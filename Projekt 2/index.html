@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pl" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Formularz kontaktowy sklepu Rowerowego</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,100;1,300&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <div class="cointainer">
+      <header>
+        <h1 id="title">Formularz kontaktowy sklepu Rowerowego</h1>
+        <p id="description">Podziel się z swoimi spostrzerzeniami odnośnie naszej działalności</p>
+      </header>
+      <form id="survey-form">
+        <div class="form-group">
+          <label id="name-label" for="name">Nazwisko</label>
+          <input
+            type="text"
+            id="name"
+            class="input-control"
+            name="nazwisko"
+            placeholder="Podaj swoje Nazwisko" required>
+        </div>
+        <div class="form-group">
+          <label id="email-label" for="email">Adres email</label>
+          <input
+            type="email"
+            id="email"
+            class="input-control"
+            name="email"
+            placeholder="Podaj swój adres email" required>
+        </div>
+        <div class="form-group">
+          <label id="number-label" for="number">Wiek</label>
+          <input
+            type="number"
+            id="number"
+            class="input-control"
+            name="wiek"
+            placeholder="Podaj swój wiek"
+            min="1"
+            max="150">
+        </div>
+        <div class="form-group">
+          <p>Na jakim rowerze jeździsz?</p>
+          <select id="dropdown" class="form-control" name="rodzaj-roweru" required>
+            <option disabled selected value>Wybierz rodzaj</opton>
+            <option value="gorski">górski</option>
+            <option value="krosowy">krosowy</option>
+            <option value="trekingowy">trekingowy</option>
+            <option value="miejski">miejski</option>
+            <option value="szosowy">szosowy</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <p>Jaka jest Twoja płeć?</p>
+          <label>
+          <input
+            type="radio"
+            class="input-radio"
+            name="plec"
+            value="mężczyzna">Mężczyzna</label>
+          <label>
+          <input type="radio"
+          class="input-radio"
+          name="plec"
+          value="kobieta"> Kobieta</label>
+          <label>
+          <input
+            type="radio"
+            class="input-radio"
+            name="plec"
+            value="inna"> inna
+          </label>
+          </div>
+          <div class="form-group">
+            <p>Dlaczego jeździsz na rowerze?</p>
+              <label>
+                <input
+                  type="checkbox"
+                  class="input-checkbox"
+                  name="cel"
+                  value="dojazd-do-pracy">Dojazd do pracy</label>
+              <label>
+                <input
+                type="checkbox"
+                class="input-checkbox"
+                name="cel"
+                value="wycieczki">Wycieczki</label>
+              <label>
+                <input
+                type="checkbox"
+                class="input-checkbox"
+                name="cel"
+                value="sport">Sport</label>
+            </div>
+            <div class="form-group">
+              <p>Jak moglibyśmy poprawić naszą ofertę?</p>
+              <textarea
+                class="input-textarea"
+                name="komentarz"
+                id="comment"
+                name="komentarz"
+                placeholder="Tutaj napisz swój komenatrz">
+            </textarea>
+          </div>
+            <div class="form-group">
+              <button type="submit" class="submit-button" id="submit" name="button">Wyślij</button>
+            </div>
+          </form>
+        </div>
+      </body>
+</html>

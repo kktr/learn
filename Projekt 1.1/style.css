@@ -1,0 +1,42 @@
+html {
+  background-color: lightgrey;
+  text-align: center;
+}
+#title {
+  margin: 15px 0;
+}
+#main {
+  padding: 15px;
+}
+#img-div {
+  background-color: white;
+  padding: 10px;
+  margin: 0;
+}
+#image {
+  width: 85%;
+  height: auto;
+  max-width: 1300px;
+  display: block;
+  margin: 0 auto;
+}
+#img-caption {
+  margin: 15px 0 5px;
+}
+#headline {
+  text-align: center;
+}
+#tribute-info {
+  text-align: justify;
+  padding: 15px 50px;
+}
+#tribute-link {
+  margin: 15px 0;
+}
+a {
+  color: black;
+}
+
+a:visited {
+  color: #74638f;
+}

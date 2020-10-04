@@ -1,0 +1,171 @@
+#red {
+  color: red;
+}
+#blue {
+  color: blue;
+}
+#big {
+  font-size: 3.0rem;
+}
+#red, #blue, #big {
+  margin: 1.5rem 0 0 0;
+}
+html {
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 62.5%;
+  color: #484545;
+}
+nav {
+  margin-left: 0px;
+  position: fixed;
+  border-width: thin;
+  border-style: solid;
+  height: 100%;
+}
+@media screen and (max-width: 345px ) {
+.ul-main {
+    margin-left: 1.7rem !important;
+  }
+  main {
+    padding: 1.25rem !important;
+  }
+  .example {
+    padding: 2rem 0rem;
+    margin-left: 0rem;
+  }
+  }
+@media screen and (max-width: 385px ) {
+  .example {
+    padding: 2rem 1rem;
+    margin-left: 0rem;
+  }
+}
+@media screen and (max-width: 630px ) {
+nav {
+  margin-top: 0px;
+  margin-left: 0px;
+  height: 30rem;
+  width: 100%;
+  position: absolute;
+  }
+#navbar {
+  height: 23rem !important;
+  width: 100%;
+}
+main {
+  margin: 33rem 0.1rem 0.1rem 0rem !important;
+  padding: 1.5rem !important;
+}
+.example {
+  padding: 2rem 2rem;
+  margin-left: 0rem;
+}
+.ul-main {
+  margin-left: 2rem;
+}
+}
+@media screen and (min-width: 631px ) {
+.example {
+  margin-left: 2rem;
+  padding: 2rem;
+}
+main {
+    padding: 2.0rem;
+    margin-left: 23.0rem;
+}
+}
+
+body {
+  display: flex;
+  font-size: 1.6rem;
+  margin-left: 0px;
+  background-color: #fff4f2;
+}
+main {
+
+  position: absolute;
+  display: block;
+
+}
+header {
+  font-size: 2.6rem;
+  font-weight: bold;
+  margin: 1.5rem 0;
+  color: #242222;
+}
+h2 {
+  font-size: 1.6em;
+  font-weight: normal;
+}
+h3 {
+  font-size: 1.6rem;
+  font-weight: normal;
+  margin-top: 0;
+}
+hr {
+  border-style: inset;
+  border-width: medium;
+  color: gray;
+}
+p {
+  line-height: 3rem;
+}
+ul {
+  line-height: 3rem;
+  font-family: inherit;
+}
+li, ul, p{
+  font-family: Ubuntu;
+}
+#navbar {
+  list-style-type: none;
+  padding-left: 0;
+  margin-top: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 88%;
+}
+nav header {
+  text-align: center;
+  border-width: thin;
+  border-style: solid;
+  padding-top: 1.8rem;
+  padding-bottom: 1.8rem;
+  margin: 0;
+}
+.nav-li {
+
+}
+li a {
+  display: block;
+  text-decoration: none;
+  color: black;
+  border-width: thin;
+  border-style: solid;
+  padding: 1.5rem 5.5rem;
+  text-align: center;
+}
+li a:hover {
+  background-color: #ffde7f;
+}
+.example {
+  background-color: #ffdab9;
+}
+#h1 {
+  font-size: 3.6rem;
+}
+#h2 {
+  font-size: 3.0rem;
+}
+#h3 {
+  font-size: 2.4rem;
+}
+#h4 {
+  font-size: 2rem;
+}
+#h5 {
+  font-size: 1.8rem;
+}
+#h6 {
+  font-size: 1.6rem;
+}

@@ -1,0 +1,99 @@
+html {
+  font-family: 'Lato', sans-serif;
+  font-size: 62.5%;
+  color: white;
+}
+body {
+  background-image: linear-gradient(
+      130deg,
+      rgba(58, 58, 158, 0.8),
+      rgba(121, 117, 199, 0.7)
+    ), url('back.jpg');
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  font-size: 1.8rem;
+}
+header {
+  text-align: center;
+}
+h1 {
+  font-weight: 300;
+}
+p {
+  font-size: 1.8rem;
+  margin: 0 0 1rem 0;
+}
+#description {
+  font-family: 'Lato light';
+  font-weight: 300;
+  font-style: italic;
+  margin-bottom: 2rem;
+}
+.cointainer {
+display: block;
+margin-left: auto;
+margin-right: auto;
+margin-top: 4rem;
+margin-bottom: 2rem;
+}
+@media screen and (min-width: 769px) {
+  .cointainer  {
+    max-width: 750px;
+  }
+}
+@media screen and (max-width: 768px) {
+    .cointainer  {
+      padding: 0.2rem;
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+    }
+    #title {
+      margin-top: 0.5rem ;
+      margin-bottom: 1rem;
+    }
+}
+#survey-form {
+  box-sizing: border-box;
+  background: rgba(0, 0, 72, 0.8);
+  border-radius: 1rem;
+  padding: 4rem;
+}
+.form-group {
+  margin: 0px auto 2.5rem auto;
+}
+.input-control,
+.form-control,
+#dropdown {
+  border: 1rem;
+  border-radius: 0.2rem;
+  width: 100%;
+  height: 4rem;
+  font-size: 1.8rem;
+}
+
+.form {
+}
+label{
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  font-size: 1.8rem;
+}
+.input-textarea {
+  width: 100%;
+  min-height: 15rem;
+}
+#submit {
+  width: 100%;
+  align-self: center;
+  min-height: 4rem;
+  border-radius: 5px;
+  background-color: #2fb92d;
+  font-weight: 700;
+  color: white;
+  font-family: inherit;
+  font-size: 1.8rem;
+
+}
