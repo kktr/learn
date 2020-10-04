@@ -1,0 +1,58 @@
+html {
+  background-color: grey;
+
+}
+.grid-cointainer {
+  width: 100%;
+  height: auto;
+  background-color: white;
+  text-align: center;
+  display: grid;
+  grid-template-areas:
+  "row row row row"
+  "menu header header header"
+  "menu main main main"
+  "footer footer footer footer";
+}
+.row {
+  grid-area: row;
+  background-color: white;
+}
+.flex-row {
+  display: flex;
+}
+.menu {
+  grid-area: menu;
+  background-color: lightgreen;
+}
+.header {
+  grid-area: header;
+  background-color: lightyellow;
+}
+.main {
+  grid-area: main;
+  background-color: lightpink;
+}
+.footer {
+  grid-area: footer;
+  background-color: lightgrey;
+}
+#adres {
+  padding: 10px 15px 0px;
+  font-size: 15px;
+  color: grey;
+}
+.telefon {
+margin-right: 10px;
+margin-left: auto;
+background-color: red;
+color: white;
+border-radius: 0 0 8px 8px;
+padding: 10px;
+font-size: 16px;
+
+}
+.telefon a{
+  color:white;
+  text-decoration: none;
+}
