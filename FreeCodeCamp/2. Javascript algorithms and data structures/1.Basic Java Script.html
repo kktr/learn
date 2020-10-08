@@ -225,12 +225,12 @@ function randomFraction() {
 }
 
 //104 Generate Random Whole Numbers
-return Math.floor(Math.random() * 10);
+//return Math.floor(Math.random() * 10);
 
 // 105/111 Generate Random Whole Numbers within a Range
 function randomRange(myMin, myMax) {
   // Only change code below this line
-  return Math.floor(Math.random() * (myMax-myMin+1)+myMin);
+//return Math.floor(Math.random() * (myMax-myMin+1)+myMin);
   // Only change code above this line
 }
 
@@ -251,8 +251,56 @@ function checkEqual(a, b) {
   return a===b  ? "Equal" : "Not Equal";
 }
 // 109/111 Use Multiple Conditional (Ternary) Operators
+function checkSign(num) {
+return (num === 0 ) ? "zero"
+: (num > 0) ? "positive"
+: "negative"
+}
+checkSign(10);
 
+//110/111 Use Recursion to Create a Countdown
+function countup(n){
+  if (n < 1) {
+    return [];
+  } else {
+    const countArray = countup(n-1);
+    countArray.unshift(n);
+    return countArray
+  }
+}
 
+//111/111 Use Recursion to Create a Range of Numbers
+/* wrong
+function
+rangeOfNumbers(startNum, endNum) {
+  if ( startNum > endNum) {
+    if (endNum > startNum) {
+      return [];
+    } else {
+     const countArray = rangeOfNumbers(startNum, endNum-1);
+      countArray.unshift(endNum);
+      return countArray;
+  }
+} else (startNum < endNum) {
+  if (endNum < startNum) {
+    return [];
+  } else {
+    const countArray = rangeOfNumbers(startNum,endNum-1);
+    countArray.push(endNum);
+    return countArray;
+  }
+}
+  return startNum;
+} */
+function rangeOfNumbers(startNum, endNum) {
+  if ( startNum === endNum) {
+      return [startNum];
+    } else {
+     var countArray = rangeOfNumbers(startNum,endNum-1);
+      countArray.push(endNum);
+      return countArray;
+  }
+}
     </script>
   </head>
   <body>
