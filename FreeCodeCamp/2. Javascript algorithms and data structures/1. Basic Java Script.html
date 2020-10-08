@@ -209,16 +209,49 @@ function lookUpProfile(name, prop){
    for ( var i = 0; i < contacts.length; i++) {
     if (contacts[i].firstName === name) {
       if (contacts[i].hasOwnProperty(prop)) {
-      return contacts[i][prop]; }
-      else { return "nie ma prop"
-    }
+       return contacts[i][prop]; }
+       else { return "nie ma prop"
     }
   }
+}
 return "nie ma kontaktu"
 }
 lookUpProfile("Akira", "likes");
 // Only change code above this line
+
  // 103/111 Generate Random Fractions with
+function randomFraction() {
+  return Math.random();
+}
+
+//104 Generate Random Whole Numbers
+return Math.floor(Math.random() * 10);
+
+// 105/111 Generate Random Whole Numbers within a Range
+function randomRange(myMin, myMax) {
+  // Only change code below this line
+  return Math.floor(Math.random() * (myMax-myMin+1)+myMin);
+  // Only change code above this line
+}
+
+// 106/111 Use the parseInt Function
+function convertToInteger(str) {
+  return str = parseInt(str);
+}
+convertToInteger("56");
+
+// 107/111 Use the parseInt Function with a Radix
+function convertToInteger(s,r) {
+  return parseInt(s,2);
+}
+convertToInteger("10011");
+
+// 108/111 Use the Conditional (Ternary) Operator
+function checkEqual(a, b) {
+  return a===b  ? "Equal" : "Not Equal";
+}
+// 109/111 Use Multiple Conditional (Ternary) Operators
+
 
     </script>
   </head>
