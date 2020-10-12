@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pol" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+<script type="text/javascript">
+// Książka
+
+// 2.1 Pętlowy trókąt
+for (let piramida = "#"; piramida.length < 8; piramida +="#" ) {
+  console.log(piramida)
+}
+// 2.2.2
+      let kafelek = "!";
+      let wysokosc = 4;
+      let piramida = [];
+      for (let i = 1;i <= wysokosc;i++) {
+          if (i < wysokosc) {
+          piramida = piramida + kafelek.repeat(i) + "\n";
+        } else {
+          piramida = piramida + kafelek.repeat(i)
+        }
+      }
+// console.log(piramida)
+
+/*2.2.1 FizzBuzz
+for (let FizzBuzz = 1; FizzBuzz <= 100; FizzBuzz+=1 ){
+  if (FizzBuzz % 3 == 0 && FizzBuzz % 5 !== 0) {
+    console.log("Fizz")
+  } else if  (FizzBuzz % 5 == 0 && FizzBuzz % 3 !== 0) {
+    console.log("Buzz")
+  } else if (FizzBuzz % 5 == 0 && FizzBuzz % 3 == 0) {
+    console.log("FizzBuzz")
+  } else {
+    console.log(FizzBuzz)
+  }
+} */
+//FizzBuzz 2.2.2
+/*
+for (let FizzBuzz = 1; FizzBuzz <= 100; FizzBuzz+=1 ){
+  if ((FizzBuzz % 5 && 3) === 0) {
+    console.log("FizzBuzz")
+  } else if (FizzBuzz % 3 == 0) {
+    console.log("Fizz")
+  } else if (FizzBuzz % 5 == 0) {
+    console.log("Buzz")
+  } else {
+    console.log(FizzBuzz)
+  }
+} */
+
+// FizzBuzz 2.2.3 Funkcja z 4 argumentami
+/*
+const FizzBuzz = (Fizz,liczbaFizz,Buzz,liczbaBuzz,razy) => {
+  for (let i=1; i <= razy; i++) {
+    if (i % liczbaFizz == 0 && i % liczbaBuzz == 0) {
+      console.log(Fizz + Buzz )
+    } else if (i % liczbaFizz == 0) {
+     console.log(Fizz)
+   } else if (i % liczbaBuzz == 0) {
+     console.log(Buzz)
+   } else console.log(i)
+ }
+}
+FizzBuzz("Fizz",3,"Buzz",5,30) */
+
+
+</script>
+  </body>
+</html>
