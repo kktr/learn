@@ -27,3 +27,12 @@ function doIt(param) {
 let test = 1
 doIt(test)
 console.log(test);
+
+/*
+zmienne: years, myDog, guests, defaultSound, pet
+Funkcje: dogYears, makeTea, secret, speak
+funkcje wbudowane: console.log(), alert(), prompt()
+Argumenty: 4, "Earl Grey"
+Parametry: dogName, age, cups, tea, kind,
+
+*/
