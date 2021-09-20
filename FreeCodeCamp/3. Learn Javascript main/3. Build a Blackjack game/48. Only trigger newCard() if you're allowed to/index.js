@@ -32,7 +32,7 @@ function renderGame() {
     for (let i = 0; i < cards.length; i++) {
         cardsEl.textContent += cards[i] + " "
     }
-    
+
     sumEl.textContent = "Sum: " + sum
     if (sum <= 20) {
         message = "Do you want to draw a new card?"
@@ -48,9 +48,11 @@ function renderGame() {
 
 
 function newCard() {
-    // Only allow the player to get a new card if she IS alive and does NOT have Blackjack
-    let card = getRandomCard()
-    sum += card
-    cards.push(card)
-    renderGame()
+    if (isAlive && !hasBlackJack) {
+      // Only allow the player to get a new card if she IS alive and does NOT have Blackjack
+      let card = getRandomCard()
+      sum += card
+      cards.push(card)
+      renderGame()
+    }
 }

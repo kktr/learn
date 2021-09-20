@@ -32,7 +32,7 @@ function renderGame() {
     for (let i = 0; i < cards.length; i++) {
         cardsEl.textContent += cards[i] + " "
     }
-    
+
     sumEl.textContent = "Sum: " + sum
     if (sum <= 20) {
         message = "Do you want to draw a new card?"
@@ -48,8 +48,10 @@ function renderGame() {
 
 
 function newCard() {
+  if (isAlive) {
     let card = getRandomCard()
     sum += card
     cards.push(card)
     renderGame()
+  }  
 }
