@@ -4,5 +4,4 @@ let hands = ["rock", "paper", "scissor"]
 function random() {
   console.log(hands[Math.floor(Math.random()*3)]);
 };
-
 random();
