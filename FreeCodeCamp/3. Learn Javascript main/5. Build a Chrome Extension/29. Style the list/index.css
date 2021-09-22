@@ -23,13 +23,16 @@ button {
 
 /* STYLE THE LIST ACCORDING TO THE DESIGN */
 ul {
-    
+  list-style-type: none;
+  padding-left: 0px;
+  margin-top: 1em;
 }
 
 li {
-    
+  margin-top: 0.5em;
 }
 
 a {
-
+  color: #4f9341;
+  font-size: 18px;
 }

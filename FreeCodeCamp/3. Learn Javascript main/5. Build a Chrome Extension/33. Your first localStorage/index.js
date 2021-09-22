@@ -12,7 +12,9 @@ const ulEl = document.getElementById("ul-el")
 // localStorage.getItem(key)
 // localStorage.clear()
 // PS: both key and value need to be strings
-
+//localStorage.setItem("blabla", "https://www.google.com")
+console.log(localStorage.getItem("blabla"));
+localStorage.clear()
 
 inputBtn.addEventListener("click", function() {
     myLeads.push(inputEl.value)
@@ -31,5 +33,5 @@ function renderLeads() {
             </li>
         `
     }
-    ulEl.innerHTML = listItems  
+    ulEl.innerHTML = listItems
 }
