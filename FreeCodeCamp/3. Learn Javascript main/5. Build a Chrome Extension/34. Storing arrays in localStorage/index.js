@@ -1,6 +1,10 @@
 let myLeads = ["www.awesomelead.com"]
 
-
+myLeads.push("www.google.com")
+myLeads = JSON.stringify(myLeads)
+console.log(myLeads + typeof myLeads);
+myLeads = JSON.parse(myLeads)
+console.log(myLeads + typeof myLeads);
 
 const inputEl = document.getElementById("input-el")
 const inputBtn = document.getElementById("input-btn")
@@ -23,5 +27,5 @@ function renderLeads() {
             </li>
         `
     }
-    ulEl.innerHTML = listItems  
+    ulEl.innerHTML = listItems
 }

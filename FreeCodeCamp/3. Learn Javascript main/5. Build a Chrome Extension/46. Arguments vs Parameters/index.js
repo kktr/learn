@@ -1,11 +1,11 @@
-// What are greeting and name?
-// What are "Howdy" and "James"?
-// What are num1 and num2?
-// What are 3 and 4?
+// What are greeting and name? parameter
+// What are "Howdy" and "James"? argument
+// What are num1 and num2? parameter
+// What are 3 and 4? argument
 
 
 //.                parameters
-function greetUser(greeting, name) { 
+function greetUser(greeting, name) {
     welcomeEl.textContent = `${greeting}, ${name} 👋`
 }
 
