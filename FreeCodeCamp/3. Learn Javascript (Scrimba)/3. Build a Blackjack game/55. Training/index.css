@@ -1,0 +1,38 @@
+body {
+  text-align: center;
+  background-image: url("images/table.png");
+  background-size: cover;
+  color: white;
+  font-weight: bold;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', Arial,
+                sans-serif;
+}
+
+h1 {
+  font-size: 2em;
+  color: goldenrod;
+}
+
+button {
+  margin: 0px 5px;
+  background-color: goldenrod;
+  color: green;
+  width: 150px;
+  border-radius: 3px;
+  font-weight: bold;
+  padding: 5px 0px;
+  font-size: 1.1em;
+  border-width: 0px;
+}
+
+#message-el {
+  font-style: italic;
+}
+
+#start-btn::after {
+content: "START GAME";
+}
+
+#start-btn:hover::after {
+ content: "PAY 10$";
+}
