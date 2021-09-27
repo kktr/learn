@@ -36,3 +36,11 @@ content: "START GAME";
 #start-btn:hover::after {
  content: "PAY 10$";
 }
+
+#newcard-btn::after {
+content: "NEW CARD";
+}
+
+#newcard-btn:hover::after {
+ content: "PAY 1$";
+}
