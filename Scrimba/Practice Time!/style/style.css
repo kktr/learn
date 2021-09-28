@@ -1,0 +1,51 @@
+body {
+  margin: 0px:
+}
+
+header {
+  margin: 0 auto;
+  max-width: 500px;
+  text-align: center;
+}
+
+h1 {
+  color: #2E7AD3;
+  font-size: 48px;
+  margin: 45px auto;
+}
+
+h2 {
+  color: #104C90;
+  font-size: 32px;
+  margin: 0 0 10px 0;
+}
+p {
+  font-size: 16px;
+}
+
+a:link {
+  color: #FF8000;
+}
+
+h1, h2, a {
+  font-weight: bold;
+}
+
+.container {
+  max-width: 500px;
+  margin: 0 auto;
+  background: #f1f1f1;
+  padding: 25px;
+}
+
+.first {
+  margin: 25px 0 0 0;
+}
+
+.secound {
+  margin: 9px 0;
+}
+
+#window {
+  width: 100%;
+}
