@@ -1,13 +1,17 @@
 body {
-  margin: 0px
+  margin: 0px;
+  font-weight: 500;
+  font-family: 'EB Garamond', serif;
 }
 
 h1 {
-  font-size: 24px;
   margin: 0px;
+  font-size: 24px;
+  font-weight: 800;
 }
 
-h2, p {
+h2,
+p {
   margin-top: 0px;
 }
 
@@ -16,7 +20,7 @@ p {
 }
 
 a {
-  color: #FFE600;
+  font-weight: 800;
 }
 
 header,
@@ -29,48 +33,54 @@ header {
   text-align: center;
 }
 
+/*
+compound selector are shitty, use more classes, classes everywhere
+we wan't selectors war
+*/
+
+.section-one {
+  background: black;
+  color: white;
+}
+
+.link-section-one {
+  color: #FFE600;
+}
 
 
-.button {
+.section-two {
+  background: white;
+  color: black
+}
+
+.link-section-two {
+  color: inherit;
+}
+
+
+.btn {
   margin: 15px 10px 0 0;
   padding: 15px 30px;
   text-decoration: none;
   display: inline-block;
-  font-weight: bold;
+  font-weight: 700;
 }
 
-.section-one {
-  color: white;
-  background: black;
-}
-
-.section-one a {
-  color: #FFE600;
-}
-
-.section-one .button {
+.btn-light {
   background: #FFE600;
   color: black;
 }
 
-.section-one .button:hover {
-  background: orange;
-}
-
-.section-two {
+.btn-light:hover {
   background: white;
-  color: black;
 }
 
-.section-two a {
-    color: black;
-}
-
-.section-two .button {
+.btn-dark {
   background: black;
   color: #FFE600;
 }
 
-.section-two .button:hover {
-  background: gray;
+.btn-dark:hover {
+  background: #FFE600;
+  color: black;
 }
