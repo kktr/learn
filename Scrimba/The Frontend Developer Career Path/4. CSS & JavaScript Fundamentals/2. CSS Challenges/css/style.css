@@ -1,0 +1,102 @@
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  font-size: 21px;
+  font-weight: 300;
+}
+
+.container {
+  width: 570px;
+  margin: 0 auto;
+  padding: 100px 0;
+  text-align: center;
+}
+
+/* Typography */
+
+h1,
+h2 {
+  font-weight: 300;
+}
+
+h1 {
+  font-size: 60px;
+}
+
+h2 {
+  font-size: 42px;
+  border-top: 1px solid #C4C4C4;
+  border-bottom: 1px solid #C4C4C4;
+  padding: 20px 0;
+  margin-bottom: 20px;
+}
+
+h3 {
+  font-size: 36px;
+  font-weight: 900;
+  margin-bottom: 0px;
+}
+
+a {
+  color: #99D930;
+  font-weight: 900;
+}
+
+a:hover,
+a:focus {
+  color: #DADADA;
+}
+
+.small {
+  font-size: 16px;
+  margin-top: 5px;
+  color: #99D930;
+}
+
+.h1-text,
+.h2-text {
+  display: block;
+  font-weight: 900;
+  color: #99D930;
+}
+
+.h1-text {
+  font-size: 80px;
+}
+
+.h2-text {
+  font-size: 60px;
+}
+
+/* Backgronds */
+
+.bg-dark {
+  background: #252525;
+  color: white;
+}
+
+.top-zero {
+  margin-top: 0px;
+}
+
+.botton-zero {
+  margin-bottom: 0;
+}
+
+/* Buttons */
+
+.btn {
+  display: inline-block;
+  background: #99D930;
+  color: #252525;
+  padding: 15px 36px;
+  font-weight: 900;
+  text-decoration: none;
+  margin: 36px 10px 0 0;
+}
+
+.btn:hover,
+.btn:focus {
+  background: #646464;
+  color: #FFF;
+}
