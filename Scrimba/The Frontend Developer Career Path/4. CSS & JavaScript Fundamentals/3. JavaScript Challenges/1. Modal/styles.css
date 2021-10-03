@@ -1,0 +1,80 @@
+html, body {
+  margin: 0;
+  padding: 50px;
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+}
+
+.btn {
+  padding: 10px 22px;
+  background: royalblue;
+  color: white;
+  font-weight: bold;
+}
+
+.btn:hover,
+.btn:focus {
+  background: blue;
+}
+
+.overlay {
+  height: 100vh;
+  width: 100%;
+  visibility: hidden;
+  position: fixed;
+  background: rgba(0, 0, 0, 0.5);
+  right: 0;
+  top: 0;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.5s;
+
+}
+.visible {
+  visibility: visible;
+  opacity: 1;
+}
+
+#modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  background: white;
+  max-width: 600px;
+  height: 150px;
+  padding: 20px;
+  margin: 0 auto;
+  top: 35%;
+}
+
+#close-button {
+  position: absolute ;
+  right: 10px;
+  top: 10px;
+  padding: 5px 11px;
+}
+
+.bla {
+  margin-top: 800px;
+}
+
+
+/** we need to style our open and close buttons, re-use the comma , to target both buttons **/
+
+/** modal -> remember we used an ID for this div? we can target it by doing #modal **/
+
+/** overlay -> we also used an ID for this, so do the same as above **/
+/** the overlay must overtake the screen, so how would you make the overlay 100% height and 100% width so it fills the entire screen? it also must position itself above everything else!
+
+/*
+========= Things to note =========
+  1) remember on the presentation we want to briefly hide the background of the modal overlay? hint: look at the notes below! rgba...
+  2)
+*/
+
+/*
+======== Helpers
+  - rgba = red, green blue, alpha (alpha being the opacity on a scale of 0 to 1 - 0.5 sounds good?)
+  - rgba is complex and it's a bit of a time sink to remember all the values, look at rgba colour values online, or rgba colour convetors, or even colour palettes!
+  - if you come from a design background, you'll know you can convert HEX values (e.g. #ffffff to rgba using a convertor)
+*/
