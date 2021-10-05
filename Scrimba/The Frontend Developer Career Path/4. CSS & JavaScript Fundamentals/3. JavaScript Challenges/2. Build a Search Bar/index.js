@@ -34,21 +34,33 @@
     3. Make sure the captured value is lowercase
     4. Log to the console to demonstrate it works
 */
-const search = document.querySelector('#searchInput');
+const search = document.querySelector('#search-input');
+let test = [];
 
 search.addEventListener('keyup', function (event) {
-  let searchQuery = event.target.value.toLowerCase();
-  let allNamesDOMCollection = document.querySelectorAll('.name');
-  for (let i = 0; i < allNamesDOMCollection.length; i++) {
-    let currentName = allNamesDOMCollection[i].textContent.toLowerCase();
-    if (currentName.includes(searchQuery)) {
-      allNamesDOMCollection[i].style.display = 'block';
-    } else {
-      allNamesDOMCollection[i].style.display = 'none';
+    let searchQuery = event.target.value.toLowerCase();
+    let allNamesDOMCollection = document.querySelectorAll('.name');
+    for (let i = 0; i < allNamesDOMCollection.length; i++) {
+      let currentName = allNamesDOMCollection[i].textContent.toLowerCase();
+      if (currentName.includes(searchQuery)) {
+        allNamesDOMCollection[i].style.display = 'block';
+      } else {
+        allNamesDOMCollection[i].style.display = 'none';
+      }
+
+      if (currentName == searchQuery) {
+        allNamesDOMCollection[i].style.background = 'red';
+        allNamesDOMCollection[i].style.color = 'white';
+        allNamesDOMCollection[i].style.fontWeight = 'bold';
+      } else {
+        allNamesDOMCollection[i].style.background = 'white';
+        allNamesDOMCollection[i].style.color = 'black';
+        allNamesDOMCollection[i].style.fontWeight = '400';
+      }
     }
-  }
-});
-/*
+  });
+
+/* allNamesDOMCollection.style.background = 'yellow';
 let allNamesDOMCollection = document.querySelectorAll('.name')
 console.log(allNamesDOMCollection[0].textContent);
 
