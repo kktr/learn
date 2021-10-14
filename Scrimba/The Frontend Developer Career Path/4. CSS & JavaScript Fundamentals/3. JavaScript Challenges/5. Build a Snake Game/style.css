@@ -18,5 +18,12 @@ body {
 .square {
   width: 20px;
   height: 20px;
-  background: blue;
+s}
+
+.snake {
+  background: green;
+}
+
+.apple {
+  background: red;
 }
