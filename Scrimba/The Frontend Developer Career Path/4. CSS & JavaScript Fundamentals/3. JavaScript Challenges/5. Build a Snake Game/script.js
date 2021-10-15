@@ -1,97 +1,114 @@
 /*jshint esversion:6*/
+
 const grid = document.querySelector('.grid');
-const startBtn = document.querySelector('#start');
-const scoreDisplay = document.querySelector('#score');
-let score = 0;
+const startButton = document.getElementById('start');
+const scoreDisplay = document.getElementById('score');
 let squares = [];
 let currentSnake = [2, 1, 0];
 let direction = 1;
+const width = 10;
 let appleIndex = 0;
-let interval = 1000;
+let score = 0;
+let intervalTime = 1000;
 let speed = 0.9;
+let timerId = 0;
 
 function createGrid() {
-  for (let i = 0; i < 100; i++) {
+  //create 100 of these elements with a for loop
+  for (let i = 0; i < width * width; i++) {
+    //create element
     const square = document.createElement('div');
+    //add styling to the element
     square.classList.add('square');
+    //put the element into our grid
     grid.appendChild(square);
+    //push it into a new squares array
     squares.push(square);
   }
 }
 
 createGrid();
 
-currentSnake.forEach((item, i) => {
-  squares[i].classList.add('snake');
-});
+currentSnake.forEach(index => squares[index].classList.add('snake'));
 
-startBtn.addEventListener('click', function () {
-  score = 0;
-  squares = [];
-  currentSnake = [2, 1, 0];
-  direction = 1;
-  appleIndex = 0;
-  interval = 1000;
-  speed = 0.9;
-  generateApples();
-  timerId = setInterval(move, interval);
-});
+function startGame() {
+  timerId = setInterval(move, intervalTime);
+}
 
 function move() {
   if (
-       (currentSnake[0] + 10 >= 100 && direction === 10) || //if snake has hit bottom
-       (currentSnake[0] % 10 === 9 && direction === 1) || //if snake has hit right wall
-       (currentSnake[0] % 10 === 0 && direction === -1) || //if snake has hit left wall
-       (currentSnake[0] - 10 < 0 && direction === -10) || //if snake has hit top
-       squares[currentSnake[0] + direction].classList.contains('snake')
-   )
-    return clearInterval(timerId);
-  let head = currentSnake[0];
-  let tail = currentSnake.pop();
-  squares[tail].classList.remove('snake');
-  currentSnake.unshift(currentSnake[0] + direction);
+      (currentSnake[0] + width >= width * width && direction === width) || //if snake has hit bottom
+      (currentSnake[0] % width === width - 1 && direction === 1) || //if snake has hit right wall
+      (currentSnake[0] % width === 0 && direction === -1) || //if snake has hit left wall
+      (currentSnake[0] - width < 0 && direction === -width) || //if snake has hit top
+      squares[currentSnake[0] + direction].classList.contains('snake')
+  )
+  return clearInterval(timerId);
 
+  //remove last element from our currentSnake array
+  const tail = currentSnake.pop();
+  //remove styling from last element
+  squares[tail].classList.remove('snake');
+  //add square in direction we are heading
+  currentSnake.unshift(currentSnake[0] + direction);
+  //add styling so we can see it
+
+  //deal with snake head gets apple
   if (squares[currentSnake[0]].classList.contains('apple')) {
+    //remove the class of apple
     squares[currentSnake[0]].classList.remove('apple');
+    //grow our snake by adding class of snake to it
     squares[tail].classList.add('snake');
+    console.log(tail);
+    //grow our snake array
     currentSnake.push(tail);
-    generateApples();
+    console.log(currentSnake);
+    //generate new apple
+    generateApple();
+    //add one to the score
     score++;
+    //display our score
     scoreDisplay.textContent = score;
-    interval = interval * speed;
+    //speed up our snake
     clearInterval(timerId);
-    timerId = setInterval(move, interval);
+    console.log(intervalTime);
+    intervalTime = intervalTime * speed;
+    console.log(intervalTime);
+    timerId = setInterval(move, intervalTime);
   }
 
   squares[currentSnake[0]].classList.add('snake');
 }
 
-let timerId = setInterval(move, interval);
-
-function generateApples() {
+function generateApple() {
   do {
     appleIndex = Math.floor(Math.random() * squares.length);
   } while (squares[appleIndex].classList.contains('snake'));
   squares[appleIndex].classList.add('apple');
 }
 
-generateApples();
-
-function controlKey(e) {
-  if (e.keyCode === 39) {
-    direction = 1;
-  } else if (e.keyCode === 37) {
-    direction = -1;
-  } else if (e.keyCode === 38) {
-    direction = -10;
-  } else if (e.keyCode === 40) {
-    direction = 10;
-  }
-}
-
-document.addEventListener('keydown', controlKey);
+generateApple();
 
 // 39 is right arrow
 // 38 is for the up arrow
 // 37 is for the left arrow
 // 40 is for the down arrow
+
+function control(e) {
+  if (e.keyCode === 39) {
+    console.log('right pressed');
+    direction = 1;
+  } else if (e.keyCode === 38) {
+    console.log('up pressed');
+    direction = -width;
+  } else if (e.keyCode === 37) {
+    console.log('left pressed');
+    direction = -1;
+  } else if (e.keyCode === 40) {
+    console.log('down pressed');
+    direction = +width;
+  }
+}
+
+document.addEventListener('keyup', control);
+startButton.addEventListener('click', startGame);
