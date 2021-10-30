@@ -1,38 +1,35 @@
 /*jshint esversion:6*/
+/* eslint-env es6 */
 
 let playerOneScore = 0;
 let playerTwoScore = 0;
 let playerOneTurn = true;
 
 const message = document.querySelector('#message');
-const playerOneScoreboard = document.querySelector('#player1Scoreboard');
-const playerTwoScoreboard = document.querySelector('#player2Scoreboard');
-const playerOneDice = document.querySelector('#player1Dice');
-const playerTwoDice = document.querySelector('#player2Dice');
+const playerOneScoreboard = document.querySelector('#player-one-scoreboard');
+const playerTwoScoreboard = document.querySelector('#player-two-scoreboard');
+const playerOneDice = document.querySelector('#player-one-dice');
+const playerTwoDice = document.querySelector('#player-two-dice');
 
-const rollBtn = document.querySelector('#rollBtn');
-const resetBtn = document.querySelector('#resetBtn');
+const rollBtn = document.querySelector('#roll-btn');
+const resetBtn = document.querySelector('#reset-btn');
 
-function randomized() {
-  const randomNumber = Math.floor(Math.random() * 6) + 1;
-}
-
-rollBtn.addEventListener('click', function () {
+rollBtn.addEventListener('click', function() {
   const randomNumber = Math.floor(Math.random() * 6) + 1;
 
   if (playerOneTurn) {
     playerOneDice.textContent = randomNumber;
     playerOneScore += randomNumber;
     displayScore('playerOne');
-    playerOneDice.classList.add('active');
-    playerTwoDice.classList.remove('active');
+    playerOneDice.classList.add('dice-active');
+    playerTwoDice.classList.remove('dice-active');
     message.textContent = 'Player 2 Turn';
   } else {
     playerTwoDice.textContent = randomNumber;
     playerTwoScore += randomNumber;
     displayScore('playerTwo');
-    playerTwoDice.classList.add('active');
-    playerOneDice.classList.remove('active');
+    playerTwoDice.classList.add('dice-active');
+    playerOneDice.classList.remove('dice-active');
     message.textContent = 'Player 1 Turn';
   }
 
@@ -47,15 +44,15 @@ rollBtn.addEventListener('click', function () {
   playerOneTurn = !playerOneTurn;
 });
 
-resetBtn.addEventListener('click', function () {
+resetBtn.addEventListener('click', function() {
   playerOneScore = 0;
   playerTwoScore = 0;
   playerOneTurn = true;
   displayScore();
   playerOneDice.textContent = '-';
   playerTwoDice.textContent = '-';
-  playerOneDice.classList.add('active');
-  playerTwoDice.classList.remove('active');
+  playerOneDice.classList.add('dice-active');
+  playerTwoDice.classList.remove('dice-active');
   message.textContent = 'Player 1 Turn';
   rollBtn.style.display = 'inline';
   resetBtn.style.display = 'none';

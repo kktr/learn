@@ -1,31 +1,48 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
-    <meta charset="utf-8">
-    <title></title>
-    <link rel="stylesheet" href="style.css">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dice Game</title>
+    <link rel="stylesheet" href="style.css" />
   </head>
+
   <body>
-    <div class="container">
-        <h1 id="message">Player 1 Turn</h1>
-        <div class="players">
-            <div id="player1">
-                <h1>Score:
-                    <span id="player1Scoreboard">0</span>
-                </h1>
-                <div id="player1Dice" class="dice active">-</div>
-            </div>
-            <div id="player2">
-                <h1>Score:
-                    <span id="player2Scoreboard">0</span>
-                </h1>
-                <div id="player2Dice" class="dice">-</div>
-            </div>
+    <main class="container">
+      <h1 id="message">Player 1 Turn</h1>
+
+      <section class="players">
+        <div id="player-one">
+          <h2>
+            Score:
+            <span id="player-one-scoreboard">
+              0
+            </span>
+          </h2>
+
+          <div class="dice dice-active" id="player-one-dice">
+            -
+          </div>
         </div>
 
-        <button id="rollBtn">Roll Dice 🎲</button>
-        <button id="resetBtn">Reset Game 🔁</button>
-    </div>
+        <div id="player-two">
+          <h2>
+            Score:
+            <span id="player-two-scoreboard">
+              0
+            </span>
+          </h2>
+
+          <div class="dice" id="player-two-dice">
+            -
+          </div>
+        </div>
+      </section>
+
+      <button id="roll-btn">Roll Dice 🎲</button>
+      <button id="reset-btn">Reset Game 🔁</button>
+    </main>
+
     <script src="index.js" charset="utf-8"></script>
   </body>
 </html>
