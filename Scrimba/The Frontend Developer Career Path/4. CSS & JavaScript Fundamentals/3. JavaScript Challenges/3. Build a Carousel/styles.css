@@ -12,10 +12,28 @@ body {
   opacity: 1;
 }
 
-.carousel-img {
+.carousel-img,
+.container {
   width: 100%;
   max-width: 600px;
   height: auto;
+}
+
+.carousel-actions {
+  /* position: absolute;
+  top: 0;
+  display: flex;
+  align-items: center;
+  align-self: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%; */
+  position: fixed;
+}
+
+.cantainer-inner {
+  width: 600px;
+  height: 300px;
 }
 
 .carousel-btn {
@@ -25,10 +43,11 @@ body {
   height: 40px;
   border: 0;
   border-radius: 50px;
-  font-weight: 900;
+  background-color: white;
+  font-weight: bold;
   font-size: 16px;
-  transform: translateY(+150%);
-  background: white;
+  cursor: pointer;
+  transform: translateY(-50%);
 }
 
 .carousel-btn:hover {
