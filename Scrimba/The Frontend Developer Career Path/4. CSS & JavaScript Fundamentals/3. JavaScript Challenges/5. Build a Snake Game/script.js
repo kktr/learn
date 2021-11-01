@@ -3,15 +3,28 @@
 const grid = document.querySelector('.grid');
 const startButton = document.getElementById('start');
 const scoreDisplay = document.getElementById('score');
+let direction = 1;
 let squares = [];
 let currentSnake = [2, 1, 0];
-let direction = 1;
-const width = 10;
 let appleIndex = 0;
 let score = 0;
 let intervalTime = 1000;
 let speed = 0.9;
 let timerId = 0;
+
+const keyCodes = {
+  up: 38,
+  left: 37,
+  right: 39,
+  down: 40
+};
+const width = 10;
+const directions = {
+  up: -width,
+  left: -1,
+  right: 1,
+  down: width
+};
 
 function createGrid() {
   //create 100 of these elements with a for loop
@@ -30,8 +43,23 @@ function createGrid() {
 createGrid();
 
 currentSnake.forEach(index => squares[index].classList.add('snake'));
+scoreDisplay.textContent = score;
 
 function startGame() {
+  //remove the snake
+  currentSnake.forEach(index => squares[index].classList.remove('snake'));
+  //remove the apple
+  squares[appleIndex].classList.remove('apple');
+  generateApple();
+  currentSnake = [2, 1, 0];
+  //readd the class of snake to our new currentSnake
+  currentSnake.forEach(index => squares[index].classList.add('snake'));
+  direction = 1;
+  score = 0;
+  //re add new score to browser
+  scoreDisplay.textContent = score;
+  clearInterval(timerId);
+  intervalTime = 1000;
   timerId = setInterval(move, intervalTime);
 }
 
@@ -51,7 +79,6 @@ function move() {
   squares[tail].classList.remove('snake');
   //add square in direction we are heading
   currentSnake.unshift(currentSnake[0] + direction);
-  //add styling so we can see it
 
   //deal with snake head gets apple
   if (squares[currentSnake[0]].classList.contains('apple')) {
@@ -59,10 +86,8 @@ function move() {
     squares[currentSnake[0]].classList.remove('apple');
     //grow our snake by adding class of snake to it
     squares[tail].classList.add('snake');
-    console.log(tail);
     //grow our snake array
     currentSnake.push(tail);
-    console.log(currentSnake);
     //generate new apple
     generateApple();
     //add one to the score
@@ -71,12 +96,10 @@ function move() {
     scoreDisplay.textContent = score;
     //speed up our snake
     clearInterval(timerId);
-    console.log(intervalTime);
     intervalTime = intervalTime * speed;
-    console.log(intervalTime);
     timerId = setInterval(move, intervalTime);
   }
-
+  //add styling so we can see it
   squares[currentSnake[0]].classList.add('snake');
 }
 
@@ -89,24 +112,15 @@ function generateApple() {
 
 generateApple();
 
-// 39 is right arrow
-// 38 is for the up arrow
-// 37 is for the left arrow
-// 40 is for the down arrow
-
 function control(e) {
-  if (e.keyCode === 39) {
-    console.log('right pressed');
-    direction = 1;
-  } else if (e.keyCode === 38) {
-    console.log('up pressed');
-    direction = -width;
-  } else if (e.keyCode === 37) {
-    console.log('left pressed');
-    direction = -1;
-  } else if (e.keyCode === 40) {
-    console.log('down pressed');
-    direction = +width;
+  if (e.keyCode === keyCodes.right) {
+    direction = directions.right;
+  } else if (e.keyCode === keyCodes.up) {
+    direction = directions.up;
+  } else if (e.keyCode === keyCodes.left) {
+    direction = directions.left;
+  } else if (e.keyCode === keyCodes.down) {
+    direction = directions.down;
   }
 }
 
