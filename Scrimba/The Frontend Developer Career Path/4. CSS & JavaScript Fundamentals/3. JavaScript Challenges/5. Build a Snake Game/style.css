@@ -3,11 +3,24 @@ body {
   padding: 10;
 }
 
+main {
+  text-align: center;
+}
+
+.score-container {
+  position: absolute;
+  top: 30px;
+  left: 40px;
+  margin: 0;
+}
+
 .grid {
   display: flex;
   flex-wrap: wrap;
   width: 500px;
   height: 500px;
+  margin-right: auto;
+  margin-left: auto;
   border: solid 2px black;
 }
 
@@ -50,4 +63,10 @@ body {
 
 .apple {
   background-image: url('img/apple.jpg');
+}
+
+#start {
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
 }
