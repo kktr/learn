@@ -12,19 +12,17 @@ let intervalTime = 1000;
 let speed = 0.9;
 let timerId = 0;
 const width = 10;
-
-let audiohungry = new Audio('audio/hungry.mp3');
-let audioEat1 = new Audio('audio/eat1.mp3');
-let audioEat2 = new Audio('audio/eat2.mp3');
-let audioEat3 = new Audio('audio/eat3.mp3');
-let audioEat4 = new Audio('audio/eat4.mp3');
-let audioEat5 = new Audio('audio/eat5.mp3');
-let audioEat6 = new Audio('audio/eat6.mp3');
-let audioEat7 = new Audio('audio/eat7.mp3');
-let audioEat8 = new Audio('audio/eat8.mp3');
-let audioEat9 = new Audio('audio/eat9.mp3');
-let audioEat10 = new Audio('audio/eat10.mp3');
+let audios = [];
+let audioHungry = new Audio('audio/hungry.mp3');
 let audioAngry = new Audio('audio/angry.mp3');
+
+function addAudio() {
+  for (let i = 0; i < 10; i++) {
+    audios[i] = new Audio(`audio/eat${i + 4}.mp3`);
+  }
+}
+
+addAudio();
 
 const keyCodes = {
   up: 38,
@@ -56,15 +54,16 @@ function createGrid() {
 
 createGrid();
 
+//first display
 currentSnake.forEach(index => squares[index].classList.add('snake'));
 squares[currentSnake[0]].classList.add('snake-head');
 scoreDisplay.textContent = score;
 
 function startGame() {
-  audiohungry.play();
+  audioHungry.play();
   //remove the snake
   currentSnake.forEach(index => squares[index].classList.remove('snake'));
-  //remove after dead: snake, snake-head, snake-head-dead and head rotation
+  //remove from snake head after dead
   squares[currentSnake[0]].classList.remove(
     'snake-head',
     'snake-head-dead',
@@ -90,6 +89,8 @@ function startGame() {
   timerId = setInterval(move, intervalTime);
 }
 
+startButton.addEventListener('click', startGame);
+
 function move() {
   if (
     (currentSnake[0] + width >= width * width && direction === width) || //if snake has hit bottom
@@ -98,7 +99,7 @@ function move() {
     (currentSnake[0] - width < 0 && direction === -width) || //if snake has hit top
     squares[currentSnake[0] + direction].classList.contains('snake')
   )
-    return dead();
+    return snakeDead();
 
   //remove last element from our currentSnake array
   const tail = currentSnake.pop();
@@ -129,6 +130,10 @@ function move() {
     squares[currentSnake[0]].classList.add('snake-head-eat');
     //generate new apple
     generateApple();
+    //play audio when eat apple
+    if (currentSnake.length < 13) {
+      audios[currentSnake.length - 3].play();
+    } else audios[9].play();
     //add one to the score
     score++;
     //display our score
@@ -137,7 +142,6 @@ function move() {
     clearInterval(timerId);
     intervalTime = intervalTime * speed;
     timerId = setInterval(move, intervalTime);
-    eatPlayAdio();
   }
   //add styling so we can see it
   squares[currentSnake[0]].classList.add('snake');
@@ -156,8 +160,6 @@ function generateApple() {
   squares[appleIndex].classList.add('apple');
 }
 
-generateApple();
-
 function control(e) {
   if (e.keyCode === keyCodes.right) {
     direction = directions.right;
@@ -171,9 +173,8 @@ function control(e) {
 }
 
 document.addEventListener('keyup', control);
-startButton.addEventListener('click', startGame);
 
-function dead() {
+function snakeDead() {
   squares[currentSnake[0]].classList.add('snake-head-dead');
   squares[currentSnake[0]].classList.remove(
     'rotate-up',
@@ -198,29 +199,3 @@ function snakeHeadRotation() {
     squares[currentSnake[0]].classList.add('rotate-left');
   }
 }
-
-function eatPlayAdio() {
-  if (currentSnake.length === 3) {
-    audioEat1.play();
-  } else if (currentSnake.length === 4) {
-    audioEat2.play();
-  } else if (currentSnake.length === 5) {
-    audioEat3.play();
-  } else if (currentSnake.length === 6) {
-    audioEat4.play();
-  } else if (currentSnake.length === 7) {
-    audioEat5.play();
-  } else if (currentSnake.length === 8) {
-    audioEat6.play();
-  } else if (currentSnake.length === 9) {
-    audioEat7.play();
-  } else if (currentSnake.length === 10) {
-    audioEat8.play();
-  } else if (currentSnake.length === 11) {
-    audioEat9.play();
-  } else if (currentSnake.length > 11) {
-    audioEat10.play();
-  }
-  return;
-}
-//const snakeHeadDead = document.querySelector('.snake-head-dead');
