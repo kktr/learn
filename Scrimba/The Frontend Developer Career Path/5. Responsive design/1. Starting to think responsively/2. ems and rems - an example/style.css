@@ -1,0 +1,73 @@
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 1.6rem;
+}
+
+.card {
+  width: 560px;
+  margin: 0 auto;
+  padding: 45px;
+  color: white;
+  background: #000;
+}
+
+h1,
+p {
+  margin-top: 0;
+}
+
+h1 {
+  font-size: 2.4rem;
+}
+
+p {
+  font-size: 1.8rem;
+}
+
+a {
+  color: white;
+}
+
+.button {
+  display: inline-block;
+  margin-bottom: 5em;
+
+  /* for properites difrent from font-size
+     em is relative to the font-size
+     of this element */
+  padding: 0.5em 1.25em;
+  color: black;
+  text-align: center;
+  text-decoration: none;
+  background: #ffe600;
+}
+
+/*
+  Font-size = rem  (to be relative to root)
+  Padding amd margins = rem (to be relative to own font-size)
+  Widths = em or precentage
+*/
+
+.button:hover {
+  background: orange;
+}
+
+.btn-big {
+  font-size: 2.2rem;
+}
+
+.btn-small {
+  font-size: 1rem;
+}
+
+.accent-color {
+  color: #ffe600;
+}
+
+.links {
+  margin-top: 0;
+  margin-bottom: 0;
+}
