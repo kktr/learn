@@ -16,14 +16,6 @@ let audios = [];
 let audioHungry = new Audio('audio/hungry.mp3');
 let audioAngry = new Audio('audio/angry.mp3');
 
-function addAudio() {
-  for (let i = 0; i < 10; i++) {
-    audios[i] = new Audio(`audio/eat${i + 4}.mp3`);
-  }
-}
-
-addAudio();
-
 const keyCodes = {
   up: 38,
   left: 37,
@@ -37,6 +29,15 @@ const directions = {
   right: 1,
   down: width
 };
+
+//create array with Auidos
+function addAudio() {
+  for (let i = 0; i < 10; i++) {
+    audios[i] = new Audio(`audio/eat${i + 1}.mp3`);
+  }
+}
+
+addAudio();
 
 function createGrid() {
   //create 100 of these elements with a for loop
@@ -54,71 +55,99 @@ function createGrid() {
 
 createGrid();
 
+function displaySnakeAndScore() {
+  currentSnake.forEach(index => squares[index].classList.add('snake'));
+  squares[currentSnake[0]].classList.add('snake-head');
+  scoreDisplay.textContent = score;
+}
 //first display
-currentSnake.forEach(index => squares[index].classList.add('snake'));
-squares[currentSnake[0]].classList.add('snake-head');
-scoreDisplay.textContent = score;
+displaySnakeAndScore();
 
 function startGame() {
   audioHungry.play();
+  //remove from snake: head style and head rotate after dead
+  removeDisplayRotateAndHead();
   //remove the snake
   currentSnake.forEach(index => squares[index].classList.remove('snake'));
-  //remove from snake head after dead
-  squares[currentSnake[0]].classList.remove(
-    'snake-head',
-    'snake-head-dead',
-    'rotate-up',
-    'rotate-down',
-    'rotate-right',
-    'rotate-left'
-  );
-  //remove the apple
-  squares[appleIndex].classList.remove('apple');
   generateApple();
+  //reset start values
   currentSnake = [2, 1, 0];
-  //re add the class of snake to our new currentSnake
-  currentSnake.forEach(index => squares[index].classList.add('snake'));
-  squares[currentSnake[0]].classList.add('snake-head');
   direction = 1;
   score = 0;
-  //re add new score to browser
-  scoreDisplay.textContent = score;
-  //reser intervalTime
+  //re add the class of snake to our new currentSnake
+  displaySnakeAndScore();
+  //reset intervalTime
   clearInterval(timerId);
   intervalTime = 1000;
-  timerId = setInterval(move, intervalTime);
+  timerId = setInterval(snakeAlive, intervalTime);
 }
 
 startButton.addEventListener('click', startGame);
 
-function move() {
+function snakeAlive() {
+  //remove previous rotate and head style
+  removeDisplayRotateAndHead();
+
   if (
     (currentSnake[0] + width >= width * width && direction === width) || //if snake has hit bottom
     (currentSnake[0] % width === width - 1 && direction === 1) || //if snake has hit right wall
     (currentSnake[0] % width === 0 && direction === -1) || //if snake has hit left wall
     (currentSnake[0] - width < 0 && direction === -width) || //if snake has hit top
-    squares[currentSnake[0] + direction].classList.contains('snake') //if snake hit snake
+    squares[currentSnake[0] + direction].classList.contains('snake') //if snake has hit snake
   )
+    //stop the game when snake hit wall or himself
     return snakeDead();
+  //move snake to chosen direction
+  snakeMove();
+  //rotate snake head to direction
+  snakeHeadRotation();
+  //deal with snake head gets apple
+  snakeEatApple();
+}
 
-  //remove last element from our currentSnake array
-  const tail = currentSnake.pop();
-  //remove styling from last element
-  squares[tail].classList.remove('snake');
-  //add square in direction we are heading
-  currentSnake.unshift(currentSnake[0] + direction);
-
-  //remove previous snake head rotation value
-  squares[currentSnake[1]].classList.remove(
+function removeDisplayRotateAndHead() {
+  //remove previous snake head rotation value and remove head style
+  squares[currentSnake[0]].classList.remove(
     'rotate-up',
     'rotate-down',
     'rotate-right',
     'rotate-left',
     'snake-head-eat',
-    'snake-head'
+    'snake-head',
+    'snake-head-dead',
+    'snake-head-afraid'
   );
-  snakeHeadRotation();
-  //deal with snake head gets apple
+}
+
+function snakeMove() {
+  //remove last element from our currentSnake array
+  tail = currentSnake.pop();
+  //remove styling from last element
+  squares[tail].classList.remove('snake');
+  //add square in direction we are heading
+  currentSnake.unshift(currentSnake[0] + direction);
+  //add styling so we can see it and add difrent head style to the head
+  squares[currentSnake[0]].classList.add('snake', 'snake-head');
+  // change snake head to afraid if he is on previous rip square
+  if (squares[currentSnake[0]].classList.contains('snake-rip')) {
+    squares[currentSnake[0]].classList.add('snake-head-afraid');
+  }
+}
+
+function snakeHeadRotation() {
+  if (direction === directions.up) {
+    squares[currentSnake[0]].classList.add('rotate-up');
+  } else if (direction === directions.down) {
+    squares[currentSnake[0]].classList.add('rotate-down');
+  } else if (direction === directions.right) {
+    squares[currentSnake[0]].classList.add('rotate-right');
+  } else if (direction === directions.left) {
+    squares[currentSnake[0]].classList.add('rotate-left');
+  }
+}
+
+function snakeEatApple() {
+  //if snake head go into apple
   if (squares[currentSnake[0]].classList.contains('apple')) {
     //remove the class of apple
     squares[currentSnake[0]].classList.remove('apple');
@@ -130,37 +159,51 @@ function move() {
     squares[currentSnake[0]].classList.add('snake-head-eat');
     //generate new apple
     generateApple();
-    //play audio when eat apple
-    if (currentSnake.length < 13) {
-      audios[currentSnake.length - 3].play();
-    } else audios[9].play();
+    //play random eat audio when snake eats the apple
+    audioIndex = Math.floor(Math.random() * 10);
+    audios[audioIndex].play();
     //add one to the score
     score++;
     //display our score
     scoreDisplay.textContent = score;
     //speed up our snake
+    //clear previous interval
     clearInterval(timerId);
+    //calculate new interval, if speed > 1.0 it will be smaller, so the game will be faster
     intervalTime = intervalTime * speed;
-    timerId = setInterval(move, intervalTime);
+    //set new Interval
+    timerId = setInterval(snakeAlive, intervalTime);
   }
-  //add styling so we can see it
-  squares[currentSnake[0]].classList.add('snake');
-  //add difrent head style to the head
-  snakeHeadDisplay();
-}
-
-function snakeHeadDisplay() {
-  squares[currentSnake[0]].classList.add('snake-head');
-  squares[currentSnake[1]].classList.remove('snake-head');
 }
 
 function generateApple() {
+  //remove the previous apple
+  squares[appleIndex].classList.remove('apple');
+  //create random index for apple
   appleIndex = Math.floor(Math.random() * squares.length);
   //preventing from apples appears inside snake
   currentSnake.forEach(function(index) {
-    if (index == appleIndex) return generateApple();
+    //restart generateApple if apple apears inside snake
+    if (index === appleIndex) return generateApple();
   });
+  //display the apple
   squares[appleIndex].classList.add('apple');
+}
+
+function snakeDead() {
+  //set correct head rotation
+  snakeHeadRotation();
+  //add dead style into snake head
+  ripIndex = Math.floor(Math.random() * 10) + 1;
+  squares[currentSnake[0]].classList.add(
+    `snake-rip-${ripIndex}`,
+    'snake-rip',
+    'snake-head-dead'
+  );
+  //play audio when snake dead
+  audioAngry.play();
+  //stop the game
+  clearInterval(timerId);
 }
 
 function control(e) {
@@ -175,30 +218,13 @@ function control(e) {
   }
 }
 
-document.addEventListener('keyup', control);
+document.addEventListener('keydown', control);
 
-function snakeDead() {
-  squares[currentSnake[0]].classList.add('snake-head-dead');
-  squares[currentSnake[0]].classList.remove(
-    'rotate-up',
-    'rotate-down',
-    'rotate-right',
-    'rotate-left',
-    'snake-head-eat'
-  );
-  snakeHeadRotation();
-  audioAngry.play();
-  clearInterval(timerId);
-}
-
-function snakeHeadRotation() {
-  if (direction === directions.up) {
-    squares[currentSnake[0]].classList.add('rotate-up');
-  } else if (direction === directions.down) {
-    squares[currentSnake[0]].classList.add('rotate-down');
-  } else if (direction === directions.right) {
-    squares[currentSnake[0]].classList.add('rotate-right');
-  } else if (direction === directions.left) {
-    squares[currentSnake[0]].classList.add('rotate-left');
-  }
-}
+// What to code ?
+// - snake tombstone after dead DONE
+// - highscore
+// - snake body rotten in time after dead
+// - ester eggs (make full clokwise loop to lower the speed )
+// - apple disaper and regenerate after time (faster blinking efect)
+// - rotten apples or shit lower the score
+// - rwd
