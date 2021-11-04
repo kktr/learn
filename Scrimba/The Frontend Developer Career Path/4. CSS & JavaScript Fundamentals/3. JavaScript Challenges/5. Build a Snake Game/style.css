@@ -29,12 +29,56 @@ main {
   height: 50px;
 }
 
+.snake-rip-1 {
+  background-image: url('img/snake-rip-1.jpg');
+}
+
+.snake-rip-2 {
+  background-image: url('img/snake-rip-2.jpg');
+}
+
+.snake-rip-3 {
+  background-image: url('img/snake-rip-3.jpg');
+}
+
+.snake-rip-4 {
+  background-image: url('img/snake-rip-4.jpg');
+}
+
+.snake-rip-5 {
+  background-image: url('img/snake-rip-5.jpg');
+}
+
+.snake-rip-6 {
+  background-image: url('img/snake-rip-6.jpg');
+}
+
+.snake-rip-7 {
+  background-image: url('img/snake-rip-7.jpg');
+}
+
+.snake-rip-8 {
+  background-image: url('img/snake-rip-8.jpg');
+}
+
+.snake-rip-9 {
+  background-image: url('img/snake-rip-9.jpg');
+}
+
+.snake-rip-10 {
+  background-image: url('img/snake-rip-10.jpg');
+}
+
 .snake {
   background-image: url('img/snake-body.jpg');
 }
 
 .snake-head {
   background-image: url('img/snake-head.jpg');
+}
+
+.snake-head-afraid {
+  background-image: url('img/snake-head-afraid.jpg');
 }
 
 .snake-head-dead {
