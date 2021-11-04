@@ -97,7 +97,7 @@ function move() {
     (currentSnake[0] % width === width - 1 && direction === 1) || //if snake has hit right wall
     (currentSnake[0] % width === 0 && direction === -1) || //if snake has hit left wall
     (currentSnake[0] - width < 0 && direction === -width) || //if snake has hit top
-    squares[currentSnake[0] + direction].classList.contains('snake')
+    squares[currentSnake[0] + direction].classList.contains('snake') //if snake hit snake
   )
     return snakeDead();
 
@@ -126,7 +126,7 @@ function move() {
     squares[tail].classList.add('snake');
     //grow our snake array
     currentSnake.push(tail);
-    //change snake head
+    //change snake head style when snake eat apple
     squares[currentSnake[0]].classList.add('snake-head-eat');
     //generate new apple
     generateApple();
@@ -145,6 +145,7 @@ function move() {
   }
   //add styling so we can see it
   squares[currentSnake[0]].classList.add('snake');
+  //add difrent head style to the head
   snakeHeadDisplay();
 }
 
@@ -154,9 +155,11 @@ function snakeHeadDisplay() {
 }
 
 function generateApple() {
-  do {
-    appleIndex = Math.floor(Math.random() * squares.length);
-  } while (squares[appleIndex].classList.contains('snake'));
+  appleIndex = Math.floor(Math.random() * squares.length);
+  //preventing from apples appears inside snake
+  currentSnake.forEach(function(index) {
+    if (index == appleIndex) return generateApple();
+  });
   squares[appleIndex].classList.add('apple');
 }
 
