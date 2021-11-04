@@ -128,9 +128,24 @@ function snakeMove() {
   currentSnake.unshift(currentSnake[0] + direction);
   //add styling so we can see it and add difrent head style to the head
   squares[currentSnake[0]].classList.add('snake', 'snake-head');
-  // change snake head to afraid if he is on previous rip square
+  //add ten to the score
+  score += 1;
+  //display our score
+  scoreDisplay.textContent = score;
+  // change snake head to afraid if he is on previous dead square
   if (squares[currentSnake[0]].classList.contains('snake-rip')) {
     squares[currentSnake[0]].classList.add('snake-head-afraid');
+    //speed up our snake
+    //clear previous interval
+    clearInterval(timerId);
+    //calculate new interval, if speed > 1.0 it will be smaller, so the game will be faster
+    intervalTime = intervalTime * 0.98;
+    //set new Interval
+    timerId = setInterval(snakeAlive, intervalTime);
+    //add ten to the score
+    score += 10;
+    //display our score
+    scoreDisplay.textContent = score;
   }
 }
 
@@ -162,8 +177,8 @@ function snakeEatApple() {
     //play random eat audio when snake eats the apple
     audioIndex = Math.floor(Math.random() * 10);
     audios[audioIndex].play();
-    //add one to the score
-    score++;
+    //add ten to the score
+    score += 100;
     //display our score
     scoreDisplay.textContent = score;
     //speed up our snake
@@ -195,11 +210,13 @@ function snakeDead() {
   snakeHeadRotation();
   //add dead style into snake head
   ripIndex = Math.floor(Math.random() * 10) + 1;
-  squares[currentSnake[0]].classList.add(
-    `snake-rip-${ripIndex}`,
-    'snake-rip',
-    'snake-head-dead'
-  );
+  if (!squares[currentSnake[0]].classList.contains('snake-rip')) {
+    squares[currentSnake[0]].classList.add(
+      'snake-rip',
+      `snake-rip-${ripIndex}`,
+      'snake-head-dead'
+    );
+  } else squares[currentSnake[0]].classList.add('snake-head-dead');
   //play audio when snake dead
   audioAngry.play();
   //stop the game
