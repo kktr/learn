@@ -81,6 +81,10 @@ main {
   background-image: url('img/snake-head-afraid.jpg');
 }
 
+.snake-head-full-loop {
+  background-image: url('img/snake-head-full-loop.jpg');
+}
+
 .snake-head-dead {
   background-image: url('img/snake-head-dead.jpg');
 }

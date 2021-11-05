@@ -6,15 +6,20 @@ const scoreDisplay = document.getElementById('score');
 let direction = 1;
 let squares = [];
 let currentSnake = [2, 1, 0];
+let snakeRoute = [];
 let appleIndex = 0;
 let score = 0;
 let intervalTime = 1000;
-let speed = 0.9;
+let speed = 1;
 let timerId = 0;
 const width = 10;
 let audios = [];
 let audioHungry = new Audio('audio/hungry.mp3');
 let audioAngry = new Audio('audio/angry.mp3');
+// prettier-ignore
+let fullLoop = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 19, 29, 39, 49, 59, 69, 79, 89,
+                99, 98, 97, 96, 95, 94, 93, 92, 91, 90, 80, 70, 60, 50, 40, 30,
+                20, 10];
 
 const keyCodes = {
   up: 38,
@@ -74,6 +79,7 @@ function startGame() {
   currentSnake = [2, 1, 0];
   direction = 1;
   score = 0;
+  speed = 1;
   //re add the class of snake to our new currentSnake
   displaySnakeAndScore();
   //reset intervalTime
@@ -115,7 +121,8 @@ function removeDisplayRotateAndHead() {
     'snake-head-eat',
     'snake-head',
     'snake-head-dead',
-    'snake-head-afraid'
+    'snake-head-afraid',
+    'snake-head-full-loop'
   );
 }
 
@@ -128,24 +135,52 @@ function snakeMove() {
   currentSnake.unshift(currentSnake[0] + direction);
   //add styling so we can see it and add difrent head style to the head
   squares[currentSnake[0]].classList.add('snake', 'snake-head');
-  //add ten to the score
-  score += 1;
-  //display our score
-  scoreDisplay.textContent = score;
+  //add 1 to the score
+  changeScore();
+  powerUpFullLoop();
   // change snake head to afraid if he is on previous dead square
   if (squares[currentSnake[0]].classList.contains('snake-rip')) {
     squares[currentSnake[0]].classList.add('snake-head-afraid');
-    //speed up our snake
-    //clear previous interval
-    clearInterval(timerId);
-    //calculate new interval, if speed > 1.0 it will be smaller, so the game will be faster
-    intervalTime = intervalTime * 0.98;
-    //set new Interval
-    timerId = setInterval(snakeAlive, intervalTime);
-    //add ten to the score
-    score += 10;
-    //display our score
-    scoreDisplay.textContent = score;
+    //speed up 2% our snake
+    changeSpeed(2);
+    //add 10 to the score
+    changeScore(10);
+  }
+}
+
+function changeSpeed(percent = 1) {
+  //clear previous interval
+  clearInterval(timerId);
+  //calculate new interval, if up = 1 the game will be 1% faster
+  intervalTime = intervalTime * speed * (1 - percent / 100);
+  //set new Interval
+  timerId = setInterval(snakeAlive, intervalTime);
+}
+
+function changeScore(points = 1) {
+  //add ten to the score
+  score += points;
+  if (score < 0) score = 0;
+  //display our score
+  scoreDisplay.textContent = score;
+}
+
+// if snake made full clockwise loop, from square 0 to squar 10, change score and speed
+function powerUpFullLoop(speed = -20, points = -500) {
+  //track snake route
+  snakeRoute.push(currentSnake[0]);
+  //loop through snakeRoute and fullLoop to check if they are identical
+  for (let i = 0; i < snakeRoute.length; i++) {
+    //clear snakeRoute if snakeRoute is difrent from fullLoop
+    if (snakeRoute[i] != fullLoop[i]) {
+      snakeRoute = [];
+      return;
+    } else if (snakeRoute.length == fullLoop.length) {
+      changeSpeed(speed);
+      changeScore(points);
+      snakeRoute = [];
+      squares[currentSnake[0]].classList.add('snake-head-full-loop');
+    }
   }
 }
 
@@ -177,17 +212,10 @@ function snakeEatApple() {
     //play random eat audio when snake eats the apple
     audioIndex = Math.floor(Math.random() * 10);
     audios[audioIndex].play();
-    //add ten to the score
-    score += 100;
-    //display our score
-    scoreDisplay.textContent = score;
-    //speed up our snake
-    //clear previous interval
-    clearInterval(timerId);
-    //calculate new interval, if speed > 1.0 it will be smaller, so the game will be faster
-    intervalTime = intervalTime * speed;
-    //set new Interval
-    timerId = setInterval(snakeAlive, intervalTime);
+    //add 100 to the score
+    changeScore(100);
+    //speed up 5% our snake
+    changeSpeed(5);
   }
 }
 
