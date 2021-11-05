@@ -1,0 +1,24 @@
+h1 {
+  color: #143774;
+  font-size: 3.375rem;
+  font-family: 'Lora', serif;
+}
+
+.subtitle {
+  color: #1792d2;
+}
+
+nav {
+  background-color: #f8f8f8;
+}
+
+nav a {
+  color: #707070;
+}
+
+.subtitle,
+nav {
+  font-weight: bold;
+  font-size: 1rem;
+  font-family: 'Ubuntu', sans-serif;
+}
