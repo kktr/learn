@@ -42,7 +42,15 @@ main {
   color: #46b648;
 }
 
+.grid-container {
+  width: 500px;
+  height: 500px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
 .grid {
+  position: fixed;
   display: flex;
   flex-wrap: wrap;
   width: 500px;
@@ -50,13 +58,28 @@ main {
   margin-right: auto;
   margin-left: auto;
   border: solid 2px black;
-  background-color: black;
+}
+
+.grid-bg {
+  position: fixed;
+  display: flex;
+  flex-wrap: wrap;
+  width: 500px;
+  height: 500px;
+  margin-right: auto;
+  margin-left: auto;
+  border: solid 2px black;
   background-image: url('img/green-moss-bg.jpg');
   background-size: cover;
-  opacity: 0.99;
+  opacity: 1;
 }
 
 .square {
+  width: 50px;
+  height: 50px;
+}
+
+.square-bg {
   width: 50px;
   height: 50px;
 }
@@ -106,8 +129,23 @@ main {
   background-image: url('img/snake-body.jpg');
 }
 
+.snake-dead {
+  border-radius: 8px;
+  background-image: url('img/snake-body.jpg');
+  -webkit-transition: opacity 10s ease-in-out;
+  -moz-transition: opacity 10s ease-in-out;
+  -ms-transition: opacity 10s ease-in-out;
+  -o-transition: opacity 10s ease-in-out;
+  transition: opacity 10 ease-in-out;
+  opacity: 0;
+}
+
 .snake-head {
   background-image: url('img/snake-head.jpg');
+}
+
+.snake-head-hungry {
+  background-image: url('img/snake-head-hungry.png');
 }
 
 .snake-head-afraid {

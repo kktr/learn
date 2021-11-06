@@ -1,13 +1,17 @@
 /*jshint esversion:6*/
 /* eslint-env es6 */
 const grid = document.querySelector('.grid');
+const gridBg = document.querySelector('.grid-bg');
 const startButton = document.getElementById('start');
 const scoreDisplay = document.getElementById('score');
 let direction = 1;
 let squares = [];
+let squaresBg = [];
 let currentSnake = [2, 1, 0];
 let snakeRoute = [];
 let appleIndex = 0;
+let movesWithoutApple = 0;
+let hungry = false;
 let score = 0;
 let intervalTime = 1000;
 let speed = 1;
@@ -43,6 +47,7 @@ function addAudio() {
 }
 
 addAudio();
+//
 
 function createGrid() {
   //create 100 of these elements with a for loop
@@ -57,6 +62,22 @@ function createGrid() {
     squares.push(square);
   }
 }
+
+function createGridBg() {
+  //create 100 of these elements with a for loop
+  for (let i = 0; i < width * width; i++) {
+    //create element
+    const squareBg = document.createElement('div');
+    //add styling to the element
+    squareBg.classList.add('square-bg');
+    //put the element into our grid
+    gridBg.appendChild(squareBg);
+    //push it into a new squares array
+    squaresBg.push(squareBg);
+  }
+}
+
+createGridBg();
 
 createGrid();
 
@@ -74,12 +95,17 @@ function startGame() {
   removeDisplayRotateAndHead();
   //remove the snake
   currentSnake.forEach(index => squares[index].classList.remove('snake'));
+  //display new apple
   generateApple();
+  //remove snake-dead style
+  currentSnake.forEach(index => squares[index].classList.remove('snake-dead'));
   //reset start values
   currentSnake = [2, 1, 0];
   direction = 1;
   score = 0;
   speed = 1;
+  movesWithoutApple = 0;
+  hungry = false;
   //re add the class of snake to our new currentSnake
   displaySnakeAndScore();
   //reset intervalTime
@@ -109,6 +135,8 @@ function snakeAlive() {
   snakeHeadRotation();
   //deal with snake head gets apple
   snakeEatApple();
+  //deal with too many moves without an apple
+  snakeHungry();
 }
 
 function removeDisplayRotateAndHead() {
@@ -122,7 +150,9 @@ function removeDisplayRotateAndHead() {
     'snake-head',
     'snake-head-dead',
     'snake-head-afraid',
-    'snake-head-full-loop'
+    'snake-head-full-loop',
+    'snake-fade',
+    'snake-head-hungry'
   );
 }
 
@@ -135,16 +165,20 @@ function snakeMove() {
   currentSnake.unshift(currentSnake[0] + direction);
   //add styling so we can see it and add difrent head style to the head
   squares[currentSnake[0]].classList.add('snake', 'snake-head');
+  if (hungry) squares[currentSnake[0]].classList.add('snake-head-hungry');
   //add 1 to the score
   changeScore();
+  //check if snake make fullLoop to change speed and points
   powerUpFullLoop();
+  //add 1 to movesWithoutApple
+  movesWithoutApple += 1;
   // change snake head to afraid if he is on previous dead square
-  if (squares[currentSnake[0]].classList.contains('snake-rip')) {
+  if (squaresBg[currentSnake[0]].classList.contains('snake-rip')) {
     squares[currentSnake[0]].classList.add('snake-head-afraid');
-    //speed up 2% our snake
-    changeSpeed(2);
-    //add 10 to the score
-    changeScore(10);
+    //speed up 2.1% our snake
+    changeSpeed(2.1);
+    //add 9 to the score
+    changeScore(9);
   }
 }
 
@@ -198,9 +232,9 @@ function snakeHeadRotation() {
 
 function snakeEatApple() {
   //if snake head go into apple
-  if (squares[currentSnake[0]].classList.contains('apple')) {
+  if (squaresBg[currentSnake[0]].classList.contains('apple')) {
     //remove the class of apple
-    squares[currentSnake[0]].classList.remove('apple');
+    squaresBg[currentSnake[0]].classList.remove('apple');
     //grow our snake by adding class of snake to it
     squares[tail].classList.add('snake');
     //grow our snake array
@@ -216,21 +250,43 @@ function snakeEatApple() {
     changeScore(100);
     //speed up 5% our snake
     changeSpeed(5);
+    //zero movesWithoutApple
+    movesWithoutApple = 0;
+    hungry = false;
   }
 }
 
 function generateApple() {
   //remove the previous apple
-  squares[appleIndex].classList.remove('apple');
+  squaresBg[appleIndex].classList.remove('apple');
   //create random index for apple
-  appleIndex = Math.floor(Math.random() * squares.length);
+  appleIndex = Math.floor(Math.random() * squaresBg.length);
   //preventing from apples appears inside snake
   currentSnake.forEach(function(index) {
     //restart generateApple if apple apears inside snake
     if (index === appleIndex) return generateApple();
     //display the apple
-    else squares[appleIndex].classList.add('apple');
+    else squaresBg[appleIndex].classList.add('apple');
   });
+}
+
+function snakeHungry(moves = 50, points = -150, speed = 0) {
+  if (movesWithoutApple == moves) {
+    hungry = true;
+    audioHungry.play();
+    //add or remove poits to the score
+    changeScore(points);
+    //speed up our snake
+    changeSpeed(speed);
+    //add hungry style to snake head
+    squares[currentSnake[0]].classList.add('snake-head-hungry');
+  } else if (movesWithoutApple > moves) {
+    //add or remove poits to the score
+    changeScore(-11);
+    //speed up our snake
+    changeSpeed(1);
+    //zero movesWithoutApple
+  }
 }
 
 function snakeDead() {
@@ -238,17 +294,20 @@ function snakeDead() {
   snakeHeadRotation();
   //add dead style into snake head
   ripIndex = Math.floor(Math.random() * 10) + 1;
-  if (!squares[currentSnake[0]].classList.contains('snake-rip')) {
-    squares[currentSnake[0]].classList.add(
+  if (!squaresBg[currentSnake[0]].classList.contains('snake-rip')) {
+    squaresBg[currentSnake[0]].classList.add(
       'snake-rip',
-      `snake-rip-${ripIndex}`,
-      'snake-head-dead'
+      `snake-rip-${ripIndex}`
     );
+    squares[currentSnake[0]].classList.add('snake-head-dead');
   } else squares[currentSnake[0]].classList.add('snake-head-dead');
   //play audio when snake dead
   audioAngry.play();
   //stop the game
   clearInterval(timerId);
+  //add snake-dead for fade out effect
+  currentSnake.forEach(index => squares[index].classList.remove('snake'));
+  currentSnake.forEach(index => squares[index].classList.add('snake-dead'));
 }
 
 function control(e) {
@@ -268,8 +327,11 @@ document.addEventListener('keydown', control);
 // What to code ?
 // - snake tombstone after dead DONE
 // - highscore
-// - snake body rotten in time after dead
-// - ester eggs (make full clokwise loop to lower the speed )
+// - snake body rotten in time after dead DONE
+// - Power up (make full clokwise loop to lower the speed ) DONE
 // - apple disaper and regenerate after time (faster blinking efect)
 // - rotten apples or shit lower the score
 // - rwd
+// - change snake images from jpg to png and play with snake color
+//   (difrent color, when snake is older, difreent color when snake fade after dead)
+// - create object with setup properities
