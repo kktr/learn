@@ -1,10 +1,37 @@
 body {
-  margin: 10;
-  padding: 10;
+  margin: 0;
+  font-family: 'Goblin One', cursive;
+
+  /* background-image: url('img/forest-bg.jpg');
+  background-size: cover; */
+  background: black;
+}
+
+h1 {
+  color: #46b648;
 }
 
 main {
   text-align: center;
+}
+
+#start {
+  display: block;
+  margin-right: auto;
+  margin-bottom: 20px;
+  margin-left: auto;
+  padding: 0.5rem 1.1rem;
+  color: #fff;
+  font-family: 'Goblin One', cursive;
+  background: #46b648;
+}
+
+#start:focus {
+  background-color: #149816;
+}
+
+#start:hover {
+  background-color: #0e6f10;
 }
 
 .score-container {
@@ -12,6 +39,7 @@ main {
   top: 30px;
   left: 40px;
   margin: 0;
+  color: #46b648;
 }
 
 .grid {
@@ -22,6 +50,10 @@ main {
   margin-right: auto;
   margin-left: auto;
   border: solid 2px black;
+  background-color: black;
+  background-image: url('img/green-moss-bg.jpg');
+  background-size: cover;
+  opacity: 0.99;
 }
 
 .square {
@@ -30,46 +62,47 @@ main {
 }
 
 .snake-rip-1 {
-  background-image: url('img/snake-rip-1.jpg');
+  background-image: url('img/snake-rip-1.png');
 }
 
 .snake-rip-2 {
-  background-image: url('img/snake-rip-2.jpg');
+  background-image: url('img/snake-rip-2.png');
 }
 
 .snake-rip-3 {
-  background-image: url('img/snake-rip-3.jpg');
+  background-image: url('img/snake-rip-3.png');
 }
 
 .snake-rip-4 {
-  background-image: url('img/snake-rip-4.jpg');
+  background-image: url('img/snake-rip-4.png');
 }
 
 .snake-rip-5 {
-  background-image: url('img/snake-rip-5.jpg');
+  background-image: url('img/snake-rip-5.png');
 }
 
 .snake-rip-6 {
-  background-image: url('img/snake-rip-6.jpg');
+  background-image: url('img/snake-rip-6.png');
 }
 
 .snake-rip-7 {
-  background-image: url('img/snake-rip-7.jpg');
+  background-image: url('img/snake-rip-7.png');
 }
 
 .snake-rip-8 {
-  background-image: url('img/snake-rip-8.jpg');
+  background-image: url('img/snake-rip-8.png');
 }
 
 .snake-rip-9 {
-  background-image: url('img/snake-rip-9.jpg');
+  background-image: url('img/snake-rip-9.png');
 }
 
 .snake-rip-10 {
-  background-image: url('img/snake-rip-10.jpg');
+  background-image: url('img/snake-rip-10.png');
 }
 
 .snake {
+  border-radius: 8px;
   background-image: url('img/snake-body.jpg');
 }
 
@@ -110,11 +143,6 @@ main {
 }
 
 .apple {
-  background-image: url('img/apple.jpg');
-}
-
-#start {
-  display: block;
-  margin-right: auto;
-  margin-left: auto;
+  background-image: url('img/apple-2.png');
+  opacity: 0.95;
 }
