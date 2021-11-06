@@ -228,9 +228,9 @@ function generateApple() {
   currentSnake.forEach(function(index) {
     //restart generateApple if apple apears inside snake
     if (index === appleIndex) return generateApple();
+    //display the apple
+    else squares[appleIndex].classList.add('apple');
   });
-  //display the apple
-  squares[appleIndex].classList.add('apple');
 }
 
 function snakeDead() {
