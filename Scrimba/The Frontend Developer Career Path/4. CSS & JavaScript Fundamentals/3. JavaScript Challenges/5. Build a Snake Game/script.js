@@ -4,6 +4,7 @@ const grid = document.querySelector('.grid');
 const gridBg = document.querySelector('.grid-bg');
 const startButton = document.getElementById('start');
 const scoreDisplay = document.getElementById('score');
+const gameMessage = document.querySelector('.game-message');
 let direction = 1;
 let squares = [];
 let squaresBg = [];
@@ -12,6 +13,7 @@ let snakeRoute = [];
 let appleIndex = 0;
 let movesWithoutApple = 0;
 let hungry = false;
+let appleAge = 0;
 let score = 0;
 let intervalTime = 1000;
 let speed = 1;
@@ -106,6 +108,8 @@ function startGame() {
   speed = 1;
   movesWithoutApple = 0;
   hungry = false;
+  appleAge = 0;
+  gameMessage.textContent = '';
   //re add the class of snake to our new currentSnake
   displaySnakeAndScore();
   //reset intervalTime
@@ -137,6 +141,8 @@ function snakeAlive() {
   snakeEatApple();
   //deal with too many moves without an apple
   snakeHungry();
+  //apple disaper after too many moves
+  appleDisappear();
 }
 
 function removeDisplayRotateAndHead() {
@@ -165,13 +171,17 @@ function snakeMove() {
   currentSnake.unshift(currentSnake[0] + direction);
   //add styling so we can see it and add difrent head style to the head
   squares[currentSnake[0]].classList.add('snake', 'snake-head');
-  if (hungry) squares[currentSnake[0]].classList.add('snake-head-hungry');
+  if (hungry) {
+    squares[currentSnake[0]].classList.add('snake-head-hungry');
+  }
   //add 1 to the score
   changeScore();
   //check if snake make fullLoop to change speed and points
   powerUpFullLoop();
   //add 1 to movesWithoutApple
   movesWithoutApple += 1;
+  //add 1 to appleAge;
+  appleAge += 1;
   // change snake head to afraid if he is on previous dead square
   if (squaresBg[currentSnake[0]].classList.contains('snake-rip')) {
     squares[currentSnake[0]].classList.add('snake-head-afraid');
@@ -194,7 +204,9 @@ function changeSpeed(percent = 1) {
 function changeScore(points = 1) {
   //add ten to the score
   score += points;
-  if (score < 0) score = 0;
+  if (score < 0) {
+    score = 0;
+  }
   //display our score
   scoreDisplay.textContent = score;
 }
@@ -232,7 +244,7 @@ function snakeHeadRotation() {
 
 function snakeEatApple() {
   //if snake head go into apple
-  if (squaresBg[currentSnake[0]].classList.contains('apple')) {
+  if (squaresBg[currentSnake[0]].classList.contains('apple', 'blink-fast')) {
     //remove the class of apple
     squaresBg[currentSnake[0]].classList.remove('apple');
     //grow our snake by adding class of snake to it
@@ -257,16 +269,26 @@ function snakeEatApple() {
 }
 
 function generateApple() {
+  //reset apple age
+  appleAge = 0;
   //remove the previous apple
-  squaresBg[appleIndex].classList.remove('apple');
+  squaresBg[appleIndex].classList.remove(
+    'apple',
+    'blink-fast',
+    'apple-after-dead'
+  );
   //create random index for apple
   appleIndex = Math.floor(Math.random() * squaresBg.length);
   //preventing from apples appears inside snake
   currentSnake.forEach(function(index) {
     //restart generateApple if apple apears inside snake
-    if (index === appleIndex) return generateApple();
+    if (index === appleIndex) {
+      return generateApple();
+    }
     //display the apple
-    else squaresBg[appleIndex].classList.add('apple');
+    else {
+      squaresBg[appleIndex].classList.add('apple');
+    }
   });
 }
 
@@ -286,6 +308,18 @@ function snakeHungry(moves = 50, points = -150, speed = 0) {
     //speed up our snake
     changeSpeed(1);
     //zero movesWithoutApple
+  }
+}
+//old apple disaper
+function appleDisappear(age = 20, score = -10) {
+  if (appleAge == age - 10) {
+    squaresBg[appleIndex].classList.add('blink-fast');
+  }
+
+  if (appleAge == age) {
+    squaresBg[appleIndex].classList.remove('blink-fast');
+    generateApple();
+    changeScore(score);
   }
 }
 
@@ -308,6 +342,9 @@ function snakeDead() {
   //add snake-dead for fade out effect
   currentSnake.forEach(index => squares[index].classList.remove('snake'));
   currentSnake.forEach(index => squares[index].classList.add('snake-dead'));
+  //fade out apple after snake dead
+  squaresBg[appleIndex].classList.add('apple-after-dead');
+  gameMessage.textContent = 'Game Over!';
 }
 
 function control(e) {

@@ -50,7 +50,7 @@ main {
 }
 
 .grid {
-  position: fixed;
+  position: absolute;
   display: flex;
   flex-wrap: wrap;
   width: 500px;
@@ -61,7 +61,7 @@ main {
 }
 
 .grid-bg {
-  position: fixed;
+  position: absolute;
   display: flex;
   flex-wrap: wrap;
   width: 500px;
@@ -74,6 +74,25 @@ main {
   opacity: 1;
 }
 
+.message {
+  position: absolute;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  width: 500px;
+  height: 500px;
+  margin-right: auto;
+  margin-left: auto;
+  border: solid 2px black;
+}
+
+.game-message {
+  color: white;
+  font-size: 40px;
+  text-shadow: 7.2px 14.4px 14.4px #a2daa3;
+}
+
 .square {
   width: 50px;
   height: 50px;
@@ -82,6 +101,10 @@ main {
 .square-bg {
   width: 50px;
   height: 50px;
+}
+
+.snake-rip {
+  filter: drop-shadow(4px 8px 8px hsl(0deg 0% 0% / 0.38));
 }
 
 .snake-rip-1 {
@@ -182,5 +205,36 @@ main {
 
 .apple {
   background-image: url('img/apple-2.png');
-  opacity: 0.95;
+  filter: drop-shadow(4px 8px 8px hsl(0deg 0% 0% / 0.38));
+}
+
+.apple-after-dead {
+  -webkit-transition: opacity 5s ease-in-out;
+  -moz-transition: opacity 5s ease-in-out;
+  -ms-transition: opacity 5s ease-in-out;
+  -o-transition: opacity 5s ease-in-out;
+  transition: opacity 5 ease-in-out;
+  opacity: 0;
+}
+
+.blink {
+  -webkit-animation: blink-animation 1s steps(5, start) infinite;
+  animation: blink-animation 1s steps(5, start) infinite;
+}
+
+.blink-fast {
+  -webkit-animation: blink-animation 0.75s steps(5, start) infinite;
+  animation: blink-animation 0.75s steps(5, start) infinite;
+}
+
+@keyframes blink-animation {
+  to {
+    visibility: hidden;
+  }
+}
+
+@-webkit-keyframes blink-animation {
+  to {
+    visibility: hidden;
+  }
 }
