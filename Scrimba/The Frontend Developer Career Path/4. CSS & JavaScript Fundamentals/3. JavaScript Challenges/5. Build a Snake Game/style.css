@@ -49,7 +49,7 @@ main {
   margin-left: auto;
 }
 
-.grid {
+.grid-pg {
   position: absolute;
   display: flex;
   flex-wrap: wrap;
@@ -93,7 +93,7 @@ main {
   text-shadow: 7.2px 14.4px 14.4px #a2daa3;
 }
 
-.square {
+.square-pg {
   width: 50px;
   height: 50px;
 }
@@ -103,58 +103,56 @@ main {
   height: 50px;
 }
 
-.snake-rip {
+.snake-tombstone {
   filter: drop-shadow(4px 8px 8px hsl(0deg 0% 0% / 0.38));
 }
 
-.snake-rip-1 {
-  background-image: url('img/snake-rip-1.png');
+.snake-tombstone-1 {
+  background-image: url('img/snake-tombstone-1.png');
 }
 
-.snake-rip-2 {
-  background-image: url('img/snake-rip-2.png');
+.snake-tombstone-2 {
+  background-image: url('img/snake-tombstone-2.png');
 }
 
-.snake-rip-3 {
-  background-image: url('img/snake-rip-3.png');
+.snake-tombstone-3 {
+  background-image: url('img/snake-tombstone-3.png');
 }
 
-.snake-rip-4 {
-  background-image: url('img/snake-rip-4.png');
+.snake-tombstone-4 {
+  background-image: url('img/snake-tombstone-4.png');
 }
 
-.snake-rip-5 {
-  background-image: url('img/snake-rip-5.png');
+.snake-tombstone-5 {
+  background-image: url('img/snake-tombstone-5.png');
 }
 
-.snake-rip-6 {
-  background-image: url('img/snake-rip-6.png');
+.snake-tombstone-6 {
+  background-image: url('img/snake-tombstone-6.png');
 }
 
-.snake-rip-7 {
-  background-image: url('img/snake-rip-7.png');
+.snake-tombstone-7 {
+  background-image: url('img/snake-tombstone-7.png');
 }
 
-.snake-rip-8 {
-  background-image: url('img/snake-rip-8.png');
+.snake-tombstone-8 {
+  background-image: url('img/snake-tombstone-8.png');
 }
 
-.snake-rip-9 {
-  background-image: url('img/snake-rip-9.png');
+.snake-tombstone-9 {
+  background-image: url('img/snake-tombstone-9.png');
 }
 
-.snake-rip-10 {
-  background-image: url('img/snake-rip-10.png');
+.snake-tombstone-10 {
+  background-image: url('img/snake-tombstone-10.png');
 }
 
-.snake {
+.snake-body {
   border-radius: 8px;
   background-image: url('img/snake-body.jpg');
 }
 
-.snake-dead {
-  border-radius: 8px;
-  background-image: url('img/snake-body.jpg');
+.snake-body-dead {
   -webkit-transition: opacity 10s ease-in-out;
   -moz-transition: opacity 10s ease-in-out;
   -ms-transition: opacity 10s ease-in-out;
@@ -179,12 +177,12 @@ main {
   background-image: url('img/snake-head-full-loop.jpg');
 }
 
-.snake-head-dead {
-  background-image: url('img/snake-head-dead.jpg');
-}
-
 .snake-head-eat {
   background-image: url('img/snake-head-eat.jpg');
+}
+
+.snake-head-dead {
+  background-image: url('img/snake-head-dead.jpg');
 }
 
 .rotate-up {
