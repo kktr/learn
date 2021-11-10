@@ -1,0 +1,38 @@
+split between files:
+  game.js
+
+    remove Draw.js
+    update from snake and apple
+    draw.js
+
+  snake.js
+    isSnakeAlive()
+      snakeDead()
+    move()
+    snakeAfraid()
+    snakeEatApple()
+    snakeHungry()
+    powerUpfullLoop()
+
+  apple.js
+    appleDisappearWhenOld()
+    getAppleRandomPosition()
+
+  input.js
+    control(e)
+
+  draw.js
+
+
+
+  // What to code ?
+  // no TODO list in code files
+  // - snake tombstone after dead DONE
+  // - highscore
+  // - snake body rotten in time after dead DONE
+  // - Power up (make full clokwise loop to lower the speed ) DONE
+  // - apple disaper and regenerate after time (faster blinking efect) DONE
+  // - rotten apples or shit lower the score
+  // - rwd
+  // - change snake images from jpg to png and play with snake color
+  //   (difrent color, when snake is older, difreent color when snake fade after dead)
