@@ -1,33 +1,58 @@
 /*jshint esversion:6*/
 /* eslint-env es6 */
-const gridPlayground = document.querySelector('.grid-playground');
-const gridBackground = document.querySelector('.grid-background');
+import {
+  createGridPlayground,
+  createGridBackground,
+  squaresPlayground,
+  squaresBackground
+} from './grid.js';
+
+import {
+  addEatAudios,
+  getAppleRandomPosition,
+  applePosition,
+  appleDisappearWhenOld,
+  appleAge,
+  setAppleAge
+} from './apple.js';
+
+import {
+  directionOfMovement,
+  directions,
+  width,
+  setDirectionOfMovement
+} from './input.js';
+
+import {
+  removeDisplay,
+  removeSnakeHeadDisplay,
+  removeSnakeHeadStyle,
+  removeStyleFromSnakeHeadPosition,
+  removeApple,
+  displaySnake,
+  displayScore,
+  changeSnakeHeadStyle,
+  changeScore,
+  snakeHeadRotation,
+  score,
+  displayApple
+} from './display.js';
+
 const startButton = document.getElementById('start');
-const scoreDisplay = document.getElementById('score');
 const gameMessage = document.querySelector('.game-message');
-const width = 10;
-const directions = {
-  up: -width,
-  left: -1,
-  right: 1,
-  down: width
-};
-let directionOfMovement = directions.right;
-let squaresPlayground = [];
-let squaresBackground = [];
-let snakeBodyPosition = [2, 1, 0];
-let snakeHeadPosition = snakeBodyPosition[0];
+
+export let snakeBodyPosition = [2, 1, 0];
+export let snakeHeadPosition = snakeBodyPosition[0];
+let tail = [];
 let snakeRoute = [];
-let applePosition = 0;
 
 let movesWithoutApple = 0;
-let appleAge = 0;
-let score = 0;
+
 let gameIntervalTime = 1000;
 let speed = 1;
 let timerId = 0;
 
-let audiosEat = [];
+export let audiosEat = [];
 let audioHungry = new Audio('audio/hungry.mp3');
 let audioDead = new Audio('audio/dead.mp3');
 // prettier-ignore
@@ -35,53 +60,12 @@ let fullLoop = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 19, 29, 39, 49, 59, 69, 79, 89,
                 99, 98, 97, 96, 95, 94, 93, 92, 91, 90, 80, 70, 60, 50, 40, 30,
                 20, 10];
 
-const keyCodes = {
-  up: 38,
-  left: 37,
-  right: 39,
-  down: 40
-};
-
 //creating audio elements and placing them in the audiosEat array,
 //they are playing when the snake eats an apple
-function addEatAudios() {
-  for (let i = 0; i < 10; i++) {
-    audiosEat[i] = new Audio(`audio/eat${i + 1}.mp3`);
-  }
-}
+
 addEatAudios();
 
-// creating a playground with 100 fields for snake movements and the appearance of apples
-function createGridPlayground() {
-  //create 100 of these elements with a for loop
-  for (let i = 0; i < width * width; i++) {
-    //create element
-    const squarePlayground = document.createElement('div');
-    //add styling to the element
-    squarePlayground.classList.add('square-playground');
-    //put the element into our grid
-    gridPlayground.appendChild(squarePlayground);
-    //push it into a new squares array
-    squaresPlayground.push(squarePlayground);
-  }
-}
-
 createGridPlayground();
-
-//create a playground with 100 fields for the snake tombstones and the background img
-function createGridBackground() {
-  //create 100 of these elements with a for loop
-  for (let i = 0; i < width * width; i++) {
-    //create element
-    const squareBackground = document.createElement('div');
-    //add styling to the element
-    squareBackground.classList.add('square-background');
-    //put the element into our grid
-    gridBackground.appendChild(squareBackground);
-    //push it into a new squares array
-    squaresBackground.push(squareBackground);
-  }
-}
 
 createGridBackground();
 
@@ -90,22 +74,15 @@ function startGame() {
   audioHungry.play();
   //reset gameIntervalTime
   resetGameInterval();
-  //removes head rotation classes from previous snake
-  removeSnakeHeadRotate();
-  //removes head styling classes from previous snake
-  removeSnakeHeadDisplay();
-  //removes snake-body and snake-body-dead styling classes from previous snake
-  removeSnakeBodyDisplay();
-  //remove previous apple
-  removeApple();
+
+  removeDisplay();
   //restore variables to their initial values
   resetValues();
   //adding body and head classes to the new snake
   displaySnake();
   //displaying a new game score
   displayScore();
-  //generate new apple index
-  getAppleRandomPosition();
+
   //adding styling to a square with a new apple
   displayApple();
 }
@@ -120,113 +97,31 @@ function resetGameInterval() {
   timerId = setInterval(game, gameIntervalTime);
 }
 
-function removeSnakeHeadRotate() {
-  removeStyleFromSnakeHeadPosition(
-    'rotate-up',
-    'rotate-down',
-    'rotate-right',
-    'rotate-left'
-  );
-}
-
-function removeSnakeHeadDisplay() {
-  removeStyleFromSnakeHeadPosition(
-    'snake-head-eat',
-    'snake-head',
-    'snake-head-dead',
-    'snake-head-afraid',
-    'snake-head-full-loop',
-    'snake-fade',
-    'snake-head-hungry'
-  );
-}
-
-function removeStyleFromSnakeHeadPosition(...classes) {
-  for (let value of classes) {
-    squaresPlayground[snakeHeadPosition].classList.remove(value);
-  }
-}
-
-function removeSnakeBodyDisplay() {
-  snakeBodyPosition.forEach(index =>
-    squaresPlayground[index].classList.remove('snake-body')
-  );
-  snakeBodyPosition.forEach(index =>
-    squaresPlayground[index].classList.remove('snake-body-dead')
-  );
-}
-
-function removeApple() {
-  //reset apple age
-  appleAge = 0;
-  //removing the apple styling from the previous apple square
-  squaresPlayground[applePosition].classList.remove(
-    'apple',
-    'apple-blink',
-    'apple-after-dead'
-  );
-}
-
 function resetValues() {
   snakeBodyPosition = [2, 1, 0];
   snakeHeadPosition = snakeBodyPosition[0];
-  directionOfMovement = directions.right;
-  score = 0;
+  setDirectionOfMovement();
+  changeScore(-score);
   speed = 1;
   movesWithoutApple = 0;
-  appleAge = 0;
+  setAppleAge(0);
   gameMessage.textContent = '';
 }
 
-function displaySnake() {
-  snakeBodyPosition.forEach(index =>
-    squaresPlayground[index].classList.add('snake-body')
-  );
-  changeSnakeHeadStyle('snake-head');
-}
 //snake first display
 displaySnake();
 
-function changeSnakeHeadStyle(...classes) {
-  for (let value of classes) {
-    squaresPlayground[snakeHeadPosition].classList.add(value);
-  }
-}
-
-function displayScore() {
-  scoreDisplay.textContent = score;
-}
-
 displayScore();
 
-function getAppleRandomPosition() {
-  applePosition = getRandomIntInclusive(0, squaresPlayground.length - 1);
-  // check if every snakeBodyPosition index is diffrent from applePosition
-  let different = snakeBodyPosition.every(isDifferentIndex);
-  // if isn't assign applePosition again
-  if (!different) {
-    return getAppleRandomPosition();
-  }
-}
-
-function getRandomIntInclusive(min, max) {
+export function getRandomIntInclusive(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
 
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-function isDifferentIndex(index) {
-  return index !== applePosition;
-}
-
-function displayApple() {
-  squaresPlayground[applePosition].classList.add('apple');
-}
-
 function game() {
   //removes head rotation classes from previous snake squares
-  removeSnakeHeadRotate();
   //removes head styling classes from previous snake squares
   removeSnakeHeadDisplay();
   //checking that the snake did not hit the wall or itself
@@ -312,7 +207,6 @@ function snakeDead() {
   //add dead-head style into snake head square
   changeSnakeHeadStyle('snake-head-dead');
   //add snake-body-dead for fade out effect
-  //last edited coment stoped here ..............................................................
   snakeBodyPosition.forEach(index =>
     squaresPlayground[index].classList.add('snake-body-dead')
   );
@@ -323,7 +217,7 @@ function snakeDead() {
 
 function randomSnakeTombstoneDisplayInBg() {
   //create a random index to select a random snake-tombstone img
-  tombstoneIndex = getRandomIntInclusive(1, 10);
+  let tombstoneIndex = getRandomIntInclusive(1, 10);
   //check if there isn't a tombstone, if not, display a random tombstone
   if (
     !squaresBackground[snakeHeadPosition].classList.contains('snake-tombstone')
@@ -351,19 +245,7 @@ function snakeMove() {
   //add 1 to movesWithoutApple
   movesWithoutApple += 1;
   //add 1 to appleAge;
-  appleAge += 1;
-}
-
-function snakeHeadRotation() {
-  if (directionOfMovement === directions.up) {
-    changeSnakeHeadStyle('rotate-up');
-  } else if (directionOfMovement === directions.down) {
-    changeSnakeHeadStyle('rotate-down');
-  } else if (directionOfMovement === directions.right) {
-    changeSnakeHeadStyle('rotate-right');
-  } else if (directionOfMovement === directions.left) {
-    changeSnakeHeadStyle('rotate-left');
-  }
+  setAppleAge(appleAge + 1);
 }
 
 function snakeAfraid() {
@@ -387,16 +269,6 @@ function changeGameSpeed(percent = 1) {
   timerId = setInterval(game, gameIntervalTime);
 }
 
-function changeScore(points = 1) {
-  //add ten to the score
-  score += points;
-  if (score < 0) {
-    score = 0;
-  }
-  //display our score
-  scoreDisplay.textContent = score;
-}
-
 function snakeEatApple() {
   //if snake head go into apple
   if (squaresPlayground[snakeHeadPosition].classList.contains('apple')) {
@@ -410,6 +282,7 @@ function snakeEatApple() {
     changeSnakeHeadStyle('snake-head-eat');
     //remove previous apple
     removeApple();
+
     //generate new apple
     getAppleRandomPosition();
     displayApple();
@@ -425,23 +298,8 @@ function snakeEatApple() {
 }
 
 function playEatAudio() {
-  audioIndex = Math.floor(Math.random() * 10);
+  let audioIndex = Math.floor(Math.random() * 10);
   audiosEat[audioIndex].play();
-}
-
-//old apple disaper
-function appleDisappearWhenOld(oldAge = 30, score = -10) {
-  if (appleAge === oldAge - 10) {
-    squaresPlayground[applePosition].classList.add('apple-blink');
-  }
-
-  if (appleAge === oldAge) {
-    squaresPlayground[applePosition].classList.remove('apple-blink');
-    removeApple();
-    getAppleRandomPosition();
-    displayApple();
-    changeScore(score);
-  }
 }
 
 function snakeHungry(moves = 50, points = -11, speed = 1) {
@@ -476,17 +334,3 @@ function powerUpFullLoop(speed = -20, points = -500) {
     }
   }
 }
-
-function control(e) {
-  if (e.keyCode === keyCodes.right) {
-    directionOfMovement = directions.right;
-  } else if (e.keyCode === keyCodes.up) {
-    directionOfMovement = directions.up;
-  } else if (e.keyCode === keyCodes.left) {
-    directionOfMovement = directions.left;
-  } else if (e.keyCode === keyCodes.down) {
-    directionOfMovement = directions.down;
-  }
-}
-
-document.addEventListener('keydown', control);
