@@ -35,7 +35,8 @@ import {
   changeScore,
   snakeHeadRotation,
   score,
-  displayApple
+  displayApple,
+  displayApple3000
 } from './display.js';
 
 const startButton = document.getElementById('start');
@@ -43,7 +44,6 @@ const gameMessage = document.querySelector('.game-message');
 
 export let snakeBodyPosition = [2, 1, 0];
 export let snakeHeadPosition = snakeBodyPosition[0];
-let tail = [];
 let snakeRoute = [];
 
 let movesWithoutApple = 0;
@@ -93,7 +93,7 @@ startButton.addEventListener('click', startGame);
 //  and assigning it to the game function
 function resetGameInterval() {
   clearInterval(timerId);
-  gameIntervalTime = 1000;
+  gameIntervalTime = 500;
   timerId = setInterval(game, gameIntervalTime);
 }
 
@@ -140,6 +140,7 @@ function game() {
     appleDisappearWhenOld();
     //the snake is hungry if it does not eat the apple for a certain number of moves,
     // then re-style the head to hungry, play audio-hungry, subtract points and speed up the game
+    displayApple3000();
     snakeHungry();
     //check Did the snake loop around the outside edge of the playground,
     //    to reduce speed at the cost of losing points?
@@ -229,17 +230,20 @@ function randomSnakeTombstoneDisplayInBg() {
   }
 }
 
-function snakeMove() {
+export let isSnakeMove = false;
+export let snakeTailPosition;
+
+export function snakeMove() {
   //remove last element from our snakeBodyPosition array
-  tail = snakeBodyPosition.pop();
+  snakeTailPosition = snakeBodyPosition.pop();
   //remove styling from last element
-  squaresPlayground[tail].classList.remove('snake-body');
+  // squaresPlayground[tail].classList.remove('snake-body');
   //add square in directionOfMovement we are heading
   snakeBodyPosition.unshift(snakeHeadPosition + directionOfMovement);
   //reset snakeHead value
   snakeHeadPosition = snakeBodyPosition[0];
   //add styling so we can see it and add difrent head style to the head
-  changeSnakeHeadStyle('snake-body', 'snake-head');
+  // changeSnakeHeadStyle('snake-body', 'snake-head');
   //add 1 to the score
   changeScore();
   //add 1 to movesWithoutApple
@@ -248,16 +252,19 @@ function snakeMove() {
   setAppleAge(appleAge + 1);
 }
 
+export let isSnakeAfraid = false;
+
 function snakeAfraid() {
   if (
     squaresBackground[snakeHeadPosition].classList.contains('snake-tombstone')
   ) {
-    changeSnakeHeadStyle('snake-head-afraid');
+    isSnakeAfraid = true;
+
     //speed up our snake
     changeGameSpeed(2.1);
     //add to the score
     changeScore(9);
-  }
+  } else isSnakeAfraid = false;
 }
 
 function changeGameSpeed(percent = 1) {
@@ -269,23 +276,26 @@ function changeGameSpeed(percent = 1) {
   timerId = setInterval(game, gameIntervalTime);
 }
 
+export let isSnakeEatApple = false;
+
 function snakeEatApple() {
   //if snake head go into apple
   if (squaresPlayground[snakeHeadPosition].classList.contains('apple')) {
+    isSnakeEatApple = true;
     //remove the class of apple
-    removeStyleFromSnakeHeadPosition('apple', 'apple-blink');
+    // removeStyleFromSnakeHeadPosition('apple', 'apple-blink');
     //grow our snake by adding class of snake to it
-    squaresPlayground[tail].classList.add('snake-body');
+    //squaresPlayground[snakeTailPosition].classList.add('snake-body');
     //grow our snake array
-    snakeBodyPosition.push(tail);
+    snakeBodyPosition.push(snakeTailPosition);
     //change snake head style when snake eat apple
-    changeSnakeHeadStyle('snake-head-eat');
+    // changeSnakeHeadStyle('snake-head-eat');
     //remove previous apple
-    removeApple();
-
+    // removeApple();
+    setAppleAge(0);
     //generate new apple
-    getAppleRandomPosition();
-    displayApple();
+    // getAppleRandomPosition();
+    // displayApple();
     //play random eat audio when snake eats the apple
     playEatAudio();
     //add 100 to the score
@@ -294,6 +304,8 @@ function snakeEatApple() {
     changeGameSpeed(5);
     //zero movesWithoutApple
     movesWithoutApple = 0;
+  } else {
+    isSnakeEatApple = false;
   }
 }
 
@@ -301,21 +313,25 @@ function playEatAudio() {
   let audioIndex = Math.floor(Math.random() * 10);
   audiosEat[audioIndex].play();
 }
+export let isSnakeHuangry = false;
 
 function snakeHungry(moves = 50, points = -11, speed = 1) {
   if (movesWithoutApple === moves) {
     audioHungry.play();
-  } else if (movesWithoutApple > moves) {
+  }
+
+  if (movesWithoutApple >= moves) {
+    isSnakeHuangry = true;
     //add hungry style to snake head
-    changeSnakeHeadStyle('snake-head-hungry');
+    //changeSnakeHeadStyle('snake-head-hungry');
     //add or remove poits to the score
     changeScore(points);
     //speed up our snake
     changeGameSpeed(speed);
     //zero movesWithoutApple
-  }
+  } else isSnakeHuangry = false;
 }
-
+export let isPowerUpFullLoop = false;
 // if snake made full clockwise loop, from square 0 to squar 10, change score and speed
 function powerUpFullLoop(speed = -20, points = -500) {
   //track snake route
@@ -324,13 +340,15 @@ function powerUpFullLoop(speed = -20, points = -500) {
   for (let i = 0; i < snakeRoute.length; i++) {
     //clear snakeRoute if snakeRoute is difrent from fullLoop
     if (snakeRoute[i] != fullLoop[i]) {
+      isPowerUpFullLoop = false;
       snakeRoute = [];
       return;
     } else if (snakeRoute.length == fullLoop.length) {
       changeGameSpeed(speed);
       changeScore(points);
       snakeRoute = [];
-      changeSnakeHeadStyle('snake-head-full-loop');
+      // changeSnakeHeadStyle('snake-head-full-loop');
+      isPowerUpFullLoop = true;
     }
   }
 }

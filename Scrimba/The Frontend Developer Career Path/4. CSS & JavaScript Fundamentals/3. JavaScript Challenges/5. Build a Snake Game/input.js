@@ -8,13 +8,13 @@ const keyCodes = {
 };
 
 export const width = 10;
-
 export const directions = {
   up: -width,
   left: -1,
   right: 1,
   down: width
 };
+
 export let directionOfMovement = directions.right;
 
 export function setDirectionOfMovement() {

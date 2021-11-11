@@ -1,20 +1,27 @@
 /*jshint esversion:6*/
 /* eslint-env es6 */
 import { squaresPlayground } from './grid.js';
-
-import { snakeBodyPosition, snakeHeadPosition } from './script.js';
-
+import {
+  snakeBodyPosition,
+  snakeHeadPosition,
+  snakeTailPosition,
+  isSnakeMove,
+  isSnakeEatApple,
+  isSnakeAfraid,
+  isSnakeHuangry,
+  isPowerUpFullLoop
+} from './script.js';
 import {
   applePosition,
   appleAge,
   setAppleAge,
-  getAppleRandomPosition
+  getAppleRandomPosition,
+  isAppleOld,
+  isAppleMaxOld
 } from './apple.js';
-
 import { directionOfMovement, directions } from './input.js';
 
 const scoreDisplay = document.getElementById('score');
-export let score = 0;
 
 export function displaySnake() {
   snakeBodyPosition.forEach(index =>
@@ -40,6 +47,8 @@ export function snakeHeadRotation() {
     changeSnakeHeadStyle('rotate-left');
   }
 }
+
+export let score = 0;
 
 export function displayScore() {
   scoreDisplay.textContent = score;
@@ -113,11 +122,51 @@ export function displayApple() {
 
 export function removeApple() {
   //reset apple age
-  setAppleAge(0);
+  // setAppleAge(0);
   //removing the apple styling from the previous apple square
   squaresPlayground[applePosition].classList.remove(
     'apple',
     'apple-blink',
     'apple-after-dead'
   );
+}
+
+export function displayApple3000() {
+  //remove styling from last element
+  squaresPlayground[snakeTailPosition].classList.remove('snake-body');
+  //add styling so we can see it and add difrent head style to the head
+  changeSnakeHeadStyle('snake-body', 'snake-head');
+
+  if (isSnakeAfraid) {
+    changeSnakeHeadStyle('snake-head-afraid');
+  }
+
+  if (isSnakeHuangry) {
+    //add hungry style to snake head
+    changeSnakeHeadStyle('snake-head-hungry');
+  }
+
+  if (isPowerUpFullLoop) {
+    changeSnakeHeadStyle('snake-head-full-loop');
+  }
+
+  if (isSnakeEatApple) {
+    //remove the class of apple
+    removeStyleFromSnakeHeadPosition('apple', 'apple-blink');
+    //grow our snake by adding class of snake to it
+    squaresPlayground[snakeTailPosition].classList.add('snake-body');
+    //change snake head style when snake eat apple
+    changeSnakeHeadStyle('snake-head-eat');
+  }
+
+  if (isAppleOld) {
+    squaresPlayground[applePosition].classList.add('apple-blink');
+  } else {
+    squaresPlayground[applePosition].classList.remove('apple-blink');
+  }
+  if (isAppleMaxOld || isSnakeEatApple) {
+    console.log('d3000 Max');
+    removeApple();
+    displayApple();
+  }
 }
