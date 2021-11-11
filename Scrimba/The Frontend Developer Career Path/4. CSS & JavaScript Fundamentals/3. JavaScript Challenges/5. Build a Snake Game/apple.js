@@ -1,19 +1,9 @@
 /*jshint esversion:6*/
 /* eslint-env es6 */
 import { squaresPlayground } from './grid.js';
-import { removeApple, changeScore } from './display.js';
-import {
-  audiosEat,
-  getRandomIntInclusive,
-  snakeBodyPosition
-} from './script.js';
+import { removeApple, changeScore, getRandomIntInclusive } from './display.js';
 import { displayApple } from './display.js';
-
-export function addEatAudios() {
-  for (let i = 0; i < 10; i++) {
-    audiosEat[i] = new Audio(`audio/eat${i + 1}.mp3`);
-  }
-}
+import { snakeBodyPosition } from './update.js';
 
 export let applePosition = 0;
 
@@ -44,8 +34,9 @@ export function setAppleAge(age) {
 
 export let isAppleOld = false;
 export let isAppleMaxOld = false;
-//old apple disaper
-export function appleDisappearWhenOld(oldAge = 30, score = -10) {
+
+//old apple blinks, maxold apple disapear
+export function appleDisappearWhenOld(oldAge = 30) {
   if (appleAge <= 1) {
     isAppleMaxOld = false;
     isAppleOld = false;
@@ -53,16 +44,11 @@ export function appleDisappearWhenOld(oldAge = 30, score = -10) {
 
   if (appleAge === oldAge - 10) {
     isAppleOld = true;
-    // squaresPlayground[applePosition].classList.add('apple-blink');
   }
 
   if (appleAge === oldAge) {
     isAppleOld = false;
     isAppleMaxOld = true;
     appleAge = 0;
-    // squaresPlayground[applePosition].classList.remove('apple-blink');
-    // removeApple();
-    // displayApple();
-    //changeScore(score);
   }
 }
