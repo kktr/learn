@@ -132,23 +132,23 @@ export function removeApple() {
 }
 
 export function displayApple3000() {
+  if (isSnakeDead) {
+    //add dead-head style into snake head square
+    changeSnakeHeadStyle('snake-head-dead');
+    //display random tombstone after snake dead
+    randomSnakeTombstoneDisplayInBg();
+    //add snake-body-dead for fade out effect
+    snakeBodyPosition.forEach(index =>
+      squaresPlayground[index].classList.add('snake-body-dead')
+    );
+    //fade out apple after snake dead
+    squaresPlayground[applePosition].classList.add('apple-after-dead');
+    gameMessage.textContent = 'Game Over!';
+  }
   //remove styling from last element
-  squaresPlayground[snakeTailPosition].classList.remove('snake-body');
+  //squaresPlayground[snakeTailPosition].classList.remove('snake-body');
   //add styling so we can see it and add difrent head style to the head
   changeSnakeHeadStyle('snake-body', 'snake-head');
-
-  if (isSnakeAfraid) {
-    changeSnakeHeadStyle('snake-head-afraid');
-  }
-
-  if (isSnakeHuangry) {
-    //add hungry style to snake head
-    changeSnakeHeadStyle('snake-head-hungry');
-  }
-
-  if (isPowerUpFullLoop) {
-    changeSnakeHeadStyle('snake-head-full-loop');
-  }
 
   if (isSnakeEatApple) {
     //remove the class of apple
@@ -157,6 +157,18 @@ export function displayApple3000() {
     squaresPlayground[snakeTailPosition].classList.add('snake-body');
     //change snake head style when snake eat apple
     changeSnakeHeadStyle('snake-head-eat');
+  }
+  if (isPowerUpFullLoop) {
+    changeSnakeHeadStyle('snake-head-full-loop');
+  }
+
+  if (isSnakeAfraid) {
+    changeSnakeHeadStyle('snake-head-afraid');
+  }
+
+  if (isSnakeHuangry) {
+    //add hungry style to snake head
+    changeSnakeHeadStyle('snake-head-hungry');
   }
 
   if (isAppleOld) {

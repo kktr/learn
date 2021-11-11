@@ -14,10 +14,20 @@ export function update3000() {
     //zero movesWithoutApple
     movesWithoutApple = 0;
   }
+
+  if (isPowerUpFullLoop) {
+  }
+
+  if (isSnakeAfraid) {
+  }
+
+  if (isSnakeHuangry) {
+  }
+
   if (isAppleOld) {
   }
+
   if (isAppleMaxOld) {
-    console.log('update 3000 max old');
   }
 }
 

@@ -196,24 +196,27 @@ function isSnakeHitHimself() {
   ].classList.contains('snake-body');
 }
 
+export let isSnakeDead = false;
+
 function snakeDead() {
+  isSnakeDead = false;
   //set correct head rotation
   snakeHeadRotation();
   //display random tombstone after snake dead
-  randomSnakeTombstoneDisplayInBg();
+  // randomSnakeTombstoneDisplayInBg();
   //stop the game by stopping function game gameIntervalTime
   clearInterval(timerId);
   //play audio when snake dead
   audioDead.play();
   //add dead-head style into snake head square
-  changeSnakeHeadStyle('snake-head-dead');
+  //changeSnakeHeadStyle('snake-head-dead');
   //add snake-body-dead for fade out effect
-  snakeBodyPosition.forEach(index =>
-    squaresPlayground[index].classList.add('snake-body-dead')
-  );
+  // snakeBodyPosition.forEach(index =>
+  // squaresPlayground[index].classList.add('snake-body-dead')
+  // );
   //fade out apple after snake dead
-  squaresPlayground[applePosition].classList.add('apple-after-dead');
-  gameMessage.textContent = 'Game Over!';
+  // squaresPlayground[applePosition].classList.add('apple-after-dead');
+  // gameMessage.textContent = 'Game Over!';
 }
 
 function randomSnakeTombstoneDisplayInBg() {
