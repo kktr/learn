@@ -2,38 +2,44 @@
 /* eslint-env es6 */
 import { createGridPlayground, createGridBackground } from './grid.js';
 
-import {
-  displaySnake,
-  displayScore,
-  display3000,
-  snakeHeadRotation,
-  removeSnakeHeadDisplay
-} from './display.js';
+import { updateGame, resetGameInterval, resetValues } from './update.js';
 
-import { update3000 } from './update.js';
+import {
+  firstDisplay,
+  startDisplay,
+  outputDisplay,
+  removeDisplay,
+  output
+} from './display.js';
 
 import { updateSnake, isSnakeAlive } from './snake.js';
 
 import { appleDisappearWhenOld } from './apple.js';
 
 createGridPlayground();
-
 createGridBackground();
 
-//first display
-displaySnake();
-displayScore();
+firstDisplay();
+
+//after pressing the start button restore the game state to the initial values
+export let isGameStart = false;
+export function setGameStart(value) {
+  isGameStart = value;
+}
+
+export function startGame() {
+  isGameStart = true;
+  resetGameInterval();
+  removeDisplay();
+  resetValues();
+  startDisplay();
+}
 
 export function game() {
   isSnakeAlive();
-  //removes head rotation classes from previous snake squares
-  //removes head styling classes from previous snake squares
-  removeSnakeHeadDisplay();
-
-  update3000();
+  updateGame();
   updateSnake();
-  //an apple disappears if it is not eaten for the specified number of moves
-  appleDisappearWhenOld();
 
-  display3000();
+  appleDisappearWhenOld();
+  output();
 }

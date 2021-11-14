@@ -26,13 +26,10 @@ import {
   changeScore,
   snakeHeadRotation,
   score,
-  displayApple,
-  display3000
+  displayApple
 } from './display.js';
 
 import {
-  startGame,
-  update3000,
   snakeHeadPosition,
   movesWithoutApple,
   snakeBodyPosition
@@ -46,6 +43,7 @@ export function updateSnake() {
 }
 
 let isAlive = true;
+export let isSnakeDead = false;
 
 export function isSnakeAlive() {
   if (
@@ -98,8 +96,6 @@ function isSnakeHitHimself() {
     snakeHeadPosition + directionOfMovement
   ].classList.contains('snake-body');
 }
-
-export let isSnakeDead = false;
 
 export let isSnakeAfraid = false;
 

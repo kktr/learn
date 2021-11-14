@@ -40,8 +40,7 @@ import {
   changeScore,
   snakeHeadRotation,
   score,
-  displayApple,
-  display3000
+  displayApple
 } from './display.js';
 
 export let snakeTailPosition;
@@ -53,42 +52,23 @@ let gameIntervalTime = 1000;
 let speed = 1;
 let timerId = 0;
 
-let audiosEat = [];
-let audioHungry = new Audio('audio/hungry.mp3');
-let audioDead = new Audio('audio/dead.mp3');
-
-function addEatAudios() {
-  for (let i = 0; i < 10; i++) {
-    audiosEat[i] = new Audio(`audio/eat${i + 1}.mp3`);
+export function updateGame() {
+  if (isSnakeDead) {
+    //stop the game by stopping function game gameIntervalTime
+    clearInterval(timerId);
+    // //play audio when snake dead
+    // audioDead.play();
+    //normal move
+  } else {
+    //remove last element from our snakeBodyPosition array
+    snakeTailPosition = snakeBodyPosition.pop();
+    //add square in directionOfMovement we are heading
+    snakeBodyPosition.unshift(snakeHeadPosition + directionOfMovement);
+    //reset snakeHead value
+    snakeHeadPosition = snakeBodyPosition[0];
   }
-}
-//creating audio elements and placing them in the audiosEat array,
-//they are playing when the snake eats an apple
-addEatAudios();
-
-const startButton = document.getElementById('start');
-
-//after pressing the start button restore the game state to the initial values
-export function startGame() {
-  audioHungry.play();
-  //reset gameIntervalTime
-  resetGameInterval();
-
-  removeDisplay();
-  //restore variables to their initial values
-  resetValues();
-  //adding body and head classes to the new snake
-  displaySnake();
-  //displaying a new game score
-  displayScore();
-
-  //adding styling to a square with a new apple
-  displayApple();
-}
-
-startButton.addEventListener('click', startGame);
-
-export function update3000() {
+  // if (isGameStart) {
+  // }
   changeScore();
   //add 1 to movesWithoutApple
   movesWithoutApple += 1;
@@ -99,8 +79,8 @@ export function update3000() {
     //grow our snake array
     snakeBodyPosition.push(snakeTailPosition);
     setAppleAge(0);
-    //play random eat audio when snake eats the apple
-    playEatAudio();
+    // //play random eat audio when snake eats the apple
+    // playEatAudio();
     //add 100 to the score
     changeScore(100);
     //speed up our snake percentage value
@@ -120,9 +100,9 @@ export function update3000() {
     //add to the score
     changeScore(9);
   }
-  if (isSnakeHungry) {
-    audioHungry.play();
-  }
+  // if (isSnakeHungry) {
+  //   audioHungry.play();
+  // }
 
   if (isSnakeSuperHungry) {
     changeScore(-21);
@@ -137,21 +117,6 @@ export function update3000() {
   if (isAppleMaxOld) {
     changeScore(-10);
   }
-
-  if (isSnakeDead) {
-    //stop the game by stopping function game gameIntervalTime
-    clearInterval(timerId);
-    //play audio when snake dead
-    audioDead.play();
-    //normal moves
-  } else {
-    //remove last element from our snakeBodyPosition array
-    snakeTailPosition = snakeBodyPosition.pop();
-    //add square in directionOfMovement we are heading
-    snakeBodyPosition.unshift(snakeHeadPosition + directionOfMovement);
-    //reset snakeHead value
-    snakeHeadPosition = snakeBodyPosition[0];
-  }
 }
 
 function changeGameSpeed(percent = 1) {
@@ -165,13 +130,13 @@ function changeGameSpeed(percent = 1) {
 
 //removing the old time interval, returning it to its initial value
 //  and assigning it to the game function
-function resetGameInterval() {
+export function resetGameInterval() {
   clearInterval(timerId);
   gameIntervalTime = 500;
   timerId = setInterval(game, gameIntervalTime);
 }
 
-function resetValues() {
+export function resetValues() {
   snakeBodyPosition = [2, 1, 0];
   snakeHeadPosition = snakeBodyPosition[0];
   setDirectionOfMovement();
@@ -179,9 +144,4 @@ function resetValues() {
   speed = 1;
   movesWithoutApple = 0;
   setAppleAge(0);
-}
-
-function playEatAudio() {
-  let audioIndex = Math.floor(Math.random() * 10);
-  audiosEat[audioIndex].play();
 }

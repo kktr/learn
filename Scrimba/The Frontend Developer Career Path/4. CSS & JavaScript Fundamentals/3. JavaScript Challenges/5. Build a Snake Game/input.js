@@ -1,5 +1,10 @@
 /*jshint esversion:6*/
 /* eslint-env es6 */
+import { startGame } from './script.js';
+const startButton = document.getElementById('start');
+
+startButton.addEventListener('click', startGame);
+
 const keyCodes = {
   up: 38,
   left: 37,

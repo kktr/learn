@@ -1,9 +1,13 @@
 /*jshint esversion:6*/
 /* eslint-env es6 */
+import { isGameStart, setGameStart } from './script.js';
+
 import { squaresPlayground, squaresBackground } from './grid.js';
+
 import {
   isSnakeEatApple,
   isSnakeAfraid,
+  isSnakeHungry,
   isSnakeSuperHungry,
   isPowerUpFullLoop,
   isSnakeDead
@@ -25,6 +29,136 @@ import {
   snakeHeadPosition,
   snakeTailPosition
 } from './update.js';
+
+export function firstDisplay() {
+  //adding body and head classes to the new snake
+  displaySnake();
+  //displaying a new game score
+  displayScore();
+}
+
+export function startDisplay() {
+  firstDisplay();
+  //adding styling to a square with a new apple
+  displayApple();
+}
+
+export function output() {
+  outputDisplay();
+  outputAudio();
+  setGameStart(false);
+}
+
+export function outputDisplay() {
+  removeSnakeHeadDisplay();
+  gameMessage.textContent = '';
+  //remove styling from last element
+  squaresPlayground[snakeTailPosition].classList.remove('snake-body');
+  //add styling so we can see it and add difrent head style to the head
+  changeSnakeHeadStyle('snake-body', 'snake-head');
+  snakeHeadRotation();
+
+  if (isSnakeDead) {
+    //add dead-head style into snake head square
+    changeSnakeHeadStyle('snake-head-dead');
+    //display random tombstone after snake dead
+    randomSnakeTombstoneDisplayInBg();
+    //add snake-body-dead for fade out effect
+    snakeBodyPosition.forEach(index =>
+      squaresPlayground[index].classList.add('snake-body-dead')
+    );
+    //fade out apple after snake dead
+    squaresPlayground[applePosition].classList.add('apple-after-dead');
+    gameMessage.textContent = 'Game Over!';
+  } else {
+    if (isSnakeEatApple) {
+      //remove the class of apple
+      removeApple();
+      //change snake head style when snake eat apple
+      changeSnakeHeadStyle('snake-head-eat');
+    }
+    if (isPowerUpFullLoop) {
+      changeSnakeHeadStyle('snake-head-full-loop');
+    }
+
+    if (isSnakeAfraid) {
+      changeSnakeHeadStyle('snake-head-afraid');
+    }
+
+    if (isSnakeSuperHungry) {
+      //add hungry style to snake head
+      changeSnakeHeadStyle('snake-head-hungry');
+    }
+
+    if (isAppleOld) {
+      squaresPlayground[applePosition].classList.add('apple-blink');
+    } else {
+      squaresPlayground[applePosition].classList.remove('apple-blink');
+    }
+    if (isAppleMaxOld || isSnakeEatApple) {
+      removeApple();
+      displayApple();
+    }
+  }
+}
+
+function randomSnakeTombstoneDisplayInBg() {
+  //create a random index to select a random snake-tombstone img
+  let tombstoneIndex = getRandomIntInclusive(1, 10);
+  //check if there isn't a tombstone, if not, display a random tombstone
+  if (
+    !squaresBackground[snakeHeadPosition].classList.contains('snake-tombstone')
+  ) {
+    squaresBackground[snakeHeadPosition].classList.add(
+      'snake-tombstone',
+      `snake-tombstone-${tombstoneIndex}`
+    );
+  }
+}
+
+let audiosEat = [];
+let audioHungry = new Audio('audio/hungry.mp3');
+let audioDead = new Audio('audio/dead.mp3');
+
+//creating audio elements and placing them in the audiosEat array,
+//they are playing when the snake eats an apple
+
+addEatAudios();
+export function outputAudio() {
+  if (isSnakeDead) {
+    //play audio when snake dead
+    audioDead.play();
+    //normal move
+  } else {
+    if (isGameStart) {
+      audioHungry.play();
+    }
+    if (isSnakeEatApple) {
+      //play random eat audio when snake eats the apple
+      playEatAudio();
+    }
+
+    if (isPowerUpFullLoop) {
+    }
+
+    if (isSnakeAfraid) {
+    }
+    if (isSnakeHungry) {
+      audioHungry.play();
+    }
+  }
+}
+
+function addEatAudios() {
+  for (let i = 0; i < 10; i++) {
+    audiosEat[i] = new Audio(`audio/eat${i + 1}.mp3`);
+  }
+}
+
+function playEatAudio() {
+  let audioIndex = getRandomIntInclusive(1, 10);
+  audiosEat[audioIndex].play();
+}
 
 export function getRandomIntInclusive(min, max) {
   min = Math.ceil(min);
@@ -112,10 +246,17 @@ export function removeSnakeHeadStyle() {
     'snake-head-hungry'
   );
 }
+let snakeHead = [];
 
 export function removeStyleFromSnakeHeadPosition(...classes) {
+  if (isSnakeDead) {
+    snakeHead = snakeHeadPosition;
+  } else {
+    snakeHead = snakeBodyPosition[1];
+  }
+
   for (let value of classes) {
-    squaresPlayground[snakeHeadPosition].classList.remove(value);
+    squaresPlayground[snakeHead].classList.remove(value);
   }
 }
 
@@ -142,74 +283,4 @@ export function removeApple() {
     'apple-blink',
     'apple-after-dead'
   );
-}
-
-export function display3000() {
-  gameMessage.textContent = '';
-  //remove styling from last element
-  squaresPlayground[snakeTailPosition].classList.remove('snake-body');
-  //add styling so we can see it and add difrent head style to the head
-  changeSnakeHeadStyle('snake-body', 'snake-head');
-
-  snakeHeadRotation();
-
-  if (isSnakeDead) {
-    console.log('isSnakeDead = true Display');
-    //add dead-head style into snake head square
-    changeSnakeHeadStyle('snake-head-dead');
-    //display random tombstone after snake dead
-    randomSnakeTombstoneDisplayInBg();
-    //add snake-body-dead for fade out effect
-    snakeBodyPosition.forEach(index =>
-      squaresPlayground[index].classList.add('snake-body-dead')
-    );
-    //fade out apple after snake dead
-    squaresPlayground[applePosition].classList.add('apple-after-dead');
-    gameMessage.textContent = 'Game Over!';
-  } else {
-    if (isSnakeEatApple) {
-      //remove the class of apple
-      removeStyleFromSnakeHeadPosition('apple', 'apple-blink');
-      //grow our snake by adding class of snake to it
-      // squaresPlayground[snakeTailPosition].classList.add('snake-body');
-      //change snake head style when snake eat apple
-      changeSnakeHeadStyle('snake-head-eat');
-    }
-    if (isPowerUpFullLoop) {
-      changeSnakeHeadStyle('snake-head-full-loop');
-    }
-
-    if (isSnakeAfraid) {
-      changeSnakeHeadStyle('snake-head-afraid');
-    }
-
-    if (isSnakeSuperHungry) {
-      //add hungry style to snake head
-      changeSnakeHeadStyle('snake-head-hungry');
-    }
-
-    if (isAppleOld) {
-      squaresPlayground[applePosition].classList.add('apple-blink');
-    } else {
-      squaresPlayground[applePosition].classList.remove('apple-blink');
-    }
-    if (isAppleMaxOld || isSnakeEatApple) {
-      removeApple();
-      displayApple();
-    }
-  }
-}
-
-function randomSnakeTombstoneDisplayInBg() {
-  //create a random index to select a random snake-tombstone img
-  let tombstoneIndex = getRandomIntInclusive(1, 10);
-  //check if there isn't a tombstone, if not, display a random tombstone
-  if (
-    !squaresBackground[snakeHeadPosition].classList.contains('snake-tombstone')
-  ) {
-    squaresBackground[snakeHeadPosition].classList.add(
-      'snake-tombstone',
-      `snake-tombstone-${tombstoneIndex}`
-    );
-  }
 }
