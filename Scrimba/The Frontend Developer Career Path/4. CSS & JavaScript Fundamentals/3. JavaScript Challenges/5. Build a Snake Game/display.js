@@ -157,6 +157,7 @@ function addEatAudios() {
 
 function playEatAudio() {
   let audioIndex = getRandomIntInclusive(1, 10);
+  console.log(audioIndex);
   audiosEat[audioIndex].play();
 }
 
@@ -250,11 +251,10 @@ let snakeHead = [];
 
 export function removeStyleFromSnakeHeadPosition(...classes) {
   if (isSnakeDead) {
-    snakeHead = snakeHeadPosition;
+    snakeHead = snakeBodyPosition[0];
   } else {
     snakeHead = snakeBodyPosition[1];
   }
-
   for (let value of classes) {
     squaresPlayground[snakeHead].classList.remove(value);
   }

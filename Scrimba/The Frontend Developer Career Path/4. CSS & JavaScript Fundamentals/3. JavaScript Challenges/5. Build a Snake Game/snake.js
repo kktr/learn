@@ -43,7 +43,10 @@ export function updateSnake() {
 }
 
 let isAlive = true;
-export let isSnakeDead = false;
+export let isSnakeDead = true;
+export function setIsSnakeDead(set) {
+  isSnakeDead = set;
+}
 
 export function isSnakeAlive() {
   if (
@@ -54,10 +57,8 @@ export function isSnakeAlive() {
     isSnakeHitHimself()
   ) {
     isSnakeDead = true;
-    return false;
   } else {
     isSnakeDead = false;
-    return true;
   }
 }
 

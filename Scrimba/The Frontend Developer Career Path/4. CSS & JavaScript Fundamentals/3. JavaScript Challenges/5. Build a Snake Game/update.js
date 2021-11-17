@@ -8,7 +8,8 @@ import {
   isSnakeHungry,
   isSnakeSuperHungry,
   isPowerUpFullLoop,
-  isSnakeDead
+  isSnakeDead,
+  setIsSnakeDead
 } from './snake.js';
 
 import {
@@ -52,14 +53,12 @@ let gameIntervalTime = 1000;
 let speed = 1;
 let timerId = 0;
 
-export function updateGame() {
-  if (isSnakeDead) {
-    //stop the game by stopping function game gameIntervalTime
-    clearInterval(timerId);
-    // //play audio when snake dead
-    // audioDead.play();
-    //normal move
-  } else {
+export function snakeMove() {
+  //grow our snake array
+  if (isSnakeEatApple) {
+    snakeBodyPosition.push(snakeTailPosition);
+  }
+  if (!isSnakeDead) {
     //remove last element from our snakeBodyPosition array
     snakeTailPosition = snakeBodyPosition.pop();
     //add square in directionOfMovement we are heading
@@ -67,55 +66,56 @@ export function updateGame() {
     //reset snakeHead value
     snakeHeadPosition = snakeBodyPosition[0];
   }
-  // if (isGameStart) {
-  // }
-  changeScore();
-  //add 1 to movesWithoutApple
-  movesWithoutApple += 1;
-  //add 1 to appleAge;
-  setAppleAge(appleAge + 1);
+}
 
-  if (isSnakeEatApple) {
-    //grow our snake array
-    snakeBodyPosition.push(snakeTailPosition);
-    setAppleAge(0);
-    // //play random eat audio when snake eats the apple
-    // playEatAudio();
-    //add 100 to the score
-    changeScore(100);
-    //speed up our snake percentage value
-    changeGameSpeed(5);
-    //zero movesWithoutApple
-    movesWithoutApple = 0;
-  }
+export function updateGame() {
+  if (isSnakeDead) {
+    //stop the game by stopping function game gameIntervalTime
+    clearInterval(timerId);
+  } else {
+    if (isSnakeEatApple) {
+      setAppleAge(0);
+      // //play random eat audio when snake eats the apple
+      // playEatAudio();
+      //add 100 to the score
+      changeScore(100);
+      //speed up our snake percentage value
+      changeGameSpeed(5);
+      //zero movesWithoutApple
+      movesWithoutApple = 0;
+    } else {
+      changeScore();
+      //add 1 to movesWithoutApple
+      movesWithoutApple += 1;
+      //add 1 to appleAge;
+      setAppleAge(appleAge + 1);
+    }
 
-  if (isPowerUpFullLoop) {
-    changeGameSpeed(-20);
-    changeScore(-500);
-  }
+    if (isPowerUpFullLoop) {
+      changeGameSpeed(-20);
+      changeScore(-500);
+    }
 
-  if (isSnakeAfraid) {
-    //speed up our snake
-    changeGameSpeed(2.1);
-    //add to the score
-    changeScore(9);
-  }
-  // if (isSnakeHungry) {
-  //   audioHungry.play();
-  // }
+    if (isSnakeAfraid) {
+      //speed up our snake
+      changeGameSpeed(2.1);
+      //add to the score
+      changeScore(9);
+    }
 
-  if (isSnakeSuperHungry) {
-    changeScore(-21);
-    //speed up our snake
-    changeGameSpeed(1);
-    //zero movesWithoutApple
-  }
+    if (isSnakeSuperHungry) {
+      changeScore(-21);
+      //speed up our snake
+      changeGameSpeed(1);
+      //zero movesWithoutApple
+    }
 
-  if (isAppleOld) {
-  }
+    if (isAppleOld) {
+    }
 
-  if (isAppleMaxOld) {
-    changeScore(-10);
+    if (isAppleMaxOld) {
+      changeScore(-10);
+    }
   }
 }
 
@@ -137,6 +137,7 @@ export function resetGameInterval() {
 }
 
 export function resetValues() {
+  setIsSnakeDead(false);
   snakeBodyPosition = [2, 1, 0];
   snakeHeadPosition = snakeBodyPosition[0];
   setDirectionOfMovement();

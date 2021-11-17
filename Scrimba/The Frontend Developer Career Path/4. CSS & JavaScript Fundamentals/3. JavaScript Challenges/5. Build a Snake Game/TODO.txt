@@ -36,3 +36,341 @@ split between files:
   // - rwd
   // - change snake images from jpg to png and play with snake color
   //   (difrent color, when snake is older, difreent color when snake fade after dead)
+
+  display backup:
+
+  /*jshint esversion:6*/
+  /* eslint-env es6 */
+  import { squaresPlayground } from './grid.js';
+  import {
+    snakeBodyPosition,
+    snakeHeadPosition,
+    snakeTailPosition,
+    isSnakeMove,
+    isSnakeEatApple,
+    isSnakeAfraid,
+    isSnakeHuangry,
+    isPowerUpFullLoop
+  } from './script.js';
+  import {
+    applePosition,
+    appleAge,
+    setAppleAge,
+    getAppleRandomPosition,
+    isAppleOld,
+    isAppleMaxOld
+  } from './apple.js';
+  import { directionOfMovement, directions } from './input.js';
+
+  const scoreDisplay = document.getElementById('score');
+
+  export function displaySnake() {
+    snakeBodyPosition.forEach(index =>
+      squaresPlayground[index].classList.add('snake-body')
+    );
+    changeSnakeHeadStyle('snake-head');
+  }
+
+  export function changeSnakeHeadStyle(...classes) {
+    for (let value of classes) {
+      squaresPlayground[snakeHeadPosition].classList.add(value);
+    }
+  }
+
+  export function snakeHeadRotation() {
+    if (directionOfMovement === directions.up) {
+      changeSnakeHeadStyle('rotate-up');
+    } else if (directionOfMovement === directions.down) {
+      changeSnakeHeadStyle('rotate-down');
+    } else if (directionOfMovement === directions.right) {
+      changeSnakeHeadStyle('rotate-right');
+    } else if (directionOfMovement === directions.left) {
+      changeSnakeHeadStyle('rotate-left');
+    }
+  }
+
+  export let score = 0;
+
+  export function displayScore() {
+    scoreDisplay.textContent = score;
+  }
+
+  export function changeScore(points = 1) {
+    //add ten to the score
+    score += points;
+    if (score < 0) {
+      score = 0;
+    }
+    //display our score
+    scoreDisplay.textContent = score;
+  }
+
+  export function removeDisplay() {
+    removeSnakeHeadDisplay();
+    //removes snake-body and snake-body-dead styling classes from previous snake
+    removeSnakeBodyDisplay();
+    //remove previous apple
+    removeApple();
+  }
+
+  export function removeSnakeHeadDisplay() {
+    //removes head rotation classes from previous snake
+    removeSnakeHeadRotate();
+    //removes head styling classes from previous snake
+    removeSnakeHeadStyle();
+  }
+
+  function removeSnakeHeadRotate() {
+    removeStyleFromSnakeHeadPosition(
+      'rotate-up',
+      'rotate-down',
+      'rotate-right',
+      'rotate-left'
+    );
+  }
+
+  export function removeSnakeHeadStyle() {
+    removeStyleFromSnakeHeadPosition(
+      'snake-head-eat',
+      'snake-head',
+      'snake-head-dead',
+      'snake-head-afraid',
+      'snake-head-full-loop',
+      'snake-fade',
+      'snake-head-hungry'
+    );
+  }
+
+  export function removeStyleFromSnakeHeadPosition(...classes) {
+    for (let value of classes) {
+      squaresPlayground[snakeHeadPosition].classList.remove(value);
+    }
+  }
+
+  function removeSnakeBodyDisplay() {
+    snakeBodyPosition.forEach(index =>
+      squaresPlayground[index].classList.remove('snake-body')
+    );
+    snakeBodyPosition.forEach(index =>
+      squaresPlayground[index].classList.remove('snake-body-dead')
+    );
+  }
+
+  export function displayApple() {
+    getAppleRandomPosition();
+    squaresPlayground[applePosition].classList.add('apple');
+  }
+
+  export function removeApple() {
+    //reset apple age
+    // setAppleAge(0);
+    //removing the apple styling from the previous apple square
+    squaresPlayground[applePosition].classList.remove(
+      'apple',
+      'apple-blink',
+      'apple-after-dead'
+    );
+  }
+
+  export function displayApple3000() {
+    if (isSnakeDead) {
+      //add dead-head style into snake head square
+      changeSnakeHeadStyle('snake-head-dead');
+      //display random tombstone after snake dead
+      randomSnakeTombstoneDisplayInBg();
+      //add snake-body-dead for fade out effect
+      snakeBodyPosition.forEach(index =>
+        squaresPlayground[index].classList.add('snake-body-dead')
+      );
+      //fade out apple after snake dead
+      squaresPlayground[applePosition].classList.add('apple-after-dead');
+      gameMessage.textContent = 'Game Over!';
+    }
+    //remove styling from last element
+    //squaresPlayground[snakeTailPosition].classList.remove('snake-body');
+    //add styling so we can see it and add difrent head style to the head
+    changeSnakeHeadStyle('snake-body', 'snake-head');
+
+    if (isSnakeEatApple) {
+      //remove the class of apple
+      removeStyleFromSnakeHeadPosition('apple', 'apple-blink');
+      //grow our snake by adding class of snake to it
+      squaresPlayground[snakeTailPosition].classList.add('snake-body');
+      //change snake head style when snake eat apple
+      changeSnakeHeadStyle('snake-head-eat');
+    }
+    if (isPowerUpFullLoop) {
+      changeSnakeHeadStyle('snake-head-full-loop');
+    }
+
+    if (isSnakeAfraid) {
+      changeSnakeHeadStyle('snake-head-afraid');
+    }
+
+    if (isSnakeHuangry) {
+      //add hungry style to snake head
+      changeSnakeHeadStyle('snake-head-hungry');
+    }
+
+    if (isAppleOld) {
+      squaresPlayground[applePosition].classList.add('apple-blink');
+    } else {
+      squaresPlayground[applePosition].classList.remove('apple-blink');
+    }
+    if (isAppleMaxOld || isSnakeEatApple) {
+      console.log('d3000 Max');
+      removeApple();
+      displayApple();
+    }
+  }
+
+
+update backup:
+
+/*jshint esversion:6*/
+/* eslint-env es6 */
+import { game } from './script.js';
+
+import {
+  isSnakeEatApple,
+  isSnakeAfraid,
+  isSnakeHungry,
+  isSnakeSuperHungry,
+  isPowerUpFullLoop,
+  isSnakeDead
+} from './snake.js';
+
+import {
+  // getAppleRandomPosition,
+  // applePosition,
+  // appleDisappearWhenOld,
+  isAppleOld,
+  isAppleMaxOld,
+  appleAge,
+  setAppleAge
+} from './apple.js';
+
+import {
+  directionOfMovement,
+  // directions,
+  // width,
+  setDirectionOfMovement
+} from './input.js';
+
+import {
+  removeDisplay,
+  removeSnakeHeadDisplay,
+  removeSnakeHeadStyle,
+  removeStyleFromSnakeHeadPosition,
+  removeApple,
+  displaySnake,
+  displayScore,
+  changeSnakeHeadStyle,
+  changeScore,
+  snakeHeadRotation,
+  score,
+  displayApple
+} from './display.js';
+
+export let snakeTailPosition;
+export let movesWithoutApple = 0;
+export let snakeBodyPosition = [2, 1, 0];
+export let snakeHeadPosition = snakeBodyPosition[0];
+
+let gameIntervalTime = 1000;
+let speed = 1;
+let timerId = 0;
+
+export function updateGame() {
+  if (isSnakeDead) {
+    //stop the game by stopping function game gameIntervalTime
+    clearInterval(timerId);
+    // //play audio when snake dead
+    // audioDead.play();
+    //normal move
+  } else {
+    //remove last element from our snakeBodyPosition array
+    snakeTailPosition = snakeBodyPosition.pop();
+    //add square in directionOfMovement we are heading
+    snakeBodyPosition.unshift(snakeHeadPosition + directionOfMovement);
+    //reset snakeHead value
+    snakeHeadPosition = snakeBodyPosition[0];
+  }
+  // if (isGameStart) {
+  // }
+  changeScore();
+  //add 1 to movesWithoutApple
+  movesWithoutApple += 1;
+  //add 1 to appleAge;
+  setAppleAge(appleAge + 1);
+
+  if (isSnakeEatApple) {
+    //grow our snake array
+    snakeBodyPosition.push(snakeTailPosition);
+    setAppleAge(0);
+    // //play random eat audio when snake eats the apple
+    // playEatAudio();
+    //add 100 to the score
+    changeScore(100);
+    //speed up our snake percentage value
+    changeGameSpeed(5);
+    //zero movesWithoutApple
+    movesWithoutApple = 0;
+  }
+
+  if (isPowerUpFullLoop) {
+    changeGameSpeed(-20);
+    changeScore(-500);
+  }
+
+  if (isSnakeAfraid) {
+    //speed up our snake
+    changeGameSpeed(2.1);
+    //add to the score
+    changeScore(9);
+  }
+  // if (isSnakeHungry) {
+  //   audioHungry.play();
+  // }
+
+  if (isSnakeSuperHungry) {
+    changeScore(-21);
+    //speed up our snake
+    changeGameSpeed(1);
+    //zero movesWithoutApple
+  }
+
+  if (isAppleOld) {
+  }
+
+  if (isAppleMaxOld) {
+    changeScore(-10);
+  }
+}
+
+function changeGameSpeed(percent = 1) {
+  //clear previous interval
+  clearInterval(timerId);
+  //calculate new interval, if up = 1 the game will be 1% faster
+  gameIntervalTime = gameIntervalTime * speed * (1 - percent / 100);
+  //set new Interval
+  timerId = setInterval(game, gameIntervalTime);
+}
+
+//removing the old time interval, returning it to its initial value
+//  and assigning it to the game function
+export function resetGameInterval() {
+  clearInterval(timerId);
+  gameIntervalTime = 500;
+  timerId = setInterval(game, gameIntervalTime);
+}
+
+export function resetValues() {
+  snakeBodyPosition = [2, 1, 0];
+  snakeHeadPosition = snakeBodyPosition[0];
+  setDirectionOfMovement();
+  changeScore(-score);
+  speed = 1;
+  movesWithoutApple = 0;
+  setAppleAge(0);
+}

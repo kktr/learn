@@ -2,7 +2,12 @@
 /* eslint-env es6 */
 import { createGridPlayground, createGridBackground } from './grid.js';
 
-import { updateGame, resetGameInterval, resetValues } from './update.js';
+import {
+  updateGame,
+  resetGameInterval,
+  resetValues,
+  snakeMove
+} from './update.js';
 
 import {
   firstDisplay,
@@ -12,7 +17,7 @@ import {
   output
 } from './display.js';
 
-import { updateSnake, isSnakeAlive } from './snake.js';
+import { updateSnake, isSnakeAlive, isSnakeDead } from './snake.js';
 
 import { appleDisappearWhenOld } from './apple.js';
 
@@ -28,18 +33,20 @@ export function setGameStart(value) {
 }
 
 export function startGame() {
-  isGameStart = true;
-  resetGameInterval();
-  removeDisplay();
-  resetValues();
-  startDisplay();
+  if (isSnakeDead) {
+    isGameStart = true;
+    resetGameInterval();
+    removeDisplay();
+    resetValues();
+    startDisplay();
+  }
 }
 
 export function game() {
   isSnakeAlive();
-  updateGame();
+  snakeMove();
   updateSnake();
-
   appleDisappearWhenOld();
+  updateGame();
   output();
 }
