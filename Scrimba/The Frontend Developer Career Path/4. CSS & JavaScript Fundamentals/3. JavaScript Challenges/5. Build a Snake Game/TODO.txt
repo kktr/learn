@@ -29,6 +29,9 @@ split between files:
   // no TODO list in code files
   // - snake tombstone after dead DONE
   // - highscore
+  // - portal to travel between maps
+  // - ślimak to slowdown speed
+  // - rabbit to faster speed
   // - snake body rotten in time after dead DONE
   // - Power up (make full clokwise loop to lower the speed ) DONE
   // - apple disaper and regenerate after time (faster blinking efect) DONE
