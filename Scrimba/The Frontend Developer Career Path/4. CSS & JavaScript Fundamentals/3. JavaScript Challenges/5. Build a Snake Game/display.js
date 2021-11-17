@@ -6,6 +6,7 @@ import { squaresPlayground, squaresBackground } from './grid.js';
 
 import {
   isSnakeEatApple,
+  isSnakeEatSnail,
   isSnakeAfraid,
   isSnakeHungry,
   isSnakeSuperHungry,
@@ -15,9 +16,11 @@ import {
 
 import {
   applePosition,
+  snailPosition,
   appleAge,
   setAppleAge,
   getAppleRandomPosition,
+  getSnailRandomPosition,
   isAppleOld,
   isAppleMaxOld
 } from './apple.js';
@@ -41,6 +44,7 @@ export function startDisplay() {
   firstDisplay();
   //adding styling to a square with a new apple
   displayApple();
+  displaySnail();
 }
 
 export function output() {
@@ -99,6 +103,14 @@ export function outputDisplay() {
       removeApple();
       displayApple();
     }
+    if (isSnakeEatSnail) {
+      removeSnail();
+      displaySnail();
+      changeSnakeHeadStyle('snake-head-eat');
+    }
+    if (!isSnakeEatSnail) {
+      displaySnail();
+    }
   }
 }
 
@@ -133,7 +145,7 @@ export function outputAudio() {
     if (isGameStart) {
       audioHungry.play();
     }
-    if (isSnakeEatApple) {
+    if (isSnakeEatApple || isSnakeEatSnail) {
       //play random eat audio when snake eats the apple
       playEatAudio();
     }
@@ -218,6 +230,7 @@ export function removeDisplay() {
   removeSnakeBodyDisplay();
   //remove previous apple
   removeApple();
+  removeSnail();
 }
 
 export function removeSnakeHeadDisplay() {
@@ -283,4 +296,17 @@ export function removeApple() {
     'apple-blink',
     'apple-after-dead'
   );
+}
+
+export function displaySnail() {
+  let possibility = getRandomIntInclusive(1, 100);
+  if (possibility > 99) {
+    removeSnail();
+    getSnailRandomPosition();
+    squaresPlayground[snailPosition].classList.add('snail');
+  }
+}
+
+export function removeSnail() {
+  squaresPlayground[snailPosition].classList.remove('snail');
 }

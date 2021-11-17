@@ -6,6 +6,7 @@ import { displayApple } from './display.js';
 import { snakeBodyPosition } from './update.js';
 
 export let applePosition = 0;
+export let snailPosition = 0;
 
 export function setApplePosition(position) {
   applePosition = position;
@@ -22,8 +23,23 @@ export function getAppleRandomPosition() {
   }
 }
 
+//generate new apple index
+export function getSnailRandomPosition() {
+  snailPosition = getRandomIntInclusive(0, squaresPlayground.length - 1);
+  // check if every snakeBodyPosition index is diffrent from applePosition
+  let different = snakeBodyPosition.every(isDifferentSnailIndex);
+  // if isn't assign applePosition again
+  if (!different) {
+    return getSnailRandomPosition();
+  }
+}
+
 function isDifferentIndex(index) {
   return index !== applePosition;
+}
+
+function isDifferentSnailIndex(index) {
+  return index !== snailPosition;
 }
 
 export let appleAge = 0;

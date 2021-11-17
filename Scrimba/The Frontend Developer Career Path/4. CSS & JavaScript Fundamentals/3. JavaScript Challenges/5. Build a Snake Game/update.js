@@ -4,6 +4,7 @@ import { game } from './script.js';
 
 import {
   isSnakeEatApple,
+  isSnakeEatSnail,
   isSnakeAfraid,
   isSnakeHungry,
   isSnakeSuperHungry,
@@ -83,6 +84,9 @@ export function updateGame() {
       changeGameSpeed(5);
       //zero movesWithoutApple
       movesWithoutApple = 0;
+    } else if (isSnakeEatSnail) {
+      changeScore(-100);
+      changeGameSpeed(-20);
     } else {
       changeScore();
       //add 1 to movesWithoutApple

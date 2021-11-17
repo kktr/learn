@@ -234,6 +234,10 @@ main {
   animation: blink-animation 0.75s steps(5, start) infinite;
 }
 
+.snail {
+  background-image: url('img/snail.png');
+}
+
 @keyframes blink-animation {
   to {
     visibility: hidden;

@@ -37,6 +37,7 @@ import {
 
 export function updateSnake() {
   snakeEatApple();
+  snakeEatSnail();
   snakeAfraid();
   snakeHungry();
   powerUpFullLoop();
@@ -116,6 +117,16 @@ function snakeEatApple() {
     isSnakeEatApple = true;
   } else {
     isSnakeEatApple = false;
+  }
+}
+export let isSnakeEatSnail = false;
+
+function snakeEatSnail() {
+  //if snake head go into apple
+  if (squaresPlayground[snakeHeadPosition].classList.contains('snail')) {
+    isSnakeEatSnail = true;
+  } else {
+    isSnakeEatSnail = false;
   }
 }
 
