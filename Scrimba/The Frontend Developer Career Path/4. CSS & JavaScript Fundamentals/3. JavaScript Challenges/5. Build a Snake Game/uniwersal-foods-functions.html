@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      /*jshint esversion:6*/
+      /* eslint-env es6 */
+
+      let foods = [
+        {
+          name: 'apple',
+          position: 0,
+          probability: 100,
+          age: 0,
+          blinkAge: 10,
+          disapearAge: 20,
+          pointsWhenDisapear: -10,
+          pointsWhenEat: 100,
+          speedWhenEat: 5
+        }
+      ];
+
+      function addFood(
+        name,
+        position,
+        probability,
+        isEatenBySnake,
+        age,
+        blinkAge,
+        disapearAge,
+        pointsWhenDisapear,
+        speedWhenDisapear,
+        pointsWhenEat,
+        speedWhenEat
+      ) {
+        foods.push({
+          name: name,
+          position: position,
+          probability: probability,
+          isEatenBySnake: false,
+          age: age,
+          blinkAge: blinkAge,
+          isBlinkAge: false,
+          disapearAge: disapearAge,
+          isDisapearAge: false,
+          pointsWhenDisapear: pointsWhenDisapear,
+          speedWhenDisapear: speedWhenDisapear,
+          pointsWhenEat: pointsWhenEat,
+          speedWhenEat: speedWhenEat
+        });
+      }
+
+      addFood('rabbit', 2, 0, false, 0, 20, false, 40, false, -10, 5, 50, 20);
+      console.log(foods[1]);
+      function setFoodAge(food, age = 0) {
+        foods[food].age = age;
+      }
+
+      function foodDisappearWhenOld(food) {
+        if (foods[food].age <= 1) {
+          foods[food].isDisapearAge = false;
+          foods[food].isBlinkAge = false;
+        }
+
+        if (foods[food].age === foods[food].disapearAge - 10) {
+          foods[food].isBlinkAge = true;
+        }
+
+        if (foods[food].age === foods[food].disapearAge) {
+          foods[food].isDisapearAge = true;
+          foods[food].isBlinkAge = false;
+          foods[food].age = 0;
+        }
+      }
+
+      // display
+      function displayFood(food) {
+        getAppleRandomPosition();
+        squaresPlayground[foods[food].position].classList.add(foods[food].name);
+      }
+
+      function removeFood(food) {
+        squaresPlayground[foods[food].position].classList.remove(
+          foods[food].name,
+          `${foods[food].name}-blink`,
+          `${foods[food].name}-disapear`
+        );
+      }
+
+      function displayFood(food) {
+        let chance = getRandomIntInclusive(1, 1000);
+        if (chance > 1000 - 10 * foods[food].probability) {
+          removeFood(food);
+          getSnailRandomPosition();
+          squaresPlayground[foods[food].position].classList.add(
+            foods[food].name
+          );
+        }
+      }
+
+      function isSnakeEatFoods() {
+        for (let i = 0; i < foods.length; i++) {
+          if (foods[i].isEatenBySnake) {
+            //remove the class of food
+            removeFood(i);
+            //change snake head style when snake eat apple
+            changeSnakeHeadStyle('snake-head-eat');
+          }
+        }
+      }
+
+      function getFoodRandomPosition(food) {
+        foods[food].position = getRandomIntInclusive(
+          0,
+          squaresPlayground.length - 1
+        );
+        // check if every snakeBodyPosition index is diffrent from applePosition
+        let different = snakeBodyPosition.every(isDifferentSnailIndex);
+        // if isn't assign applePosition again
+        if (!different) {
+          return getSnailRandomPosition();
+        }
+      }
+
+      function isDifferentSnailIndex(index) {
+        return index !== snailPosition;
+      }
+      // snake
+
+      function isSnakeEatFoods() {
+        for (let i = 0; i < foods.length; i++) {
+          if (
+            squaresPlayground[snakeHeadPosition].classList.contains(
+              foods[i].name
+            )
+          ) {
+            foods[i].isEatenBySnake = true;
+          } else {
+            foods[i].isEatenBySnake = false;
+          }
+        }
+      }
+      // update
+      function updateWhenSnakeEatFoods() {
+        for (let i = 0; i < foods.length; i++) {
+          if (foods[i].isEatenBySnake) {
+            changeScore(foods[i].pointsWhenEat);
+            changeGameSpeed(foods[i].speedWhenEat);
+          }
+        }
+      }
+
+      function isFoodsDisapear() {
+        for (let i = 0; i < foods.length; i++) {
+          if ((foods[i].age = foods[i].disapearAge)) {
+            changeScore(foods[i].pointsWhenDisapear);
+            changeGameSpeed(foods[i].speedWhenDisapear);
+          }
+        }
+      }
+    </script>
+  </body>
+</html>
