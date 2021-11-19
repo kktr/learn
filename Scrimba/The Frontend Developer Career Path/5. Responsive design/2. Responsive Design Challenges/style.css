@@ -1,0 +1,214 @@
+html {
+  font-size: 0.9rem;
+}
+
+body {
+  margin: 0;
+  font-weight: 300;
+  font-family: 'Roboto', sans-serif;
+  text-align: center;
+}
+
+.container {
+  max-width: 570px;
+  margin: 0 auto;
+  padding: 0 0.625em;
+}
+
+.columns {
+  display: flex;
+  flex-direction: column;
+}
+
+h1,
+h2 {
+  font-weight: 300;
+}
+
+h1 {
+  margin-top: 0;
+  font-size: 3.75rem;
+}
+
+h2 {
+  margin-top: 0;
+  margin-bottom: 0.5em;
+  padding: 0.5em 0;
+  border-top: solid 1px #c4c4c4;
+  border-bottom: solid 1px #c4c4c4;
+  font-size: 2.625rem;
+}
+
+h3 {
+  margin-bottom: 0;
+  font-weight: 900;
+  font-size: 2.25rem;
+}
+
+.accent-text {
+  display: block;
+}
+
+h1 .accent-text {
+  font-size: 5rem;
+}
+
+h2 .accent-text {
+  font-size: 3.75rem;
+}
+
+.accent-text,
+.name,
+time {
+  color: #99d930;
+  font-weight: 900;
+}
+
+p {
+  margin-bottom: 0;
+}
+
+a {
+  color: #99d930;
+  font-weight: 900;
+}
+
+a:hover,
+a:focus {
+  color: #131313;
+}
+
+.small-text {
+  margin-top: 0.3125em;
+  font-size: 1rem;
+}
+
+img {
+  max-width: 100%;
+}
+
+header .column,
+section .column {
+  padding: 5em 0;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.inverse {
+  color: #fff;
+  background: #252525;
+}
+
+.inverse .btn:hover,
+.inverse .btn:focus {
+  color: #252525;
+  background: #fff;
+}
+
+.btn {
+  display: inline-block;
+  margin-top: 1.5625em;
+  padding: 0.625em 1.5em;
+  color: #252525;
+  text-decoration: none;
+  background: #99d930;
+}
+
+.btn:hover,
+.btn:focus {
+  color: #fff;
+  background: #252525;
+}
+
+@media (min-width: 600px) {
+  html {
+    font-size: 1.3125rem;
+  }
+}
+
+@media (min-width: 750px) {
+  .columns {
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .column {
+    max-width: 90%;
+  }
+
+  main .inverse {
+    background-color: #99d930;
+    color: black;
+  }
+
+  main .inverse .btn {
+    color: #fff;
+    background: black;
+  }
+
+  main .inverse .accent-text,
+  .small-text,
+  .name,
+  time,
+  a,
+  h2,
+  h3 {
+    color: currentColor;
+  }
+
+  main .inverse h2 {
+    border-color: currentColor;
+  }
+
+  main .inverse a:hover,
+  a:focus {
+    color: #fff;
+  }
+
+  /* .articles .inverse,
+  .about-me {
+    width: 50%;
+  } */
+}
+
+@media (min-width: 750px) {
+  .dark-bg {
+    color: #fff;
+    background: #252525;
+  }
+
+  .dark-bg .accent-text {
+    color: currentColor;
+  }
+
+  .portfolio {
+    display: flex;
+    align-items: center;
+    height: 100vh;
+  }
+
+  .portfolio-img {
+    object-fit: cover;
+    width: 100%;
+    height: 15em;
+  }
+
+  .rows {
+    display: flex;
+    flex-direction: column;
+    max-width: 1200px;
+  }
+
+  .work {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .portfolio-item {
+    width: 28%;
+  }
+}
