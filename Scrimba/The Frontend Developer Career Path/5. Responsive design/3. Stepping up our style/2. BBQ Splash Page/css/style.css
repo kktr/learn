@@ -1,0 +1,220 @@
+body {
+  margin: 0;
+  color: #5a5a5a;
+  font-weight: 300;
+  font-size: 1.125rem;
+text-align: center;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.site-title {
+  margin-top: 1.1em;
+  color: white;
+  font-weight: 300;
+  font-size: 3.5rem;
+
+  line-height: 1em;
+}
+
+.site-subtitle,
+.site-additional-info-body,
+.article-title,
+.article-subtitle {
+  font-weight: 900;
+
+}
+
+.site-subtitle,
+.site-additional-info-body,
+.article-subtitle {
+  color: #f18119;
+  text-transform: uppercase;
+}
+
+.site-subtitle {
+  padding-bottom: 1.2em;
+}
+
+.article-subtitle {
+  margin-top: 0;
+  margin-bottom: 1.813em;
+  font-size: 1.125rem;
+}
+
+.article-title,
+.site-subtitle {
+  font-size: 1.75rem;
+}
+
+.article-title {
+  margin-top: 1.125em;
+  margin-bottom: 0.1em;
+  color: #404040;
+}
+
+.site-additional-info {
+  letter-spacing: 1.5px;
+}
+
+.article-body {
+
+  margin-top: 0;
+}
+
+.article-footer {
+  margin-top: 0;
+  margin-bottom: 4em;
+
+}
+
+.text-bold {
+  font-weight: 900;
+}
+
+.text-small {
+  font-size: 0.625rem;
+}
+
+.site-additional-info-decoration {
+  height: 7px;
+  background:
+    transparent
+    linear-gradient(270deg, #ff895d 0%, #df4e13 0%, #ffa51d 100%) 0% 0%
+    no-repeat padding-box;
+}
+
+header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  object-fit: cover;
+  max-width: 565px;
+  min-width: 315px;
+  max-height: 810px;
+  height: 100vh;
+  background-image: url(../images/dark-ribs.jpg);
+}
+
+main {
+  min-width: 315px;
+  max-width: 565px;
+}
+
+.cointainer-header {
+  padding: 0 2.25em;
+}
+
+.cointainer-article {
+  display: flex;
+  flex-direction: column;
+  padding: 0 1.6em;
+}
+
+.cointainer-flex {
+  display: flex;
+  flex-direction: column;
+}
+
+.site-additional-info {
+  order: -2;
+
+  /* position: absolute;
+  top: 0;
+  left: 50%;
+  margin: 0 auto;
+  transform: translateX(-50%); */
+}
+
+.button {
+  width: 253px;
+  height: 37px;
+  margin-right: auto;
+  margin-bottom: 0.875em;
+  margin-left: auto;
+  border-radius: 0.438em;
+
+}
+
+.button-register {
+  color: #fff;
+  margin-bottom: 0.813em;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  text-decoration: none;
+  text-transform: uppercase;
+  background:
+    transparent linear-gradient(270deg, #ff713b 0%, #ffa51d 100%) 0%
+    0% no-repeat padding-box;
+}
+
+.button-register-text {
+  position: relative;
+  margin: 0;
+  color: white;
+  top: 50%;
+  transform: translateX(+50%);
+  transform: translateY(-50%);
+  font-weight: 900;
+}
+
+input {
+  border: 1px solid #818181;
+  box-sizing: border-box;
+
+
+}
+
+::placeholder {
+  color: #404040;
+  opacity: 0.3;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+@media (min-width: 565px) {
+  .cointainer-flex {
+    flex-direction: row;
+  }
+
+  .cointainer-header {
+    justify-content: center;
+  }
+
+  .site-additional-info {
+    position: absolute;
+    top: 0;
+  }
+
+  .site-title {
+    margin-bottom: 0;
+  }
+
+  .site-subtitle {
+    margin-top: 0.5em;
+  }
+
+  header {
+    flex-grow: 2;
+  }
+
+  main {
+    display: flex;
+    flex-grow: 2;
+    align-items: center;
+    width: 50%;
+  }
+
+  .button {
+    width: 200px;
+}
+}
+
+@media (min-width: 700px) {
+  .button {
+    width: 253px;
+}
