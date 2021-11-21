@@ -1,42 +1,43 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   color: #5a5a5a;
   font-weight: 300;
   font-size: 1.125rem;
-text-align: center;
   font-family: 'Source Sans Pro', sans-serif;
+  text-align: center;
 }
 
-* {
-  box-sizing: border-box;
+.cointainer-intro * {
+  margin-top: 0;
 }
 
 .site-title {
-  margin-top: 1.1em;
   color: white;
   font-weight: 300;
   font-size: 3.5rem;
-
   line-height: 1em;
 }
 
 .site-subtitle,
-.site-additional-info-body,
+.site-top-text-body,
 .article-title,
 .article-subtitle {
   font-weight: 900;
-
 }
 
 .site-subtitle,
-.site-additional-info-body,
+.site-top-text-body,
 .article-subtitle {
   color: #f18119;
   text-transform: uppercase;
 }
 
 .site-subtitle {
-  padding-bottom: 1.2em;
+  margin-bottom: 1.2em;
 }
 
 .article-subtitle {
@@ -51,24 +52,22 @@ text-align: center;
 }
 
 .article-title {
-  margin-top: 1.125em;
   margin-bottom: 0.1em;
   color: #404040;
 }
 
-.site-additional-info {
+.site-top-text {
+  order: -2;
+  margin-bottom: 1.1em;
   letter-spacing: 1.5px;
 }
 
 .article-body {
-
   margin-top: 0;
 }
 
 .article-footer {
-  margin-top: 0;
   margin-bottom: 4em;
-
 }
 
 .text-bold {
@@ -79,7 +78,7 @@ text-align: center;
   font-size: 0.625rem;
 }
 
-.site-additional-info-decoration {
+.site-top-text-decoration {
   height: 7px;
   background:
     transparent
@@ -87,16 +86,17 @@ text-align: center;
     no-repeat padding-box;
 }
 
-header {
+.intro {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
   object-fit: cover;
-  max-width: 565px;
   min-width: 315px;
-  max-height: 810px;
+  max-width: 565px;
   height: 100vh;
+  max-height: 810px;
+  background-color: black;
   background-image: url(../images/dark-ribs.jpg);
 }
 
@@ -105,7 +105,7 @@ main {
   max-width: 565px;
 }
 
-.cointainer-header {
+.cointainer-intro {
   padding: 0 2.25em;
 }
 
@@ -120,60 +120,62 @@ main {
   flex-direction: column;
 }
 
-.site-additional-info {
-  order: -2;
-
-  /* position: absolute;
-  top: 0;
-  left: 50%;
-  margin: 0 auto;
-  transform: translateX(-50%); */
+.register-form {
+  width: 80%;
+  max-width: 255px;
+  margin: auto;
 }
 
 .button {
-  width: 253px;
+  width: 100%;
   height: 37px;
   margin-right: auto;
   margin-bottom: 0.875em;
   margin-left: auto;
   border-radius: 0.438em;
-
+  transform: scale(1);
+  transition: opacity 250ms;
+  transition: transform 250ms;
 }
 
 .button-register {
-  color: #fff;
+  margin: 0;
   margin-bottom: 0.813em;
-  font-weight: 900;
-  letter-spacing: 1.5px;
+  color: #fff;
+  font-weight: 700;
+  font-family: inherit;
+  letter-spacing: 1.2px;
   text-decoration: none;
   text-transform: uppercase;
+  cursor: pointer;
   background:
     transparent linear-gradient(270deg, #ff713b 0%, #ffa51d 100%) 0%
     0% no-repeat padding-box;
 }
 
+.button:focus,
+.button:hover {
+  transform: scale(1.05);
+  opacity: 0.5;
+}
+
 .button-register-text {
-  position: relative;
+  /* position: relative;
   margin: 0;
   color: white;
-  top: 50%;
-  transform: translateX(+50%);
-  transform: translateY(-50%);
-  font-weight: 900;
+  font-weight: 900; */
 }
 
 input {
   border: 1px solid #818181;
   box-sizing: border-box;
-
-
 }
 
 ::placeholder {
   color: #404040;
-  opacity: 0.3;
-  text-align: center;
   letter-spacing: 1px;
+  text-align: center;
+  opacity: 0.3;
 }
 
 @media (min-width: 565px) {
@@ -181,24 +183,20 @@ input {
     flex-direction: row;
   }
 
-  .cointainer-header {
+  .cointainer-intro {
     justify-content: center;
   }
 
-  .site-additional-info {
+  .site-top-text {
     position: absolute;
     top: 0;
   }
 
   .site-title {
-    margin-bottom: 0;
+    margin-bottom: 0.5em;
   }
 
-  .site-subtitle {
-    margin-top: 0.5em;
-  }
-
-  header {
+  .intro {
     flex-grow: 2;
   }
 
@@ -210,11 +208,12 @@ input {
   }
 
   .button {
-    width: 200px;
-}
+    /* width: 200px; */
+  }
 }
 
 @media (min-width: 700px) {
   .button {
-    width: 253px;
+    /* width: 253px; */
+  }
 }

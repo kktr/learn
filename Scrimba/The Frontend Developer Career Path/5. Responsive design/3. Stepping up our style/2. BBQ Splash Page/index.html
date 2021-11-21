@@ -4,31 +4,33 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>BBQ</title>
+    <title>BBQ live webinar</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;700;900&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./css/style.css" />
   </head>
   <body>
     <div class=" cointainer-flex">
-      <header class="cointainer-header">
+      <div class="intro cointainer-intro">
         <h1 class="site-title">
           Learn how to make <span class="text-bold">the best BBQ ribs</span> in
           town
         </h1>
 
         <h2 class="site-subtitle">Join us for this live webinar</h2>
-        <div class="site-additional-info">
-          <div class="site-additional-info-decoration"></div>
-          <p class="site-additional-info-body text-small">
+
+        <div class="site-top-text">
+          <div class="site-top-text-decoration"></div>
+
+          <p class="site-top-text-body text-small">
             Mouthwateringly delicious
           </p>
         </div>
-      </header>
+      </div>
 
       <main>
         <article class="cointainer-article">
@@ -44,9 +46,12 @@
             process is to learn from the best. You can do just that by signing
             up for this free webinar!
           </p>
-          <form class="regiter-form" action="index.html" method="post">
+
+          <form class="register-form" action="index.html" method="post">
+            <label for="fname"></label>
             <input
               class="input-first-name button"
+              id="fname"
               type="text"
               action="#"
               method="post"
@@ -54,17 +59,24 @@
               placeholder="first name"
             />
 
+            <label for="email"></label>
             <input
               class="input-email button"
+              id="email"
               type="email"
               name="email"
               placeholder="email"
             />
-          </form>
 
-          <a class="button button-register text-small" href="#"
-            ><p class="button-register-text">register</p></a
-          >
+            <button
+              type="submit"
+              name="register"
+              class="button button-register text-small"
+              href="#"
+            >
+              register
+            </button>
+          </form>
 
           <p class="article-footer text-small">
             We'll never share your information<br />without your permission
