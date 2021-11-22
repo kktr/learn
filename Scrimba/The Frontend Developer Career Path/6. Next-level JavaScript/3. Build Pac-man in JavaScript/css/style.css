@@ -1,0 +1,37 @@
+body {
+}
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  width: 420px;
+  height: 420px;
+  border: solid black;
+}
+
+.grid div {
+  width: 15px;
+  height: 15px;
+}
+
+.pac-dots {
+  border: 5px solid white;
+  background-color: green;
+  box-sizing: border-box;
+}
+
+.wall {
+  border-radius: 7.5px;
+  background-color: blue;
+}
+
+.ghost-lair {
+}
+
+.power-pellet {
+  border-radius: 7.5px;
+  background-color: green;
+}
+
+.empty {
+}
