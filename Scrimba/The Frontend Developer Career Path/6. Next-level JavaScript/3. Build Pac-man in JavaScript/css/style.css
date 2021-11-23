@@ -21,7 +21,6 @@ body {
 }
 
 .wall {
-  border-radius: 7.5px;
   background-color: blue;
 }
 
@@ -34,4 +33,10 @@ body {
 }
 
 .empty {
+}
+
+.pacman {
+  border: none;
+  border-radius: 7.5px;
+  background-color: yellow;
 }
