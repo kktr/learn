@@ -3,11 +3,13 @@
 const grid = document.getElementById('grid');
 const score = document.getElementById('score');
 
+let points = 0;
 let squares = [];
 let gameComponents = [];
 const width = 28;
 
 const directions = { up: -width, down: width, left: -1, right: 1 };
+// const directionsArray = [up, down, left, right];
 const com = { pacdots: 0, wall: 1, ghostliar: 2, powerpellet: 3, emptry: 4 };
 
 const gameElements = [
@@ -32,6 +34,21 @@ class Component {
   removeDisplay(i) {
     squares[i].classList.remove(this.clas);
   }
+  isEatenByPacMan() {
+    if (squares[pacMan.position].classList.contains(this.clas)) return true;
+    return false;
+  }
+  eatenByPacMan(point) {
+    if (this.isEatenByPacMan()) {
+      this.removeDisplay(pacMan.position);
+      points += point;
+      displayPoints();
+    }
+  }
+}
+
+function displayPoints() {
+  score.innerHTML = points;
 }
 
 function createComponents(array) {
@@ -50,25 +67,29 @@ class Sprite extends Component {
     this.position = position;
     this.moveDirection = moveDirection;
   }
-  isOnTopBorder() {
-    if (this.position - width >= 0) return false;
-    else return true;
-  }
-  isOnBottomBorder() {
-    if (this.position + width < width * width) return false;
-    else return true;
-  }
-  isOnLeftBorder() {
-    if (this.position % width !== 0) return false;
-    else return true;
-  }
-  isOnRightBorder() {
-    if (this.position % width < width - 1) return false;
-    else return true;
+  isOnBorder(direction) {
+    if (direction == directions.up) {
+      if (this.position - width >= 0) {
+        return false;
+      } else return true;
+    } else if (direction == directions.down) {
+      if (this.position + width < width * width) {
+        return false;
+      } else return true;
+    } else if (direction == directions.left) {
+      if (this.position % width !== 0) {
+        return false;
+      } else return true;
+    } else if (direction == directions.right) {
+      if (this.position % width < width - 1) {
+        return false;
+      } else return true;
+    }
+    return true;
   }
   isHeading(something) {
     if (
-      squares[pacMan.position + pacMan.moveDirection].classList.contains(
+      squares[this.position + this.moveDirection].classList.contains(
         something.clas
       )
     )
@@ -76,20 +97,27 @@ class Sprite extends Component {
     else return false;
   }
   isTryingMove(where) {
-    if (pacMan.moveDirection == where) return true;
+    if (this.moveDirection == where) return true;
     else return false;
+  }
+  isHeadingLeftPortal() {
+    if ((this.position == 364) & (this.moveDirection == directions.left))
+      return true;
+    return false;
+  }
+  isHeadingRightPortal() {
+    if ((this.position == 391) & (this.moveDirection == directions.right))
+      return true;
+    return false;
+  }
+  moveThroughLeftPortal() {
+    this.position = 391;
+  }
+  moveThroughRightPortal() {
+    this.position = 364;
   }
   move(where) {
     this.position += where;
-  }
-  moveDown() {
-    this.position += directions.down;
-  }
-  moveLeft() {
-    this.position += directions.left;
-  }
-  moveRight() {
-    this.position += directions.right;
   }
 }
 
@@ -144,6 +172,37 @@ createBoard();
 
 pacMan.display(pacMan.position);
 
+setInterval(game, 500);
+
+function game() {
+  pacMan.removeDisplay(pacMan.position);
+  move();
+  pacMan.display(pacMan.position);
+  gameComponents[com.pacdots].eatenByPacMan(1);
+}
+
+function move() {
+  if (pacMan.isHeadingLeftPortal()) {
+    pacMan.moveThroughLeftPortal();
+  } else if (pacMan.isHeadingRightPortal()) {
+    pacMan.moveThroughRightPortal();
+  } else {
+    if (
+      !pacMan.isHeading(gameComponents[com.wall]) &
+      !pacMan.isHeading(gameComponents[com.ghostliar])
+    ) {
+      for (const direction in directions) {
+        if (
+          pacMan.isTryingMove(directions[direction]) &
+          !pacMan.isOnBorder(directions[direction])
+        ) {
+          pacMan.move(directions[direction]);
+        }
+      }
+    }
+  }
+}
+
 function control(e) {
   switch (event.key) {
     case 'Down': // IE/Edge specific value
@@ -170,44 +229,3 @@ function control(e) {
 }
 
 document.addEventListener('keydown', control);
-
-function move() {
-  if (!pacMan.isHeading(gameComponents[com.wall])) {
-    if (pacMan.isTryingMove(directions.up) & !pacMan.isOnTopBorder()) {
-      console.log(!pacMan.isOnTopBorder());
-      pacMan.move(directions.up);
-    } else if (
-      (pacMan.moveDirection == directions.down) &
-      !pacMan.isOnBottomBorder()
-    ) {
-      pacMan.moveDown();
-    } else if (
-      (pacMan.moveDirection == directions.left) &
-      !pacMan.isOnLeftBorder()
-    ) {
-      pacMan.moveLeft();
-    } else if (
-      (pacMan.moveDirection == directions.right) &
-      !pacMan.isOnRightBorder()
-    ) {
-      pacMan.moveRight();
-    }
-    // for (let i = 0; i < directions.length; i++) {
-    //   if (pacMan.isTryingMove(directions[i]) & !pacMan.isOnTopBorder()) {
-    //     console.log(!pacMan.isOnTopBorder());
-    //     pacMan.move(directions[i]);
-    //   }
-    // }
-  }
-}
-setInterval(game, 1000);
-
-function game() {
-  pacMan.removeDisplay(pacMan.position);
-  move();
-  pacMan.display(pacMan.position);
-}
-
-console.log(gameComponents);
-console.log(pacMan);
-console.log(gameComponents[com.wall]);
