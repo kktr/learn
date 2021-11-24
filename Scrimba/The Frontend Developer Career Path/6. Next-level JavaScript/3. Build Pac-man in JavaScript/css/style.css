@@ -35,8 +35,31 @@ body {
 .empty {
 }
 
+.blinky {
+  border: none;
+  background-color: red;
+}
+
+.pinky {
+  border: none;
+  background-color: pink;
+}
+
+.inky {
+  border: none;
+  background-color: aqua;
+}
+
+.clyde {
+  border: none;
+  background-color: orange;
+}
+
 .pacman {
   border: none;
   border-radius: 7.5px;
   background-color: yellow;
+}
+
+.ghost {
 }

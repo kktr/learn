@@ -35,12 +35,13 @@ class Component {
     squares[i].classList.remove(this.clas);
   }
   isEatenByPacMan() {
-    if (squares[pacMan.position].classList.contains(this.clas)) return true;
+    if (squares[pacMan.currentPosition].classList.contains(this.clas))
+      return true;
     return false;
   }
   eatenByPacMan(point) {
     if (this.isEatenByPacMan()) {
-      this.removeDisplay(pacMan.position);
+      this.removeDisplay(pacMan.currentPosition);
       points += point;
       displayPoints();
     }
@@ -62,26 +63,27 @@ function createComponents(array) {
 createComponents(gameElements);
 
 class Sprite extends Component {
-  constructor(number, clas, position, moveDirection) {
+  constructor(number, clas, startposition, moveDirection) {
     super(number, clas);
-    this.position = position;
+    this.startPosition = startposition;
+    this.currentPosition = startposition;
     this.moveDirection = moveDirection;
   }
   isOnBorder(direction) {
     if (direction == directions.up) {
-      if (this.position - width >= 0) {
+      if (this.currentPosition - width >= 0) {
         return false;
       } else return true;
     } else if (direction == directions.down) {
-      if (this.position + width < width * width) {
+      if (this.currentPosition + width < width * width) {
         return false;
       } else return true;
     } else if (direction == directions.left) {
-      if (this.position % width !== 0) {
+      if (this.currentPosition % width !== 0) {
         return false;
       } else return true;
     } else if (direction == directions.right) {
-      if (this.position % width < width - 1) {
+      if (this.currentPosition % width < width - 1) {
         return false;
       } else return true;
     }
@@ -89,7 +91,7 @@ class Sprite extends Component {
   }
   isHeading(something) {
     if (
-      squares[this.position + this.moveDirection].classList.contains(
+      squares[this.currentPosition + this.moveDirection].classList.contains(
         something.clas
       )
     )
@@ -101,27 +103,59 @@ class Sprite extends Component {
     else return false;
   }
   isHeadingLeftPortal() {
-    if ((this.position == 364) & (this.moveDirection == directions.left))
+    if ((this.currentPosition == 364) & (this.moveDirection == directions.left))
       return true;
     return false;
   }
   isHeadingRightPortal() {
-    if ((this.position == 391) & (this.moveDirection == directions.right))
+    if (
+      (this.currentPosition == 391) &
+      (this.moveDirection == directions.right)
+    )
       return true;
     return false;
   }
   moveThroughLeftPortal() {
-    this.position = 391;
+    this.currentPosition = 391;
   }
   moveThroughRightPortal() {
-    this.position = 364;
+    this.currentPosition = 364;
   }
   move(where) {
-    this.position += where;
+    this.currentPosition += where;
   }
 }
 
 pacMan = new Sprite(6, 'pacman', 490, directions.right);
+
+class Ghost extends Sprite {
+  constructor(number, clas, startPosition, moveDirection, speed) {
+    super(number, clas, startPosition, moveDirection);
+    this.currentPosition = startPosition;
+    this.speed = speed;
+    this.timerId = NaN;
+  }
+  getRandomDirection() {
+    const possibleDirections = [width, -width, 1, -1];
+    return possibleDirections[
+      Math.floor(Math.random() * possibleDirections.length)
+    ];
+  }
+  // setNewMoveDirection() {
+  //   this.moveDirection = this.getRandomDirection();
+  //   if (this.isHeading(gameComponents[com.wall])) return setNewMoveDirection();
+  // }
+  // moving() {
+  //   removeDisplay(this.currentPosition);
+  // }
+}
+
+const ghosts = [
+  new Ghost(7, 'blinky', 348, directions.right, 250),
+  new Ghost(8, 'pinky', 376, directions.right, 400),
+  new Ghost(9, 'inky', 351, directions.right, 300),
+  new Ghost(10, 'clyde', 379, directions.right, 500)
+];
 
 // prettier-ignore
 const layout = [
@@ -165,19 +199,33 @@ function createBoard() {
         gameComponents[j].display(i, squares);
       }
     }
+    for (let j = 0; j < ghosts.length; j++) {
+      if (i == ghosts[j].startPosition) {
+        ghosts[j].display(i, squares);
+      }
+    }
   }
 }
 
 createBoard();
 
-pacMan.display(pacMan.position);
+// ghosts.forEach(ghost => squares[ghost.position].classList.add(ghosts.clas));
+//move the ghosts
+// ghosts.forEach(ghost => moveGhost(ghost));
+
+// function moveGhost(ghost) {
+//   console.log('moved ghost');
+//   const directions = [-1, +1, -width, +width];
+// }
+
+pacMan.display(pacMan.startPosition);
 
 setInterval(game, 500);
 
 function game() {
-  pacMan.removeDisplay(pacMan.position);
+  pacMan.removeDisplay(pacMan.currentPosition);
   move();
-  pacMan.display(pacMan.position);
+  pacMan.display(pacMan.currentPosition);
   gameComponents[com.pacdots].eatenByPacMan(1);
 }
 
@@ -229,3 +277,31 @@ function control(e) {
 }
 
 document.addEventListener('keydown', control);
+
+//move the ghosts
+ghosts.forEach(ghost => moveGhost(ghost));
+
+function moveGhost(ghost) {
+  console.log('moved ghost');
+  let direction = ghost.getRandomDirection();
+  console.log(direction);
+
+  ghost.timerId = setInterval(function() {
+    //all our code
+    //if the next square does NOT contain a wall and does not contain a ghost
+    if (
+      !squares[ghost.currentPosition + direction].classList.contains('wall') &&
+      !squares[ghost.currentPosition + direction].classList.contains('ghost')
+    ) {
+      //remove any ghost
+      ghost.removeDisplay(ghost.currentPosition);
+      squares[ghost.currentPosition].classList.remove('ghost');
+      // //add direction to current Index
+      ghost.currentPosition += direction;
+      console.log(ghost.currentPosition);
+      // //add ghost class
+      ghost.display(ghost.currentPosition);
+      squares[ghost.currentPosition].classList.add('ghost');
+    } else direction = ghost.getRandomDirection();
+  }, ghost.speed);
+}
