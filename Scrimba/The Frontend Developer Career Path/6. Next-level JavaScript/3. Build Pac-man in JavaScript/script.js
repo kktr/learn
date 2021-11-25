@@ -10,7 +10,13 @@ const width = 28;
 
 const directions = { up: -width, down: width, left: -1, right: 1 };
 // const directionsArray = [up, down, left, right];
-const com = { pacdots: 0, wall: 1, ghostliar: 2, powerpellet: 3, emptry: 4 };
+const componentsMap = {
+  pacdots: 0,
+  wall: 1,
+  ghostliar: 2,
+  powerpellet: 3,
+  emptry: 4
+};
 
 const gameElements = [
   'pac-dots',
@@ -42,13 +48,13 @@ class Component {
   eatenByPacMan(point) {
     if (this.isEatenByPacMan()) {
       this.removeDisplay(pacMan.currentPosition);
-      points += point;
-      displayPoints();
+      displayPoints(point);
     }
   }
 }
 
-function displayPoints() {
+function displayPoints(point) {
+  points += point;
   score.innerHTML = points;
 }
 
@@ -124,6 +130,29 @@ class Sprite extends Component {
   move(where) {
     this.currentPosition += where;
   }
+  eatingPowerPellet() {
+    if (gameComponents[componentsMap.powerpellet].isEatenByPacMan()) {
+      gameComponents[componentsMap.powerpellet].eatenByPacMan(10);
+      ghosts.forEach(ghost => (ghost.isScared = true));
+      setTimeout(unScareAllGhosts, 10000);
+    }
+  }
+  eatingScaredGhost() {
+    ghosts.forEach(ghost => {
+      if (ghost.isEatenByPacMan() & ghost.isScared) {
+        ghost.unScare();
+        ghost.removeDisplay(ghost.currentPosition);
+        squares[ghost.currentPosition].classList.remove('ghost-scared');
+        ghost.currentPosition = ghost.startPosition;
+        ghost.display(ghost.currentPosition);
+        displayPoints(100);
+      }
+    });
+  }
+}
+
+function unScareAllGhosts() {
+  ghosts.forEach(ghost => ghost.unScare());
 }
 
 pacMan = new Sprite(6, 'pacman', 490, directions.right);
@@ -134,6 +163,7 @@ class Ghost extends Sprite {
     this.currentPosition = startPosition;
     this.speed = speed;
     this.timerId = NaN;
+    this.isScared = false;
   }
   getRandomDirection() {
     const possibleDirections = [width, -width, 1, -1];
@@ -141,9 +171,19 @@ class Ghost extends Sprite {
       Math.floor(Math.random() * possibleDirections.length)
     ];
   }
+  unScare() {
+    this.isScared = false;
+  }
+
+  displayScared(i) {
+    squares[i].classList.add('ghost-scared');
+  }
+  // makeInterwal() {
+  //   this.timerId = setInterval(moveGhost(this), this.speed);
+  // }
   // setNewMoveDirection() {
   //   this.moveDirection = this.getRandomDirection();
-  //   if (this.isHeading(gameComponents[com.wall])) return setNewMoveDirection();
+  //   if (this.isHeading(gameComponents[componentsMap.wall])) return setNewMoveDirection();
   // }
   // moving() {
   //   removeDisplay(this.currentPosition);
@@ -226,7 +266,11 @@ function game() {
   pacMan.removeDisplay(pacMan.currentPosition);
   move();
   pacMan.display(pacMan.currentPosition);
-  gameComponents[com.pacdots].eatenByPacMan(1);
+  gameComponents[componentsMap.pacdots].eatenByPacMan(1);
+  pacMan.eatingPowerPellet();
+  pacMan.eatingScaredGhost();
+  checkForGameOver();
+  checkForWin();
 }
 
 function move() {
@@ -236,8 +280,8 @@ function move() {
     pacMan.moveThroughRightPortal();
   } else {
     if (
-      !pacMan.isHeading(gameComponents[com.wall]) &
-      !pacMan.isHeading(gameComponents[com.ghostliar])
+      !pacMan.isHeading(gameComponents[componentsMap.wall]) &
+      !pacMan.isHeading(gameComponents[componentsMap.ghostliar])
     ) {
       for (const direction in directions) {
         if (
@@ -255,9 +299,7 @@ function control(e) {
   switch (event.key) {
     case 'Down': // IE/Edge specific value
     case 'ArrowDown':
-      console.log('down');
       pacMan.moveDirection = directions.down;
-      console.log(pacMan.moveDirection);
       break;
     case 'Up': // IE/Edge specific value
     case 'ArrowUp':
@@ -279,16 +321,13 @@ function control(e) {
 document.addEventListener('keydown', control);
 
 //move the ghosts
-ghosts.forEach(ghost => moveGhost(ghost));
 
 function moveGhost(ghost) {
-  console.log('moved ghost');
+  ghost.timerId = ghost.speed;
+  //all our code
+  //if the next square does NOT contain a wall and does not contain a ghost
   let direction = ghost.getRandomDirection();
-  console.log(direction);
-
   ghost.timerId = setInterval(function() {
-    //all our code
-    //if the next square does NOT contain a wall and does not contain a ghost
     if (
       !squares[ghost.currentPosition + direction].classList.contains('wall') &&
       !squares[ghost.currentPosition + direction].classList.contains('ghost')
@@ -296,12 +335,43 @@ function moveGhost(ghost) {
       //remove any ghost
       ghost.removeDisplay(ghost.currentPosition);
       squares[ghost.currentPosition].classList.remove('ghost');
+      squares[ghost.currentPosition].classList.remove('ghost-scared');
       // //add direction to current Index
       ghost.currentPosition += direction;
-      console.log(ghost.currentPosition);
       // //add ghost class
       ghost.display(ghost.currentPosition);
       squares[ghost.currentPosition].classList.add('ghost');
     } else direction = ghost.getRandomDirection();
+
+    if (ghost.isScared) {
+      ghost.displayScared(ghost.currentPosition);
+    }
   }, ghost.speed);
+}
+
+ghosts.forEach(ghost => moveGhost(ghost));
+
+function checkForGameOver() {
+  if (
+    squares[pacMan.currentPosition].classList.contains('ghost') &&
+    !squares[pacMan.currentPosition].classList.contains('scared-ghost')
+  ) {
+    stopGame();
+    //tell user the game is over
+    score.innerHTML = 'You Lose';
+  }
+}
+
+function checkForWin() {
+  if (points == 274) {
+    stopGame();
+    score.innerHTML = 'You Win';
+  }
+}
+
+function stopGame() {
+  //for each ghost - we need to stop it moving
+  ghosts.forEach(ghost => clearInterval(ghost.timerId));
+  //remove eventlistener from our control function
+  document.removeEventListener('keydown', control);
 }

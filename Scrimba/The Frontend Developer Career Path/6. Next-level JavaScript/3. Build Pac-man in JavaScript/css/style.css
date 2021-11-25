@@ -55,11 +55,16 @@ body {
   background-color: orange;
 }
 
+.ghost {
+  /* background-color: black; */
+}
+
+.ghost-scared {
+  background-color: blue;
+}
+
 .pacman {
   border: none;
   border-radius: 7.5px;
   background-color: yellow;
-}
-
-.ghost {
 }
