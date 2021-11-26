@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>BlogSpace</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <nav>
+      <h2>BlogSpace</h2>
+    </nav>
+    <form id="send-post" action="" method="get" class="form">
+      <div class="input-container">
+        <label for="post-title">Enter post title: </label>
+        <input type="text" name="post-title" id="post-title" required />
+      </div>
+      <div class="input-container">
+        <label for="post-body">Write the post: </label>
+        <textarea id="post-body" rows="3" cols="10" required></textarea>
+      </div>
+      <div class="input-container">
+        <button class="button button-send" type="submit" value="POST">
+          SEND
+        </button>
+      </div>
+    </form>
+    <main><div id="blog-posts"></div></main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
