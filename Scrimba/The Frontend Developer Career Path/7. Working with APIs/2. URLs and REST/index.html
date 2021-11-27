@@ -17,22 +17,36 @@
     <nav>
       <h2>BlogSpace</h2>
     </nav>
-    <form id="send-post" action="" method="get" class="form">
-      <div class="input-container">
-        <label for="post-title">Enter post title: </label>
-        <input type="text" name="post-title" id="post-title" required />
-      </div>
-      <div class="input-container">
-        <label for="post-body">Write the post: </label>
-        <textarea id="post-body" rows="3" cols="10" required></textarea>
-      </div>
-      <div class="input-container">
-        <button class="button button-send" type="submit" value="POST">
-          SEND
-        </button>
-      </div>
-    </form>
-    <main><div id="blog-posts"></div></main>
+    <div class="cointainer">
+      <form id="send-new-post" action="" method="get" class="form">
+        <div class="input-container">
+          <label for="new-post-title">Enter post title: </label>
+          <input
+            type="text"
+            name="new-post-title"
+            id="new-post-title"
+            required
+          />
+        </div>
+
+        <div class="input-container">
+          <label for="new-post-body">Write the post: </label>
+          <textarea id="new-post-body" rows="15" cols="30" required></textarea>
+        </div>
+
+        <div class="input-container">
+          <button class="button button-send" type="submit" value="POST">
+            SEND
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <div class="cointainer">
+      <main>
+        <div id="blog-posts"></div>
+      </main>
+    </div>
 
     <script src="script.js"></script>
   </body>

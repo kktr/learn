@@ -1,5 +1,6 @@
 body {
   margin: 0;
+  font-size: 1rem;
   font-family: 'Lato', sans-serif;
 }
 
@@ -32,6 +33,19 @@ form {
   flex-direction: column;
   padding-top: 10em;
   background-color: #cbcbea;
+}
+
+label {
+  margin-bottom: 0.5em;
+}
+
+.cointainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgba(245, 248, 238, 0.28);
+  background-color: #cbcbea;
+  background-size: cover;
 }
 
 .input-container {
@@ -86,12 +100,9 @@ form {
 }
 
 main {
-  background-color: rgba(245, 248, 238, 0.28);
-  background-color: #cbcbea;
-  background-size: cover;
+  max-width: 1000px;
   text-align: justify;
   text-justify: inter-word;
-  background-blend-mode: screen;
 }
 
 #input-post-body {
