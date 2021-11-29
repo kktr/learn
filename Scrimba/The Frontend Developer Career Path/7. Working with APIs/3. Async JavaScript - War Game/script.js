@@ -1,32 +1,49 @@
 /*jshint esversion: 6*/
 /* eslint-env es6 */
-const newDeckBtn = document.getElementById('new-deck');
-const drawTwoCardsBtn = document.getElementById('draw-two-cards');
+const newDeckBtnEl = document.getElementById('new-deck-btn-el');
+const drawBtnEl = document.getElementById('draw-btn-el');
 const cardsEl = document.getElementById('cards-el');
 
 let deckId;
+let remainingCards;
 
 function getNewDeckId() {
+  cardsEl.innerHTML = '';
   fetch('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1')
     .then(res => res.json())
-    .then(deckData => (deckId = deckData.deck_id));
+    .then(deckData => (deckId = deckData.deck_id))
+    .then(function drawBtnElActive() {
+      drawBtnEl.classList.add('btn-active');
+    });
 }
 
 function drawTwoCards() {
   fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=2`)
     .then(res => res.json())
-    .then(deckData => updateCards(deckData));
+    .then(deckData => {
+      updateCards(deckData);
+      remainingCards = deckData.remaining;
+    });
 }
 
 function updateCards(deckData) {
-  cardsEl.innerHTML = `
-    <image class="player-one-card" src="${deckData.cards[0].image}" />
-    <image class="player-two-card" src="${deckData.cards[1].image}" />
-    `;
+  console.log(cardsEl.childNodes[0]);
+  // cardsEl.innerHTML = `
+  //   <image class="card player-one-card" src="${deckData.cards[0].image}" />
+  //   <image class="card player-two-card" src="${deckData.cards[1].image}" />
+  //   `;
+  for (let i = 0; i < cardsEl.childNodeschildNodes.length; i++) {
+    console.log(cardsEl.childNodes[i]);
+    //   cardsEl.children[i].innerHTML = `
+    // <div class="card-slot">
+    //   <image class="card player-one-card" src="${deckData.cards[i].image}" />
+    // </div>
+    // `;
+  }
 }
 
-newDeckBtn.addEventListener('click', getNewDeckId);
-drawTwoCardsBtn.addEventListener('click', drawTwoCards);
+newDeckBtnEl.addEventListener('click', getNewDeckId);
+drawBtnEl.addEventListener('click', drawTwoCards);
 /**
  * Challenge
  *

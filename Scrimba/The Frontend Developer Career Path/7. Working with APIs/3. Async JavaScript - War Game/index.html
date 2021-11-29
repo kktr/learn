@@ -14,19 +14,18 @@
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
-    <h1></h1>
+    <div class="cointainer cointainer-card cointainer-flex">
+      <button class="button new-deck-btn" id="new-deck-btn-el">
+        New Deck, Please!
+      </button>
 
-    <main>
-      <div class="cointainer">
-        <button class="button" id="new-deck">New Deck, Please!</button>
+      <div id="cards-el">
+        <div class="card-slot"></div>
+        <div class="card-slot"></div>
       </div>
 
-      <div class="cointainer cointainer-flex">
-        <div id="cards-el"></div>
-
-        <button class="button" id="draw-two-cards">Draw</button>
-      </div>
-    </main>
+      <button class="button draw-btn" id="draw-btn-el">Draw</button>
+    </div>
 
     <script src="script.js"></script>
   </body>

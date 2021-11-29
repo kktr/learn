@@ -1,4 +1,14 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100vh;
+  margin: 0;
+}
+
 body {
+  height: 100%;
   margin: 0;
   background-image: url('../img/table.png');
   background-size: cover;
@@ -7,21 +17,23 @@ body {
 
 .cointainer {
   max-width: 800px;
-  padding: 2em;
+  height: 100%;
+  margin: 0 auto;
 }
 
 .cointainer-flex {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between;
 }
 
 .button {
-  max-width: 200px
+  max-width: 400px;
   margin-top: 0;
-  margin-bottom: 6em;
-  padding: 2em 4em;
+  padding: 1em 2.2em;
   border-style: none;
+  border-radius: 5px;
   box-shadow: rgb(38, 57, 77) 0 20px 30px -10px;
   font-weight: 700;
   font-family: 'Lato', sans-serif;
@@ -29,7 +41,7 @@ body {
   filter: progid:dximagetransform.microsoft.gradient(startColorstr='#c39e22', endColorstr='#fdf72d', GradientType=1);
   cursor: pointer;
   transform: scale(1);
-  transition: transform 250ms;
+  transition: transform 150ms;
   background: rgb(195, 158, 34);
   background:
     -moz-linear-gradient(
@@ -83,7 +95,27 @@ body {
   transform: scale(1);
 }
 
-#draw-two-cards {
-  position: absolute;
-  top: 80%
+.new-deck-btn {
+  align-self: flex-start;
+  margin-top: 20px;
+  margin-left: 20px;
+}
+
+.draw-btn {
+  display: none;
+  width: 80%;
+  margin-bottom: 4em;
+}
+
+.btn-active {
+  display: block;
+}
+
+#cards-el {
+  display: flex;
+  flex-direction: column;
+}
+
+.card {
+  max-height: 30vh;
 }
