@@ -15,16 +15,35 @@
   </head>
   <body>
     <div class="cointainer cointainer-card cointainer-flex">
-      <button class="button new-deck-btn" id="new-deck-btn-el">
-        New Deck, Please!
-      </button>
+      <div class="cointainer-top">
+        <button class="button new-deck-btn" id="new-deck-btn-el">
+          New Deck, Please!
+        </button>
+
+        <h3 class="remaining-cards-info">
+          Remaning cards: <span id="remaning-card-num-el"></span>
+        </h3>
+      </div>
+
+      <h3 class="poits-info">
+        Computer:
+        <div id="player1-points-el"></div>
+      </h3>
 
       <div id="cards-el">
         <div class="card-slot"></div>
+
         <div class="card-slot"></div>
       </div>
 
-      <button class="button draw-btn" id="draw-btn-el">Draw</button>
+      <h3 class="poits-info">
+        Me:
+        <div id="player2-points-el"></div>
+      </h3>
+
+      <button class="button draw-btn" id="draw-btn-el">
+        Draw (first take a new deck)
+      </button>
     </div>
 
     <script src="script.js"></script>

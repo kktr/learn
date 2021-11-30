@@ -3,18 +3,40 @@
 const newDeckBtnEl = document.getElementById('new-deck-btn-el');
 const drawBtnEl = document.getElementById('draw-btn-el');
 const cardsEl = document.getElementById('cards-el');
+const remaningCardsNumEl = document.getElementById('remaning-card-num-el');
+const player1PointsEl = document.getElementById('player1-points-el');
+const player2PointsEl = document.getElementById('player2-points-el');
 
 let deckId;
 let remainingCards;
+let player1Score;
+let player2Score;
 
 function getNewDeckId() {
-  cardsEl.innerHTML = '';
   fetch('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1')
     .then(res => res.json())
-    .then(deckData => (deckId = deckData.deck_id))
-    .then(function drawBtnElActive() {
-      drawBtnEl.classList.add('btn-active');
-    });
+    .then(deckData => {
+      remainingCards = deckData.remaining;
+      deckId = deckData.deck_id;
+    })
+    .then(remainingCards => updateRemaningCards())
+    .then(updateRemaningCards => makeActiveDrawBtnEl());
+
+  removeCards();
+}
+
+function updateRemaningCards() {
+  remaningCardsNumEl.innerHTML = remainingCards;
+}
+
+function makeActiveDrawBtnEl() {
+  drawBtnEl.classList.add('btn-active');
+  drawBtnEl.innerHTML = 'Draw';
+}
+
+function removeCards() {
+  cardsEl.children[0].innerHTML = '';
+  cardsEl.children[1].innerHTML = '';
 }
 
 function drawTwoCards() {
@@ -22,25 +44,28 @@ function drawTwoCards() {
     .then(res => res.json())
     .then(deckData => {
       updateCards(deckData);
+      updateScore(deckData);
       remainingCards = deckData.remaining;
     });
 }
 
 function updateCards(deckData) {
-  console.log(cardsEl.childNodes[0]);
-  // cardsEl.innerHTML = `
-  //   <image class="card player-one-card" src="${deckData.cards[0].image}" />
-  //   <image class="card player-two-card" src="${deckData.cards[1].image}" />
-  //   `;
-  for (let i = 0; i < cardsEl.childNodeschildNodes.length; i++) {
-    console.log(cardsEl.childNodes[i]);
-    //   cardsEl.children[i].innerHTML = `
-    // <div class="card-slot">
-    //   <image class="card player-one-card" src="${deckData.cards[i].image}" />
-    // </div>
-    // `;
+  for (let i = 0; i < cardsEl.children.length; i++) {
+    cardsEl.children[i].innerHTML = `<image class="card player${i +
+      1}-card" src="${deckData.cards[i].image}" />
+    `;
   }
+  remainingCards -= 2;
+  updateRemaningCards();
 }
+
+// function updateScore(deckData) {
+//   let player1CardValue = 0;
+//   let player2CardValue = 0;
+//   if ((decData.cards[0].value = 'ACE')) {
+//     player1CardValue += 14;
+//   }
+// }
 
 newDeckBtnEl.addEventListener('click', getNewDeckId);
 drawBtnEl.addEventListener('click', drawTwoCards);

@@ -95,20 +95,34 @@ body {
   transform: scale(1);
 }
 
-.new-deck-btn {
+.cointainer-top {
+  display: flex;
+  flex-wrap: wrap;
   align-self: flex-start;
+  margin-bottom: 1em;
+}
+
+.new-deck-btn {
+  max-height: 42px;
   margin-top: 20px;
   margin-left: 20px;
 }
 
 .draw-btn {
-  display: none;
+  z-index: -1;
   width: 80%;
   margin-bottom: 4em;
 }
 
 .btn-active {
-  display: block;
+  z-index: 1;
+}
+
+.remaining-cards-info {
+  margin-left: 2em;
+  color: white;
+  font-size: 2em;
+  letter-spacing: 1px;
 }
 
 #cards-el {
@@ -116,6 +130,18 @@ body {
   flex-direction: column;
 }
 
+.card-slot {
+  width: calc(30vh * 5 / 7);
+  height: 30vh;
+  margin-bottom: 1em;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.card-slot:first-child {
+  margin-bottom: 3em;
+}
+
 .card {
-  max-height: 30vh;
+  height: 100%;
 }
