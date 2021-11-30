@@ -6,11 +6,12 @@ const cardsEl = document.getElementById('cards-el');
 const remaningCardsNumEl = document.getElementById('remaning-card-num-el');
 const player1PointsEl = document.getElementById('player1-points-el');
 const player2PointsEl = document.getElementById('player2-points-el');
+const battleInfoEl = document.getElementById('battle-info-el');
 
 let deckId;
 let remainingCards;
-let player1Score;
-let player2Score;
+let player1Score = 0;
+let player2Score = 0;
 
 function getNewDeckId() {
   fetch('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1')
@@ -20,9 +21,12 @@ function getNewDeckId() {
       deckId = deckData.deck_id;
     })
     .then(remainingCards => updateRemaningCards())
-    .then(updateRemaningCards => makeActiveDrawBtnEl());
+    .then(updateRemaningCards => makeActiveDrawBtnEl())
+    .then(makeActiveDrawBtnEl => removeCards());
 
-  removeCards();
+  battleInfoEl.innerHTML = 'War!';
+  player1Score = 0;
+  player2Score = 0;
 }
 
 function updateRemaningCards() {
@@ -40,6 +44,7 @@ function removeCards() {
 }
 
 function drawTwoCards() {
+  battleInfoEl.innerHTML = 'War!';
   fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=2`)
     .then(res => res.json())
     .then(deckData => {
@@ -55,17 +60,54 @@ function updateCards(deckData) {
       1}-card" src="${deckData.cards[i].image}" />
     `;
   }
+
   remainingCards -= 2;
   updateRemaningCards();
 }
 
-// function updateScore(deckData) {
-//   let player1CardValue = 0;
-//   let player2CardValue = 0;
-//   if ((decData.cards[0].value = 'ACE')) {
-//     player1CardValue += 14;
-//   }
-// }
+// too long!
+function updateScore(deckData) {
+  let player1CardValue = deckData.cards[0].value;
+  let player2CardValue = deckData.cards[1].value;
+  let player1Points = 0;
+  let player2Points = 0;
+
+  // prettier-ignore
+  const cardsValues =
+  ['2','3','4','5','6','7','8','9','10','JACK','QUEEN','KING','ACE'];
+
+  for (let i = 0; i < cardsValues.length; i++) {
+    if (player1CardValue == cardsValues[i]) {
+      player1Points = i;
+    } else if (player2CardValue == cardsValues[i]) {
+      player2Points = i;
+    }
+  }
+
+  if (player1Points > player2Points) {
+    player1Score += 1;
+    battleInfoEl.innerHTML = 'Computer Wins!';
+  } else if (player1Points < player2Points) {
+    player2Score += 1;
+    battleInfoEl.innerHTML = 'You Win!';
+  }
+
+  player1PointsEl.innerHTML = `${player1Score}`;
+  player2PointsEl.innerHTML = `${player2Score}`;
+
+  if (deckData.remaining == '0') {
+    if (player1Points > player2Points) {
+      battleInfoEl.innerHTML = 'The computer Won the Game!';
+    } else if (player1Points < player2Points) {
+      battleInfoEl.innerHTML = 'You Won the Game!';
+    } else if (player1Points == player2Points) {
+      battleInfoEl.innerHTML = 'No one won, there is a draw';
+    }
+
+    drawBtnEl.classList.remove('btn-active');
+    drawBtnEl.innerHTML = 'Draw (first take a new deck)';
+  }
+}
 
 newDeckBtnEl.addEventListener('click', getNewDeckId);
 drawBtnEl.addEventListener('click', drawTwoCards);

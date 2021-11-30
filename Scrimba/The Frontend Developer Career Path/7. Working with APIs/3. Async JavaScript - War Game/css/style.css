@@ -12,7 +12,9 @@ body {
   margin: 0;
   background-image: url('../img/table.png');
   background-size: cover;
+  color: white;
   font-family: 'Lato', sans-serif;
+  letter-spacing: 1px;
 }
 
 .cointainer {
@@ -108,21 +110,16 @@ body {
   margin-left: 20px;
 }
 
-.draw-btn {
-  z-index: -1;
-  width: 80%;
-  margin-bottom: 4em;
-}
-
-.btn-active {
-  z-index: 1;
-}
-
 .remaining-cards-info {
   margin-left: 2em;
   color: white;
   font-size: 2em;
   letter-spacing: 1px;
+}
+
+#battle-info-el {
+  margin-top: 0;
+  font-size: 2em;
 }
 
 #cards-el {
@@ -131,8 +128,8 @@ body {
 }
 
 .card-slot {
-  width: calc(30vh * 5 / 7);
-  height: 30vh;
+  width: calc(25vh * 226 / 314);
+  height: 25vh;
   margin-bottom: 1em;
   border: 1px solid black;
   border-radius: 5px;
@@ -144,4 +141,14 @@ body {
 
 .card {
   height: 100%;
+}
+
+.draw-btn {
+  z-index: -1;
+  width: 80%;
+  margin-bottom: 4em;
+}
+
+.btn-active {
+  z-index: 1;
 }
