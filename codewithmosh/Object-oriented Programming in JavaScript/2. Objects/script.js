@@ -127,11 +127,12 @@ console.log(circle12.defaultLocation);
 
 // Exercise - Stop Watch
 
-function Sw() {
+function CreateStopWatch() {
   let startTime;
   let endTime;
   let duration = 0;
   let isStarted = false;
+  let isPaused = false;
 
   const msToTime = function(s) {
     // Pad to 2 or 3 digits, default is 2
@@ -151,34 +152,67 @@ function Sw() {
   };
 
   this.start = function() {
-    if (isStarted) {
+    if (isPaused && isStarted) {
+      startTime -= duration;
+      console.log('start after pause');
+    } else if (isStarted) {
       throw new Error('StopWatch has already started');
+    } else if (!isPaused) {
+      startTime = new Date().getTime();
+      console.log('start');
     }
-    startTime = new Date().getTime();
+
+    isPaused = false;
     isStarted = true;
-    console.log('start');
+  };
+
+  this.pause = function() {
+    if (isPaused) {
+      throw new Error('StopWatch has already paused');
+    }
+
+    if (!isStarted) {
+      throw new Error('Stopwatch is not started');
+    }
+
+    endTime = new Date().getTime();
+    duration = endTime - startTime;
+    isPaused = true;
+    console.log('pause');
+    console.log(msToTime(duration));
   };
 
   this.stop = function() {
     if (!isStarted) {
       throw new Error('Stopwatch is not started');
     }
-    endTime = new Date().getTime();
+
+    if (!isPaused) {
+      endTime = new Date().getTime();
+    }
+
+    isPasued = false;
     isStarted = false;
     console.log('stop');
-    this.duration = msToTime(endTime - startTime);
+    duration = endTime - startTime;
   };
 
   this.reset = function() {
     startTime = null;
     endTime = null;
     isStarted = false;
-    this.duration = 0;
+    isPaused = false;
+    duration = 0;
+    console.log('reset');
   };
 
   Object.defineProperty(this, 'duration', {
     get: function() {
-      return duration;
+      if (isStarted & !isPaused) {
+        endTime = new Date().getTime();
+        duration = endTime - startTime;
+      }
+      return msToTime(duration);
     },
     set: function(value) {
       duration = value;
@@ -186,4 +220,4 @@ function Sw() {
   });
 }
 
-const stopwatch = new Sw();
+const stopwatch = new CreateStopWatch();
