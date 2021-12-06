@@ -22,6 +22,19 @@ Circle.prototype.draw = function() {
   // Do additional stuff here
 };
 
+function Bike(numberOfwheels) {
+  this.numberOfwheels = numberOfwheels;
+}
+
+RoadBike.prototype = Object.create(Bike.prototype);
+RoadBike.prototype.constructor = RoadBike;
+
+function RoadBike(numberOfwheels) {
+  Bike.call(this, numberOfwheels);
+}
+
+const szrot = new Bike(2);
+const tcr = new RoadBike(2);
 // Don't create large inheritance hierarchies.
 // One level of inheritance is fine.
 
@@ -44,3 +57,59 @@ function mixin(target, ...sources) {
 function Person() {}
 
 mixin(Person.prototype, canEat, canWalk);
+
+const haveMudGuards = {
+  protectFromMud: function() {
+    console.log('I have mud guards');
+  }
+};
+
+const haveLights = {
+  lightOn: function() {
+    console.log('The Light is turned on');
+  }
+};
+
+function CityBike() {}
+
+mixin(CityBike.prototype, haveMudGuards, haveLights);
+
+const blackArrow = new CityBike();
+
+function HtmlElement() {
+  this.click = function() {
+    console.log('clicked');
+  };
+}
+
+HtmlElement.prototype.focus = function() {
+  console.log(focus);
+};
+
+const e = new HtmlElement();
+
+function HtmlSelectElement(items) {
+  this.addItem = function(item) {
+    this.items.push(item);
+  };
+  this.items = items;
+  this.removeItems = function(item) {
+    this.items.splice(this.items.indexOf(item, 1));
+  };
+}
+
+HtmlSelectElement.prototype = new HtmlElement();
+HtmlSelectElement.prototype.constructor = HtmlSelectElement;
+
+let numbers = [1, 2, 3];
+const s = new HtmlSelectElement(numbers);
+
+function HtmlImageElement(src) {
+  this.src = src;
+  this.render = `<img src="${this.src}" />`;
+}
+
+HtmlImageElement.prototype = new HtmlElement();
+HtmlImageElement.prototype.constructor = HtmlImageElement;
+
+const img = new HtmlImageElement();
