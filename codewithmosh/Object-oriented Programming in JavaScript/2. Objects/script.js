@@ -213,11 +213,140 @@ function CreateStopWatch() {
         duration = endTime - startTime;
       }
       return msToTime(duration);
+    }
+  });
+}
+
+// very bad idea, becaouse we need change private properties to public
+const stopwatch = new CreateStopWatch();
+
+function CreateStopWatch2() {
+  let startTime;
+  let endTime;
+  let duration = 0;
+  let isStarted = false;
+  let isPaused = false;
+
+  const msToTime = function(s) {
+    // Pad to 2 or 3 digits, default is 2
+    function pad(n, z) {
+      z = z || 2;
+      return ('00' + n).slice(-z);
+    }
+
+    let ms = s % 1000;
+    s = (s - ms) / 1000;
+    let secs = s % 60;
+    s = (s - secs) / 60;
+    let mins = s % 60;
+    let hrs = (s - mins) / 60;
+
+    return pad(hrs) + ':' + pad(mins) + ':' + pad(secs) + '.' + pad(ms, 3);
+  };
+
+  Object.defineProperty(this, 'duration', {
+    get: function() {
+      if (this.isStarted & !this.isPaused) {
+        this.endTime = new Date().getTime();
+        duration = this.endTime - this.startTime;
+      }
+      return msToTime(duration);
     },
     set: function(value) {
       duration = value;
     }
   });
+
+  Object.defineProperty(this, 'startTime', {
+    get: function() {
+      return startTime;
+    },
+    set: function(value) {
+      startTime = value;
+    }
+  });
+
+  Object.defineProperty(this, 'endTime', {
+    get: function() {
+      return endTime;
+    },
+    set: function(value) {
+      endTime = value;
+    }
+  });
+
+  Object.defineProperty(this, 'isStarted', {
+    get: function() {
+      return isStarted;
+    },
+    set: function(value) {
+      isStarted = value;
+    }
+  });
+
+  Object.defineProperty(this, 'isPaused', {
+    get: function() {
+      return isPaused;
+    },
+    set: function(value) {
+      isPaused = value;
+    }
+  });
 }
 
-const stopwatch = new CreateStopWatch();
+CreateStopWatch2.prototype.start = function() {
+  if (this.isPaused && this.isStarted) {
+    this.startTime -= this.duration;
+    console.log('start after pause');
+  } else if (this.isStarted) {
+    throw new Error('StopWatch has already started');
+  } else if (!this.isPaused) {
+    this.startTime = new Date().getTime();
+    console.log('start');
+  }
+
+  this.isPaused = false;
+  this.isStarted = true;
+};
+
+CreateStopWatch2.prototype.pause = function() {
+  if (this.isPaused) {
+    throw new Error('StopWatch has already paused');
+  }
+
+  if (!this.isStarted) {
+    throw new Error('Stopwatch is not started');
+  }
+
+  this.endTime = new Date().getTime();
+  this.duration = this.endTime - this.startTime;
+  this.isPaused = true;
+  console.log('pause');
+  console.log(msToTime(this.duration));
+};
+
+CreateStopWatch2.prototype.stop = function() {
+  if (!this.isStarted) {
+    throw new Error('Stopwatch is not started');
+  }
+
+  if (!this.isPaused) {
+    this.endTime = new Date().getTime();
+  }
+
+  this.isPasued = false;
+  this.isStarted = false;
+  console.log('stop');
+  this.duration = this.endTime - this.startTime;
+};
+
+CreateStopWatch2.prototype.reset = function() {
+  this.startTime = null;
+  this.endTime = null;
+  this.isStarted = false;
+  this.isPaused = false;
+  this.duration = 0;
+  console.log('reset');
+};
+
+const stopwatch2 = new CreateStopWatch2();
