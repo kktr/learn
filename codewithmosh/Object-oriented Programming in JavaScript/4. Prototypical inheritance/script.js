@@ -92,9 +92,32 @@ function HtmlSelectElement(items) {
   this.addItem = function(item) {
     this.items.push(item);
   };
+
   this.items = items;
+
   this.removeItems = function(item) {
     this.items.splice(this.items.indexOf(item, 1));
+  };
+
+  this.render = function() {
+    return `<select>${this.items
+      .map(item => `<option>${item}</option>`)
+      .join('')}
+    </select>`;
+    // let options = '';
+    //
+    // for (let i = 0; i < this.items.length; i++) {
+    //   if (i == 0) {
+    //     options = '<select>';
+    //   }
+    //
+    //   options += `<option>${this.items[i]}</option>`;
+    //
+    //   if (i == this.items.length - 1) {
+    //     options += '<select/>';
+    //   }
+    // }
+    // return options;
   };
 }
 
@@ -106,10 +129,20 @@ const s = new HtmlSelectElement(numbers);
 
 function HtmlImageElement(src) {
   this.src = src;
-  this.render = `<img src="${this.src}" />`;
+
+  this.render = function() {
+    return `<img src="${this.src}" />`;
+  };
 }
 
 HtmlImageElement.prototype = new HtmlElement();
 HtmlImageElement.prototype.constructor = HtmlImageElement;
 
 const img = new HtmlImageElement();
+
+const elements = [
+  new HtmlSelectElement(numbers),
+  new HtmlImageElement('http://')
+];
+
+for (let element of elements) console.log(element.render());
