@@ -76,3 +76,21 @@ obj[0][1] = 2;
 obj[0].push(3);
 console.log(obj);
 console.log(obj[0][0]);
+
+// Get the Middle Character 7 6kyu
+
+//my solutions
+function getMiddle(s) {
+  if (s.length == 1) {
+    return s;
+  } else if (s.length % 2 == 0) {
+    return s[s.length / 2 - 1] + s[s.length / 2];
+  } else {
+    return s[s.length / 2 - 0.5];
+  }
+}
+
+// Clever
+function getMiddle2(s) {
+  return s.substr(Math.ceil(s.length / 2 - 1), s.length % 2 === 0 ? 2 : 1);
+}
