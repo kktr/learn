@@ -1,0 +1,30 @@
+body {
+  margin: 0;
+}
+
+.flex {
+  display: flex;
+  height: 100vh;
+}
+
+.one {
+  width: 100px;
+  min-height: 200px;
+  background-color: #36d6e3;
+}
+
+.two {
+  flex-grow: 1;
+  flex-basis: 50px;
+  width: 200px;
+  min-height: 300px;
+  background-color: #80e336;
+}
+
+.three {
+  flex-grow: 1;
+  flex-basis: 50px;
+  width: 300px;
+  min-height: 400px;
+  background-color: #e34336;
+}
