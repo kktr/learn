@@ -1,0 +1,64 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #7fc8f8;
+}
+
+* {
+  font-family: 'Lucida Console', Monaco, monospace;
+}
+
+header,
+footer {
+  height: 10%;
+  background-color: #c9695b;
+  font-size: 1.6rem;
+}
+
+footer p,
+main p {
+  margin-top: 0;
+}
+
+aside {
+  width: 40%;
+}
+
+main {
+  flex: auto;
+  background-color: #5cc96a;
+  font-size: 1.6rem;
+}
+
+.cointainer-flex {
+  display: flex;
+  flex-direction: row;
+}
+
+.cointainer {
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  height: 80vh;
+}
+
+.user {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 1em;
+  border: solid black 3px;
+  background-color: lightgreen;
+  font-size: 1rem;
+}
+
+.circle {
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  margin-right: 0.5em;
+  margin-left: 0.5em;
+  border-radius: 50%;
+  background-color: green;
+}

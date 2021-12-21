@@ -1,0 +1,17 @@
+body {
+  margin: 0;
+}
+
+#photo-galery {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 1em;
+  background-color: gray;
+}
+
+.my-photo {
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+  border: 0.1em solid white;
+  border-radius: 0.7em;
+}

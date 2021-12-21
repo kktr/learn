@@ -1,0 +1,14 @@
+body {
+  margin: 0;
+}
+
+.my-colors {
+  display: flex;
+  flex-wrap: wrap;
+  height: 100vh;
+}
+
+.my-color {
+  width: 10%;
+  height: 10%;
+}
