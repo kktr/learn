@@ -94,3 +94,74 @@ function getMiddle(s) {
 function getMiddle2(s) {
   return s.substr(Math.ceil(s.length / 2 - 1), s.length % 2 === 0 ? 2 : 1);
 }
+
+// Sum of Digits / Digital Root 6 kyu
+
+//my solutions
+function digital_root(n) {
+  let myFunc = num => Number(num);
+  let intArr = Array.from(String(n), myFunc);
+  let sumIntArr = intArr.reduce((a, b) => a + b, 0);
+
+  if (sumIntArr < 10) {
+    return sumIntArr;
+  } else {
+    return digital_root(sumIntArr);
+  }
+}
+
+// Clever
+function digital_root2(n) {
+  return ((n - 1) % 9) + 1;
+}
+
+// Stop gninnipS My sdroW! 6 kyu
+
+//my solutions
+function spinWords(string) {
+  let words = string.split(' ');
+  let solution = [];
+  words.forEach(word => {
+    if (word.length < 5) {
+      solution.push(word);
+    } else {
+      solution.push(
+        word
+          .split('')
+          .reverse()
+          .join('')
+      );
+    }
+  });
+  return solution.join(' ');
+}
+
+spinWords('This is another test');
+
+// Clever
+function spinWords2(words) {
+  return words
+    .split(' ')
+    .map(function(word) {
+      return word.length > 4
+        ? word
+            .split('')
+            .reverse()
+            .join('')
+        : word;
+    })
+    .join(' ');
+}
+
+// Array.diff 6 kyu
+
+//my solutions
+function arrayDiff(a, b) {
+  let uniqueChars = [...new Set(a)].concat([...new Set(b)]);
+  let unique = uniqueChars.filter((item, i, ar) => ar.indexOf(item) === i);
+
+  console.log(uniqueChars);
+  console.log(unique);
+}
+
+arrayDiff([3, 3, 4], [3]);
