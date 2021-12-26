@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Modal Window</title>
+  </head>
+  <body>
+    <button class="show-modal" name="button">Show modal 1</button>
+    <button class="show-modal" name="button">Show modal 2</button>
+    <button class="show-modal" name="button">Show modal 3</button>
+
+    <div class="modal hidden">
+      <div class="close-modal">&times</div>
+
+      <h1>I'm modal window</h1>
+
+      <p>
+        In their most basic form, modal windows are a UI element that appears on
+        top of a product’s main interface so that you can convey a message
+        directly to users that is hard to ignore. When used correctly, designers
+        can do so much with modals: cheery welcome messages, dazzling new
+        feature announcements, and crucial in-app messaging can all be brought
+        to life with modals.
+      </p>
+    </div>
+
+    <div class="overlay hidden"></div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
