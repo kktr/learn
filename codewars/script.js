@@ -5,28 +5,31 @@
 // https://www.codewars.com/kata/5266876b8f4bf2da9b000362/solutions/javascript
 
 //my dirty solution
+'use strict';
 
 function likes(names) {
   let string = '';
-  let endstring = 'like this';
-  let endstring2 = 'likes this';
+  let endString = 'like this';
+  let endString2 = 'likes this';
   if (names[0] == undefined) {
     return 'no one likes this';
   } else if (names.length == 1) {
-    return (string = names[0] + ' ' + endstring2);
-  } else
+    return (string = names[0] + ' ' + endString2);
+  } else {
     for (let i = 0; i < names.length; i++) {
       if (i == names.length - 1) {
-        return (string += ' ' + 'and' + ' ' + names[i] + ' ' + endstring);
+        return (string += ' ' + 'and' + ' ' + names[i] + ' ' + endString);
       } else if (names.length > 2 && i < names.length - 2) {
         string += names[i] + ',' + ' ';
       } else if (names.length > 3) {
-        return `${names[0]}, ${names[1]} and ${names.length -
-          2} others ${endstring}`;
+        return `${names[0]}, ${names[1]} and ${
+          names.length - 2
+        } others ${endString}`;
       } else {
         string += names[i];
       }
     }
+  }
 }
 //clever
 
@@ -36,7 +39,7 @@ function likes2(names) {
     1: `${names[0]} likes this`,
     2: `${names[0]} and ${names[1]} like this`,
     3: `${names[0]}, ${names[1]} and ${names[2]} like this`,
-    4: `${names[0]}, ${names[1]} and ${names.length - 2} others like this`
+    4: `${names[0]}, ${names[1]} and ${names.length - 2} others like this`,
   }[Math.min(4, names.length)];
 }
 
@@ -50,7 +53,7 @@ function findOdd(A) {
   if (A.length == 1) {
     return A;
   } else {
-    odds = A.sort(function(a, b) {
+    odds = A.sort(function (a, b) {
       return a - b;
     });
     console.log(odds);
@@ -99,7 +102,7 @@ function getMiddle2(s) {
 
 //my solutions
 function digital_root(n) {
-  let myFunc = num => Number(num);
+  let myFunc = (num) => Number(num);
   let intArr = Array.from(String(n), myFunc);
   let sumIntArr = intArr.reduce((a, b) => a + b, 0);
 
@@ -121,34 +124,24 @@ function digital_root2(n) {
 function spinWords(string) {
   let words = string.split(' ');
   let solution = [];
-  words.forEach(word => {
+  words.forEach((word) => {
     if (word.length < 5) {
       solution.push(word);
     } else {
-      solution.push(
-        word
-          .split('')
-          .reverse()
-          .join('')
-      );
+      solution.push(word.split('').reverse().join(''));
     }
   });
   return solution.join(' ');
 }
 
-spinWords('This is another test');
+console.log(spinWords('This is another test'));
 
 // Clever
 function spinWords2(words) {
   return words
     .split(' ')
-    .map(function(word) {
-      return word.length > 4
-        ? word
-            .split('')
-            .reverse()
-            .join('')
-        : word;
+    .map(function (word) {
+      return word.length > 4 ? word.split('').reverse().join('') : word;
     })
     .join(' ');
 }
