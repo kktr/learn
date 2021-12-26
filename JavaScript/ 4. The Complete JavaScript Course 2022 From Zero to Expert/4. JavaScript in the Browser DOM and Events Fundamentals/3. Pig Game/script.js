@@ -27,7 +27,7 @@ let diceRoll,
   player2Score,
   currentPlayer;
 
-function setInicialValues() {
+function setInitialValues() {
   diceRoll = 0;
 
   player1CurrentScore = 0;
@@ -169,6 +169,6 @@ function removeWinner() {
   player2El.classList.remove('player-winner');
 }
 
-setInicialValues();
+setInitialValues();
 
-btnNewEl.addEventListener('click', setInicialValues);
+btnNewEl.addEventListener('click', setInitialValues);
