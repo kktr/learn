@@ -118,7 +118,8 @@ main {
 }
 
 .snake-tombstone {
-  filter: drop-shadow(4px 8px 8px hsl(0deg 0% 0% / 0.38));
+  -webkit-filter: drop-shadow(4px 8px 8px hsl(0deg 0% 0% / 38%));
+          filter: drop-shadow(4px 8px 8px hsl(0deg 0% 0% / 38%));
 }
 
 .snake-tombstone-1 {
@@ -167,11 +168,7 @@ main {
 }
 
 .snake-body-dead {
-  -webkit-transition: opacity 10s ease-in-out;
-  -moz-transition: opacity 10s ease-in-out;
-  -ms-transition: opacity 10s ease-in-out;
-  -o-transition: opacity 10s ease-in-out;
-  transition: opacity 10 ease-in-out;
+  transition: opacity 10s ease-in-out;
   opacity: 0;
 }
 
@@ -217,21 +214,24 @@ main {
 
 .apple {
   background-image: url('img/apple-2.png');
-  filter: drop-shadow(4px 8px 8px hsl(0deg 0% 0% / 0.38));
+  -webkit-filter: drop-shadow(4px 8px 8px hsl(0deg 0% 0% / 38%));
+          filter: drop-shadow(4px 8px 8px hsl(0deg 0% 0% / 38%));
 }
 
 .apple-after-dead {
-  -webkit-transition: opacity 5s ease-in-out;
-  -moz-transition: opacity 5s ease-in-out;
-  -ms-transition: opacity 5s ease-in-out;
-  -o-transition: opacity 5s ease-in-out;
-  transition: opacity 5 ease-in-out;
+  transition: opacity 5s ease-in-out;
   opacity: 0;
 }
 
 .apple-blink {
   -webkit-animation: blink-animation 0.75s steps(5, start) infinite;
-  animation: blink-animation 0.75s steps(5, start) infinite;
+          animation: blink-animation 0.75s steps(5, start) infinite;
+}
+
+@-webkit-keyframes blink-animation {
+  to {
+    visibility: hidden;
+  }
 }
 
 @keyframes blink-animation {
@@ -240,7 +240,7 @@ main {
   }
 }
 
-@-webkit-keyframes blink-animation {
+@keyframes blink-animation {
   to {
     visibility: hidden;
   }
