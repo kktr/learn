@@ -1,5 +1,6 @@
-/*jshint esversion: 6*/
-/* eslint-env es6 */
+/*jshint esversion: 8*/
+/* eslint-env es8 */
+'use strict';
 
 // https://apis.scrimba.com/hexcolors/
 let howManyColors = 100;
@@ -18,8 +19,9 @@ async function getColors() {
 function displayColors(colors) {
   let myColorHTML = colors
     .map((color, index) => {
-      return `<div class="my-color my-color-${index +
-        1}" style="background-color: ${color.value}"></div>`;
+      return `<div class="my-color my-color-${
+        index + 1
+      }" style="background-color: ${color.value}"></div>`;
     })
     .join('');
   // for (let color of colors) {
