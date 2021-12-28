@@ -153,3 +153,27 @@ friend.age = 20;
 
 console.log(friend.age);
 console.log(me2.age);
+
+// 6. Coping Objects
+
+const jessica2 = {
+  firstName: 'Jessica',
+  lastName: 'Williams',
+  age: 27,
+  family: ['Alice', 'Bop'],
+};
+
+// it's not deep copy, .family points at the same object in the memory  heap
+const jessicaCopy = Object.assign({}, jessica2);
+
+// it works only for first level deep
+jessicaCopy.lastName = 'Davis';
+console.log(jessica2.lastName);
+console.log(jessicaCopy.lastName);
+
+jessicaCopy.family.push('Mary');
+jessicaCopy.family.push('John');
+// push only to jessicaCopy, but family in jessicaCopy and jessica2 is reference
+//  to this same object
+console.log(`before marriage: ${jessica2.family}`);
+console.log(`after marriage: ${jessicaCopy.family}`);
