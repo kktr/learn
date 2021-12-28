@@ -3,7 +3,7 @@
 
 'use strict';
 
-// Debuging
+// Debugging
 
 // 1. IDENTIFY
 // -during development
@@ -20,24 +20,25 @@
 
 // 4. PREVENT
 // -searching for the same bug in similar code
-// -wiriting tests using testing software
+// -writing tests using testing software
 
-const measureKelvin = function() {
+const measureKelvin = function () {
   const measurement = {
     type: 'temp',
     unit: 'celsius',
-    value: Number('20')
+    value: Number('20'),
   };
 
   let kelvins = measurement.value + 273;
   console.log(kelvins);
   console.table(measurement);
+
   return kelvins;
 };
 
 measureKelvin();
 
-const calcTempAmlitudeBug = function(t1, t2) {
+const calcTempAmplitudeBug = function (t1, t2) {
   const temps = t1.concat(t2);
   console.log(temps);
 
@@ -56,7 +57,7 @@ const calcTempAmlitudeBug = function(t1, t2) {
   return max - min;
 };
 
-const amplitudeBug = calcTempAmlitudeBug([3, 5, 1], [9, 4, 5]);
+const amplitudeBug = calcTempAmplitudeBug([3, 5, 1], [9, 4, 5]);
 console.log(amplitudeBug);
 
 // Coding Challenge 1
@@ -66,6 +67,7 @@ let data2 = [12, 5, -5, 0, 4];
 
 function printForecast(data) {
   let forecast = '...';
+
   for (let i = 0; i < data.length; i++) {
     forecast += ` ${data[i]}°C in ${i + 1} days ...`;
   }

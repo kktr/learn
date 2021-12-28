@@ -21,12 +21,12 @@ btnCheckEl.addEventListener('click', game);
 btnAgainEl.addEventListener('click', reset);
 
 function game() {
-  if (!isGuessCorect() && !isLost()) {
+  if (!isGuessCorrect() && !isLost()) {
     getGuessNumber();
     displayScore();
   }
 
-  if (isGuessCorect()) {
+  if (isGuessCorrect()) {
     displayWin();
     displayHighScore();
   }
@@ -43,6 +43,7 @@ function reset() {
   secretNumber = getRandomNumber(1, 20);
   score = 20;
   guessNumber = '';
+
   setMessage('start guessing...');
   body.classList.remove('win');
   body.classList.remove('lose');
@@ -54,6 +55,7 @@ function getRandomNumber(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
   let num = Math.floor(Math.random() * (max - min + 1) + min);
+
   return num;
 }
 
@@ -71,6 +73,7 @@ function displayHighScore() {
 
 function getGuessNumber() {
   guessNumber = inputGuessEl.value;
+
   return Number(guessNumber);
 }
 
@@ -78,7 +81,7 @@ function isGuessInRange() {
   return guessNumber > 0 && guessNumber <= 20;
 }
 
-function isGuessCorect() {
+function isGuessCorrect() {
   return secretNumber == guessNumber;
 }
 
@@ -93,7 +96,7 @@ function isGuessToLow() {
 function displayMessages() {
   if (!isGuessInRange()) {
     setMessage('enter a number in the range!');
-  } else if (isGuessCorect()) {
+  } else if (isGuessCorrect()) {
     setMessage('Correct Number!');
   } else if (isGuessToHigh()) {
     setMessage(`${guessNumber} is too high!`);

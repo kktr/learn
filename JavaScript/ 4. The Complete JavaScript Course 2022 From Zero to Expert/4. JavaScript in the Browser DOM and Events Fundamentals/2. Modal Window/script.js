@@ -2,7 +2,7 @@
 /* eslint-env es6 */
 'use strict';
 
-const showModalBtns = document.querySelectorAll('.show-modal');
+const showModalButtons = document.querySelectorAll('.show-modal');
 const modalEl = document.querySelector('.modal');
 const closeModalEl = document.querySelector('.close-modal');
 const overlayEl = document.querySelector('.overlay');
@@ -17,13 +17,13 @@ function hideModal() {
   overlayEl.classList.add('hidden');
 }
 
-showModalBtns.forEach(btn => btn.addEventListener('click', displayModal));
+showModalButtons.forEach((btn) => btn.addEventListener('click', displayModal));
 
 closeModalEl.addEventListener('click', hideModal);
 
 overlayEl.addEventListener('click', hideModal);
 
-document.addEventListener('keydown', event => {
+document.addEventListener('keydown', (event) => {
   if (event.key === 'Escape' && !modalEl.classList.contains('hidden')) {
     hideModal();
   }

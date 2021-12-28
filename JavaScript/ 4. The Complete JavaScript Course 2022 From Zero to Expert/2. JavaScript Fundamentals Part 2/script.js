@@ -51,48 +51,48 @@ console.log(totals);
 // Coding Challenge 3
 
 let mark = {
-  fullname: 'Mark Miller',
+  fullName: 'Mark Miller',
   mass: 78,
   heigh: 1.69,
-  calcBmi: function() {
+  calcBmi: function () {
     return (this.mass / this.heigh) * this.heigh;
-  }
+  },
 };
 
 let john = {
-  fullname: 'John Smith',
+  fullName: 'John Smith',
   mass: 92,
   heigh: 1.95,
-  calcBmi: function() {
+  calcBmi: function () {
     return (this.mass / this.heigh) * this.heigh;
-  }
+  },
 };
 
 function whoHasHigherBmi(person1, person2) {
   person1.calcBmi() > person2.calcBmi()
     ? console.log(
-        `${person1.fullname}'s BMI (${person1.calcBmi()}) is higher than ${
-          person2.fullname
+        `${person1.fullName}'s BMI (${person1.calcBmi()}) is higher than ${
+          person2.fullName
         }'s (${john.calcBmi()})'`
       )
     : console.log(
-        `${person2.fullname}'s BMI (${person2.calcBmi()}) is higher than ${
-          person1.fullname
+        `${person2.fullName}'s BMI (${person2.calcBmi()}) is higher than ${
+          person1.fullName
         }'s (${mark.calcBmi()})`
       );
 }
 
 whoHasHigherBmi(mark, john);
 
-// Looping Arrays, Breacking and Continuing
+// Looping Arrays, Breaking and Continuing
 
 const jonas = [
   'Jonas',
-  'Sronas',
+  'Max',
   2000 - 1899,
   'teacher',
   ['Michael', 'Peter'],
-  true
+  true,
 ];
 
 for (let i = 0; i < jonas.length; i++) {
@@ -120,14 +120,14 @@ calcTip2(bills);
 console.log(tips);
 console.log(totals);
 
-function calcAverage(nums) {
+function calcAverage2(numbers) {
   let sum = 0;
-  for (let num of nums) {
+  for (let num of numbers) {
     sum += num;
   }
-  let avg = sum / nums.length;
+  let avg = sum / numbers.length;
   console.log(avg);
   return avg;
 }
 
-calcAverage([100, 899, 1]);
+calcAverage2([100, 899, 1]);

@@ -5,9 +5,6 @@
 const player1El = document.getElementById('player-0-el');
 const player2El = document.getElementById('player-1-el');
 
-const player1NameEl = document.getElementById('name-0');
-const player2NameEl = document.getElementById('name-1');
-
 const player1ScoreEl = document.getElementById('score-0');
 const player2ScoreEl = document.getElementById('score-1');
 
@@ -89,6 +86,7 @@ function rollDice() {
 function getRandomIntInclusive(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
+
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 

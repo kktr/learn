@@ -51,7 +51,7 @@ function whoWin(teamA, teamB) {
 
 whoWin(dolphinsScore, koalasScore);
 
-// switch statment
+// switch statement
 
 const day = 'friday';
 switch (day) {
