@@ -6,6 +6,7 @@
 // Data needed for a later exercise
 const flights =
   '_Delayed_Departure;fao93766109;txl2133758440;11:25+_Arrival;bru0943384722;fao93766109;11:45+_Delayed_Arrival;hel7439299980;fao93766109;12:05+_Departure;fao93766109;lis2323639855;12:30';
+console.log(flights);
 
 // Data needed for first part of the section
 const restaurant = {
@@ -52,6 +53,12 @@ const restaurant = {
     console.log(
       `Here is your delicious pasta with ${ingredient1}, ${ingredient2}, ${ingredient3}`
     );
+  },
+
+  orderPizza: function (ingredientMain, ...ingredientOthers) {
+    console.log(ingredientMain);
+    console.log(ingredientOthers);
+    return [ingredientMain, ingredientOthers];
   },
 };
 
@@ -100,8 +107,8 @@ console.log(p, q, r);
 
 // Destructuring objects
 
-const { thu, fri, sat } = restaurant.openingHours;
-console.log(thu, fri, sat);
+const { thu, fri, saturday } = restaurant.openingHours;
+console.log(thu, fri, saturday);
 
 const {
   name: restaurantName,
@@ -169,3 +176,47 @@ console.log(newRestaurant);
 const restaurantCopy = { ...restaurant };
 restaurantCopy.name = 'Restaurante Roma';
 console.log(restaurantCopy);
+
+// 9/106 Rest pattern and parameters
+
+// 1) Destructuring
+
+// SPREAD, because on RIGHT side of =
+const arr4 = [1, 2, ...[3, 4]];
+console.log(arr4);
+
+// REST because on the LEFT side of =
+const [a3, b3, ...others] = [1, 2, 3, 4, 5];
+console.log(a3, b3, others);
+
+const [pizza, , risotto, focaccia, ...otherFood] = [
+  ...restaurant.mainMenu,
+  ...restaurant.starterMenu,
+];
+console.log(pizza, risotto, focaccia, otherFood);
+
+// Objects
+const { sat, ...weekdays } = restaurant.openingHours;
+console.log(weekdays);
+console.log(sat);
+
+const {
+  mon: mon2 = 'closed',
+  sat: sat2,
+  ...weekdays2
+} = restaurant.openingHours;
+console.log(weekdays2);
+console.log(sat2);
+console.log(mon2);
+
+// 2) Functions
+const add = function (...numbers) {
+  console.log(numbers);
+  return numbers.reduce((a, b) => a + b, 0);
+};
+
+console.log(add(2, 3));
+console.log(add(5, 7, 2, 6));
+console.log(add(3, 4, 5, 6, 2, 5, 6, 3));
+
+console.log(restaurant.orderPizza('mozzarella', 'basil', 'olives'));
