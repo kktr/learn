@@ -1,5 +1,5 @@
 /*jshint esversion: 11*/
-/* eslint-env es11 */
+/* eslint-env es12 */
 
 'use strict';
 
@@ -266,3 +266,40 @@ console.log(guest4);
 restaurant.numGuests = undefined;
 const guest5 = restaurant.numGuests ?? 40;
 console.log(guest5);
+
+// 9/109 Logical Assignment Operator
+
+const restaurant1 = {
+  name: 'Capri',
+  numberGuests: 200,
+};
+
+const restaurant2 = {
+  name: 'La Piazza',
+  owner: 'Giovanni Rossi',
+};
+
+// OR assignment operator
+restaurant1.numberGuests = restaurant1.numberGuests || 300;
+console.log(restaurant1.numberGuests);
+
+restaurant2.numberGuests = restaurant2.numberGuests || 100;
+console.log(restaurant2.numberGuests);
+
+/* jshint ignore:start */
+restaurant1.numberGuests ||= 300;
+console.log(restaurant1.numberGuests);
+
+restaurant2.numberGuests = 0;
+restaurant2.numberGuests ||= 400;
+console.log(restaurant2.numberGuests);
+
+// nullish assignment operator
+restaurant2.numberGuests = 0;
+restaurant2.numberGuests ??= 400;
+console.log(restaurant2.numberGuests);
+
+// AND assignment operator
+restaurant2.owner &&= 'anonymous';
+console.log(restaurant2.owner);
+/* jshint ignore:end */
