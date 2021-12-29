@@ -220,3 +220,38 @@ console.log(add(5, 7, 2, 6));
 console.log(add(3, 4, 5, 6, 2, 5, 6, 3));
 
 console.log(restaurant.orderPizza('mozzarella', 'basil', 'olives'));
+
+// 9/107 Short Circuiting (&& and ||)
+
+// Use ANY data type, return ANY data type, short-circuiting
+
+// || return first truthy value or if there isn't a truthy value return last value
+console.log(3 || 'Jonas');
+console.log('' || 'Jonas');
+console.log(true || 0);
+console.log(undefined || null);
+console.log(null || 0);
+
+const guests1 = restaurant.numGuests ? restaurant.numGuests : 10;
+console.log(guests1);
+
+restaurant.numGuests = 23;
+const guests2 = restaurant.numGuests ? restaurant.numGuests : 10;
+console.log(guests2);
+
+const guestsVip3 = restaurant.numGuestsVip || 30;
+console.log(guestsVip3);
+
+// && return first falsy value or if there isn't a falsy value return last value
+
+console.log(0 && 'Jonas');
+console.log(5 && 'Jonas' && null && 0);
+
+// Practical example
+if (restaurant.orderPizza) {
+  restaurant.orderPizza('mushrooms', 'spinach');
+}
+
+console.log(
+  restaurant.orderPizza && restaurant.orderPizza('mushrooms', 'spinach')
+);
