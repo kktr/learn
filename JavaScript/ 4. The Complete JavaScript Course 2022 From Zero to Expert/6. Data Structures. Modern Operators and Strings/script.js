@@ -1,5 +1,5 @@
-/*jshint esversion: 9*/
-/* eslint-env es9 */
+/*jshint esversion: 11*/
+/* eslint-env es11 */
 
 'use strict';
 
@@ -255,3 +255,14 @@ if (restaurant.orderPizza) {
 console.log(
   restaurant.orderPizza && restaurant.orderPizza('mushrooms', 'spinach')
 );
+
+// 9/108 The Nullish Coalescing Operator ??
+
+// return at left side when value is not a nullish: null and undefined (not 0 or "") or at last value
+restaurant.numGuests = 0;
+const guest4 = restaurant.numGuests ?? 40;
+console.log(guest4);
+
+restaurant.numGuests = undefined;
+const guest5 = restaurant.numGuests ?? 40;
+console.log(guest5);
