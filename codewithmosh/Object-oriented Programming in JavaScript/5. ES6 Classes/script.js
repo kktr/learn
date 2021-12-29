@@ -5,11 +5,11 @@ class Circle {
   constructor(radius) {
     this.radius = radius;
 
-    this.move = function() {
+    this.move = function () {
       console.log('move');
     };
 
-    this.drawThis = function() {
+    this.drawThis = function () {
       console.log(this);
     };
 
@@ -54,7 +54,7 @@ function sayHello() {
 }
 
 // Function Expression isn't hoisted
-const sayGoodbye = function() {};
+const sayGoodbye = function () {};
 
 // Classes aren't hoisted
 
@@ -64,7 +64,7 @@ class Circe {}
 // Class Expression
 const Square = class {};
 
-// 5. Private members using sybols
+// 5. Private members using symbols
 
 const _radius = Symbol('radius');
 const _draw = Symbol('draw');
@@ -83,7 +83,7 @@ const c3 = new Circle3(3);
 
 console.log(Object.getOwnPropertySymbols(c3)[0]);
 
-// 6. Private members using WaksMaps
+// 6. Private members using WeakMaps
 
 const _radius2 = new WeakMap();
 const _move = new WeakMap();
@@ -159,19 +159,19 @@ const c8 = new Circle8('red', 8);
 
 class Shape9 {
   move() {
-    console.log('moveshape8');
+    console.log('move shape 9');
   }
 }
 
 class Circle9 extends Shape9 {
   move() {
-    console.log('movecircle9');
+    console.log('move circle9');
   }
 }
 
 const c9 = new Circle9();
 
-// 10 Execrcise
+// 10 Exercise
 
 const _stack = new WeakMap();
 

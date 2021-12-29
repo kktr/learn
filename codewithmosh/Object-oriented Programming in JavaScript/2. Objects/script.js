@@ -6,9 +6,9 @@
 function createCircle1(radius) {
   return {
     radius,
-    draw: function() {
+    draw: function () {
       console.log('draw');
-    }
+    },
   };
 }
 
@@ -19,7 +19,7 @@ circle1.draw();
 
 function Circle2(radius) {
   this.radius = radius;
-  this.draw = function() {
+  this.draw = function () {
     console.log('draw');
   };
 }
@@ -55,7 +55,7 @@ Circle2.apply({}, [1, 2, 3]);
 // References Types - Objects are copied by their reference
 //Object, Function, Array
 
-// 8. Adding or removing proterties
+// 8. Adding or removing properties
 
 const circle4 = new Circle2(10);
 
@@ -64,7 +64,7 @@ circle4['location'] = { x: 1 };
 
 delete circle4['location'];
 
-// 9. Enumerating properites
+// 9. Enumerating properties
 
 for (let key in circle4) {
   if (typeof circle4[key] !== 'function') console.log(key, circle4[key]);
@@ -78,7 +78,7 @@ if ('radius' in circle4) console.log('circle4 has a radius');
 // 10. Abstraction
 
 // hide the details and show the essentials
-// Jeśli metoda używa innej metody, która nie powinna być wywoływana indywidualnie
+// If the method uses another method that should not be called individually
 
 // 11. Private Properties and Methods
 
@@ -87,9 +87,9 @@ function Circle5(radius) {
 
   let defaultLocation = { x: 0, y: 0 };
 
-  let computeOptimumLocation = factor => factor * 2;
+  let computeOptimumLocation = (factor) => factor * 2;
 
-  this.draw = function() {
+  this.draw = function () {
     computeOptimumLocation(0.1);
     console.log('draw');
   };
@@ -103,18 +103,18 @@ function Circle12(radius) {
   let defaultLocation = { x: 0, y: 0 };
 
   this.radius = radius;
-  this.draw = function() {
+  this.draw = function () {
     console.log('draw');
   };
 
   Object.defineProperty(this, 'defaultLocation', {
-    get: function() {
+    get: function () {
       return defaultLocation;
     },
-    set: function(value) {
+    set: function (value) {
       if (!value.x || !value.y) throw new Error('Invalid location');
       defaultLocation = value;
-    }
+    },
   });
 }
 
@@ -134,7 +134,7 @@ function CreateStopWatch() {
   let isStarted = false;
   let isPaused = false;
 
-  const msToTime = function(s) {
+  const msToTime = function (s) {
     // Pad to 2 or 3 digits, default is 2
     function pad(n, z) {
       z = z || 2;
@@ -151,7 +151,7 @@ function CreateStopWatch() {
     return pad(hrs) + ':' + pad(mins) + ':' + pad(secs) + '.' + pad(ms, 3);
   };
 
-  this.start = function() {
+  this.start = function () {
     if (isPaused && isStarted) {
       startTime -= duration;
       console.log('start after pause');
@@ -166,7 +166,7 @@ function CreateStopWatch() {
     isStarted = true;
   };
 
-  this.pause = function() {
+  this.pause = function () {
     if (isPaused) {
       throw new Error('StopWatch has already paused');
     }
@@ -182,7 +182,7 @@ function CreateStopWatch() {
     console.log(msToTime(duration));
   };
 
-  this.stop = function() {
+  this.stop = function () {
     if (!isStarted) {
       throw new Error('Stopwatch is not started');
     }
@@ -191,13 +191,13 @@ function CreateStopWatch() {
       endTime = new Date().getTime();
     }
 
-    isPasued = false;
+    isPaused = false;
     isStarted = false;
     console.log('stop');
     duration = endTime - startTime;
   };
 
-  this.reset = function() {
+  this.reset = function () {
     startTime = null;
     endTime = null;
     isStarted = false;
@@ -207,17 +207,17 @@ function CreateStopWatch() {
   };
 
   Object.defineProperty(this, 'duration', {
-    get: function() {
+    get: function () {
       if (isStarted & !isPaused) {
         endTime = new Date().getTime();
         duration = endTime - startTime;
       }
       return msToTime(duration);
-    }
+    },
   });
 }
 
-// very bad idea, becaouse we need change private properties to public
+// very bad idea, because we need change private properties to public
 const stopwatch = new CreateStopWatch();
 
 function CreateStopWatch2() {
@@ -227,7 +227,7 @@ function CreateStopWatch2() {
   let isStarted = false;
   let isPaused = false;
 
-  const msToTime = function(s) {
+  const msToTime = function (s) {
     // Pad to 2 or 3 digits, default is 2
     function pad(n, z) {
       z = z || 2;
@@ -245,56 +245,56 @@ function CreateStopWatch2() {
   };
 
   Object.defineProperty(this, 'duration', {
-    get: function() {
+    get: function () {
       if (this.isStarted & !this.isPaused) {
         this.endTime = new Date().getTime();
         duration = this.endTime - this.startTime;
       }
       return msToTime(duration);
     },
-    set: function(value) {
+    set: function (value) {
       duration = value;
-    }
+    },
   });
 
   Object.defineProperty(this, 'startTime', {
-    get: function() {
+    get: function () {
       return startTime;
     },
-    set: function(value) {
+    set: function (value) {
       startTime = value;
-    }
+    },
   });
 
   Object.defineProperty(this, 'endTime', {
-    get: function() {
+    get: function () {
       return endTime;
     },
-    set: function(value) {
+    set: function (value) {
       endTime = value;
-    }
+    },
   });
 
   Object.defineProperty(this, 'isStarted', {
-    get: function() {
+    get: function () {
       return isStarted;
     },
-    set: function(value) {
+    set: function (value) {
       isStarted = value;
-    }
+    },
   });
 
   Object.defineProperty(this, 'isPaused', {
-    get: function() {
+    get: function () {
       return isPaused;
     },
-    set: function(value) {
+    set: function (value) {
       isPaused = value;
-    }
+    },
   });
 }
 
-CreateStopWatch2.prototype.start = function() {
+CreateStopWatch2.prototype.start = function () {
   if (this.isPaused && this.isStarted) {
     this.startTime -= this.duration;
     console.log('start after pause');
@@ -309,7 +309,7 @@ CreateStopWatch2.prototype.start = function() {
   this.isStarted = true;
 };
 
-CreateStopWatch2.prototype.pause = function() {
+CreateStopWatch2.prototype.pause = function () {
   if (this.isPaused) {
     throw new Error('StopWatch has already paused');
   }
@@ -325,7 +325,7 @@ CreateStopWatch2.prototype.pause = function() {
   console.log(msToTime(this.duration));
 };
 
-CreateStopWatch2.prototype.stop = function() {
+CreateStopWatch2.prototype.stop = function () {
   if (!this.isStarted) {
     throw new Error('Stopwatch is not started');
   }
@@ -334,13 +334,13 @@ CreateStopWatch2.prototype.stop = function() {
     this.endTime = new Date().getTime();
   }
 
-  this.isPasued = false;
+  this.isPaused = false;
   this.isStarted = false;
   console.log('stop');
   this.duration = this.endTime - this.startTime;
 };
 
-CreateStopWatch2.prototype.reset = function() {
+CreateStopWatch2.prototype.reset = function () {
   this.startTime = null;
   this.endTime = null;
   this.isStarted = false;

@@ -26,7 +26,7 @@ class Square {
   // "Kind of" private method
   [_draw]() {}
 
-  // By "kind of" I mean: these properties and methods are essentally
+  // By "kind of" I mean: these properties and methods are essentially
   // part of the object and are accessible from the outside. But accessing
   // them is hard and awkward.
 }
