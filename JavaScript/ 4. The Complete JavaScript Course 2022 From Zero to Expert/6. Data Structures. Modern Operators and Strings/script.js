@@ -1,5 +1,5 @@
-/*jshint esversion: 6*/
-/* eslint-env es6 */
+/*jshint esversion: 9*/
+/* eslint-env es9 */
 
 'use strict';
 
@@ -45,6 +45,12 @@ const restaurant = {
       ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]}
       will be delivered to ${address}
       at ${time}`
+    );
+  },
+
+  orderPasta: function (ingredient1, ingredient2, ingredient3) {
+    console.log(
+      `Here is your delicious pasta with ${ingredient1}, ${ingredient2}, ${ingredient3}`
     );
   },
 };
@@ -124,8 +130,42 @@ const {
 } = restaurant.openingHours;
 console.log(o2, c2);
 
-// The spread operator
+// 9/105 The spread operator
 
 const arr2 = [7, 8, 9];
 const arr3 = [5, 6, ...arr2, 10];
-console.log(arr3);
+console.log(...arr3);
+console.log(5, 6, 7, 8, 9, 10);
+
+const newMenu = [...restaurant.mainMenu, 'Gnocci'];
+console.log(newMenu);
+
+// Copy array
+const mainMenuCopy = [...restaurant.mainMenu];
+console.log(mainMenuCopy);
+
+// Join 2 arrays
+const menu2 = [...restaurant.mainMenu, ...restaurant.starterMenu];
+console.log(menu2);
+
+// Iterables: arrays, strings, maps, sets, NOT objects
+const str = 'Jonas';
+const letters = [...str, '', 'J.'];
+console.log(...letters);
+
+// Real word example
+const ingredients = [
+  prompt("Let's make pasta! Ingredient 1?"),
+  prompt('Ingredient 2?'),
+  prompt('Ingredient 3'),
+];
+
+console.log(restaurant.orderPasta(...ingredients));
+
+// Objects
+const newRestaurant = { foundedIn: 1998, ...restaurant, founder: 'Thomas' };
+console.log(newRestaurant);
+
+const restaurantCopy = { ...restaurant };
+restaurantCopy.name = 'Restaurante Roma';
+console.log(restaurantCopy);
