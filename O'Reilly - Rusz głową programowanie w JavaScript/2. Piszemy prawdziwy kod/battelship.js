@@ -1,5 +1,6 @@
 /*jshint esversion:6*/
 /* eslint-env es6 */
+
 let randomLoc = Math.floor(Math.random() * 5);
 let location1 = randomLoc;
 let location2 = location1 + 1;
@@ -13,6 +14,7 @@ let isSunk = false;
 
 while (isSunk == false) {
   guess = prompt('Gotów, cel, pal!(podaj liczbę od 0-6):');
+
   if (guess < 0 || guess > 6) {
     alert('Proszę podać prawidłowy numer komórki');
   } else {
