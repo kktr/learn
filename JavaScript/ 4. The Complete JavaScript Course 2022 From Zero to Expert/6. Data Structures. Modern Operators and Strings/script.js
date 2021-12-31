@@ -697,3 +697,43 @@ const staffUniqueArray2 = [...new Set(staff)];
 console.log(staffUniqueArray2);
 
 console.log(new Set(staff).size);
+
+// 9/117 Maps Fundamentals
+
+const restaurants = new Map();
+restaurants.set('name', 'Classico Italiano');
+console.log(restaurants);
+
+restaurants
+  .set('categories', ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'])
+  .set(1, 'Frieze, Italy')
+  .set('open', 11)
+  .set('close', 23)
+  .set(true, 'We are open')
+  .set(false, 'We are closed');
+
+console.log(restaurants);
+
+console.log(restaurants.get('name'));
+console.log(restaurants.get(true));
+console.log(restaurants.get(1));
+
+const time = 15;
+console.log(
+  restaurants.get(
+    time >= restaurants.get('open') && time <= restaurants.get('close')
+  )
+);
+
+console.log(restaurants.has('categories'));
+console.log(restaurants.has('car'));
+console.log(restaurants.delete(1));
+console.log(restaurants.size);
+
+restaurants.set(document.querySelector('h1'), 'Heading');
+console.log(restaurants);
+
+const arr5 = [1, 2];
+
+restaurants.set(arr5, 'test');
+console.log(restaurants.get(arr5));
