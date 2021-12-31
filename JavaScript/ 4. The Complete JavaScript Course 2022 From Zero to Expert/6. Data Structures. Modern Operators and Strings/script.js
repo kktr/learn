@@ -490,3 +490,32 @@ console.log(user[0]?.name ?? 'User array empty');
 
 user = [{ name: 'Jonas', email: 'hello@jonas.io' }];
 console.log(user[0]?.name ?? 'User array empty');
+
+// 9/114 Looping Objects: Object Keys, Values, and Entries
+
+// Property keys - NAMES
+console.log(restaurant.openingHours);
+console.log(Object.keys(restaurant.openingHours));
+const properties = Object.keys(restaurant.openingHours);
+
+let openString = `We are open on ${properties.length} days: `;
+console.log(openString);
+
+for (const day of Object.keys(restaurant.openingHours)) {
+  openString += `${day}, `;
+}
+
+console.log(openString);
+
+// Property VALUES
+const values = Object.values(restaurant.openingHours);
+console.log(values);
+
+// Entries
+const entries = Object.entries(restaurant.openingHours);
+console.log(entries);
+
+for (const [day, { open, close }] of entries) {
+  console.log(day, open, close);
+  console.log(`On ${day} we open at ${open} and close at ${close}`);
+}
