@@ -658,3 +658,42 @@ function goals() {
 console.log(goals());
 
 //  9/116 Sets
+
+const ordersSet = new Set([
+  'Pasta',
+  'Pizza',
+  'Pizza',
+  'Risotto',
+  'Pasta',
+  'Pizza',
+]);
+
+console.log(ordersSet);
+
+console.log(new Set('Jonas'));
+
+console.log(ordersSet.size);
+console.log(ordersSet.has('Pizza'));
+console.log(ordersSet.has('Potatoes'));
+
+console.log(ordersSet.add('Garlic Bread'));
+
+ordersSet.delete('Risotto');
+console.log(ordersSet);
+
+for (const orderSet of ordersSet) {
+  console.log(orderSet);
+}
+
+// Example
+const staff = ['Waiter', 'Chef', 'Waiter', 'Manager', 'Chef', 'Waiter'];
+const staffUniqueSet = new Set(staff);
+console.log(staffUniqueSet);
+
+const staffUniqueArray = [...staffUniqueSet];
+console.log(staffUniqueArray);
+
+const staffUniqueArray2 = [...new Set(staff)];
+console.log(staffUniqueArray2);
+
+console.log(new Set(staff).size);
