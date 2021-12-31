@@ -413,3 +413,15 @@ team2 = 1;
 console.log(team1 < team2);
 team1 < team2 && console.log('team 1 is more likely to win');
 team1 < team2 || console.log('team 2 is more likely to win');
+
+// 9/111 Looping Arrays: The for-of Loop
+
+const menu3 = [...restaurant.mainMenu, ...restaurant.starterMenu];
+
+for (const item of menu3) {
+  console.log(item);
+}
+
+for (const [i, el] of menu3.entries()) {
+  console.log(`${i + 1}: ${el}`);
+}
