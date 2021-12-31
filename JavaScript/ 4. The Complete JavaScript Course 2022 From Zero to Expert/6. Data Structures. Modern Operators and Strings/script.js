@@ -425,3 +425,34 @@ for (const item of menu3) {
 for (const [i, el] of menu3.entries()) {
   console.log(`${i + 1}: ${el}`);
 }
+
+// 112. Enhanced Object Literals
+
+const weekdays3 = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+
+const openingHours3 = {
+  [weekdays3[3]]: {
+    open: 12,
+    close: 22,
+  },
+  [weekdays3[4]]: {
+    open: 11,
+    close: 23,
+  },
+  [`day-${4 + 2}]`]: {
+    open: 0, // Open 24 hours
+    close: 24,
+  },
+};
+
+const restaurant3 = {
+  mainMenu: ['Pizza', 'Pasta', 'Risotto'],
+  // ES6 enhanced object literals
+  openingHours3,
+  // skip writing "function"
+  order(starterIndex, mainIndex) {
+    return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
+  },
+};
+
+console.log(restaurant3);
