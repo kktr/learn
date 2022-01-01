@@ -627,16 +627,14 @@ for (const [winner, oddValue] of entries2) {
   //     return `draw`;
   //   }
   // };
-  const victoryOrWinner = winner === 'x' ? 'draw' : 'victory';
-  const victoryOrWinner2 =
+  const victoryOrDraw = winner === 'x' ? 'draw' : 'victory';
+  const victoryOrDraw2 =
     winner === 'x' ? 'draw:' : `victory ${game2?.[winner]}:`;
 
-  console.log(victoryOrWinner);
+  console.log(victoryOrDraw);
 
-  console.log(
-    `Odd of ${victoryOrWinner} ${game2?.[winner] ?? ''}: ${oddValue}`
-  );
-  console.log(`Odd of ${victoryOrWinner2} ${oddValue}`);
+  console.log(`Odd of ${victoryOrDraw} ${game2?.[winner] ?? ''}: ${oddValue}`);
+  console.log(`Odd of ${victoryOrDraw2} ${oddValue}`);
 }
 
 // So the solution is to loop over the array, and add the array elements as
