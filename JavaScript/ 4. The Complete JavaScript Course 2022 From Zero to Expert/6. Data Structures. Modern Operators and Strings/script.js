@@ -797,3 +797,34 @@ function getAnswer() {
 // Convert map to array
 const questionsArray = [...question];
 console.log(questionsArray);
+
+// 9/119 Summary Which Data Structure to Use
+
+// Collection of data
+//
+// Data structure
+//    SIMPLE LIST?           KEY/VALUE PAIRS?
+//    Arrays or Sets          Objects or Maps
+
+// Arrays
+//  ordered list, duplicates
+//  manipulate data
+
+// Sets
+// unique values
+// need high-performance
+// to remove duplicates
+
+// Objects
+// more traditional
+// easier write and access values with . and []
+// need to include functions (methods)
+// working with JSON (can convert to map)
+
+// Maps
+// better performance
+// keys can have any data type
+// easy to iterate
+// easy to compute size
+// when simply need to map key to values
+// when need keys that are NOT strings
