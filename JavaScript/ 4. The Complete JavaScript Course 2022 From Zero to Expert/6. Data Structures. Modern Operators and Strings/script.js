@@ -735,3 +735,65 @@ const arr5 = [1, 2];
 
 restaurants.set(arr5, 'test');
 console.log(restaurants.get(arr5));
+
+// 9/118 Maps iteration
+
+const question = new Map([
+  ['question', 'What is the best programing language'],
+  [1, 'C'],
+  [2, 'Java'],
+  [3, 'JavaScript'],
+  ['correct', 3],
+  [true, 'Correct'],
+  [false, 'Try again'],
+]);
+
+console.log(question);
+
+// Convert object to map
+console.log(Object.entries(restaurant.openingHours));
+const hoursMap = new Map(Object.entries(restaurant.openingHours));
+console.log(hoursMap);
+
+for (const [hour, { open: whenOpen, close: whenClose }] of hoursMap) {
+  console.log(hour);
+  console.log(whenOpen);
+  console.log(whenClose);
+}
+
+function quiz() {
+  let question1 = `${question.get('question')}?
+      `;
+
+  for (const [key, value] of question) {
+    if (typeof key === 'number') {
+      question1 += `Answer ${key}: ${value}
+      `;
+    }
+  }
+
+  alert(question1);
+
+  getAnswer();
+}
+
+function getAnswer() {
+  const yourAnswer = Number(prompt('Your answer'));
+
+  alert(question.get(yourAnswer === question.get('correct')));
+
+  if (yourAnswer !== 1 && yourAnswer !== 2 && yourAnswer !== 3) {
+    alert('enter the digit 1, 2 or 3');
+    return getAnswer();
+  }
+
+  if (yourAnswer !== question.get('correct')) {
+    return getAnswer();
+  }
+}
+
+// quiz();
+
+// Convert map to array
+const questionsArray = [...question];
+console.log(questionsArray);
