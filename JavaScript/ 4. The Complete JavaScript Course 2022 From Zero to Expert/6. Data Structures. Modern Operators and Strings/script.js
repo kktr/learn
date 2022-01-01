@@ -404,15 +404,15 @@ printGoals(...game.scored);
 printGoals('Davies', 'Muller', 'Lewandowski', 'Kimmich');
 
 // 7
-console.log(team1 < team2);
-team1 < team2 && console.log('team 1 is more likely to win');
-team1 < team2 || console.log('team 2 is more likely to win');
+console.log(team1 > team2);
+team1 > team2 && console.log('team 1 is more likely to win');
+team1 > team2 || console.log('team 2 is more likely to win');
 
 team1 = 10;
 team2 = 1;
-console.log(team1 < team2);
-team1 < team2 && console.log('team 1 is more likely to win');
-team1 < team2 || console.log('team 2 is more likely to win');
+console.log(team1 > team2);
+console.log(team1 > team2 && 'team 1 is more likely to win');
+console.log(team1 > team2 || 'team 2 is more likely to win');
 
 // 9/111 Looping Arrays: The for-of Loop
 
