@@ -899,3 +899,39 @@ for (const [minute, event] of gameEvents) {
 
   console.log(message);
 }
+
+// 9/121 Working with strings part 1
+
+const airline = 'Tap Air Portugal';
+const plane = 'A320';
+
+console.log(plane[0]);
+console.log('B737'[0]);
+
+console.log(airline.length);
+
+console.log(airline.indexOf('r'));
+console.log(airline.lastIndexOf('r'));
+
+console.log(airline.slice(4, 7));
+
+console.log(airline.slice(0, airline.indexOf(' ')));
+console.log(airline.slice(airline.lastIndexOf(' ') + 1));
+
+const checkMiddleSeat = function (seat) {
+  console.log(seat.slice(-1));
+
+  const seatLetter = seat.slice(-1);
+  const isMiddle = seatLetter === 'B' || seatLetter === 'E';
+  const message = isMiddle ? "it's middle seat" : "isn't middle seat";
+
+  console.log(message);
+};
+
+checkMiddleSeat('11B');
+checkMiddleSeat('23C');
+checkMiddleSeat('33D');
+
+console.log(new String('jonas'));
+console.log(typeof new String('jonas'));
+console.log(typeof new String('jonas').slice(1));
