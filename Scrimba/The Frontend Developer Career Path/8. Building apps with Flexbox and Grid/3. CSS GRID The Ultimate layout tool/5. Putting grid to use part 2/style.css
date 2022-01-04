@@ -1,0 +1,39 @@
+body {
+  margin: 3em;
+  color: #555;
+  font-family: 'Raleway', sans-serif;
+  background: #333;
+}
+
+.portfolio {
+  display: grid;
+
+  /* grid-template-areas:
+    'header header header'
+    'card card card';
+  grid-template-rows: auto; */
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1em;
+  padding: 1em;
+}
+
+.portfolio-title {
+  grid-column: 1 / -1;
+  color: #00c896;
+  text-align: center;
+}
+
+img {
+  max-width: 100%;
+}
+
+.portfolio-card {
+  padding: 1em;
+  box-shadow: 0 0 1em rgb(0 0 0 / 25%);
+  background: white;
+}
+
+.portfolio-card-title {
+  color: #000;
+  font-size: 1.5rem;
+}
