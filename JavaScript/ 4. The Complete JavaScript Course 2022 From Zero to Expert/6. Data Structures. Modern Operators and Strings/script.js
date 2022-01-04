@@ -935,3 +935,82 @@ checkMiddleSeat('33D');
 console.log(new String('jonas'));
 console.log(typeof new String('jonas'));
 console.log(typeof new String('jonas').slice(1));
+
+// 9/122 Working with strings part 2
+
+console.log(airline.toLocaleLowerCase());
+console.log(airline.toUpperCase());
+
+// Fix capitalization in name
+function fixCapitalization(name) {
+  const [firstLetter, ...restLetters] = name.split('');
+  const properFirstLetter = firstLetter.toUpperCase();
+  const properRestLetters = restLetters.join('').toLowerCase();
+  const properPassengerName = properFirstLetter + properRestLetters;
+  console.log(properPassengerName);
+
+  return properPassengerName;
+}
+
+fixCapitalization('jOnAS');
+
+// Comparing emails
+const email = 'hello@jonas.io';
+const loginEmail = '   hello@Jonas.Io \n';
+
+const compareEmails = (...emails) => {
+  return isAllEqual(correctEmails(emails));
+};
+
+function correctEmails(emails) {
+  const correctedEmails = [];
+
+  emails.forEach((email) => {
+    correctedEmails.push(email.toLowerCase().trim());
+  });
+
+  return correctedEmails;
+}
+
+const isAllEqual = (arr) => arr.every((v) => v === arr[0]);
+
+console.log(compareEmails(email, loginEmail));
+console.log(compareEmails('abc@com', 'AbC@cOM', '    ABC@com     '));
+
+// replacing
+const priceGB = '288,44£';
+const priceUS = priceGB.replace('£', '$').replace(',', '.');
+console.log(priceUS);
+
+const announcement =
+  'All passengers come to boarding door 23. Boarding door 23!';
+
+console.log(announcement.replace('door', 'gate'));
+console.log(announcement.replace(/door/g, 'gate'));
+
+// https://regexr.com/
+
+const plane2 = 'A320neo';
+
+console.log(plane2.includes('A320'));
+console.log(plane2.includes('Boeing'));
+console.log(plane2.startsWith('Air'));
+
+if (plane2.startsWith('A') && plane2.endsWith('neo')) {
+  console.log('Part of the NEW Airbus family');
+}
+
+// Practice exercise
+const checkBaggage = function (items) {
+  const baggage = items.toLowerCase();
+
+  if (baggage.includes('knife') || baggage.includes('gun')) {
+    console.log('You are NOT allowed on board');
+  } else {
+    console.log('Welcome aboard');
+  }
+};
+
+checkBaggage('I have laptop, some Food and a pocket with Knife');
+checkBaggage('Socks and camera');
+checkBaggage('Got some snacks and a gun for protection');
