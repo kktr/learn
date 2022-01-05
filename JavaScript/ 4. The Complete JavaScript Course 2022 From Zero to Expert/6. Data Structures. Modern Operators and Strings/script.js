@@ -125,7 +125,7 @@ console.log(menu, starters);
 //Mutating variables
 let a2 = 111;
 let b2 = 999;
-const obj2 = { a: 23, b: 7, c: 14 };
+const obj2 = { a2: 23, b2: 7, c: 14 };
 console.log(a2, b2);
 
 ({ a2, b2 } = obj2);
