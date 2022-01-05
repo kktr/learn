@@ -1,0 +1,32 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background-color: hsl(120deg 73% 75%);
+}
+
+.board {
+  display: grid;
+  grid-template-rows: repeat(5, 20%);
+  grid-template-columns: repeat(5, 20%);
+  min-height: 100vh;
+  min-width: 100vw;
+}
+
+.board * {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0.1rem solid black;
+  text-align: center;
+}
+
+.my-category-title {
+  grid-row: 1/2;
+  background-color: hsl(195deg 53% 79%);
+  text-transform: uppercase;
+}
