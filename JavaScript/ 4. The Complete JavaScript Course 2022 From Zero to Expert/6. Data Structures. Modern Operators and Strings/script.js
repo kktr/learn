@@ -1065,7 +1065,7 @@ const planesInLine = function (n) {
 
 planesInLine(7);
 
-// Coding Challenge #4
+// Coding Challenge 4
 
 /* 
 Write a program that receives a list of variable names written in underscore_case and convert them to camelCase.
@@ -1128,3 +1128,35 @@ camelCaseGen(`underscore_case
 Some_Variable
   calculate_AGE
 delayed_departure`);
+
+// 9/125 Strings Methods Practice
+
+let flights1 = flights;
+
+function logFlightInfo(data) {
+  const flightsArr = data.split('+');
+
+  for (const flight of flightsArr) {
+    let flightArr = flight.split(';');
+
+    flightArr[0] = flightArr[0].replace('_', '').replace('_', ' ');
+
+    if (flightArr[0].slice(0, 7) === 'Delayed') {
+      flightArr[0] = '🔴 ' + flightArr[0];
+    }
+    flightArr[1] = getFirst3Letters(flightArr[1]);
+    flightArr[2] = getFirst3Letters(flightArr[2]);
+
+    console.log(
+      `${flightArr[0]} from ${flightArr[1]} to ${flightArr[2]} at (${flightArr[3]})`.padStart(
+        50
+      )
+    );
+  }
+}
+
+function getFirst3Letters(word) {
+  return word.toUpperCase().slice(0, 3);
+}
+
+logFlightInfo(flights1);
