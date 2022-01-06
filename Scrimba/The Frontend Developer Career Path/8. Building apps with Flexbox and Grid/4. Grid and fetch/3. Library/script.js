@@ -28,6 +28,14 @@ async function getBooks() {
   });
 }
 
+function displayBooks(books) {
+  document.body.innerHTML = `
+  <div class="my-library">
+    ${books.map(getBookHtml).join('')}
+  </div>
+  `;
+}
+
 function getBookHtml(book) {
   return `
   <div class="my-book">
@@ -38,13 +46,6 @@ function getBookHtml(book) {
 `;
 }
 
-// function displayBooks(data) {}
-
-getBooks().then(
-  (books) =>
-    (document.body.innerHTML = `
-  <div class="my-library">
-    ${books.map(getBookHtml).join('')}
-  </div>
-  `)
-);
+getBooks()
+  .then(displayBooks)
+  .catch((e) => console.log(e));
