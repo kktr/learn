@@ -81,7 +81,7 @@ const upperFirstWord = function (str) {
 
 // Higher order function
 const transformer = function (str, fn) {
-  console.log(`Orginal string: ${str} `);
+  console.log(`Original string: ${str} `);
   console.log(`Transformed string: ${fn(str)}`);
 
   console.log(`Transformed by: ${fn.name}`);
