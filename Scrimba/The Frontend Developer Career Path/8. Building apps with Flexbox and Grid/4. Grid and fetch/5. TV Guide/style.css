@@ -1,0 +1,43 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background-color: lightgreen;
+}
+
+body {
+  padding: 2em;
+}
+
+.tv-show {
+  display: flex;
+  flex-direction: column;
+  max-width: 800px;
+  margin: auto;
+  padding: 2em;
+  border-radius: 0.5rem;
+  background-color: lightcyan;
+}
+
+.show-title,
+.show-summary {
+  overflow: scroll;
+  max-height: 200px;
+  margin: auto;
+}
+
+.tv-show p {
+  text-align: center;
+}
+
+.seasons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.season {
+  margin: 0.5em;
+  padding: 0.7em 1.8em;
+  background-color: tan;
+}
