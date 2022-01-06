@@ -2,7 +2,11 @@ html,
 body {
   margin: 0;
   padding: 0;
-  background-color: lightgreen;
+  background-color: hsl(120deg 73% 75%);
+}
+
+body {
+  padding: 0.5em;
 }
 
 .pokemon {
@@ -10,36 +14,48 @@ body {
   grid-template-areas:
     'info'
     'stats';
-  border: 2px solid black;
+  margin-bottom: 0.5em;
+  border: 1px solid black;
 }
-
-.info { grid-area: info; }
-
-.number { grid-area: number; }
-.name { grid-area: name; }
-.type { grid-area: type; }
-.stats { grid-area: stats; }
 
 .info {
   display: grid;
+  grid-area: info;
   grid-template-areas: 'number name type';
   grid-template-columns: 1fr repeat(2, 2fr);
 }
 
+.number {
+  grid-area: number;
+  background-color: hsl(183deg 73% 73%);
+}
+
+.name {
+  grid-area: name;
+  background-color: hsl(327deg 71% 95%);
+}
+
+.type {
+  grid-area: type;
+  background-color: hsl(111deg 73% 73%);
+}
+
 .stats {
   display: grid;
+  grid-area: stats;
   grid-template-columns: repeat(4, 1fr);
+  background-color: hsl(327deg 73% 73%);
+}
+
+.names {
+  display: flex;
+  background-color: hsl(260deg 72% 73%);
 }
 
 p {
-  text-align: center;
+  width: 100%;
   margin: 0;
   padding: 1em 0;
   border: 1px solid black;
-}
-
-. {
-  width: 100%;
-  height: 100%;
-
+  text-align: center;
 }

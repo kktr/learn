@@ -19,24 +19,19 @@
 async function getPokedex() {
   let response = await fetch('pokemon.json');
   let data = await response.json();
-  console.log(data[0]);
-  return data;
+  return data.slice(0, 100);
 }
 
-getPokedex();
-
 getPokedex().then((data) => {
-  console.log(...data[0].type);
-  document.body.innerHTML = getPokemons(data);
+  document.body.innerHTML = displayPokemons(data);
 });
 
-function getPokemons(data) {
-  let pokemons = [];
+function displayPokemons(data) {
+  let pokemons = '';
   for (let i = 0; i < data.length; i++) {
     let type = [...data[i].type];
     let typeStr = type.toString().replace(',', ' / ');
-    pokemons.push(
-      `<div class="pokemon">
+    pokemons += `<div class="pokemon">
         <div class="info">
           <p class="number">${i + 1}</p>
           <p class="name">${data[i].name.english}</p>
@@ -49,13 +44,16 @@ function getPokemons(data) {
           <p>Defense: ${data[i].base.Defense}</p>
           <p>Speed: ${data[i].base.Speed}</p>
         </div>
-      </div>`
-    );
+        
+        <div class="names">
+          <p>${data[i].name.japanese}</p>
+          <p>${data[i].name.chinese}</p>
+          <p>${data[i].name.french}</p>
+        </div>
+      </div>`;
   }
 
-  console.log(pokemons[0]);
-  return pokemons[0];
-  console.log(pokemons[0]);
+  return pokemons;
 }
 
 // name2: data[i].name.english,
