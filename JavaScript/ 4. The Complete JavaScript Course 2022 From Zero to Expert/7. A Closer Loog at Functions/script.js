@@ -92,7 +92,7 @@ transformer('JavaScript is the best!', oneWord);
 
 // JS uses callback all the time
 const high5 = function () {
-  console.log('🙏');
+  // console.log('🙏');
 };
 
 document.body.addEventListener('click', high5);
@@ -171,3 +171,46 @@ console.log(swiss);
 // Modern method
 book.call(swiss, ...flightData);
 console.log(swiss);
+
+// 10/134 the bind Method
+
+const bookEW = book.bind(eurowings);
+const bookLH = book.bind(lufthansa);
+const bookLX = book.bind(lufthansa);
+
+bookEW(23, 'Steven Williams');
+
+const bookEW23 = book.bind(eurowings, 23);
+bookEW23('Jonas Schmedtmann');
+bookEW23('Martha Cooper');
+
+// With Event Listeners
+lufthansa.planes = 300;
+lufthansa.buyPlane = function () {
+  console.log(this);
+
+  this.planes++;
+  console.log(this.planes);
+};
+
+// need bind to have proper this keyword, without bind this = button
+document
+  .querySelector('.buy')
+  .addEventListener('click', lufthansa.buyPlane.bind(lufthansa));
+
+// Partial application
+
+const addTax = (rate, value) => value + value * rate;
+console.log(addTax(0.1, 200));
+
+// set this to null, add rate = 0.23
+const addVAT = addTax.bind(null, 0.23);
+
+// call only with value parameter
+console.log(addVAT(100));
+
+function addVAT2(value) {
+  return addTax(0.23, value);
+}
+
+console.log(addVAT2(1000));
