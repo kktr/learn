@@ -301,3 +301,49 @@ poll.displayResults.call({ answers: [1, 5, 3, 9, 6, 1] }, 'array');
 // console.log(isPrivate);
 
 (() => console.log('This will ALSO never tun again'))();
+
+// 10/137 Closures
+
+const secureBooking = function () {
+  let passengerCount = 0;
+
+  return function () {
+    passengerCount++;
+    console.log(`${passengerCount} passengers`);
+  };
+};
+
+const booker = secureBooking();
+
+booker();
+booker();
+booker();
+console.dir(booker);
+
+// 10/138 more closures examples
+
+let f;
+
+const g = function () {
+  const a = 23;
+
+  f = function () {
+    console.log(a * 2);
+  };
+};
+
+const h = function () {
+  const b = 777;
+
+  f = function () {
+    console.log(b * 2);
+  };
+};
+
+g();
+f();
+console.dir(f);
+
+h();
+f();
+console.dir(f);
