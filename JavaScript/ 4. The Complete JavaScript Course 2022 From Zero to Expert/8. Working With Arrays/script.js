@@ -269,3 +269,22 @@ console.log(movements3Usd3);
 console.log(movements3Usd4);
 
 movements3Usd4.forEach((mov) => console.log(mov));
+
+// 11/151 Computing usernames
+
+function getUsername(user) {
+  return user
+    .split(' ')
+    .map((word) => word.at(0))
+    .join('')
+    .toLocaleLowerCase();
+}
+
+function createUsernames(accounts) {
+  accounts.forEach((account) => {
+    account.username = getUsername(account.owner);
+  });
+}
+
+createUsernames(accounts);
+console.log(accounts);
