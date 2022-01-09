@@ -192,7 +192,7 @@ currenciesUnique.forEach((value, _, set) => {
   console.log(...set);
 });
 
-// 11/148 Coding Challenge #1
+// 11/148 Coding challenge 1
 
 /* 
 Julia and Kate are doing a study on dogs. So each of them asked 5 dog owners about their dog's age, and stored the data into an array (one array for each). For now, they are just interested in knowing whether a dog is an adult or a puppy. A dog is an adult if it is at least 3 years old, and it's a puppy if it's less than 3 years old.
@@ -234,3 +234,38 @@ dogsKate = [10, 5, 6, 1, 4];
 
 console.log('test data 2');
 checkDogs(dogsJulia, dogsKate);
+
+// 11/149 Data Transformation map, filter, reduce
+
+// 11/150 The map method
+
+const movements3 = [200, 50, -400, -650, -130, 70, 1300];
+
+const eurToUsd = 1.1;
+
+const movements3Usd = movements.map((mov) => mov * eurToUsd);
+
+console.log(movements3Usd);
+
+//  this same operation with forOf loop
+// let movements3Usd2 = [];
+// for (const mov of movements3) {
+//   movements3Usd2.push(mov * eurToUsd);
+// }
+// console.log(movements3Usd2);
+
+const movements3Usd3 = movements3.map((mov, i) =>
+  mov > 0
+    ? `Movement ${i + 1}: You deposited ${mov}`
+    : `Movement ${i + 1}: You withdrew ${Math.abs(mov)}`
+);
+
+const movements3Usd4 = movements3.map((mov, i) => {
+  return mov > 0
+    ? `Movement ${i + 1}: You deposited ${mov}`
+    : `Movement ${i + 1}: You withdrew ${Math.abs(mov)}`;
+});
+console.log(movements3Usd3);
+console.log(movements3Usd4);
+
+movements3Usd4.forEach((mov) => console.log(mov));
