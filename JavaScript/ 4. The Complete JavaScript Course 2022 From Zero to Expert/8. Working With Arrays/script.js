@@ -111,3 +111,16 @@ console.log(letters);
 
 // JOIN
 console.log(letters.join(' - '));
+
+// 10/143 The new at method
+
+const arr6 = [23, 11, 64];
+console.log(arr6[0]);
+console.log(arr6.at(0));
+
+console.log(arr6[arr6.length - 2]);
+// get first value of last element in arr
+console.log(arr6.slice(-1)[0]);
+console.log(arr6.at(-1));
+
+console.log('jonas'.at(0));
