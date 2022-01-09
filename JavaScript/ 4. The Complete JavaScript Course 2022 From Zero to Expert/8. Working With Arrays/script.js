@@ -160,3 +160,34 @@ movements2.forEach((movement, index, array) => {
     ? console.log(`${index}, it's end of array: [${array.join(', ')}]`)
     : console.log(index);
 });
+
+// if need brake use for of method
+
+// 10/145 for Each with Maps and Sets
+
+// Map
+const currencies2 = new Map([
+  ['USD', 'united States dollar'],
+  ['EUR', 'Euro'],
+  ['GBP', 'Pound sterling'],
+]);
+
+// first value, second key
+currencies2.forEach((value, key) => {
+  console.log(`${key} is shortcut for ${value}`);
+});
+
+const currenciesUnique = new Set(['USD', 'GBP', 'USD', 'EUR', 'EUR']);
+console.log(currenciesUnique);
+
+// for Set second parameter = first parameter , third = whole set
+currenciesUnique.forEach((value, value2, set) => {
+  console.log(`${value}: ${value2}`);
+  console.log(set);
+  console.log(...set);
+});
+
+// use _ to omit parameter
+currenciesUnique.forEach((value, _, set) => {
+  console.log(...set);
+});
