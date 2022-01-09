@@ -288,3 +288,14 @@ function createUsernames(accounts) {
 
 createUsernames(accounts);
 console.log(accounts);
+
+// 11/152 The filter method
+
+const movements4 = [200, 50, -400, -650, -130, 70, 1300];
+
+const movementsAboveZero = movements4.filter((value) => value > 0);
+
+console.log(movementsAboveZero);
+
+const withdrawals2 = movements4.filter((value) => value < 0);
+console.log(withdrawals2);
