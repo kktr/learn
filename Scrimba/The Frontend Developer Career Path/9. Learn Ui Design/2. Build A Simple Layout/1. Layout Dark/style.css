@@ -1,0 +1,68 @@
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background-color: hsl(0deg 0% 12%);
+  background: linear-gradient(0deg, rgb(34 34 34 / 100%) 32%, rgb(28 28 28 / 100%) 32%, rgb(28 28 28 / 100%) 100%);
+}
+
+body {
+  color: aliceblue;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.container {
+  display: grid;
+  min-height: 100vh;
+  text-align: center;
+  place-content: center;
+}
+
+h1,
+p {
+  margin: 0;
+  padding: 0;
+  z-index: 1;
+}
+
+h1 {
+  font-size: 2.5rem;
+}
+
+p {
+  margin-bottom: 0.5em;
+  font-size: 1.2rem;
+  text-align: left;
+}
+
+span {
+  position: relative;
+}
+
+span::before {
+  content: '';
+  position: absolute;
+  bottom: 0.1em;
+  z-index: -1;
+  width: 80%;
+  height: 0.2em;
+  background: hsl(88deg 100% 36%);
+}
+
+/*
+
+- White Space
+- Color
+- Contrast
+- Scale
+- Alignment
+- Typography
+- Visual Hierarchy
+
+*/
