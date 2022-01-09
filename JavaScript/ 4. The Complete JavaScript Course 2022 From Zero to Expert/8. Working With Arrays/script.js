@@ -124,3 +124,39 @@ console.log(arr6.slice(-1)[0]);
 console.log(arr6.at(-1));
 
 console.log('jonas'.at(0));
+
+//  10/144 Looping arrays forEach
+
+const movements2 = [200, 50, -400, -650, -130, 70, 1300];
+
+for (const movement of movements2) {
+  if (movement > 0) {
+    console.log(`You deposited ${movement}`);
+  } else {
+    console.log(`You withdrew ${Math.abs(movement)}`);
+  }
+}
+
+console.log('-- for of with counter --');
+
+for (const [index, movement] of movements2.entries()) {
+  console.log(index);
+
+  if (movement > 0) {
+    console.log(`You deposited ${movement}`);
+  } else {
+    console.log(`You withdrew ${Math.abs(movement)}`);
+  }
+}
+
+console.log('--- forEach ---');
+
+movements2.forEach((movement, index, array) => {
+  movement > 0
+    ? console.log(`You deposited ${movement}`)
+    : console.log(`You withdrew ${Math.abs(movement)}`);
+
+  index === array.length - 1
+    ? console.log(`${index}, it's end of array: [${array.join(', ')}]`)
+    : console.log(index);
+});
