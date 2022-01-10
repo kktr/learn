@@ -385,3 +385,12 @@ const calcAverageHumanAge2 = (dogAges) =>
 
 console.log(calcAverageHumanAge2([5, 2, 4, 1, 15, 8, 3]));
 console.log(calcAverageHumanAge2([16, 6, 10, 5, 6, 1, 4]));
+
+// 11/157 The find method
+
+const movements7 = [200, 450, -400, 3000, -650, -130, 70, 1300];
+console.log(movements7.find((mov) => mov > 500));
+
+// find with destructuring {}
+const accounts2 = [account1, account2, account3, account4];
+console.log(accounts2.find(({ owner }) => owner === 'Sarah Smith'));
