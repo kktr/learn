@@ -353,3 +353,15 @@ function calcAverageHumanAge(dogAges) {
 
 calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3]);
 calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4]);
+
+// 11/155 The magic of chaining methods
+
+const eurToUsd2 = 1.1;
+const movements6 = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+const totalDepositUsd = movements6
+  .filter((mov) => mov > 0)
+  .map((mov) => mov * eurToUsd2)
+  .reduce((acc, mov) => acc + mov);
+
+console.log(totalDepositUsd);
