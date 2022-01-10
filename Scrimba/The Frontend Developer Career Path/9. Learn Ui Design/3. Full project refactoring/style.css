@@ -1,0 +1,165 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  color: #a5b2d3;
+  font-family: serif;
+  font-family: 'Nunito', sans-serif;
+  text-align: center;
+  background: hsl(223deg 25% 25%);
+  padding-bottom: 5em;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 6em;
+  margin: auto 10vw;
+}
+
+header svg {
+  width: 1.5em;
+  cursor: pointer;
+}
+
+a {
+  color: white;
+}
+
+ul {
+  padding: 0;
+  list-style: none;
+}
+
+a.logo {
+  margin: 0 1em;
+  font-weight: bold;
+  font-size: 2rem;
+  text-decoration: none;
+}
+
+a.cta-btn {
+  display: inline-block;
+  margin: 0 0 0 auto;
+  padding: 0.4em 1.2em;
+  border-radius: 2em;
+  color: #303a52;
+  font-weight: bold;
+  font-size: 1.2rem;
+  text-decoration: none;
+  background: #fc85ae;
+}
+
+/* Navigation */
+
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 40%;
+  height: 100vh;
+  text-align: center;
+  visibility: hidden;
+  transform: translateX(-50%);
+  background: hsl(223deg 25% 25%);
+  opacity: 0;
+  transition: all 0.3s;
+}
+
+nav p {
+  max-width: 30em;
+  margin: 0 auto;
+  padding: 2em 3em;
+
+  /* text-align: justify; */
+}
+
+nav svg {
+  width: 1em;
+  cursor: pointer;
+}
+
+nav ul li a {
+  display: block;
+  padding: 0.4em;
+  font-size: 1.2em;
+  text-decoration: none;
+  text-align: left;
+}
+
+.selected {
+  background: #9e579d;
+}
+
+.open-nav {
+  visibility: unset;
+  transform: translateX(0);
+  opacity: 1;
+}
+
+/* Main Section */
+
+h1 {
+  color: white;
+  font-size: 3rem;
+  padding: 0.5em 0;
+  margin: 0;
+}
+
+.panel {
+  border-radius: 0.3em;
+  background: hsl(223deg 25% 30%);
+  padding: 1em;
+}
+
+h3 {
+  margin: 0;
+  color: #fc85ae;
+}
+
+ul.data li p {
+  margin: 0.3em 0 1em;
+  color: white;
+  font-weight: 400;
+  font-size: 1.5em;
+}
+
+ul.data li:last-child p {
+  margin-bottom: 0;
+}
+
+ul.secondary {
+  margin-top: 2em;
+}
+
+ul.secondary li p {
+  font-size: 1.2em;
+}
+
+main {
+  max-width: 80vw;
+  margin: auto;
+}
+
+.half {
+  padding: 1.5em 0;
+  max-width: 60vw;
+  margin: auto;
+  
+}
+
+.left p {
+  text-align: justify;
+}
+
+/* Your Fixes Below */
