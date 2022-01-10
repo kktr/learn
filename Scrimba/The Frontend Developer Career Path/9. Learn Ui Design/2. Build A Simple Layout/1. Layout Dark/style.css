@@ -6,39 +6,46 @@
 
 html,
 body {
+  height: 100vh;
   margin: 0;
   padding: 0;
-  background-color: hsl(0deg 0% 12%);
-  background: linear-gradient(0deg, rgb(34 34 34 / 100%) 32%, rgb(28 28 28 / 100%) 32%, rgb(28 28 28 / 100%) 100%);
 }
 
 body {
-  color: aliceblue;
+  display: grid;
+  align-items: center;
+  color: white;
   font-family: 'Montserrat', sans-serif;
+  background:
+    linear-gradient(
+      322deg,
+      rgb(43 46 39 / 100%) 29%,
+      rgb(28 28 28 / 100%) 29%,
+      rgb(28 28 28 / 100%) 40%,
+      rgb(43 46 39 / 100%) 40%,
+      rgb(43 46 39 / 100%) 48%,
+      rgb(28 28 28 / 100%) 48%,
+      rgb(28 28 28 / 100%) 92%,
+      rgb(113 174 33 / 100%) 92%,
+      rgb(113 174 33 / 100%) 100%
+    );
 }
 
 .container {
-  display: grid;
-  min-height: 100vh;
-  text-align: center;
-  place-content: center;
-}
-
-h1,
-p {
-  margin: 0;
-  padding: 0;
-  z-index: 1;
+  width: 40%;
+  height: 50%;
+  margin-left: 4em;
 }
 
 h1 {
-  font-size: 2.5rem;
+  margin-top: 0;
+  font-size: 2.4em;
 }
 
 p {
   margin-bottom: 0.5em;
-  font-size: 1.2rem;
-  text-align: left;
+  font-size: 1.2em;
+  text-transform: uppercase;
 }
 
 span {
@@ -52,7 +59,7 @@ span::before {
   z-index: -1;
   width: 80%;
   height: 0.2em;
-  background: hsl(88deg 100% 36%);
+  background: #71ae21;
 }
 
 /*
