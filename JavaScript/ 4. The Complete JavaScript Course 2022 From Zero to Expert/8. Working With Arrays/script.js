@@ -291,7 +291,7 @@ console.log(accounts);
 
 // 11/152 The filter method
 
-const movements4 = [200, 50, -400, -650, -130, 70, 1300];
+const movements4 = [200, 450, -400, -650, -130, 70, 1300];
 
 const movementsAboveZero = movements4.filter((value) => value > 0);
 
@@ -299,3 +299,24 @@ console.log(movementsAboveZero);
 
 const withdrawals2 = movements4.filter((value) => value < 0);
 console.log(withdrawals2);
+
+// 11/153 The reduce Method
+
+const movements5 = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+const movSum = movements5.reduce((acc, cur) => acc + cur);
+console.log(movSum);
+
+// start counting at 60
+const movSum2 = movements5.reduce(function (acc, cur, i) {
+  console.log(i, acc);
+  return acc + cur;
+}, 60);
+console.log(movSum2);
+
+// maximum value
+const maxVal = movements5.reduce((acc, cur) => {
+  return acc > cur ? acc : cur;
+});
+
+console.log(maxVal);
