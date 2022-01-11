@@ -16,7 +16,6 @@ body {
   font-family: 'Nunito', sans-serif;
   text-align: center;
   background: hsl(223deg 25% 25%);
-  padding-bottom: 5em;
 }
 
 header {
@@ -24,7 +23,7 @@ header {
   align-items: center;
   justify-content: center;
   height: 6em;
-  margin: auto 10vw;
+  margin: auto 2em;
 }
 
 header svg {
@@ -44,18 +43,18 @@ ul {
 a.logo {
   margin: 0 1em;
   font-weight: bold;
-  font-size: 2rem;
+  font-size: 1.25rem;
   text-decoration: none;
 }
 
 a.cta-btn {
   display: inline-block;
   margin: 0 0 0 auto;
-  padding: 0.4em 1.2em;
-  border-radius: 2em;
+  padding: 0.3em 0.75em;
+  border-radius: 0.2em;
   color: #303a52;
   font-weight: bold;
-  font-size: 1.2rem;
+  font-size: 1rem;
   text-decoration: none;
   background: #fc85ae;
 }
@@ -66,9 +65,8 @@ nav {
   position: fixed;
   top: 0;
   left: 0;
-  width: 40%;
+  width: 70%;
   height: 100vh;
-  text-align: center;
   visibility: hidden;
   transform: translateX(-50%);
   background: hsl(223deg 25% 25%);
@@ -78,8 +76,9 @@ nav {
 
 nav p {
   max-width: 30em;
-  margin: 0 auto;
-  padding: 2em 3em;
+  margin: 1em auto;
+
+  /* font-size: 1.2rem; */
 
   /* text-align: justify; */
 }
@@ -91,10 +90,10 @@ nav svg {
 
 nav ul li a {
   display: block;
-  padding: 0.4em;
+  padding: 0.8em 1em;
   font-size: 1.2em;
-  text-decoration: none;
   text-align: left;
+  text-decoration: none;
 }
 
 .selected {
@@ -110,16 +109,16 @@ nav ul li a {
 /* Main Section */
 
 h1 {
+  margin: 0;
+  padding: 0.5em 0;
   color: white;
   font-size: 3rem;
-  padding: 0.5em 0;
-  margin: 0;
 }
 
 .panel {
+  padding: 1em;
   border-radius: 0.3em;
   background: hsl(223deg 25% 30%);
-  padding: 1em;
 }
 
 h3 {
@@ -147,15 +146,14 @@ ul.secondary li p {
 }
 
 main {
-  max-width: 80vw;
   margin: auto;
+  padding: 0 1em 1em;
 }
 
 .half {
-  padding: 1.5em 0;
-  max-width: 60vw;
+  /* max-width: 60vw; */
   margin: auto;
-  
+  padding: 1.5em 1em;
 }
 
 .left p {
@@ -163,3 +161,53 @@ main {
 }
 
 /* Your Fixes Below */
+.inner-wrapper {
+  padding: 1em;
+  text-align: left;
+}
+
+@media (min-width: 420px) {
+  body {
+    padding: 1em;
+    text-align: left;
+  }
+
+  ul.data {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  ul.data li {
+    flex: 0 0 50%;
+  }
+}
+
+@media (min-width: 550px) {
+  ul.data {
+    justify-content: center;
+  }
+
+  .panel ul.data li {
+    flex: 0 0 33%;
+  }
+
+  .panel ul.data li p {
+    margin-bottom: 0;
+  }
+}
+
+@media (min-width: 720px) {
+  body {
+    padding: 1.5em;
+  }
+
+  .half {
+    display: flex;
+  }
+
+  .secondary li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
