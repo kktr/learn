@@ -62,6 +62,112 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
+let summary = 0;
+let sumInt = 0;
+let currentAccount = '';
+
+function display(account) {
+  displayApp();
+  displayWelcome(account);
+  displayMovements(account);
+  displaySummary(account);
+  displayBalance();
+}
+
+function displayApp() {
+  containerApp.style.opacity = 1;
+}
+
+function displayMovements(account) {
+  containerMovements.innerHTML = '';
+
+  account.movements.forEach((mov, i) => {
+    const movType = mov > 0 ? 'deposit' : 'withdrawal';
+    const movNumber = i + 1;
+
+    const movementHtml = `<div class="movements__row">
+      <div class="movements__type movements__type--${movType}">${movNumber} ${movType}</div>
+      <div class="movements__date"></div>
+      <div class="movements__value">${mov.toFixed(2)} €</div>
+    </div>`;
+
+    containerMovements.innerHTML += movementHtml;
+  });
+}
+
+function displayWelcome(account) {
+  labelWelcome.textContent = `Good Morning, ${account.owner.split(' ')[0]}`;
+}
+
+function displaySummary(account) {
+  summary = account.movements.reduce((acc, cur) => acc + cur).toFixed(2);
+
+  const summaryIn = account.movements
+    .filter((mov) => mov > 0)
+    .reduce((acc, cur) => acc + cur)
+    .toFixed(2);
+
+  const summaryOut = summary - summaryIn;
+
+  sumInt = account.movements
+    .filter((mov) => mov > 0)
+    .map((mov) => (mov * account.interestRate) / 100)
+    .filter((mov) => mov > 1)
+    .reduce((acc, cur) => acc + cur)
+    .toFixed(2);
+
+  labelSumIn.textContent = `${summaryIn} €`;
+  labelSumOut.textContent = `${summaryOut} €`;
+  labelSumInterest.textContent = `${sumInt} €`;
+}
+
+function displayBalance() {
+  labelBalance.textContent = `${(Number(summary) + Number(sumInt)).toFixed(
+    2
+  )} €`;
+}
+
+function getUsername(user) {
+  return user
+    .split(' ')
+    .map((word) => word.at(0))
+    .join('')
+    .toLocaleLowerCase();
+}
+
+function createUsernames(accounts) {
+  accounts.forEach((account) => {
+    account.username = getUsername(account.owner);
+  });
+}
+
+function setCurrentAccount() {
+  const user = inputLoginUsername.value;
+  currentAccount = accounts.find(({ username }) => username === user);
+}
+
+function isPinCorrect() {
+  return currentAccount?.pin === Number(inputLoginPin.value);
+}
+
+function clearInput() {
+  inputLoginUsername.value = inputLoginPin.value = '';
+  inputLoginPin.blur();
+}
+createUsernames(accounts);
+
+btnLogin.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  setCurrentAccount();
+
+  if (isPinCorrect()) {
+    display(currentAccount);
+  }
+
+  clearInput();
+});
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
@@ -272,7 +378,7 @@ movements3Usd4.forEach((mov) => console.log(mov));
 
 // 11/151 Computing usernames
 
-function getUsername(user) {
+function getUsername2(user) {
   return user
     .split(' ')
     .map((word) => word.at(0))
@@ -280,13 +386,13 @@ function getUsername(user) {
     .toLocaleLowerCase();
 }
 
-function createUsernames(accounts) {
+function createUsernames2(accounts) {
   accounts.forEach((account) => {
-    account.username = getUsername(account.owner);
+    account.username = getUsername2(account.owner);
   });
 }
 
-createUsernames(accounts);
+createUsernames2(accounts);
 console.log(accounts);
 
 // 11/152 The filter method
@@ -394,3 +500,5 @@ console.log(movements7.find((mov) => mov > 500));
 // find with destructuring {}
 const accounts2 = [account1, account2, account3, account4];
 console.log(accounts2.find(({ owner }) => owner === 'Sarah Smith'));
+
+// 11/158
