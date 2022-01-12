@@ -30,13 +30,14 @@ body {
   background-image:
     linear-gradient(
       to right bottom,
-      hsl(111deg 55% 64% / 80%),
-      hsl(160deg 64% 43% / 80%)
+      rgba(113, 158, 214, 0.7),
+      rgba(39, 95, 180, 0.7)
     ),
-    url('../img/hero.jpg');
-  background-position: top;
+    url('../img/bike.jpeg');
+  background-position: center;
   background-size: cover;
-  clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+  clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%);
+
 }
 
 .logo-box {
@@ -51,6 +52,7 @@ body {
 
 .text-box {
   display: flex;
+  flex-direction: column;
 
   /* align-items: center;
   justify-content: center; */
@@ -58,10 +60,11 @@ body {
 }
 
 .heading-primary {
-  margin: 22vh auto auto;
+  margin: 22vh auto 2em;
   color: #fff;
   text-align: center;
   text-transform: uppercase;
+  backface-visibility: hidden;
 }
 
 .heading-primary-main {
@@ -69,6 +72,8 @@ body {
   font-weight: 400;
   font-size: 3.5rem;
   letter-spacing: 35px;
+  animation-name: moveInLeft;
+  animation-duration: 0.9s;
 }
 
 .heading-primary-sub {
@@ -76,4 +81,104 @@ body {
   font-weight: 400;
   font-size: 1rem;
   letter-spacing: 17.4px;
+  animation-name: moveInRight;
+  animation-duration: 0.9s;
 }
+
+@keyframes moveInLeft {
+  0% {
+    transform: translateX(-100px);
+    opacity: 0;
+  }
+
+  80% {
+    transform: translateX(10px);
+  }
+
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes moveInRight {
+  0% {
+    transform: translateX(100px);
+    opacity: 0;
+  }
+
+  80% {
+    transform: translateX(-20px);
+  }
+
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes moveInBottom {
+  0% {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.btn:link,
+.btn:visited {
+  position: relative;
+  display: inline-block;
+  padding: 0.8em 2em;
+  border-radius: 100px;
+  box-shadow: rgb(0 0 0 / 24%) 0 3px 8px;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: all 0.2s;
+  animation: moveInBottom;
+  animation-duration: 0.9s;
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  transform: scale(1.03);
+}
+
+.btn:active {
+  box-shadow: rgb(99 99 99 / 20%) 0 2px 8px 0;
+  transform: translateY(-1px);
+  transform: scale(0.98);
+}
+
+.btn-light {
+  margin: 0 auto auto;
+  background-color: #fff;
+  color: #777;
+}
+
+.btn::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  border-radius: 100px;
+  content: '';
+  transition: all .4s;
+}
+
+.btn-light::after {
+  background-color: #fff;
+}
+
+.btn:hover::after {
+  transform: scaleX(1.5) scaleY(1.7);
+  opacity: 0;
+}
+
