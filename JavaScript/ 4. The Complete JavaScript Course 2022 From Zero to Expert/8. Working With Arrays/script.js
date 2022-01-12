@@ -71,7 +71,7 @@ function display(account) {
   displayWelcome(account);
   displayMovements(account);
   displaySummary(account);
-  displayBalance();
+  displayBalance(account);
 }
 
 function displayApp() {
@@ -91,7 +91,7 @@ function displayMovements(account) {
       <div class="movements__value">${mov.toFixed(2)} €</div>
     </div>`;
 
-    containerMovements.innerHTML += movementHtml;
+    containerMovements.insertAdjacentHTML('afterbegin', movementHtml);
   });
 }
 
@@ -100,7 +100,9 @@ function displayWelcome(account) {
 }
 
 function displaySummary(account) {
-  summary = account.movements.reduce((acc, cur) => acc + cur).toFixed(2);
+  account.balance = account.movements
+    .reduce((acc, cur) => acc + cur)
+    .toFixed(2);
 
   const summaryIn = account.movements
     .filter((mov) => mov > 0)
@@ -121,10 +123,8 @@ function displaySummary(account) {
   labelSumInterest.textContent = `${sumInt} €`;
 }
 
-function displayBalance() {
-  labelBalance.textContent = `${(Number(summary) + Number(sumInt)).toFixed(
-    2
-  )} €`;
+function displayBalance(account) {
+  labelBalance.textContent = `${account.balance} €`;
 }
 
 function getUsername(user) {
@@ -154,6 +154,7 @@ function clearInput() {
   inputLoginUsername.value = inputLoginPin.value = '';
   inputLoginPin.blur();
 }
+
 createUsernames(accounts);
 
 btnLogin.addEventListener('click', function (e) {
@@ -168,6 +169,43 @@ btnLogin.addEventListener('click', function (e) {
   clearInput();
 });
 
+btnTransfer.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  const receiver = accounts.find(
+    ({ username }) => username === inputTransferTo.value
+  );
+  const amount = Number(inputTransferAmount.value);
+
+  if (
+    receiver &&
+    isBiggerThanZero(amount) &&
+    hasEnoughMoney(currentAccount, amount) &&
+    !isTransferToHimself(receiver, currentAccount)
+  ) {
+    currentAccount.movements.push(-amount);
+    receiver.movements.push(amount);
+
+    displayMovements(currentAccount);
+    displaySummary(currentAccount);
+    displayBalance(currentAccount);
+  }
+
+  inputTransferTo.value = inputTransferAmount.value = '';
+  inputTransferAmount.blur();
+});
+
+function isBiggerThanZero(x) {
+  return x > 0;
+}
+
+function hasEnoughMoney(currentAccount, amount) {
+  return currentAccount.balance >= amount;
+}
+
+function isTransferToHimself(receiver, currentAccount) {
+  return receiver?.username === currentAccount.username;
+}
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
@@ -501,4 +539,4 @@ console.log(movements7.find((mov) => mov > 500));
 const accounts2 = [account1, account2, account3, account4];
 console.log(accounts2.find(({ owner }) => owner === 'Sarah Smith'));
 
-// 11/158
+// 11/158 Implementing Login
