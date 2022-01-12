@@ -206,6 +206,24 @@ function hasEnoughMoney(currentAccount, amount) {
 function isTransferToHimself(receiver, currentAccount) {
   return receiver?.username === currentAccount.username;
 }
+
+btnClose.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  if (
+    currentAccount.username === inputCloseUsername.value &&
+    currentAccount.pin === Number(inputClosePin.value)
+  ) {
+    const accountNum = accounts.findIndex(
+      ({ username }) => username === inputCloseUsername.value
+    );
+    accounts.splice(accountNum, 1);
+    containerApp.style.opacity = 0;
+  }
+
+  inputCloseUsername.value = inputClosePin.value = '';
+  inputCloseUsername.blur();
+});
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
@@ -540,3 +558,7 @@ const accounts2 = [account1, account2, account3, account4];
 console.log(accounts2.find(({ owner }) => owner === 'Sarah Smith'));
 
 // 11/158 Implementing Login
+
+// 11/159 Implementing transfers
+
+// 11/160 The findIndex Method
