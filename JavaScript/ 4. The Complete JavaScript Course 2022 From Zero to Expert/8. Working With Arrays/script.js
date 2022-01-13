@@ -598,3 +598,28 @@ console.log('🚀 ~ allDeposits1', allDeposits1);
 
 const allDeposits2 = accounts.at(3).movements.every((mov) => mov > 0);
 console.log('🚀 ~ allDeposits2', allDeposits2);
+
+// 11/162 flat and flatMap
+
+const arr7 = [[1, 2], [3, 4], 5, 6, 7, 8];
+const arr7Flat = arr7.flat();
+console.log('🚀 ~ arr7Flat', arr7Flat);
+
+const arr8 = [1, 2, [3, [4]]];
+const arr8Flat = arr8.flat();
+console.log('🚀 ~ arr8Flat', arr8Flat);
+
+const arr8Flat2 = arr8.flat(2);
+console.log('🚀 ~ arr8Flat2', arr8Flat2);
+
+const totalBalance = accounts
+  .map((acc) => acc.movements)
+  .flat()
+  .reduce((acc, mov) => acc + mov);
+console.log('🚀 ~ totalBalance', totalBalance);
+
+// flatMap
+const totalBalance2 = accounts
+  .flatMap((acc) => acc.movements)
+  .reduce((acc, mov) => acc + mov);
+console.log('🚀 ~ totalBalance2', totalBalance2);
