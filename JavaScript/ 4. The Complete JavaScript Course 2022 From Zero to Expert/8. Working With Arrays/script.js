@@ -69,6 +69,10 @@ let currentAccount = '';
 function display(account) {
   displayApp();
   displayWelcome(account);
+  updateUI(account);
+}
+
+function updateUI(account) {
   displayMovements(account);
   displaySummary(account);
   displayBalance(account);
@@ -186,9 +190,7 @@ btnTransfer.addEventListener('click', function (e) {
     currentAccount.movements.push(-amount);
     receiver.movements.push(amount);
 
-    displayMovements(currentAccount);
-    displaySummary(currentAccount);
-    displayBalance(currentAccount);
+    updateUI(currentAccount);
   }
 
   inputTransferTo.value = inputTransferAmount.value = '';
@@ -206,6 +208,20 @@ function hasEnoughMoney(currentAccount, amount) {
 function isTransferToHimself(receiver, currentAccount) {
   return receiver?.username === currentAccount.username;
 }
+
+btnLoan.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  const loan = Number(inputLoanAmount.value);
+
+  if (loan > 0 && currentAccount.movements.some((mov) => mov * 0.1 >= loan)) {
+    currentAccount.movements.push(loan);
+    updateUI(currentAccount);
+  }
+
+  inputLoanAmount.value = '';
+  inputLoanAmount.blur();
+});
 
 btnClose.addEventListener('click', function (e) {
   e.preventDefault();
@@ -562,3 +578,23 @@ console.log(accounts2.find(({ owner }) => owner === 'Sarah Smith'));
 // 11/159 Implementing transfers
 
 // 11/160 The findIndex Method
+
+// 11/161 some and every
+
+// EQUALITY
+console.log(movements.includes(-130));
+
+// CONDITION
+
+// Some
+console.log(movements.some((mov) => mov > 0));
+
+const anyDeposits = movements.some((mov) => mov > 0);
+console.log('🚀 ~ anyDeposits', anyDeposits);
+
+// Every
+const allDeposits1 = movements.every((mov) => mov > 0);
+console.log('🚀 ~ allDeposits1', allDeposits1);
+
+const allDeposits2 = accounts.at(3).movements.every((mov) => mov > 0);
+console.log('🚀 ~ allDeposits2', allDeposits2);
