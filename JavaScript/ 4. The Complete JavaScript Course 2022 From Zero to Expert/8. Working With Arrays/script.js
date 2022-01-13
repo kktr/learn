@@ -82,10 +82,14 @@ function displayApp() {
   containerApp.style.opacity = 1;
 }
 
-function displayMovements(account) {
+function displayMovements(account, sorted = false) {
   containerMovements.innerHTML = '';
 
-  account.movements.forEach((mov, i) => {
+  const moves = sorted
+    ? account.movements.slice().sort((a, b) => a - b)
+    : account.movements;
+
+  moves.forEach((mov, i) => {
     const movType = mov > 0 ? 'deposit' : 'withdrawal';
     const movNumber = i + 1;
 
@@ -240,6 +244,18 @@ btnClose.addEventListener('click', function (e) {
   inputCloseUsername.value = inputClosePin.value = '';
   inputCloseUsername.blur();
 });
+
+btnSort.addEventListener('click', function (e) {
+  e.preventDefault();
+  currentAccount.isSorted = !currentAccount.isSorted || false;
+
+  displayMovements(currentAccount, currentAccount.isSorted);
+});
+
+console.log(
+  '🚀 ~ currentAccount.sortedMovements',
+  currentAccount.sortedMovements
+);
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
@@ -623,3 +639,13 @@ const totalBalance2 = accounts
   .flatMap((acc) => acc.movements)
   .reduce((acc, mov) => acc + mov);
 console.log('🚀 ~ totalBalance2', totalBalance2);
+
+// 11/163 Sorting arrays
+
+const arr9 = [20, -50, 2000, 3];
+
+arr9.sort((a, b) => a - b);
+console.log('🚀 ~ arr9', arr9);
+
+arr9.sort((a, b) => b - a);
+console.log('🚀 ~ arr9', arr9);
