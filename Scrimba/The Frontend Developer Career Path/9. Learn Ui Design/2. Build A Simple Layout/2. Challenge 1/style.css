@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito:400,700&display=swap');
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  display: grid;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  background-color: hsl(0deg 0% 62%);
+  color: aliceblue;
+  font-family: 'Nunito', sans-serif;
+}
+
+/*
+
+- White Space
+- Color
+- Contrast
+- Scale
+- Alignment
+- Typography
+- Visual Hierarchy
+
+*/
+
+.container {
+  display: grid;
+  max-width: 31em;
+  margin: auto;
+  padding: 2em;
+  border-radius: 15px;
+  background-color: hsl(0deg 0% 20%);
+  place-content: center;
+}
+
+h1 {
+  margin: 0 0 0.4em;
+  color: #0074d9;
+  font-weight: 700;
+  font-size: 2.7rem;
+  letter-spacing: 0.05em;
+}
+
+span {
+  display: inline-block;
+  margin: 0 0 0 0.5em;
+  padding: 0.2em 0.5em;
+  border-radius: 8px;
+  background-color: slategrey;
+  color: aliceblue;
+  font-weight: 500;
+  font-size: 1rem;
+  letter-spacing: 0;
+}
+
+p {
+  margin: 0;
+  text-align: justify;
+  opacity: 0.9;
+}

@@ -1,0 +1,75 @@
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: grid;
+  align-items: center;
+  color: white;
+  font-family: 'Montserrat', sans-serif;
+  background:
+    linear-gradient(
+      322deg,
+      rgb(43 46 39 / 100%) 29%,
+      rgb(28 28 28 / 100%) 29%,
+      rgb(28 28 28 / 100%) 40%,
+      rgb(43 46 39 / 100%) 40%,
+      rgb(43 46 39 / 100%) 48%,
+      rgb(28 28 28 / 100%) 48%,
+      rgb(28 28 28 / 100%) 92%,
+      rgb(113 174 33 / 100%) 92%,
+      rgb(113 174 33 / 100%) 100%
+    );
+}
+
+.container {
+  width: 40%;
+  height: 50%;
+  margin-left: 4em;
+}
+
+h1 {
+  margin-top: 0;
+  font-size: 2.4em;
+}
+
+p {
+  margin-bottom: 0.5em;
+  font-size: 1.2em;
+  text-transform: uppercase;
+}
+
+span {
+  position: relative;
+}
+
+span::before {
+  content: '';
+  position: absolute;
+  bottom: 0.1em;
+  z-index: -1;
+  width: 80%;
+  height: 0.2em;
+  background: #71ae21;
+}
+
+/*
+
+- White Space
+- Color
+- Contrast
+- Scale
+- Alignment
+- Typography
+- Visual Hierarchy
+
+*/

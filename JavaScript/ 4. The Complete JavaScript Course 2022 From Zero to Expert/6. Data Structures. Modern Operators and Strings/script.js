@@ -125,7 +125,7 @@ console.log(menu, starters);
 //Mutating variables
 let a2 = 111;
 let b2 = 999;
-const obj2 = { a: 23, b: 7, c: 14 };
+const obj2 = { a2: 23, b2: 7, c: 14 };
 console.log(a2, b2);
 
 ({ a2, b2 } = obj2);
@@ -1064,3 +1064,99 @@ const planesInLine = function (n) {
 };
 
 planesInLine(7);
+
+// Coding Challenge 4
+
+/* 
+Write a program that receives a list of variable names written in underscore_case and convert them to camelCase.
+
+The input will come from a textarea inserted into the DOM (see code below), and conversion will happen when the button is pressed.
+
+THIS TEST DATA (pasted to textarea)
+underscore_case
+ first_name
+Some_Variable 
+  calculate_AGE
+delayed_departure
+
+SHOULD PRODUCE THIS OUTPUT (5 separate console.log outputs)
+underscoreCase      ✅
+firstName           ✅✅
+someVariable        ✅✅✅
+calculateAge        ✅✅✅✅
+delayedDeparture    ✅✅✅✅✅
+
+HINT 1: Remember which character defines a new line in the textarea 😉
+HINT 2: The solution only needs to work for a variable made out of 2 words, like a_b
+HINT 3: Start without worrying about the ✅. Tackle that only after you have the variable name conversion working 😉
+HINT 4: This challenge is difficult on purpose, so start watching the solution in case you're stuck. Then pause and continue!
+
+Afterwards, test with your own test data!
+
+GOOD LUCK 😀
+*/
+
+const textAreaEl = document.createElement('textarea');
+document.body.append(textAreaEl);
+
+const button = document.createElement('button');
+document.body.append(button);
+
+button.addEventListener('click', function () {
+  camelCaseGen(textAreaEl.value);
+});
+
+function camelCaseGen(words) {
+  let wordsArr = words.split('\n');
+  let camelCaseWord = '';
+
+  for (const [index, word] of wordsArr.entries()) {
+    let [firstWord, secundWord] = word.toLocaleLowerCase().split('_');
+
+    const secundLetterUp = secundWord[0].toUpperCase();
+    secundWord = secundWord.replace(secundWord[0], secundLetterUp);
+    camelCaseWord = firstWord.trim() + secundWord;
+    camelCaseWord = camelCaseWord.padEnd(20) + '✅'.repeat(index + 1);
+    console.log(camelCaseWord);
+  }
+
+  return;
+}
+
+camelCaseGen(`underscore_case
+  first_name
+Some_Variable
+  calculate_AGE
+delayed_departure`);
+
+// 9/125 Strings Methods Practice
+
+let flights1 = flights;
+
+function logFlightInfo(data) {
+  const flightsArr = data.split('+');
+
+  for (const flight of flightsArr) {
+    let flightArr = flight.split(';');
+
+    flightArr[0] = flightArr[0].replace('_', '').replace('_', ' ');
+
+    if (flightArr[0].slice(0, 7) === 'Delayed') {
+      flightArr[0] = '🔴 ' + flightArr[0];
+    }
+    flightArr[1] = getFirst3Letters(flightArr[1]);
+    flightArr[2] = getFirst3Letters(flightArr[2]);
+
+    console.log(
+      `${flightArr[0]} from ${flightArr[1]} to ${flightArr[2]} at (${flightArr[3]})`.padStart(
+        50
+      )
+    );
+  }
+}
+
+function getFirst3Letters(word) {
+  return word.toUpperCase().slice(0, 3);
+}
+
+logFlightInfo(flights1);

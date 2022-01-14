@@ -1,0 +1,79 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background-color: hsl(120deg 79% 95%);
+}
+
+.apis-container {
+  max-width: 800px;
+  margin: auto;
+}
+
+.my-api {
+  display: grid;
+  grid-template-areas:
+    'title title title'
+    '. body .'
+    'footer footer footer';
+  grid-template-columns: 1fr 3fr 1fr;
+  justify-items: center;
+  margin: 1em;
+  padding: 1em;
+  border-radius: 0.2em;
+  background-color: hsl(219deg 79% 95%);
+}
+
+.api-title {
+  grid-area: title;
+}
+
+.link {
+  padding: 0.5em;
+  color: hsl(270deg 79% 66%);
+  font-weight: 900;
+  font-size: 1.5rem;
+  text-decoration: none;
+}
+
+.link:focus,
+.link:hover {
+  opacity: 0.8;
+}
+
+.api-body {
+  grid-area: body;
+  margin-bottom: 2em;
+  letter-spacing: 1px;
+  text-align: justify;
+}
+
+.api-footer {
+  display: flex;
+  grid-area: footer;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.api-auth { grid-area: auth; }
+
+.https-true,
+.auth-none {
+  color: hsl(120deg 81% 58%);
+}
+
+.https-false,
+.auth-true {
+  color: hsl(0deg 79% 66%);
+}
+
+.api-https {
+  grid-area: https;
+}
+
+.api-footer div {
+  padding: 0.5em 1.2em;
+  border-radius: 0.2em;
+  background-color: hsl(60deg 79% 66%);
+  font-weight: bold;
+}
