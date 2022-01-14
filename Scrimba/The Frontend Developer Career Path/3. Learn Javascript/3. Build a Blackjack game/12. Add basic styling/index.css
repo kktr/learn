@@ -1,17 +1,17 @@
 /* Complete the CSS styling according to the provided design */
 
 body {
-    font-family: 'Trebuchet MS';
-    text-align: center;
-    color: white;
-    background-image: url("images/table.png");
-    background-size: cover;
-    font-size: 30px;
-    font-weight: bold;
+  background-image: url('images/table.png');
+  background-size: cover;
+  color: white;
+  font-weight: bold;
+  font-size: 30px;
+  font-family: 'Trebuchet MS', sans-serif;
+  text-align: center;
 }
 
 h1 {
-    color: goldenrod;
+  color: goldenrod;
 }
 
 #message-el {

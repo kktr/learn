@@ -3,15 +3,15 @@
 const buttonNewIdea = document.getElementById('button-new-idea');
 const textNewIdea = document.getElementById('text-new-idea');
 const main = document.getElementById('main');
-const siteTitle = document.getElementById('site-tite');
+const siteTitle = document.getElementById('site-title');
 const siteInfo = document.getElementById('site-info');
 
 let newIdea = '';
 
 function getNewIdea() {
   fetch('https://apis.scrimba.com/bored/api/activity')
-    .then(response => response.json())
-    .then(data => (newIdea = data.activity));
+    .then((response) => response.json())
+    .then((data) => (newIdea = data.activity));
 }
 
 getNewIdea();

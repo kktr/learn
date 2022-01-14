@@ -1,28 +1,32 @@
 body {
-  text-align: center;
-  background-image: url("images/table.png");
+  background-image: url('images/table.png');
   background-size: cover;
   color: white;
   font-weight: bold;
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', Arial,
-                sans-serif;
+  font-family:
+    'Trebuchet MS',
+    'Lucida Sans Unicode',
+    'Lucida Grande',
+    'Arial',
+    sans-serif;
+  text-align: center;
 }
 
 h1 {
-  font-size: 2em;
   color: goldenrod;
+  font-size: 2em;
 }
 
 button {
-  margin: 0px 5px;
+  width: 150px;
+  margin: 0 5px;
+  padding: 5px 0;
+  border-width: 0;
+  border-radius: 3px;
   background-color: goldenrod;
   color: green;
-  width: 150px;
-  border-radius: 3px;
   font-weight: bold;
-  padding: 5px 0px;
   font-size: 1.1em;
-  border-width: 0px;
 }
 
 #message-el {
@@ -30,17 +34,17 @@ button {
 }
 
 #start-btn::after {
-content: "START GAME";
+  content: 'START GAME';
 }
 
 #start-btn:hover::after {
- content: "PAY 10$";
+  content: 'PAY 10$';
 }
 
-#newcard-btn::after {
-content: "NEW CARD";
+#newCard-btn::after {
+  content: 'NEW CARD';
 }
 
-#newcard-btn:hover::after {
- content: "PAY 1$";
+#newCard-btn:hover::after {
+  content: 'PAY 1$';
 }

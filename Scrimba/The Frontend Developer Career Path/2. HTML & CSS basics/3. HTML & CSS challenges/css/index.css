@@ -1,15 +1,14 @@
 body {
-  margin: 0px;
-
+  margin: 0;
 }
 
 h1 {
-  margin-top: 0px;
-  padding: 25px 0px;
-  background: #281B2D;
-  color: #FFF;
-  text-align: center;
+  margin-top: 0;
+  padding: 25px 0;
+  color: #fff;
   font-size: 72px;
+  text-align: center;
+  background: #281b2d;
 }
 
 /* solution with header styled */
@@ -27,14 +26,14 @@ h1 {
 } */
 
 .header-two {
-  margin-top: 0px;
-  font-size: 48px;
-  background: #281B2D;
-  color: #FCD801;
-  border-color: #00C54C;
-  border-style: solid;
-  border-width: 0 0 5px 0;
+  margin-top: 0;
   padding: 20px;
+  border-width: 0 0 5px;
+  border-style: solid;
+  border-color: #00c54c;
+  color: #fcd801;
+  font-size: 48px;
+  background: #281b2d;
 }
 
 /* better solution:
@@ -57,33 +56,33 @@ border-bottom: 5px solid #00C54C;
 }
 
 .sidebar {
-    width: 30%;
-    background: #9AE84F;
-    padding: 15px;
+  width: 30%;
+  padding: 15px;
+  background: #9ae84f;
 }
 
 .columns {
   display: flex;
 }
+
 .col-right {
-    margin-left: 25px;
+  margin-left: 25px;
 }
 
 ol {
   padding-left: 20px;
-
 }
 
 ol li {
-    margin-bottom: 15px;
+  margin-bottom: 15px;
 }
 
 a {
-  color: #281B2D;
+  color: #281b2d;
 }
 
 a:hover {
-  color: #9138B7;
+  color: #9138b7;
 }
 
 .source {
@@ -91,5 +90,5 @@ a:hover {
 }
 
 aside h2 {
-  margin-bottom: 0px;
+  margin-bottom: 0;
 }

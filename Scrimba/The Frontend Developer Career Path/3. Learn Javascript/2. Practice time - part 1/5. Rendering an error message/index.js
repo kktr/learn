@@ -3,5 +3,6 @@
 // that has the id="error".
 
 function message() {
-  document.getElementById('error').innerText = "Something went wrong, please try again";
+  document.getElementById('error').innerText =
+    'Something went wrong, please try again';
 }

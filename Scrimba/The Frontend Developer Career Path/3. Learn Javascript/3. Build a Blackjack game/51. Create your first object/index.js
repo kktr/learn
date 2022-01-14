@@ -5,8 +5,8 @@
 let airbnbCastle = {
   isHilly: true,
   howBig: 3,
-  motto: "Lorem ipsum, crazy dipsum",
-  addInfo: ["grey", "forest"]
+  motto: 'Lorem ipsum, crazy dipsum',
+  addInfo: ['grey', 'forest'],
 };
 
 console.log(airbnbCastle.howBig);

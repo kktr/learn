@@ -1,10 +1,10 @@
-let hasCompletedCourse = false
-let givesCertificate = true
+let hasCompletedCourse = false;
+let givesCertificate = true;
 
 if (hasCompletedCourse && givesCertificate) {
-        generateCertificate()
+  generateCertificate();
 }
 
 function generateCertificate() {
-    console.log("Generating certificate....")
+  console.log('Generating certificate....');
 }

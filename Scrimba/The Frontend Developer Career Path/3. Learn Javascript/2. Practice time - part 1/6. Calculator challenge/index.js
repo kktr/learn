@@ -1,7 +1,8 @@
-let num1 = 8
-let num2 = 2
-document.getElementById("num1-el").textContent = num1
-document.getElementById("num2-el").textContent = num2
+document.getElementById('num1-el').textContent = num1;
+document.getElementById('num2-el').textContent = num2;
+
+let num1 = 8;
+let num2 = 2;
 
 // Create four functions: add(), subtract(), divide(), multiply()
 // Call the correct function when the user clicks on one of the buttons
@@ -10,20 +11,25 @@ document.getElementById("num2-el").textContent = num2
 
 // E.g. if the user clicks on the "Plus" button, you should render
 // "Sum: 10" (since 8 + 2 = 10) inside the paragraph with id="sum-el"
-let sum = 0
+
+let sum = 0;
+
 function FunAdd() {
-  sum = num1 + num2
-  document.getElementById('sum-el').innerText ="Sum: " + sum;
+  sum = num1 + num2;
+  document.getElementById('sum-el').innerText = 'Sum: ' + sum;
 }
+
 function FunDiv() {
-  sum = num1 / num2
-  document.getElementById("sum-el").innerText = "Sum: " + sum;
+  sum = num1 / num2;
+  document.getElementById('sum-el').innerText = 'Sum: ' + sum;
 }
+
 function FunMul() {
   sum = num1 * num2;
-  document.getElementById('sum-el').innerText = "Sum: " + sum;
+  document.getElementById('sum-el').innerText = 'Sum: ' + sum;
 }
+
 function FunSub() {
   sum = num1 - num2;
-  document.getElementById("sum-el").innerText = "Sum: " + sum;
+  document.getElementById('sum-el').innerText = 'Sum: ' + sum;
 }
