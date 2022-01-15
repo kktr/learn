@@ -682,3 +682,86 @@ labelBalance.addEventListener('click', function () {
 
   console.log('🚀 ~ movementsUiEl', movementsUiEl);
 });
+
+// 11/165 summary, which array method to use
+
+// 11/166 Array Method Practice
+
+// 1.
+const bankDepositSum = accounts
+  .flatMap(({ movements }) => movements.filter((x) => x > 0))
+  .reduce((acc, cur) => acc + cur, 0);
+console.log('🚀 ~ bankDepositSum', bankDepositSum);
+
+// 2
+const numDeposits1000 = accounts.flatMap(({ movements }) =>
+  movements.filter((x) => x >= 1000)
+).length;
+console.log('🚀 ~ numDeposits1000', numDeposits1000);
+
+const numDeposits1000v2 = accounts
+  .flatMap(({ movements }) => movements)
+  .reduce((count, curr) => (curr >= 1000 ? ++count : count), 0);
+
+console.log('🚀 ~ numDeposits1000v2', numDeposits1000v2);
+
+// 3
+const { deposits, withdrawals } = accounts
+  .flatMap(({ movements }) => movements)
+  .reduce(
+    (acc, curr) => {
+      acc[curr > 0 ? 'deposits' : 'withdrawals'] += curr;
+
+      return acc;
+    },
+    { deposits: 0, withdrawals: 0 }
+  );
+console.log('🚀 ~ deposits', deposits);
+console.log('🚀 ~ withdrawals', withdrawals);
+
+// 4 Convert title case
+let sentence = 'a Convert a titLe cAsE Yet';
+function convertTitleCase(sentence) {
+  const exceptions = [
+    'and',
+    'as',
+    'but',
+    'for',
+    'if',
+    'nor',
+    'or',
+    'so',
+    'yet',
+    'a',
+    'an',
+    'the',
+    'as',
+    'at',
+    'by',
+    'for',
+    'in',
+    'of',
+    'off',
+    'on',
+    'per',
+    'to',
+    'up',
+    'via',
+  ];
+  console.log('🚀 ~ convertTitleCase ~ exceptions', exceptions);
+
+  let converted = sentence
+    .toLowerCase()
+    .split(' ')
+    .map((word, index) => {
+      console.log(!exceptions.some((exceptions) => exceptions === word));
+      return !exceptions.includes(word) || index === 0
+        ? word.at(0).toUpperCase() + word.slice(1)
+        : word;
+    })
+    .join(' ');
+
+  console.log(converted);
+}
+
+convertTitleCase(sentence);
