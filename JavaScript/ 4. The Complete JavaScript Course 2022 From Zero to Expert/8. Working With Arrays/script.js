@@ -649,3 +649,36 @@ console.log('🚀 ~ arr9', arr9);
 
 arr9.sort((a, b) => b - a);
 console.log('🚀 ~ arr9', arr9);
+
+// 11/164 More Ways of Creating and Filling Arrays
+
+const arr10 = [1, 2, 3, 4, 5, 6, 7];
+
+new Array(1, 2, 3, 4, 5, 6, 7);
+console.log('🚀 ~ new Array(1,2,3,4,5,6,7)', new Array(1, 2, 3, 4, 5, 6, 7));
+
+const x = new Array(7);
+console.log('🚀 ~ x', x);
+
+// fill with 1 from place 3 to place 5
+x.fill(1, 3, 5);
+console.log('🚀 ~ x', x);
+
+arr10.fill(23, 2, 6);
+console.log('🚀 ~ arr10', arr10);
+
+// Array.from
+const y = Array.from({ length: 7 }, () => 1);
+console.log('🚀 ~ y', y);
+
+const z = Array.from({ length: 7 }, (_, i) => i + 1);
+console.log('🚀 ~ z', z);
+
+labelBalance.addEventListener('click', function () {
+  const movementsUiEl = Array.from(
+    document.querySelectorAll('.movements__value'),
+    (el) => Number(el.textContent.replace('€', ''))
+  );
+
+  console.log('🚀 ~ movementsUiEl', movementsUiEl);
+});
