@@ -1,0 +1,34 @@
+body {
+  // padding: 1.875em;
+  color: #777;
+  font-weight: 400;
+  font-size: 16px;
+  font-family: 'Lato', sans-serif;
+  line-height: 1.7;
+}
+
+.heading-primary {
+  margin: 22vh auto 2em;
+  color: #fff;
+  text-align: center;
+  text-transform: uppercase;
+  backface-visibility: hidden;
+
+  &--main {
+    display: block;
+    font-weight: 400;
+    font-size: 3.5rem;
+    letter-spacing: 0.625em;
+    animation-name: moveInLeft;
+    animation-duration: 0.9s;
+  }
+
+  &--sub {
+    display: block;
+    font-weight: 400;
+    font-size: 1rem;
+    letter-spacing: 1.0875em;
+    animation-name: moveInRight;
+    animation-duration: 0.9s;
+  }
+}
