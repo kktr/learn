@@ -34,9 +34,12 @@ body {
 }
 
 header {
+  margin-bottom: 2.9em;
+}
+
+.container--header {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 2.9em;
 }
 
 body {
@@ -82,14 +85,22 @@ h3 {
   font-size: var(--fs-h3);
 }
 
+.container {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
 .section__title {
   margin-bottom: 0.25em;
+  backface-visibility: hidden;
 }
 
 .section__title--intro {
   width: 100%;
   margin: 0 auto;
   font-weight: var(--fw-reg);
+  animation: moveInLeft;
+  animation-duration: 0.9s;
 }
 
 .section__title--intro strong {
@@ -116,6 +127,8 @@ h3 {
   padding: 0.1em 0;
   font-size: 1.6875rem;
   letter-spacing: 3.77px;
+  animation: moveInRight;
+  animation-duration: 0.9s;
 }
 
 /* header */
@@ -136,11 +149,15 @@ nav {
   z-index: 1;
   max-width: 78vw;
   margin: auto;
+  animation: moveFromZero 0.6s ease-out 0.75s;
+  animation-fill-mode: backwards;
 }
 
 .logo {
   max-width: 138px;
   margin-left: 1.3637em;
+  animation: moveInTop 0.6s ease-out 1.2s;
+  animation-fill-mode: backwards;
 }
 
 .my-services {
@@ -188,7 +205,7 @@ nav {
 
 .btn:active {
   box-shadow: rgb(50 50 93 / 25%) 0 2px 5px -1px, rgb(0 0 0 / 30%) 0 1px 3px -1px;
-  transform: scale(0.95);
+  transform: scale(0.98);
 }
 
 .about-me {
@@ -202,23 +219,23 @@ nav {
 }
 
 .section__subtitle--about {
-  text-transform: none;
-  max-width: 83vw;
-  margin-bottom: 1.7em;
+  max-width: 100%;
+  margin: 0 0 1.7em;
   padding: 0.5em 2.1em;
   font-size: 1.5rem;
   line-height: 1;
   letter-spacing: 0;
   text-align: center;
+  text-transform: none;
 }
 
 .about-me__image {
-  max-width: 76.25vw;
+  max-width: 76.25%;
   margin: auto;
 }
 
 .about-me__body {
-  max-width: 76.56vw;
+  max-width: 76.56%;
   margin: 1.222em auto auto;
   text-align: center;
 }
@@ -250,13 +267,17 @@ nav {
   gap: 1em;
   justify-content: center;
   justify-items: center;
-  max-width: 75vw;
+  max-width: 75%;
   margin: auto;
   padding-bottom: 3.0555em;
 }
 
 .portfolio__img {
+  transition: transform 0.3s;
+}
 
+.portfolio__img:hover {
+  transform: scale(1.09);
 }
 
 .footer {
@@ -268,7 +289,7 @@ nav {
 }
 
 .footer__link {
-  margin-bottom: 3.29166em;
+  margin-bottom: 3.2916em;
   color: inherit;
   font-weight: 600;
   font-size: 1.5rem;
@@ -279,9 +300,9 @@ nav {
 .social-list {
   display: flex;
   justify-content: space-between;
-  max-width: 73.75vw;
+  max-width: 73.75%;
   margin: auto;
-  margin-top: 3.29166em;
+  margin-top: 3.2916em;
   padding: 0;
   list-style-type: none;
 }
@@ -291,8 +312,80 @@ nav {
   text-decoration: none;
 }
 
+@keyframes moveInLeft {
+  0% {
+    transform: translateX(-6.25em);
+    opacity: 0;
+  }
+
+  80% {
+    transform: translateX(0.625em);
+  }
+
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes moveInRight {
+  0% {
+    transform: translateX(6.25em);
+    opacity: 0;
+  }
+
+  80% {
+    transform: translateX(-0.625em);
+  }
+
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes moveInTop {
+  0% {
+    transform: translateY(-6.25em);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes moveInBottom {
+  0% {
+    transform: translateY(5em);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes moveFromZero {
+  0% {
+    transform: scale(0);
+    opacity: 0.5;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
 @media (min-width: 600px) {
-  .intro {
+  .container {
+    max-width: 80%;
+  }
+
+  .container--intro {
     display: grid;
     grid-template-areas:
       'img title'
@@ -330,4 +423,23 @@ nav {
     letter-spacing: 3.77px;
     text-align: right;
   }
+
+  .my-services {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: linear-gradient(rgba(40, 40, 40, 0.653), rgba(0, 0, 0, 0.653)), url('../img/services-bg.jpg');
+  }
+}
+
+@media (min-width: 900px) {
+  .container {
+    max-width: 700px;
+  }
+
+
+}
+
+@media (min-width: 1450px) {
+
 }
