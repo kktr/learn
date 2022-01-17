@@ -63,8 +63,9 @@ body {
 }
 
 .heading-primary {
-  margin: 22vh auto 2em;
+  margin: 22vh auto 1.1428571429em;
   color: #fff;
+  font-size: 3.5rem;
   text-align: center;
   text-transform: uppercase;
   backface-visibility: hidden;
@@ -72,7 +73,6 @@ body {
 .heading-primary--main {
   display: block;
   font-weight: 400;
-  font-size: 3.5rem;
   letter-spacing: 0.625em;
   animation-name: moveInLeft;
   animation-duration: 0.9s;
@@ -95,14 +95,6 @@ body {
   text-decoration: none;
   text-transform: uppercase;
 }
-.btn:hover {
-  transform: translateY(-0.1875em);
-  transform: scale(1.03);
-}
-.btn:hover::after {
-  transform: scaleX(1.5) scaleY(1.7);
-  opacity: 0;
-}
 .btn:active {
   box-shadow: #63636333 0 0.125em 0.5em 0;
   transform: translateY(-0.0625em);
@@ -119,6 +111,14 @@ body {
   height: 100%;
   border-radius: 1em;
   transition: all 0.4s;
+}
+.btn:hover {
+  transform: translateY(-0.1875em);
+  transform: scale(1.03);
+}
+.btn:hover::after {
+  transform: scaleX(1.5) scaleY(1.7);
+  opacity: 0;
 }
 .btn-light {
   margin: 0 auto auto;
@@ -147,7 +147,7 @@ body {
   left: 2.5em;
 }
 .header__logo {
-  height: 2.188em;
+  height: 2.1875em;
 }
 .header__text-box {
   display: flex;

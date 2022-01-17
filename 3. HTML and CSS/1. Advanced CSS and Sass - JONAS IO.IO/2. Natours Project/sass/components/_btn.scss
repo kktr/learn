@@ -1,23 +1,15 @@
+@use '../base/typography';
+
 .btn {
   &:link,
   &:visited {
     position: relative;
     display: inline-block;
-    padding: 1em 2em;
-    border-radius: 1em;
+    padding: typography.em(16px) typography.em(32px);
+    border-radius: typography.em(16px);
     box-shadow: #0000003d 0 0.1875em 0.5em;
     text-decoration: none;
     text-transform: uppercase;
-  }
-
-  &:hover {
-    transform: translateY(-0.1875em);
-    transform: scale(1.03);
-
-    &::after {
-      transform: scaleX(1.5) scaleY(1.7);
-      opacity: 0;
-    }
   }
 
   &:active {
@@ -37,6 +29,16 @@
     height: 100%;
     border-radius: 1em;
     transition: all 0.4s;
+  }
+
+  &:hover {
+    transform: translateY(-0.1875em);
+    transform: scale(1.03);
+
+    &::after {
+      transform: scaleX(1.5) scaleY(1.7);
+      opacity: 0;
+    }
   }
 
   &-light {

@@ -1,15 +1,28 @@
+@use '../abstracts/functions';
+@use 'sass:math';
+
+@function rem($pxValue) {
+  @return math.div($pxValue, 16px) * 1rem;
+}
+
+@function em($pxValue, $context: $browser-context) {
+  @return math.div($pxValue, $context) * 1em;
+}
+
+$browser-context: 16px;
+
 body {
-  // padding: 1.875em;
   color: #777;
   font-weight: 400;
-  font-size: 16px;
+  font-size: $browser-context;
   font-family: 'Lato', sans-serif;
   line-height: 1.7;
 }
 
 .heading-primary {
-  margin: 22vh auto 2em;
+  margin: 22vh auto em(64px, 56px);
   color: #fff;
+  font-size: rem(56px);
   text-align: center;
   text-transform: uppercase;
   backface-visibility: hidden;
@@ -17,8 +30,7 @@ body {
   &--main {
     display: block;
     font-weight: 400;
-    font-size: 3.5rem;
-    letter-spacing: 0.625em;
+    letter-spacing: em(35px, 56px);
     animation-name: moveInLeft;
     animation-duration: 0.9s;
   }
@@ -26,8 +38,8 @@ body {
   &--sub {
     display: block;
     font-weight: 400;
-    font-size: 1rem;
-    letter-spacing: 1.0875em;
+    font-size: rem(16px);
+    letter-spacing: em(17.4px);
     animation-name: moveInRight;
     animation-duration: 0.9s;
   }

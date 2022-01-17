@@ -1,12 +1,14 @@
 @use '../abstracts/variables';
+@use '../base/typography';
 
 .header {
   position: relative;
   height: 95vh;
-  background-image: linear-gradient(
+  background-image:
+    linear-gradient(
       to right bottom,
-      rgba(variables.$color-primary--light, 0.702),
-      rgba(variables.$color-primary--dark, 0.702)
+      rgb(variables.$color-primary--light, 0.702),
+      rgb(variables.$color-primary--dark, 0.702)
     ),
     url('../img/bike.jpeg');
   background-position: bottom left;
@@ -15,12 +17,12 @@
 
   &__logo-box {
     position: absolute;
-    top: 2.5em;
-    left: 2.5em;
+    top: typography.em(40px);
+    left: typography.em(40px);
   }
 
   &__logo {
-    height: 2.188em;
+    height: typography.em(35px);
   }
 
   &__text-box {
