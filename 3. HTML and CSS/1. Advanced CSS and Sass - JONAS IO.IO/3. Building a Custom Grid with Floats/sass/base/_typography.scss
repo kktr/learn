@@ -1,0 +1,21 @@
+@use 'sass:math';
+
+@function rem($pxValue) {
+  @return math.div($pxValue, 16px) * 1rem;
+}
+
+@function em($pxValue, $context: $browser-context) {
+  @return math.div($pxValue, $context) * 1em;
+}
+
+$browser-context: 16px;
+
+body {
+  padding: 2em;
+  color: #111;
+  font-weight: 400;
+  font-size: $browser-context;
+  font-family: 'Lato', sans-serif;
+  line-height: 1.7;
+  text-align: center;
+}

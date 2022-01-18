@@ -1,0 +1,8 @@
+@use '../base/typography';
+
+$color-primary: #7ed56f;
+$color-secondary: rgb(113 158 214);
+$color-accent: rgb(103, 119, 139);
+
+$gutter-horizontal: typography.rem(20px);
+$gutter-vertical: typography.rem(80px);

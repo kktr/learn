@@ -1,0 +1,62 @@
+body {
+  padding: 2em;
+  color: #111;
+  font-weight: 400;
+  font-size: 16px;
+  font-family: "Lato", sans-serif;
+  line-height: 1.7;
+  text-align: center;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+body {
+  box-sizing: border-box;
+}
+
+.grid__row {
+  max-width: 71.25rem;
+  margin: 0 auto;
+  background-color: #719ed6;
+}
+.grid__row::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.grid__row:not(:last-child) {
+  margin-bottom: 5rem;
+}
+.grid__col {
+  float: left;
+  background-color: #7ed56f;
+}
+.grid__col:not(:last-child) {
+  margin-right: 1.25rem;
+}
+.grid__col--1-of-2 {
+  width: calc((100% - 1.25rem) / 2);
+}
+.grid__col--1-of-3 {
+  width: calc((100% - 2 * 1.25rem) / 3);
+}
+.grid__col--2-of-3 {
+  width: calc(2 * ((100% - 2 * 1.25rem) / 3) + 1.25rem);
+}
+.grid__col--1-of-4 {
+  width: calc((100% - 3 * 1.25rem) / 4);
+}
+.grid__col--2-of-4 {
+  width: calc(2 * ((100% - 3 * 1.25rem) / 4) + 1.25rem);
+}
+.grid__col--3-of-4 {
+  width: calc(3 * (100% - 3 * 1.25rem) / 4 + (2* 1.25rem));
+}
+
+/*# sourceMappingURL=main.css.map */

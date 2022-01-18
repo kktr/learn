@@ -1,0 +1,13 @@
+{
+  "name": "3.-building-a-custom-grid-with-floats",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "compileSass": "sass --watch sass/main.scss css/main.css --embed-sources",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "kktr",
+  "license": "ISC"
+}
