@@ -28,15 +28,19 @@
   </head>
 
   <body>
-    <header>
-      <div class="container container--header">
+    <div class="container container--header">
+      <header class="header">
         <div class="logo"><img src="img/devjane.png" alt="logo" /></div>
 
-        <button class="nav-toggle" aria-label="toggle navigation">
+        <button
+          class="nav-toggle"
+          id="nav-toggle-btn"
+          aria-label="toggle navigation"
+        >
           <span class="hamburger"></span>
         </button>
 
-        <nav class="nav">
+        <nav class="nav" id="nav-el">
           <ul class="nav__list">
             <li class="nav__item">
               <a href="#" class="nav__link">Home</a>
@@ -55,11 +59,11 @@
             </li>
           </ul>
         </nav>
-      </div>
-    </header>
+      </header>
+    </div>
 
-    <section class="intro" id="home">
-      <div class="container container--intro">
+    <div class="container container--intro">
+      <section class="intro" id="home">
         <h1 class="section__title section__title--intro">
           Hi, I am <strong>Jane Smith</strong>
         </h1>
@@ -73,27 +77,16 @@
           alt="a picture of Dev smiling"
           class="intro__img"
         />
-      </div>
-    </section>
+      </section>
+    </div>
 
-    <section class="my-services" id="services">
-      <div class="container">
+    <div class="container container--my-services container--dark">
+      <section class="my-services" id="services">
         <h2 class="section__title section__title--services">What I do</h2>
 
         <div class="services">
-          <div class="sevice">
-            <h3 class="service__title">Design + Development</h3>
-
-            <p class="service__body">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.
-            </p>
-          </div>
-
           <div class="service">
-            <h3 class="service__title">E-Commerce</h3>
+            <h3 class="service__title">Design + Development</h3>
 
             <p class="service__body">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -124,25 +117,19 @@
               nisi ut aliquip ex ea commodo consequat.
             </p>
           </div>
-
-          <a href="#work" class="btn">see my Work</a>
         </div>
-      </div>
-    </section>
 
-    <section class="about-me" id="about">
-      <div class="container">
+        <a href="#work" class="btn btn--accent">see my Work</a>
+      </section>
+    </div>
+
+    <div class="container container--about-me">
+      <section class="about-me" id="about">
         <h2 class="section__title section__title--about">Who I am</h2>
 
         <p class="section__subtitle section__subtitle--about">
           Designer & developer based out of NYC
         </p>
-
-        <img
-          class="about-me__image"
-          src="img/dev-jane-02.jpg"
-          alt="Dev leaning against a bus"
-        />
 
         <div class="about-me__body">
           <p>
@@ -159,11 +146,17 @@
             aliquip ex ea commodo consequat.
           </p>
         </div>
-      </div>
-    </section>
 
-    <section class="my-work" id="work">
-      <div class="container">
+        <img
+          class="about-me__image"
+          src="img/dev-jane-02.jpg"
+          alt="Dev leaning against a bus"
+        />
+      </section>
+    </div>
+
+    <div class="container container--my-work container--dark">
+      <section class="my-work" id="work">
         <h2 class="section__title section__title--my-work">My work</h2>
 
         <p class="section__subtitle section__subtitle--my-work">
@@ -195,31 +188,41 @@
             ><img src="img/portfolio-06.jpg" alt="" class="portfolio__img"
           /></a>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
 
-    <footer class="footer">
-      <div class="container">
+    <div class="container container--footer container--black">
+      <footer class="footer">
         <a href="mailto:abc@abc.abc" class="footer__link">abc@abc.abc</a>
 
         <ul class="social-list">
           <li class="social-list__item">
-            <a href="https://codepen.io" class="social-list__link">a</a>
+            <a href="https://codepen.io" class="social-list__link"
+              ><i class="fab fa-codepen"></i
+            ></a>
           </li>
 
           <li class="social-list__item">
-            <a href="http://dribbble.com" class="social-list__link">b</a>
+            <a href="http://dribbble.com" class="social-list__link"
+              ><i class="fab fa-dribbble"></i
+            ></a>
           </li>
 
           <li class="social-list__item">
-            <a href="https://twitter.com" class="social-list__link">c</a>
+            <a href="https://twitter.com" class="social-list__link"
+              ><i class="fab fa-twitter"></i
+            ></a>
           </li>
 
           <li class="social-list__item">
-            <a href="https://github.com" class="social-list__link">d</a>
+            <a href="https://github.com" class="social-list__link"
+              ><i class="fab fa-github"></i
+            ></a>
           </li>
         </ul>
-      </div>
-    </footer>
+      </footer>
+    </div>
+
+    <script src="js/script.js"></script>
   </body>
 </html>
