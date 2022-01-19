@@ -827,6 +827,10 @@ function isYouDogEatingToMuch(owner) {
 
 isYouDogEatingToMuch('Sarah');
 
+// better solution
+const dogSarah = dogs.find((dog) => dog.owners.includes('Sarah'));
+console.log(dogSarah);
+
 // 3. Create an array containing all owners of dogs who eat too much ('ownersEatTooMuch') and an array with all owners of dogs who eat too little ('ownersEatTooLittle').
 
 let ownersEatTooMuch = [];
@@ -841,6 +845,17 @@ dogs.forEach((dog) => {
 });
 console.log('🚀 ~ ownersEatTooMuch', ownersEatTooMuch);
 console.log('🚀 ~ ownersEatTooLittle', ownersEatTooLittle);
+
+// better solution
+const ownersEatTooMuch2 = dogs
+  .filter((dog) => dog.curFood > dog.recommendedFood)
+  .flatMap((dog) => dog.owners);
+console.log(ownersEatTooMuch2);
+
+const ownersEatTooLittle2 = dogs
+  .filter((dog) => dog.curFood < dog.recommendedFood)
+  .flatMap((dog) => dog.owners);
+console.log(ownersEatTooLittle2);
 
 // 4. Log a string to the console for each array created in 3., like this: "Matilda and Alice and Bob's dogs eat too much!" and "Sarah and John and Michael's dogs eat too little!"
 
@@ -865,6 +880,9 @@ dogs.forEach((dog, index) => {
   }
 });
 
+// better solution
+console.log(dogs.some((dog) => dog.curFood === dog.recommendedFood));
+
 // 6. Log to the console whether there is any dog eating an OKAY amount of food (just true or false)
 
 dogs.forEach((dog, index) => {
@@ -883,6 +901,16 @@ dogs.forEach((dog, index) => {
   }
 });
 
+// better solution
+const checkEatingOk = (dog) => {
+  return (
+    dog.curFood > dog.recommendedFood * 0.9 &&
+    dog.curFood < dog.recommendedFood * 1.1
+  );
+};
+
+console.log(dogs.some((dog) => checkEatingOk(dog)));
+
 // 7. Create an array containing the dogs that are eating an OKAY amount of food (try to reuse the condition used in 6.)
 
 dogs.forEach((dog, index) => {
@@ -899,9 +927,13 @@ dogs.forEach((dog, index) => {
   }
 });
 
+// better solution
+const dogsEatingOk = dogs.filter(checkEatingOk);
+console.log('dogsEatingOk', dogsEatingOk);
+
 // 8. Create a shallow copy of the dogs array and sort it by recommended food portion in an ascending order (keep in mind that the portions are inside the array's objects)
 
 const dogsSorted = dogs.slice().sort((a, b) => {
   return a.recommendedFood - b.recommendedFood;
 });
-console.log('🚀 ~ dogsSorted ~ dogsSorted', dogsSorted);
+console.log('🚀 ~ dogsSorted', dogsSorted);
