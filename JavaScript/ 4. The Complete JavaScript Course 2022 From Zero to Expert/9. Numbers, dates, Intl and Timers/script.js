@@ -256,3 +256,42 @@ btnSort.addEventListener('click', function (e) {
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
+
+// 12/170 Converting and Checking Numbers
+
+console.log(23 === 23.0);
+
+console.log(0.3 + 0.1);
+console.log(0.3 + 0.1 === 0.3);
+
+// Conversions
+console.log('  ', Number('23'));
+console.log('  ', +'23');
+
+// Parsing
+console.log('PARSING');
+console.log('  ', Number.parseInt('30px', 10));
+console.log('  ', "don't work", Number.parseInt('e30', 10));
+
+console.log('  ', 2, Number.parseInt('  2.5  ', 10));
+console.log('  ', 2.5, Number.parseFloat('  2.5  ', 10));
+
+// Check if value is NAN
+console.log('IS NAN');
+console.log('  ', Number.isNaN(20));
+console.log('  ', Number.isNaN('20'));
+console.log('  ', Number.isNaN(+'20X'));
+console.log('  ', Number.isNaN(23 / 0));
+
+// Checking if value is number
+console.log('isFinite');
+
+console.log('  ', Number.isFinite(20));
+console.log('  ', Number.isFinite('20'));
+console.log('  ', Number.isFinite(+'20X'));
+console.log('  ', Number.isFinite(23 / 0));
+
+console.log('isInteger');
+console.log('  ', Number.isInteger(23));
+console.log('  ', Number.isInteger(23.0));
+console.log('  ', Number.isInteger(23 / 0));
