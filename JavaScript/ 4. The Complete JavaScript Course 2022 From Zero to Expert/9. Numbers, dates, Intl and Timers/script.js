@@ -340,3 +340,24 @@ console.log((2.7).toFixed(3));
 console.log((2.345).toFixed(2));
 
 console.log(+(2.345).toFixed(2));
+
+console.log('rest');
+console.log(5 % 2);
+console.log(5 / 2);
+
+const isEven = (n) => n % 2 === 0;
+
+console.log(isEven(2));
+console.log(isEven(3));
+
+// labelBalance.addEventListener('click', function () {
+//   console.log('click');
+[...document.querySelectorAll('.movements__row')].forEach((row, i) => {
+  if (isEven(i)) {
+    return (row.style.backgroundColor = 'orange');
+  }
+  if (i % 3) {
+    return (row.style.backgroundColor = 'blue');
+  }
+});
+// });
