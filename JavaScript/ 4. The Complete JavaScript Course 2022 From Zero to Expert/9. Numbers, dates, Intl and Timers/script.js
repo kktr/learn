@@ -361,3 +361,9 @@ console.log(isEven(3));
   }
 });
 // });
+
+// 12/173 Numeric separators
+
+const diameter = 287_460_000_000;
+
+console.log('🚀 ~ diameter', diameter);
