@@ -367,3 +367,33 @@ console.log(isEven(3));
 const diameter = 287_460_000_000;
 
 console.log('🚀 ~ diameter', diameter);
+
+// 12/173 Working with BigInt
+
+console.log(2 ** 53 - 1);
+console.log(Number.MAX_SAFE_INTEGER);
+
+const huge = 48646846513135654684684651313516849846515619n;
+console.log('🚀 ~ huge', huge);
+
+console.log(1000000n + 1000000n);
+
+// doesn't work
+// console.log(Math.sqrt(16n));
+
+// error cannot mix BigInt and other types
+// console.log(huge + 1);
+
+// exception
+console.log(huge > 1);
+console.log(20n === 20);
+console.log(20n == 20);
+console.log(typeof huge);
+
+console.log(huge + ' is REALLY big!!!');
+
+// divisions cut decimal part
+
+console.log(10n / 3n);
+console.log(11n / 3n);
+console.log(10 / 7);
