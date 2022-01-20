@@ -397,3 +397,44 @@ console.log(huge + ' is REALLY big!!!');
 console.log(10n / 3n);
 console.log(11n / 3n);
 console.log(10 / 7);
+
+// 12/174 Creating Dates
+
+const now = new Date();
+console.log(now);
+
+console.log(new Date('december 24, 2015'));
+
+console.log(new Date(accounts[0].movementsDates[0]));
+
+console.log(new Date(2037, 10, 19, 15, 23, 5));
+
+console.log(new Date(0));
+console.log(new Date(3 * 24 * 60 * 60 * 1000));
+
+// Working with dates
+const future = new Date(2037, 10, 31, 15, 23, 5);
+console.log('🚀 ~ future', future);
+
+console.log(future.getFullYear());
+console.log(future.getMonth());
+console.log('getDate', future.getDate());
+console.log('getDay', 'day of the week: thu = 2.', future.getDay());
+console.log('getHours', future.getHours());
+console.log('getMinutes', future.getMinutes());
+console.log('getSeconds', future.getSeconds());
+console.log('getMilliseconds', future.getMilliseconds());
+
+// 2037-12-01T14:23:05.000Z
+console.log(future.toISOString());
+
+// time in ms from unix time
+console.log(future.getTime());
+
+console.log(new Date(2143290185000));
+
+// time now in ms
+console.log(Date.now());
+
+future.setFullYear(2040);
+console.log(future);
