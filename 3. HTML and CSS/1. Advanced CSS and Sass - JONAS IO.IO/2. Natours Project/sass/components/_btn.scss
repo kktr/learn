@@ -8,6 +8,7 @@
     padding: typography.em(16px) typography.em(32px);
     border-radius: typography.em(16px);
     box-shadow: #0000003d 0 0.1875em 0.5em;
+    font-size: clamp(typography.rem(16px), 1.1111vw, typography.rem(32px));
     text-decoration: none;
     text-transform: uppercase;
   }

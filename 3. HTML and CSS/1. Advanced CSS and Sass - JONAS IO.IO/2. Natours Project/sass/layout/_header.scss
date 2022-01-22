@@ -10,19 +10,24 @@
       rgb(variables.$color-primary--light, 0.702),
       rgb(variables.$color-primary--dark, 0.702)
     ),
-    url('../img/bike.jpeg');
+    image-set(
+      url('../../img/hero-2000.webp') 1x,
+      url('../../img/src/hero.jpg') 1x,
+    );
   background-position: bottom left;
   background-size: cover;
   clip-path: polygon(0 0, 100% 0, 100% 85vh, 25% 100%, 0 100%);
 
   &__logo-box {
     position: absolute;
-    top: typography.em(40px);
-    left: typography.em(40px);
+    top: clamp(typography.em(10px), calc(40/1040*100vw), typography.em(80px));
+    left: clamp(typography.em(10px), calc(40/1040*100vw), typography.em(80px));
   }
 
   &__logo {
-    height: typography.em(35px);
+    // height: typography.em(35px);
+    width: clamp(typography.em(68px), calc(68/1040*100vw), typography.em(136px) );
+    height: 100%;
   }
 
   &__text-box {
@@ -34,3 +39,56 @@
     height: 100%;
   }
 }
+
+@media (max-width: 1500px) {
+  .header {
+  background-image:
+  linear-gradient(
+    to right bottom,
+    rgb(variables.$color-primary--light, 0.702),
+    rgb(variables.$color-primary--dark, 0.702)
+  ),
+  image-set(
+    url('../../img/hero-1500.webp') 1x,
+    url('../../img/hero-2000.webp') 2x
+  );
+  }
+};
+
+@media (max-width: 1000px) {
+  .header {
+  background-image:
+  linear-gradient(
+    to right bottom,
+    rgb(variables.$color-primary--light, 0.702),
+    rgb(variables.$color-primary--dark, 0.702)
+  ),
+  image-set(
+    url('../../img/hero-1000.webp') 1x,
+    url('../../img/hero-2000.webp') 2x
+  );
+  }
+};
+
+@media (max-width: 500px) {
+  .header {
+  background-image:
+  linear-gradient(
+    to right bottom,
+    rgb(variables.$color-primary--light, 0.702),
+    rgb(variables.$color-primary--dark, 0.702)
+  ),
+  image-set(
+    url('../../img/hero-500.webp') 1x,
+    url('../../img/hero-1000.webp') 2x,
+    url('../../img/hero-1500.webp') 3x
+  );
+  }
+};
+
+// and (min-resolution: 192dpi)
+// url(../../img/hero-1500.webp) 1x,
+// url(../../img/hero-2000.webp) 2x,
+// url(../../img/hero-2000.webp) 3x,
+// url(../../img/src/hero-small.jpg) 1x,
+// url(../../img/src/hero.jpg) 2x,

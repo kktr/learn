@@ -65,7 +65,7 @@ body {
 .heading-primary {
   margin: 22vh auto 1.1428571429em;
   color: #fff;
-  font-size: 3.5rem;
+  font-size: clamp(1.875rem, 5.3846153846vw, 7rem);
   text-align: center;
   text-transform: uppercase;
   backface-visibility: hidden;
@@ -80,10 +80,33 @@ body {
 .heading-primary--sub {
   display: block;
   font-weight: 400;
-  font-size: 1rem;
+  font-size: max(0.2857142857em, 1rem);
   letter-spacing: 1.0875em;
   animation-name: moveInRight;
   animation-duration: 0.9s;
+}
+
+.heading-secondary {
+  display: inline-block;
+  background-image: linear-gradient(to right, #719ed6, #275fb4);
+  background-clip: text;
+  color: transparent;
+  font-weight: 700;
+  font-size: clamp(1rem, 1.5384615385vw, 2rem);
+  letter-spacing: 0.2rem;
+  text-transform: uppercase;
+  transition: all 0.2s;
+}
+.heading-secondary:hover {
+  transform: skewY(3deg) skewX(15deg) scale(1.1);
+}
+
+.u-center-text {
+  text-align: center;
+}
+
+.u-margin-bottom-8 {
+  margin-bottom: 8rem;
 }
 
 .btn:link, .btn:visited {
@@ -92,6 +115,7 @@ body {
   padding: 1em 2em;
   border-radius: 1em;
   box-shadow: #0000003d 0 0.1875em 0.5em;
+  font-size: clamp(1rem, 1.1111vw, 2rem);
   text-decoration: none;
   text-transform: uppercase;
 }
@@ -136,18 +160,19 @@ body {
 .header {
   position: relative;
   height: 95vh;
-  background-image: linear-gradient(to right bottom, rgba(113, 158, 214, 0.702), rgba(39, 95, 180, 0.702)), url("../img/bike.jpeg");
+  background-image: linear-gradient(to right bottom, rgba(113, 158, 214, 0.702), rgba(39, 95, 180, 0.702)), image-set(url("../../img/hero-2000.webp") 1x, url("../../img/src/hero.jpg") 1x);
   background-position: bottom left;
   background-size: cover;
   clip-path: polygon(0 0, 100% 0, 100% 85vh, 25% 100%, 0 100%);
 }
 .header__logo-box {
   position: absolute;
-  top: 2.5em;
-  left: 2.5em;
+  top: clamp(0.625em, 3.8461538462vw, 5em);
+  left: clamp(0.625em, 3.8461538462vw, 5em);
 }
 .header__logo {
-  height: 2.1875em;
+  width: clamp(4.25em, 6.5384615385vw, 8.5em);
+  height: 100%;
 }
 .header__text-box {
   display: flex;
@@ -155,6 +180,27 @@ body {
   /* align-items: center;
   justify-content: center; */
   height: 100%;
+}
+
+@media (max-width: 1500px) {
+  .header {
+    background-image: linear-gradient(to right bottom, rgba(113, 158, 214, 0.702), rgba(39, 95, 180, 0.702)), image-set(url("../../img/hero-1500.webp") 1x, url("../../img/hero-2000.webp") 2x);
+  }
+}
+@media (max-width: 1000px) {
+  .header {
+    background-image: linear-gradient(to right bottom, rgba(113, 158, 214, 0.702), rgba(39, 95, 180, 0.702)), image-set(url("../../img/hero-1000.webp") 1x, url("../../img/hero-2000.webp") 2x);
+  }
+}
+@media (max-width: 500px) {
+  .header {
+    background-image: linear-gradient(to right bottom, rgba(113, 158, 214, 0.702), rgba(39, 95, 180, 0.702)), image-set(url("../../img/hero-500.webp") 1x, url("../../img/hero-1000.webp") 2x, url("../../img/hero-1500.webp") 3x);
+  }
+}
+.section-about {
+  margin-top: -10vh;
+  padding: calc(10vh + 5.625em) 0 0;
+  background-color: #f7f7f7;
 }
 
 /*# sourceMappingURL=main.css.map */
