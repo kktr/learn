@@ -24,8 +24,8 @@ const account1 = {
     '2020-04-01T10:17:24.185Z',
     '2020-05-08T14:11:59.604Z',
     '2020-05-27T17:01:17.194Z',
-    '2020-07-11T23:36:17.929Z',
-    '2020-07-12T10:51:36.790Z',
+    '2022-01-20T23:36:17.929Z',
+    '2022-01-21T10:51:36.790Z',
   ],
   currency: 'EUR',
   locale: 'pt-PT', // de-DE
@@ -93,16 +93,24 @@ const displayMovements = function (acc, sort = false) {
   const displayDate = (i) => {
     const movDate = new Date(acc.movementsDates[i]);
 
-    // const currDate = new Date();
-    // const daysDifference = Math.ceil(
-    //   (currDate.getTime() - movDate.getTime()) / (60 * 60 * 24 * 1000)
-    // );
+    const currDate = new Date();
+    const daysDifference = Math.round(
+      (+currDate - +movDate) / (60 * 60 * 24 * 1000)
+    );
 
-    const day = `${movDate.getDate()}`.padStart(2, 0);
-    const month = `${movDate.getMonth() + 1}`.padStart(2, 0);
-    const year = `${movDate.getFullYear()}`;
+    if (daysDifference < 1) {
+      return 'today';
+    } else if (daysDifference < 2) {
+      return 'yesterday';
+    } else if (daysDifference < 8) {
+      return `${daysDifference} day's ago`;
+    } else {
+      const day = `${movDate.getDate()}`.padStart(2, 0);
+      const month = `${movDate.getMonth() + 1}`.padStart(2, 0);
+      const year = `${movDate.getFullYear()}`;
 
-    return `${day}/${month}/${year}`;
+      return `${day}/${month}/${year}`;
+    }
   };
 
   movs.forEach(function (mov, i) {
@@ -471,3 +479,23 @@ console.log(Date.now());
 
 future.setFullYear(2040);
 console.log(future);
+
+// 12/177 Operations with dates
+const future2 = new Date(2037, 10, 31, 15, 23, 5);
+const now3 = new Date();
+
+console.log('🚀 ~ future2', future2);
+console.log('🚀 ~ now3', now3);
+
+console.log(future2);
+console.log(now3);
+console.log((Number(future2) - Number(now3)) / 1000 / 60 / 60 / 24);
+
+const daysPassed = (day1, day2) => {
+  return Math.round(Math.abs((+day1 - +day2) / 1000 / 60 / 60 / 24));
+};
+
+const dayPassedTest1 = daysPassed(future2, now3);
+const dayPassedTest2 = daysPassed(now3, future2);
+console.log('🚀 ~ dayPassedTest1', dayPassedTest1);
+console.log('🚀 ~ dayPassedTest2', dayPassedTest2);
