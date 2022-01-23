@@ -21,9 +21,9 @@ body {
 }
 
 .heading-primary {
-  margin: 22vh auto em(64px, 56px);
+  margin: 22vh auto em(64px, 48px);
   color: #fff;
-  font-size: clamp(rem(30px), calc(56/1040*100vw), rem(112px) );
+  font-size: clamp(rem(28px), calc(48/1040*100vw), rem(96px) );
   // rem(56px); 5.3846vw
   text-align: center;
   text-transform: uppercase;
@@ -32,7 +32,7 @@ body {
   &--main {
     display: block;
     font-weight: variables.$normal-weight;
-    letter-spacing: em(35px, 56px);
+    letter-spacing: em(35px, 48px);
     animation-name: moveInLeft;
     animation-duration: 0.9s;
   }
@@ -40,7 +40,7 @@ body {
   &--sub {
     display: block;
     font-weight: variables.$normal-weight;
-    font-size: max(em(16px, 56px),rem(16px));
+    font-size: max(em(16px, 48px),rem(16px));
     letter-spacing: em(17.4px);
     animation-name: moveInRight;
     animation-duration: 0.9s;

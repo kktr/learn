@@ -63,9 +63,9 @@ body {
 }
 
 .heading-primary {
-  margin: 22vh auto 1.1428571429em;
+  margin: 22vh auto 1.3333333333em;
   color: #fff;
-  font-size: clamp(1.875rem, 5.3846153846vw, 7rem);
+  font-size: clamp(1.75rem, 4.6153846154vw, 6rem);
   text-align: center;
   text-transform: uppercase;
   backface-visibility: hidden;
@@ -73,14 +73,14 @@ body {
 .heading-primary--main {
   display: block;
   font-weight: 400;
-  letter-spacing: 0.625em;
+  letter-spacing: 0.7291666667em;
   animation-name: moveInLeft;
   animation-duration: 0.9s;
 }
 .heading-primary--sub {
   display: block;
   font-weight: 400;
-  font-size: max(0.2857142857em, 1rem);
+  font-size: max(0.3333333333em, 1rem);
   letter-spacing: 1.0875em;
   animation-name: moveInRight;
   animation-duration: 0.9s;
@@ -160,7 +160,8 @@ body {
 .header {
   position: relative;
   height: 95vh;
-  background-image: linear-gradient(to right bottom, rgba(113, 158, 214, 0.702), rgba(39, 95, 180, 0.702)), image-set(url("../../img/hero-2000.webp") 1x, url("../../img/src/hero.jpg") 1x);
+  background-image: linear-gradient(to right bottom, rgba(113, 158, 214, 0.702), rgba(39, 95, 180, 0.702)), url("/img/hero-2000.jpeg");
+  background-image: linear-gradient(to right bottom, rgba(113, 158, 214, 0.702), rgba(39, 95, 180, 0.702)), url("/img/hero-2000-v2.webp");
   background-position: bottom left;
   background-size: cover;
   clip-path: polygon(0 0, 100% 0, 100% 85vh, 25% 100%, 0 100%);
@@ -184,17 +185,17 @@ body {
 
 @media (max-width: 1500px) {
   .header {
-    background-image: linear-gradient(to right bottom, rgba(113, 158, 214, 0.702), rgba(39, 95, 180, 0.702)), image-set(url("../../img/hero-1500.webp") 1x, url("../../img/hero-2000.webp") 2x);
+    background-image: linear-gradient(to right bottom, rgba(113, 158, 214, 0.702), rgba(39, 95, 180, 0.702)), image-set(url("/img/hero-1500.webp") 1x, url("/img/hero-2000-v2.webp") 2x);
   }
 }
 @media (max-width: 1000px) {
   .header {
-    background-image: linear-gradient(to right bottom, rgba(113, 158, 214, 0.702), rgba(39, 95, 180, 0.702)), image-set(url("../../img/hero-1000.webp") 1x, url("../../img/hero-2000.webp") 2x);
+    background-image: linear-gradient(to right bottom, rgba(113, 158, 214, 0.702), rgba(39, 95, 180, 0.702)), image-set(url("/img/hero-2000-v2.webp") 2x url("/img/hero-1000.webp") 1x);
   }
 }
 @media (max-width: 500px) {
   .header {
-    background-image: linear-gradient(to right bottom, rgba(113, 158, 214, 0.702), rgba(39, 95, 180, 0.702)), image-set(url("../../img/hero-500.webp") 1x, url("../../img/hero-1000.webp") 2x, url("../../img/hero-1500.webp") 3x);
+    background-image: linear-gradient(to right bottom, rgba(113, 158, 214, 0.702), rgba(39, 95, 180, 0.702)), image-set(url("/img/hero-500.webp") 1x, url("/img/hero-1000.webp") 2x, url("/img/hero-1500.webp") 3x);
   }
 }
 .section-about {
