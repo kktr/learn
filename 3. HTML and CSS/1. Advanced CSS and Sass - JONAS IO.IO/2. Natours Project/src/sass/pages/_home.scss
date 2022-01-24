@@ -1,0 +1,7 @@
+@use '../abstracts/variables';
+@use '../base/typography';
+
+.section-about {
+  padding: 6em 1em 1em;
+  background-color: variables.$color-grey-light-1;
+}

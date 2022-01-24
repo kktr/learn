@@ -4,4 +4,4 @@
 'use strict';
 
 // import '../css/main.css';
-import '../sass/main.scss';
+import './sass/main.scss';

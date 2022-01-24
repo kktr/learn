@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Natours | Exciting tours for adventurous people</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap"
+      media="print"
+      onload="this.media='all'"
+    />
+
+    <!-- <script src="../dist/main.js"></script> -->
+    <!-- <link rel="stylesheet" href="../build/post-main.css" /> -->
+
+    <meta name="description" content="Page created for advanced css training" />
+    <meta
+      property="og:title"
+      content="Natours | Exciting tours for adventurous people"
+    />
+    <meta
+      property="og:description"
+      content="Page created for advanced css training"
+    />
+    <!-- <meta property="og:image" content="https://www.mywebsite.com/image.jpg"> -->
+    <!-- <meta property="og:image:alt" content="Image description"> -->
+    <meta property="og:locale" content="en_GB" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta property="og:url" content="https://kktr-natours.netlify.app" />
+    <link rel="canonical" href="https://kktr-natours.netlify.app/" />
+    <link rel="icon" href="./assets/favicon.ico" />
+    <link rel="icon" href="./assets/favicon.webp" />
+  </head>
+
+  <body>
+    <picture class="header__bg-container">
+      <source
+        src="./assets/hero-gradient-2000x1199.jpeg"
+        srcset="
+          ./assets/hero-gradient-500x299.webp    500w,
+          ./assets/hero-gradient-1000x599.webp  1000w,
+          ./assets/hero-gradient-1500x899.webp  1500w,
+          ./assets/hero-gradient-2000x1199.webp 2000w
+        "
+      />
+      <img
+        class="header__bg"
+        src="./assets/hero-gradient-2000x1199.jpeg"
+        alt="women"
+      />
+    </picture>
+
+    <header class="header">
+      <div class="header__logo-box">
+        <img src="./assets/logo-white.webp" class="header__logo" alt="logo" />
+      </div>
+
+      <div class="header__text-box">
+        <h1 class="heading-primary">
+          <span class="heading-primary--main">Outdoors</span>
+
+          <span class="heading-primary--sub">is where life happens</span>
+        </h1>
+
+        <a href="#" class="btn btn-light btn-animated">Discover our tours</a>
+      </div>
+    </header>
+
+    <main>
+      <section class="section-about">
+        <div class="u-center-text u-margin-bottom-8">
+          <h2 class="heading-secondary">
+            Exciting tours for adventurous people
+          </h2>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
