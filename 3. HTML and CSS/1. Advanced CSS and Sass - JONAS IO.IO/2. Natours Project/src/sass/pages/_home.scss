@@ -2,6 +2,8 @@
 @use '../base/typography';
 
 .section-about {
-  padding: 6em 1em 1em;
+  // margin-top: -10vh;
+  // padding: calc(10vh + #{typography.em(90px)}) 0 0;
+  padding: 2em 1em;
   background-color: variables.$color-grey-light-1;
 }

@@ -12,7 +12,8 @@
     "prefix": "npm run build:sass && postcss build/main.css --use=autoprefixer --output=build/post-main.css",
     "dev": "onchange \"src/sass/**/*.scss\" -- npm run prefix",
     "compileSass": "sass --watch src/sass/main.scss build/main.css --embed-sources",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "critical": "node critical-css.js"
   },
   "author": "kktr",
   "license": "ISC",
@@ -37,6 +38,7 @@
     "sass-loader": "^12.4.0",
     "style-loader": "^3.3.1",
     "webpack": "^5.66.0",
-    "webpack-cli": "^4.9.1"
+    "webpack-cli": "^4.9.1",
+    "webpack-critical-css-inliner": "^1.2.0"
   }
 }

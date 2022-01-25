@@ -1,10 +1,11 @@
 /*jshint esversion: 11*/
 /* eslint-env es12 */
 
-const path = require('path');
+const WebpackCriticalCSSInliner = require('webpack-critical-css-inliner');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
 
 module.exports = {
   mode: 'production',
@@ -17,15 +18,9 @@ module.exports = {
      *   clean-webpack-plugin will remove files inside the directory below
      */
     path: path.resolve(process.cwd(), 'dist'),
-    assetModuleFilename: 'imgs/[name].[hash][ext]',
+    // filename: 'webpack-critical-css-inliner.[contenthash].js',
+    assetModuleFilename: '[name].[hash][ext]',
   },
-  plugins: [
-    new CleanWebpackPlugin(),
-    new MiniCssExtractPlugin(),
-    new HtmlWebpackPlugin({
-      template: './src/template.html',
-    }),
-  ],
 
   module: {
     rules: [
@@ -33,8 +28,8 @@ module.exports = {
         test: /\.s[ac]ss$/i,
         use: [
           // fallback to style-loader in development
-          'style-loader',
-          // MiniCssExtractPlugin.loader,
+          // 'style-loader',
+          MiniCssExtractPlugin.loader,
           'css-loader',
           'postcss-loader',
           'sass-loader',
@@ -50,6 +45,24 @@ module.exports = {
       },
     ],
   },
+  plugins: [
+    new CleanWebpackPlugin(),
+
+    new HtmlWebpackPlugin({
+      template: './src/template.html',
+      inject: false,
+    }),
+
+    new MiniCssExtractPlugin(),
+
+    new WebpackCriticalCSSInliner({
+      base: 'dist/',
+      src: './index.html',
+      target: './index-critical.html',
+      inlineGoogleFonts: false,
+      minify: true,
+    }),
+  ],
 
   devtool: 'source-map',
 };

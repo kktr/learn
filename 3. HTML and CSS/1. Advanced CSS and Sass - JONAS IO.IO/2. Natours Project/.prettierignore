@@ -1,0 +1,6 @@
+# Ignore artifacts:
+/dist/
+/build/
+
+# Ignore all HTML files:
+*.html
