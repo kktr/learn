@@ -90,7 +90,7 @@ const displayMovements = function (acc, sort = false) {
     ? acc.movements.slice().sort((a, b) => a - b)
     : acc.movements;
 
-  const displayDate = (i) => {
+  const displayDate = (i, locale) => {
     const movDate = new Date(acc.movementsDates[i]);
 
     const currDate = new Date();
@@ -105,11 +105,11 @@ const displayMovements = function (acc, sort = false) {
     } else if (daysDifference < 8) {
       return `${daysDifference} day's ago`;
     } else {
-      const day = `${movDate.getDate()}`.padStart(2, 0);
-      const month = `${movDate.getMonth() + 1}`.padStart(2, 0);
-      const year = `${movDate.getFullYear()}`;
+      // const day = `${movDate.getDate()}`.padStart(2, 0);
+      // const month = `${movDate.getMonth() + 1}`.padStart(2, 0);
+      // const year = `${movDate.getFullYear()}`;
 
-      return `${day}/${month}/${year}`;
+      return new Intl.DateTimeFormat(locale).format(movDate);
     }
   };
 
@@ -121,7 +121,7 @@ const displayMovements = function (acc, sort = false) {
         <div class="movements__type movements__type--${type}">${
       i + 1
     } ${type}</div>
-        <div class="movements__date">${displayDate(i)}</div>
+        <div class="movements__date">${displayDate(i, acc.locale)}</div>
         <div class="movements__value">${mov}€</div>
       </div>
     `;
@@ -187,13 +187,6 @@ currentAccount = account1;
 updateUI(currentAccount);
 containerApp.style.opacity = 100;
 
-const now2 = new Date();
-const day = `${now2.getDate()}`.padStart(2, 0);
-const month = `${now2.getMonth() + 1}`.padStart(2, 0);
-const year = `${now2.getFullYear()}`;
-console.log(now2.getDate);
-labelDate.textContent = `${day}/${month}/${year}`;
-
 btnLogin.addEventListener('click', function (e) {
   // Prevent form from submitting
   e.preventDefault();
@@ -213,6 +206,22 @@ btnLogin.addEventListener('click', function (e) {
     // Clear input fields
     inputLoginUsername.value = inputLoginPin.value = '';
     inputLoginPin.blur();
+
+    const now2 = new Date();
+    const locale = navigator.language;
+    // const day = `${now2.getDate()}`.padStart(2, 0);
+    // const month = `${now2.getMonth() + 1}`.padStart(2, 0);
+    // const year = `${now2.getFullYear()}`;
+    console.log(now2.getDate);
+    const options = {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric',
+    };
+    labelDate.textContent = new Intl.DateTimeFormat(
+      currentAccount.locale,
+      options
+    ).format(now2);
 
     // Update UI
     updateUI(currentAccount);
