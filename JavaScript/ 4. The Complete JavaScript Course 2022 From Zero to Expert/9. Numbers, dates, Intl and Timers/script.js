@@ -122,7 +122,7 @@ const displayMovements = function (acc, sort = false) {
       i + 1
     } ${type}</div>
         <div class="movements__date">${displayDate(i, acc.locale)}</div>
-        <div class="movements__value">${mov}€</div>
+        <div class="movements__value">${formatCurrency(mov, acc)}</div>
       </div>
     `;
 
@@ -130,21 +130,33 @@ const displayMovements = function (acc, sort = false) {
   });
 };
 
+const formatCurrency = function (value, acc) {
+  const options = {
+    style: 'currency',
+    currency: acc.currency,
+  };
+
+  return Intl.NumberFormat(acc.locale, options).format(value);
+};
+
 const calcDisplayBalance = function (acc) {
   acc.balance = acc.movements.reduce((acc, mov) => acc + mov, 0);
-  labelBalance.textContent = `${acc.balance.toFixed(2)}€`;
+  const balance = acc.balance.toFixed(2);
+  labelBalance.textContent = `${formatCurrency(balance, acc)}`;
 };
 
 const calcDisplaySummary = function (acc) {
   const incomes = acc.movements
     .filter((mov) => mov > 0)
     .reduce((acc, mov) => acc + mov, 0);
-  labelSumIn.textContent = `${incomes.toFixed(2)}€`;
+  const incomesValue = incomes.toFixed(2);
+  labelSumIn.textContent = `${formatCurrency(incomesValue, acc)}`;
 
   const out = acc.movements
     .filter((mov) => mov < 0)
     .reduce((acc, mov) => acc + mov, 0);
-  labelSumOut.textContent = `${Math.abs(out).toFixed(2)}€`;
+  const outValue = Math.abs(out).toFixed(2);
+  labelSumOut.textContent = `${formatCurrency(outValue, acc)}`;
 
   const interest = acc.movements
     .filter((mov) => mov > 0)
@@ -154,7 +166,8 @@ const calcDisplaySummary = function (acc) {
       return int >= 1;
     })
     .reduce((acc, int) => acc + int, 0);
-  labelSumInterest.textContent = `${interest.toFixed(2)}€`;
+  const interestValue = interest.toFixed(2);
+  labelSumInterest.textContent = `${formatCurrency(interestValue, acc)}`;
 };
 
 const createUsernames = function (accs) {
@@ -208,7 +221,7 @@ btnLogin.addEventListener('click', function (e) {
     inputLoginPin.blur();
 
     const now2 = new Date();
-    const locale = navigator.language;
+    // const locale = navigator.language;
     // const day = `${now2.getDate()}`.padStart(2, 0);
     // const month = `${now2.getMonth() + 1}`.padStart(2, 0);
     // const year = `${now2.getFullYear()}`;
@@ -508,3 +521,16 @@ const dayPassedTest1 = daysPassed(future2, now3);
 const dayPassedTest2 = daysPassed(now3, future2);
 console.log('🚀 ~ dayPassedTest1', dayPassedTest1);
 console.log('🚀 ~ dayPassedTest2', dayPassedTest2);
+
+// 12/179 Internationalizing Numbers (Intl)
+
+const num = 3884764.23;
+
+const options2 = {
+  style: 'unit',
+  unit: 'mile-per-hour',
+  // useGrouping: false,
+};
+console.log('US', new Intl.NumberFormat('en-US', options2).format(num));
+console.log('Germany', new Intl.NumberFormat('pl-PL', options2).format(num));
+console.log('Syria', new Intl.NumberFormat('ar-SY', options2).format(num));
