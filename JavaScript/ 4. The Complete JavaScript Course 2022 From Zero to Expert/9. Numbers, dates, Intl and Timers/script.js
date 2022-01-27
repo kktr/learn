@@ -276,12 +276,14 @@ btnLoan.addEventListener('click', function (e) {
     amount > 0 &&
     currentAccount.movements.some((mov) => mov >= amount * 0.1)
   ) {
-    // Add movement
-    currentAccount.movements.push(amount);
-    currentAccount.movementsDates.push(now);
+    setTimeout(() => {
+      // Add movement
+      currentAccount.movements.push(amount);
+      currentAccount.movementsDates.push(now);
 
-    // Update UI
-    updateUI(currentAccount);
+      // Update UI
+      updateUI(currentAccount);
+    }, 3000);
   }
   inputLoanAmount.value = '';
 });
@@ -534,3 +536,49 @@ const options2 = {
 console.log('US', new Intl.NumberFormat('en-US', options2).format(num));
 console.log('Germany', new Intl.NumberFormat('pl-PL', options2).format(num));
 console.log('Syria', new Intl.NumberFormat('ar-SY', options2).format(num));
+
+// 12/180 Timers setTimeout and setInterval
+const ing1 = 'olives';
+const ing2 = 'peperoni';
+
+// passing arguments after delay value
+setTimeout(
+  (ingredients1, ingredients2) =>
+    console.log(`Here is your pizza with ${ingredients1} and ${ingredients2}`),
+  3000,
+  ing1,
+  ing2
+);
+console.log('waiting');
+
+const ingredients = ['tomatoes', 'spinach'];
+
+setTimeout(
+  ([ingredients1, ingredients2] = [...allIngredients]) =>
+    console.log(`Here is your pizza with ${ingredients1} and ${ingredients2}`),
+  4000,
+  ingredients
+);
+
+// better solution
+setTimeout(
+  (ingredients1, ingredients2) =>
+    console.log(`Here is your pizza with ${ingredients1} and ${ingredients2}`),
+  5000,
+  ...ingredients
+);
+
+// setInterval(function () {
+//   const now = new Date();
+//   function leftFillNum(num, targetLength) {
+//     return num.toString().padStart(targetLength, 0);
+//   }
+//   function leftFillNum(num, targetLength) {
+//     return num.toString().padStart(targetLength, 0);
+//   }
+//   const time = `${now.getHours()}:${now.getMinutes()}:${leftFillNum(
+//     now.getSeconds(),
+//     2
+//   )}`;
+//   console.log(time);
+// }, 1000);
