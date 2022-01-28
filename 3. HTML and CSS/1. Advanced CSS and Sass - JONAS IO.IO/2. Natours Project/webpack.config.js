@@ -48,19 +48,19 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
 
-    new HtmlWebpackPlugin({
-      template: './src/template.html',
-      inject: false,
-    }),
-
-    new MiniCssExtractPlugin(),
-
     new WebpackCriticalCSSInliner({
-      base: 'dist/',
+      base: './dist',
       src: './index.html',
       target: './index-critical.html',
       inlineGoogleFonts: false,
       minify: true,
+    }),
+
+    new MiniCssExtractPlugin(),
+
+    new HtmlWebpackPlugin({
+      template: './src/template.html',
+      // inject: false,
     }),
   ],
 
