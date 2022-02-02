@@ -12,6 +12,8 @@ const btnScrollTo = document.querySelector('.btn--scroll-to');
 const section1 = document.querySelector('#section--1');
 const navLink = document.querySelectorAll('.nav__link');
 const navLinks = document.querySelector('.nav__links');
+const nav = document.querySelector('.nav');
+const logo = document.querySelector('.nav__logo');
 
 const openModal = function (e) {
   e.preventDefault();
@@ -94,6 +96,76 @@ navLinks.addEventListener('click', function (e) {
   }
 });
 
+// tabbed component
+const tabs = document.querySelectorAll('.operations__tab');
+const tabsContainer = document.querySelector('.operations__tab-container');
+const tabContent = document.querySelectorAll('.operations__content');
+
+tabsContainer.addEventListener('click', function (e) {
+  e.preventDefault();
+  const clicked = e.target.closest('.operations__tab');
+
+  const dataTab = clicked.getAttribute('data-tab');
+  console.log(dataTab);
+
+  // Guard clause
+  if (!clicked) return;
+
+  tabs.forEach((tab) => tab.classList.remove('operations__tab--active'));
+
+  clicked.classList.add('operations__tab--active');
+  // console.log(this.parentNode.children);
+  //   this.parentNode.children.forEach((tab) => {
+  //     tab.classList.remove('operations__tab--active');
+  //   });
+  //   if (this.parentNode.children.classList.contains('operations__content--1')) {
+  //     console.log('passed');
+  //   }
+  // Activate content
+  tabContent.forEach((content) =>
+    content.classList.remove('operations__content--active')
+  );
+
+  document
+    .querySelector(`.operations__content--${dataTab}`)
+    .classList.add('operations__content--active');
+});
+
+// Menu fade animation
+
+function handleHover(e) {
+  if (e.target.classList.contains('nav__link')) {
+    const opacity = this;
+    const link = e.target;
+    console.log('🚀 ~ handleHover ~ link', link);
+
+    const siblings = link.closest('.nav').querySelectorAll('.nav__link');
+    console.log('🚀 ~ handleHover ~ siblings', siblings);
+
+    siblings.forEach(function (el) {
+      if (el !== link) el.style.opacity = opacity;
+      console.log('🚀 ~ el.style.opacity', opacity);
+    });
+
+    logo.style.opacity = opacity;
+  }
+}
+
+nav.addEventListener('mouseover', handleHover.bind(0.5));
+
+nav.addEventListener('mouseout', handleHover.bind(1));
+
+// Sticky navigation
+
+// scroll isn't efficient
+const initialCords = section1.getBoundingClientRect();
+
+window.addEventListener('scroll', function (e) {
+  if (window.scrollY > initialCords.top) {
+    nav.classList.add('sticky');
+  } else nav.classList.remove('sticky');
+});
+
 //! Lessons
 
 // 13/186 Selecting, Creating, and Deleting Elements
@@ -159,7 +231,7 @@ console.log('after change', message.style.height);
 document.documentElement.style.setProperty('--color-primary', 'orangered');
 
 // Attributes
-const logo = document.querySelector('.nav__logo');
+
 console.log('alt', logo.alt);
 console.log('absolute src', logo.src);
 console.log('relative src', logo.getAttribute('src'));
@@ -255,3 +327,5 @@ console.log('h1.parentNode.children', h1.parentNode.children);
 // [...h1.parentNode.children].forEach(function (el) {
 //   if (el !== h1) el.style.transform = 'scale(0.5)';
 // });
+
+// 13/194 Build tabbed component
