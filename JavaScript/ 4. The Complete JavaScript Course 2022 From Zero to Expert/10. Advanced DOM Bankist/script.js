@@ -206,6 +206,32 @@ const sectionObserver = new IntersectionObserver(showSection, {
 
 sections.forEach((section) => sectionObserver.observe(section));
 
+// lazy loading images
+
+const imgTargets = document.querySelectorAll('img[data-src]');
+
+function showImg(entries) {
+  const [entry] = entries;
+
+  if (entry.isIntersecting) {
+    const dataSrc = entry.target.attributes[1].value;
+    entry.target.src = dataSrc;
+
+    entry.target.addEventListener('load', function () {
+      entry.target.classList.remove('lazy-img');
+      imgObserver.unobserve(entry.target);
+    });
+  }
+}
+
+const imgObserver = new IntersectionObserver(showImg, {
+  root: null,
+  threshold: 0,
+  rootMargin: '200px',
+});
+
+imgTargets.forEach((img) => imgObserver.observe(img));
+
 //! Lessons
 
 // 13/186 Selecting, Creating, and Deleting Elements
