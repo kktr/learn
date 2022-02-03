@@ -160,11 +160,51 @@ nav.addEventListener('mouseout', handleHover.bind(1));
 // scroll isn't efficient
 const initialCords = section1.getBoundingClientRect();
 
-window.addEventListener('scroll', function (e) {
-  if (window.scrollY > initialCords.top) {
+// window.addEventListener('scroll', function (e) {
+//   if (window.scrollY > initialCords.top) {
+//     nav.classList.add('sticky');
+//   } else nav.classList.remove('sticky')
+// });
+
+//  13/197 A Better Way: The Intersection Observer API
+
+const header = document.querySelector('.header');
+const navHeight = nav.getBoundingClientRect().height;
+
+const stickyNav = function (entries) {
+  const [entry] = entries;
+
+  if (!entry.isIntersecting) {
     nav.classList.add('sticky');
   } else nav.classList.remove('sticky');
+};
+
+const headerObserver = new IntersectionObserver(stickyNav, {
+  root: null,
+  threshold: 0,
+  rootMargin: `-${navHeight}px`,
 });
+
+headerObserver.observe(header);
+
+const sections = document.querySelectorAll('.section');
+
+const showSection = function (entries, observer) {
+  const [entry] = entries;
+
+  if (entry.isIntersecting) {
+    entry.target.classList.remove('section--hidden');
+    sectionObserver.observe(entry.target);
+  }
+};
+
+const sectionObserver = new IntersectionObserver(showSection, {
+  root: null,
+  threshold: 0.15,
+  // rootMargin: `-${navHeight}px`,
+});
+
+sections.forEach((section) => sectionObserver.observe(section));
 
 //! Lessons
 
@@ -174,7 +214,6 @@ console.log(document.documentElement);
 console.log(document.head);
 console.log(document.body);
 
-const header = document.querySelector('.header');
 const allSections = document.querySelectorAll('.section');
 console.log('🚀 ~ allSections', allSections);
 
