@@ -232,165 +232,250 @@ const imgObserver = new IntersectionObserver(showImg, {
 
 imgTargets.forEach((img) => imgObserver.observe(img));
 
+// Slider
+const slider = function () {
+  const slides = document.querySelectorAll('.slide');
+  const btnLeft = document.querySelector('.slider__btn--left');
+  const btnRight = document.querySelector('.slider__btn--right');
+  const dotContainer = document.querySelector('.dots');
+
+  let curSlide = 0;
+  const maxSlide = slides.length;
+
+  // Functions
+  const createDots = function () {
+    slides.forEach(function (_, i) {
+      dotContainer.insertAdjacentHTML(
+        'beforeend',
+        `<button class="dots__dot" data-slide="${i}"></button>`
+      );
+    });
+  };
+
+  const activateDot = function (slide) {
+    document
+      .querySelectorAll('.dots__dot')
+      .forEach((dot) => dot.classList.remove('dots__dot--active'));
+
+    document
+      .querySelector(`.dots__dot[data-slide="${slide}"]`)
+      .classList.add('dots__dot--active');
+  };
+
+  const goToSlide = function (slide) {
+    slides.forEach(
+      (s, i) => (s.style.transform = `translateX(${100 * (i - slide)}%)`)
+    );
+  };
+
+  // Next slide
+  const nextSlide = function () {
+    if (curSlide === maxSlide - 1) {
+      curSlide = 0;
+    } else {
+      curSlide++;
+    }
+
+    goToSlide(curSlide);
+    activateDot(curSlide);
+  };
+
+  const prevSlide = function () {
+    if (curSlide === 0) {
+      curSlide = maxSlide - 1;
+    } else {
+      curSlide--;
+    }
+    goToSlide(curSlide);
+    activateDot(curSlide);
+  };
+
+  const init = function () {
+    goToSlide(0);
+    createDots();
+
+    activateDot(0);
+  };
+  init();
+
+  // Event handlers
+  btnRight.addEventListener('click', nextSlide);
+  btnLeft.addEventListener('click', prevSlide);
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowLeft') prevSlide();
+    e.key === 'ArrowRight' && nextSlide();
+  });
+
+  dotContainer.addEventListener('click', function (e) {
+    if (e.target.classList.contains('dots__dot')) {
+      const { slide } = e.target.dataset;
+      goToSlide(slide);
+      activateDot(slide);
+    }
+  });
+};
+slider();
+
 //! Lessons
 
 // 13/186 Selecting, Creating, and Deleting Elements
 
-console.log(document.documentElement);
-console.log(document.head);
-console.log(document.body);
+// console.log(document.documentElement);
+// console.log(document.head);
+// console.log(document.body);
 
-const allSections = document.querySelectorAll('.section');
-console.log('🚀 ~ allSections', allSections);
+// const allSections = document.querySelectorAll('.section');
+// console.log('🚀 ~ allSections', allSections);
 
-console.log(document.getElementById('section--1'));
+// console.log(document.getElementById('section--1'));
 
-const allButtons = document.getElementsByTagName('button');
-console.log('🚀 ~ allButtons', allButtons);
+// const allButtons = document.getElementsByTagName('button');
+// console.log('🚀 ~ allButtons', allButtons);
 
-console.log(document.getElementsByClassName('btn'));
+// console.log(document.getElementsByClassName('btn'));
 
-// Creating and inserting elements
-const message = document.createElement('div');
-message.classList.add('cookie-message');
-// message.textContent = 'We use cookie for improve functionality and analytics'
-message.innerHTML = `We use cookie for improve functionality and analytics. <button class="btn btn-close-cookie">Got it!</button>`;
+// // Creating and inserting elements
+// const message = document.createElement('div');
+// message.classList.add('cookie-message');
+// // message.textContent = 'We use cookie for improve functionality and analytics'
+// message.innerHTML = `We use cookie for improve functionality and analytics. <button class="btn btn-close-cookie">Got it!</button>`;
 
-// header.prepend(message);
+// // header.prepend(message);
 
-// header.append(message.cloneNode(true));
+// // header.append(message.cloneNode(true));
 
-header.append(message);
+// header.append(message);
 
-// header.before(message);
-// header.after(message);
+// // header.before(message);
+// // header.after(message);
 
-console.log(document.querySelector('.btn-close-cookie'));
-document
-  .querySelector('.btn-close-cookie')
-  .addEventListener('click', function (e) {
-    e.preventDefault;
-    message.remove();
-  });
+// console.log(document.querySelector('.btn-close-cookie'));
+// document
+//   .querySelector('.btn-close-cookie')
+//   .addEventListener('click', function (e) {
+//     e.preventDefault;
+//     message.remove();
+//   });
 
-// 13/187 Styles, Attributes and Classes
+// // 13/187 Styles, Attributes and Classes
 
-// styles
-message.style.backgroundColor = '#37383d';
-message.style.width = '120%';
+// // styles
+// message.style.backgroundColor = '#37383d';
+// message.style.width = '120%';
 
-console.log('only for inline style', message.style.backgroundColor);
-console.log('empty', message.style.height);
+// console.log('only for inline style', message.style.backgroundColor);
+// console.log('empty', message.style.height);
 
-console.log('for real style, css, browser', getComputedStyle(message).height);
+// console.log('for real style, css, browser', getComputedStyle(message).height);
 
-const height = getComputedStyle(message).height;
-console.log('🚀 ~ height', height);
-console.log(parseInt(height));
+// const height = getComputedStyle(message).height;
+// console.log('🚀 ~ height', height);
+// console.log(parseInt(height));
 
-message.style.height = `${parseInt(height) + 100}px`;
+// message.style.height = `${parseInt(height) + 100}px`;
 
-console.log('🚀 ~ height', height);
-console.log('after change', message.style.height);
+// console.log('🚀 ~ height', height);
+// console.log('after change', message.style.height);
 
-document.documentElement.style.setProperty('--color-primary', 'orangered');
+// document.documentElement.style.setProperty('--color-primary', 'orangered');
 
-// Attributes
+// // Attributes
 
-console.log('alt', logo.alt);
-console.log('absolute src', logo.src);
-console.log('relative src', logo.getAttribute('src'));
-console.log('src', logo.className);
+// console.log('alt', logo.alt);
+// console.log('absolute src', logo.src);
+// console.log('relative src', logo.getAttribute('src'));
+// console.log('src', logo.className);
 
-// Non-standard, don't work
-console.log(logo.designer);
-console.log(logo.getAttribute('designer'));
+// // Non-standard, don't work
+// console.log(logo.designer);
+// console.log(logo.getAttribute('designer'));
 
-logo.setAttribute('company', 'Bankist');
+// logo.setAttribute('company', 'Bankist');
 
-logo.alt = 'beautiful minimalist logo';
-console.log(logo.alt);
+// logo.alt = 'beautiful minimalist logo';
+// console.log(logo.alt);
 
-// data attributes
-console.log(logo.dataset.versionNumber);
+// // data attributes
+// console.log(logo.dataset.versionNumber);
 
-// Classes
-logo.classList.add('c');
-logo.classList.remove('c');
-logo.classList.toggle('c');
-logo.classList.contains('c');
+// // Classes
+// logo.classList.add('c');
+// logo.classList.remove('c');
+// logo.classList.toggle('c');
+// logo.classList.contains('c');
 
-// don't use
-// logo.className = 'jonas'
+// // don't use
+// // logo.className = 'jonas'
 
-// 13/188 Implementing smooth scrolling
+// // 13/188 Implementing smooth scrolling
 
-// 13/189 Types of events and events handlers
+// // 13/189 Types of events and events handlers
 
-const h1 = document.querySelector('h1');
+// const h1 = document.querySelector('h1');
 
-const alertH1 = function (e) {
-  alert('addEventListener: Great! You are reading the heading');
+// const alertH1 = function (e) {
+//   alert('addEventListener: Great! You are reading the heading');
 
-  h1.removeEventListener('mouseenter', alertH1);
-};
+//   h1.removeEventListener('mouseenter', alertH1);
+// };
 
-// h1.addEventListener('mouseenter', alertH1);
+// // h1.addEventListener('mouseenter', alertH1);
 
-// 13/190 Event propagation: bubbling and capturing
+// // 13/190 Event propagation: bubbling and capturing
 
-// 13/191 Event propagation in practice
+// // 13/191 Event propagation in practice
 
-const randomInt = (min, max) =>
-  Math.floor(Math.random() * (max - min + 1) + min);
+// const randomInt = (min, max) =>
+//   Math.floor(Math.random() * (max - min + 1) + min);
 
-const randomColor = () =>
-  `rgb(${randomInt(0, 255)}, ${randomInt(0, 255)}, ${randomInt(0, 255)})`;
+// const randomColor = () =>
+//   `rgb(${randomInt(0, 255)}, ${randomInt(0, 255)}, ${randomInt(0, 255)})`;
 
-document.querySelector('.nav__link').addEventListener('click', function (e) {
-  console.log('nav__link', e.target, e.currentTarget);
-  this.style.backgroundColor = randomColor();
-  e.stopPropagation();
-});
-
-document.querySelector('.nav__links').addEventListener('click', function (e) {
-  console.log('.nav__links', e.target, e.currentTarget);
-  this.style.backgroundColor = randomColor();
-});
-
-document.querySelector('.nav').addEventListener('click', function (e) {
-  console.log('.nav', e.target, e.currentTarget);
-  this.style.backgroundColor = randomColor();
-});
-
-// 13/193 Dom traversing
-
-// going downwards: child
-// finding children no matter how far it is
-console.log(h1.querySelectorAll('.highlight'));
-console.log('h1.childNodes', h1.childNodes);
-console.log('h1.children', h1.children);
-h1.firstElementChild.style.color = randomColor();
-h1.lastElementChild.style.color = randomColor();
-
-// going upwards: parents
-console.log('h1.parentNode', h1.parentNode);
-console.log('h1.parentElement', h1.parentElement);
-
-// finding parent no matter how far it is
-console.log(h1.closest('.header'));
-
-// going sideways: siblings
-console.log('h1.previousElementSibling)', h1.previousElementSibling);
-console.log('h1.nextElementSibling)', h1.nextElementSibling);
-
-console.log('h1.previousSibling', h1.previousSibling);
-console.log('h1.nextSibling', h1.nextSibling);
-
-// all siblings
-console.log('h1.parentNode.children', h1.parentNode.children);
-// [...h1.parentNode.children].forEach(function (el) {
-//   if (el !== h1) el.style.transform = 'scale(0.5)';
+// document.querySelector('.nav__link').addEventListener('click', function (e) {
+//   console.log('nav__link', e.target, e.currentTarget);
+//   this.style.backgroundColor = randomColor();
+//   e.stopPropagation();
 // });
 
-// 13/194 Build tabbed component
+// document.querySelector('.nav__links').addEventListener('click', function (e) {
+//   console.log('.nav__links', e.target, e.currentTarget);
+//   this.style.backgroundColor = randomColor();
+// });
+
+// document.querySelector('.nav').addEventListener('click', function (e) {
+//   console.log('.nav', e.target, e.currentTarget);
+//   this.style.backgroundColor = randomColor();
+// });
+
+// // 13/193 Dom traversing
+
+// // going downwards: child
+// // finding children no matter how far it is
+// console.log(h1.querySelectorAll('.highlight'));
+// console.log('h1.childNodes', h1.childNodes);
+// console.log('h1.children', h1.children);
+// h1.firstElementChild.style.color = randomColor();
+// h1.lastElementChild.style.color = randomColor();
+
+// // going upwards: parents
+// console.log('h1.parentNode', h1.parentNode);
+// console.log('h1.parentElement', h1.parentElement);
+
+// // finding parent no matter how far it is
+// console.log(h1.closest('.header'));
+
+// // going sideways: siblings
+// console.log('h1.previousElementSibling)', h1.previousElementSibling);
+// console.log('h1.nextElementSibling)', h1.nextElementSibling);
+
+// console.log('h1.previousSibling', h1.previousSibling);
+// console.log('h1.nextSibling', h1.nextSibling);
+
+// // all siblings
+// console.log('h1.parentNode.children', h1.parentNode.children);
+// // [...h1.parentNode.children].forEach(function (el) {
+// //   if (el !== h1) el.style.transform = 'scale(0.5)';
+// // });
+
+// // 13/194 Build tabbed component
