@@ -103,6 +103,7 @@ button:focus {
 }
 
 img {
+  height: auto;
   transition: filter 0.5s;
 }
 
@@ -233,6 +234,7 @@ h4 {
 
 .features__img {
   width: 100%;
+  height: auto;
 }
 
 .features__feature {

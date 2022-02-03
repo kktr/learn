@@ -247,7 +247,9 @@ const slider = function () {
     slides.forEach(function (_, i) {
       dotContainer.insertAdjacentHTML(
         'beforeend',
-        `<button class="dots__dot" data-slide="${i}"></button>`
+        `<button class="dots__dot" data-slide="${i}" aria-label="Slide-${
+          i + 1
+        }"></button>`
       );
     });
   };
@@ -482,16 +484,16 @@ slider();
 
 // 13/202 Lifecycle DOM events
 
-document.addEventListener('DOMContentLoaded', function (e) {
-  console.log('HTML parsed and DOM tree built!', e);
-});
+// document.addEventListener('DOMContentLoaded', function (e) {
+//   console.log('HTML parsed and DOM tree built!', e);
+// });
 
-window.addEventListener('load', function (e) {
-  console.log('Page fully loaded', e);
-});
+// window.addEventListener('load', function (e) {
+//   console.log('Page fully loaded', e);
+// });
 
-window.addEventListener('beforeunload', function (e) {
-  e.preventDefault();
-  console.log(e);
-  e.returnValue = '';
-});
+// window.addEventListener('beforeunload', function (e) {
+//   e.preventDefault();
+//   console.log(e);
+//   e.returnValue = '';
+// });
