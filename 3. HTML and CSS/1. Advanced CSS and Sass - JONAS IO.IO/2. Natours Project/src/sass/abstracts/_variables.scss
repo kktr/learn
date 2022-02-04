@@ -1,10 +1,31 @@
+@use 'sass:math';
+
+@function rem($pxValue) {
+  @return math.div($pxValue, 16px) * 1rem;
+}
+
+@function em($pxValue, $context: 16) {
+  @return math.div($pxValue, $context) * 1em;
+}
+
 $color-primary: #7ed56f;
 $color-primary--light: rgb(113 158 214);
 $color-primary--dark: rgb(39 95 180);
+$color-secondary: rgb(113 158 214);
 $color-grey-light-1: #f7f7f7;
-$color-grey-dark-1: #777;
+$color-grey-dark-1: #666;
 $color-white: #fff;
 $color-black: #000;
+
 $normal-weight: 400;
+
 $bold-weight: 700;
 $retina: '(-webkit-min-device-pixel-ratio: 2), (min-resolution:192dpi)';
+
+$gutter-horizontal: rem(20px);
+$gutter-vertical: rem(80px);
+
+$speed-superfast: 0.1s;
+$speed-fast: 0.2s;
+$speed-medium: 0.55s;
+$speed-long: 0.9s;

@@ -1,4 +1,5 @@
 @use '../base/typography';
+@use '../abstracts/variables';
 
 .btn {
   &:link,
@@ -55,5 +56,29 @@
   &-animated {
     animation: moveInBottom 0.5s ease-out 0.75s;
     animation-fill-mode: backwards;
+  }
+}
+
+.btn-text {
+  &:link,
+  &:visited {
+    display: inline-block;
+    padding: typography.rem(3px);
+    border-bottom: 1px solid variables.$color-primary;
+    color: variables.$color-secondary;
+    font-size: typography.$browser-context;
+    text-decoration: none;
+    transform: translateY(-2px);
+    transition: all 0.2s;
+  }
+
+  &:hover {
+    background-color: variables.$color-primary;
+    color: variables.$color-white;
+    box-shadow: 0 1rem 2rem rgba(variables.$color-black, 0.15);
+  }
+
+  &:active {
+    transform: translateY(0);
   }
 }

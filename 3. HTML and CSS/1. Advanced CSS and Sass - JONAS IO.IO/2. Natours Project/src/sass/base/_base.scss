@@ -1,3 +1,5 @@
+@use '../abstracts/variables';
+
 *,
 *::before,
 *::after {
@@ -7,6 +9,8 @@
 }
 
 body {
+  padding: 1em;
+  background-color: variables.$color-grey-light-1;
   box-sizing: border-box;
 }
 

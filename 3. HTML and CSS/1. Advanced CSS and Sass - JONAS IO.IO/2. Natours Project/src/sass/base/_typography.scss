@@ -10,7 +10,16 @@
   @return math.div($pxValue, $context) * 1em;
 }
 
+@function pxWidth($pxValue, $viewWidth) {
+  $pxValue2: math.div(($pxValue - $browser-context), 1px);
+
+  @return calc(math.div($pxValue2, $viewWidth) * 100vw + $browser-context);
+}
+
 $browser-context: 16px;
+
+$gutter-horizontal: rem(20px);
+$gutter-vertical: rem(80px);
 
 body {
   color: #777;
@@ -21,10 +30,10 @@ body {
 }
 
 .heading-primary {
+  z-index: 1;
   margin: 22vh auto em(64px, 48px);
   color: #fff;
-  font-size: clamp(rem(28px), calc(48/1040*100vw), rem(96px) );
-  // rem(56px); 5.3846vw
+  font-size: clamp(rem(28px), calc(48 / 1040 * 100vw), rem(96px));
   text-align: center;
   text-transform: uppercase;
   backface-visibility: hidden;
@@ -33,17 +42,16 @@ body {
     display: block;
     font-weight: variables.$normal-weight;
     letter-spacing: em(35px, 48px);
-    // animation-name: moveInLeft;
-    animation-duration: 0.9s;
+    animation-duration: variables.$speed-long;
   }
 
   &--sub {
     display: block;
     font-weight: variables.$normal-weight;
-    font-size: max(em(16px, 48px),rem(16px));
+    font-size: max(em(16px, 48px), rem(16px));
     letter-spacing: em(17.4px);
     animation-name: moveInRight;
-    animation-duration: 0.9s;
+    animation-duration: variables.$speed-long;
   }
 }
 
@@ -58,12 +66,26 @@ body {
   background-clip: text;
   color: transparent;
   font-weight: variables.$bold-weight;
-  font-size: clamp(rem(16px), calc(16/1040*100vw), rem(32px) );
+  font-size: clamp(rem(16px), calc(20 / 1040 * 100vw), rem(32px));
   letter-spacing: rem(3.2px);
   text-transform: uppercase;
-  transition: all 0.2s;
+  transition: all variables.$speed-fast;
 
   &:hover {
     transform: skewY(3deg) skewX(15deg) scale(1.1);
+  }
+}
+
+.heading-tertiary {
+  font-weight: variables.$bold-weight;
+  font-size: $browser-context;
+  text-transform: uppercase;
+}
+
+.paragraph {
+  font-size: $browser-context;
+
+  &:not(:last-child) {
+    margin-bottom: rem(48px);
   }
 }

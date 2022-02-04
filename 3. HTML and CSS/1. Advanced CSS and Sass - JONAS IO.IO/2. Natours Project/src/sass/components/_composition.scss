@@ -1,0 +1,42 @@
+@use '../abstracts/variables';
+@use '../base/typography';
+
+.composition {
+  position: relative;
+
+  &__photo {
+    position: absolute;
+    z-index: 10;
+    width: 60%;
+    border-radius: 2px;
+    box-shadow: 0 typography.rem(15px) typography.rem(40px) rgba(variables.$color-black, 0.4);
+    transition: all variables.$speed-medium;
+
+    &--p1 {
+      top: typography.rem(-20px);
+      left: 0;
+    }
+
+    &--p2 {
+      top: 10%;
+      right: 0;
+    }
+
+    &--p3 {
+      top: typography.rem(100px);
+      left: 20%;
+    }
+
+    &:hover {
+      z-index: 20;
+      box-shadow: 0 typography.rem(25px) typography.rem(40px) rgba(variables.$color-black, 0.5);
+      outline: typography.rem(15px) solid variables.$color-primary;
+      outline-offset: typography.rem(20px);
+      transform: scale(1.05) translateY(typography.rem(-5px));
+    }
+  }
+
+  &:hover &__photo:not(:hover) {
+    transform: scale(0.95);
+  }
+}

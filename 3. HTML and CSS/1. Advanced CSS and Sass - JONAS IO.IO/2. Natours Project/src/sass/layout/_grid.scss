@@ -1,0 +1,46 @@
+@use '../abstracts/variables';
+@use '../base/typography';
+@use '../abstracts/mixins';
+
+.row {
+  @include mixins.clearfix;
+
+  max-width: typography.rem(1140px);
+  margin: 0 auto;
+
+  &:not(:last-child) {
+    margin-bottom: variables.$gutter-vertical;
+  }
+}
+
+.col {
+  float: left;
+
+  &:not(:last-child) {
+    margin-right: variables.$gutter-horizontal;
+  }
+
+  &--1-of-2 {
+    width: calc((100% - #{variables.$gutter-horizontal}) / 2);
+  }
+
+  &--1-of-3 {
+    width: calc((100% - 2 * #{variables.$gutter-horizontal}) / 3);
+  }
+
+  &--2-of-3 {
+    width: calc(2 * ((100% - 2 * #{variables.$gutter-horizontal}) / 3) + #{variables.$gutter-horizontal});
+  }
+
+  &--1-of-4 {
+    width: calc((100% - 3 * #{variables.$gutter-horizontal}) / 4);
+  }
+
+  &--2-of-4 {
+    width: calc(2 * ((100% - 3 * #{variables.$gutter-horizontal}) / 4) + #{variables.$gutter-horizontal});
+  }
+
+  &--3-of-4 {
+    width: calc(3 * ((100% - 3 * #{variables.$gutter-horizontal}) / 4) + (2* #{variables.$gutter-horizontal}));
+  }
+}

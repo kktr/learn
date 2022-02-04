@@ -1,0 +1,39 @@
+@font-face {
+  font-weight: bold;
+  font-style: normal;
+  font-family: 'Lato';
+  src: url('./assets/fonts/subset-Lato-Bold.woff2') format('woff2');
+  font-display: swap;
+}
+
+@font-face {
+  font-weight: 900;
+  font-style: normal;
+  font-family: 'Lato';
+  src: url('./assets/fonts/subset-Lato-Black.woff2') format('woff2');
+  font-display: swap;
+}
+
+@font-face {
+  font-weight: 300;
+  font-style: normal;
+  font-family: 'Lato';
+  src: url('./assets/fonts/subset-Lato-Light.woff2') format('woff2');
+  font-display: swap;
+}
+
+@font-face {
+  font-weight: normal;
+  font-style: normal;
+  font-family: 'Lato';
+  src: url('./assets/fonts/subset-Lato-Regular.woff2') format('woff2');
+  font-display: swap;
+}
+
+@font-face {
+  font-weight: 300;
+  font-style: normal;
+  font-family: 'Lato Hairline';
+  src: url('./assets/fonts/subset-Lato-Hairline.woff2') format('woff2');
+  font-display: swap;
+}

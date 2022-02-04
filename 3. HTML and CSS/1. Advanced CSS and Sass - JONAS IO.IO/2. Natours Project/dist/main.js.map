@@ -1,1 +1,0 @@
-{"version":3,"file":"main.js","mappings":"yBAQAA,QAAQC,IAAI,S","sources":["webpack://2.-natours-project/./src/index.js"],"sourcesContent":["/*jshint esversion: 11*/\n/* eslint-env es12 */\n\n'use strict';\n\n// import '../css/main.css';\nimport './sass/main.scss';\n\nconsole.log('Hello');\n"],"names":["console","log"],"sourceRoot":""}

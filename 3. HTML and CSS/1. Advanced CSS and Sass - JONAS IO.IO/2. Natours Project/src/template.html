@@ -16,7 +16,9 @@
     /> -->
 
     <!-- <script src="../dist/main.js"></script> -->
-    <!-- <link rel="stylesheet" href="../dist/main.css" /> -->
+
+    <!-- <link rel="stylesheet" href="../src/assets/iconfont/icon-font.css" />
+    <link rel="stylesheet" href="../build/post-main.css" /> -->
 
     <!-- <link
       rel="stylesheet"
@@ -42,70 +44,27 @@
     <link rel="canonical" href="https://kktr-natours.netlify.app/" />
     <link rel="icon" href="./assets/favicon.ico" />
     <link rel="icon" href="./assets/favicon.webp" />
-    <style>
-      @font-face {
-        font-family: 'Lato';
-        src: url('../src/assets/fonts/subset-Lato-Bold.woff2') format('woff2');
-        font-weight: bold;
-        font-style: normal;
-        font-display: swap;
-      }
-
-      @font-face {
-        font-family: 'Lato';
-        src: url('../src/assets/fonts/subset-Lato-Black.woff2') format('woff2');
-        font-weight: 900;
-        font-style: normal;
-        font-display: swap;
-      }
-
-      @font-face {
-        font-family: 'Lato';
-        src: url('../src/assets/fonts//subset-Lato-Light.woff2') format('woff2');
-        font-weight: 300;
-        font-style: normal;
-        font-display: swap;
-      }
-
-      @font-face {
-        font-family: 'Lato';
-        src: url('../src/assets/fonts//subset-Lato-Regular.woff2')
-          format('woff2');
-        font-weight: normal;
-        font-style: normal;
-        font-display: swap;
-      }
-
-      @font-face {
-        font-family: 'Lato Hairline';
-        src: url('../src/assets/fonts//subset-Lato-Hairline.woff2')
-          format('woff2');
-        font-weight: 300;
-        font-style: normal;
-        font-display: swap;
-      }
-    </style>
   </head>
 
   <body>
-    <picture class="header__bg-container">
-      <source
-        src="./assets/hero-gradient-2000x1199.jpeg"
-        srcset="
-          ./assets/hero-gradient-500x299.webp    500w,
-          ./assets/hero-gradient-1000x599.webp  1000w,
-          ./assets/hero-gradient-1500x899.webp  1500w,
-          ./assets/hero-gradient-2000x1199.webp 2000w
-        "
-      />
-      <img
-        class="header__bg"
-        src="./assets/hero-gradient-2000x1199.jpeg"
-        alt="women"
-      />
-    </picture>
-
     <header class="header">
+      <picture class="header__bg-container">
+        <source
+          src="./assets/hero-gradient-2000x1199.jpeg"
+          srcset="
+            ./assets/hero-gradient-500x299.webp    500w,
+            ./assets/hero-gradient-1000x599.webp  1000w,
+            ./assets/hero-gradient-1500x899.webp  1500w,
+            ./assets/hero-gradient-2000x1199.webp 2000w
+          "
+        />
+        <img
+          class="header__bg"
+          src="./assets/hero-gradient-2000x1199.jpeg"
+          alt="women"
+        />
+      </picture>
+
       <div class="header__logo-box">
         <img src="./assets/logo-white.webp" class="header__logo" alt="logo" />
       </div>
@@ -123,10 +82,76 @@
 
     <main>
       <section class="section-about">
-        <div class="u-center-text u-margin-bottom-8">
+        <div class="u-center-text u-margin-bottom-big">
           <h2 class="heading-secondary">
             Exciting tours for adventurous people
           </h2>
+        </div>
+
+        <div class="row">
+          <div class="col col--1-of-2">
+            <h3 class="heading-tertiary u-margin-bottom-medium">
+              You're goingto fall in love with nature
+            </h3>
+            <p class="paragraph">
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+              Voluptate deserunt sint dolores pariatur cumque architecto libero
+              eveniet sequi quae omnis, eum culpa non eligendi odit magni
+            </p>
+
+            <h3 class="heading-tertiary u-margin-bottom-medium">
+              Live adventure like you never have before
+            </h3>
+
+            <p class="paragraph">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis
+              ratione, nobis
+            </p>
+
+            <a href="#" class="btn-text">Learn more &rarr;</a>
+          </div>
+
+          <div class="col col--1-of-2">
+            <div class="composition">
+              <img
+                loading="lazy"
+                src="../src/assets/images/nat-1.jpg"
+                alt=""
+                class="composition__photo composition__photo--p1"
+              />
+
+              <img
+                loading="lazy"
+                src="../src/assets/images/nat-2.jpg"
+                alt=""
+                class="composition__photo composition__photo--p2"
+              />
+
+              <img
+                loading="lazy"
+                src="../src/assets/images/nat-3.jpg"
+                alt=""
+                class="composition__photo composition__photo--p3"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-features">
+        <div class="row">
+          <div class="col col-1-od-4">
+            <div class="feature-box">
+              <i class="icon-basic-world"></i>
+
+              <h3 class="headin-tertinary"></h3>
+
+              <p class="feature-box__text">
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                Doloribus, eveniet.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
     </main>

@@ -9,17 +9,15 @@ const path = require('path');
 
 module.exports = {
   mode: 'production',
-  entry: {
-    main: './src/index.js',
-  },
+  cache: false,
+  entry: path.resolve(__dirname, 'src/', 'index.js'),
   output: {
-    /**
-     * With zero configuration,
-     *   clean-webpack-plugin will remove files inside the directory below
-     */
-    path: path.resolve(process.cwd(), 'dist'),
-    // filename: 'webpack-critical-css-inliner.[contenthash].js',
-    assetModuleFilename: '[name].[hash][ext]',
+    path: path.resolve(__dirname, 'dist/'),
+    filename: 'webpack-critical-css-inliner.js',
+    assetModuleFilename: '[name][ext]',
+  },
+  devServer: {
+    static: './dist',
   },
 
   module: {
@@ -30,9 +28,38 @@ module.exports = {
           // fallback to style-loader in development
           // 'style-loader',
           MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 2,
+            },
+          },
+          {
+            loader: 'resolve-url-loader',
+          },
+          {
+            loader: 'postcss-loader',
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: true, // <-- !!IMPORTANT!!
+            },
+          },
+          // 'css-loader',
+          // 'postcss-loader',
+          // 'sass-loader',
+        ],
+      },
+      {
+        test: /\.css$/i,
+        use: [
+          // fallback to style-loader in development
+          // 'style-loader',
+          MiniCssExtractPlugin.loader,
           'css-loader',
           'postcss-loader',
-          'sass-loader',
+          // 'sass-loader',
         ],
       },
       {
@@ -40,28 +67,35 @@ module.exports = {
         use: ['html-loader'],
       },
       {
-        test: /\.(svg|ico|png|jpg|jpeg|webp)$/,
+        test: /\.(svg|ico|png|jpg|jpeg|webp|woff|woff2|eot|ttf|otf)$/,
         type: 'asset/resource',
       },
+      // {
+      //   test: /\.(woff|woff2|eot|ttf|otf)$/i,
+      //   type: 'asset/resource',
+      //   generator: {
+      //     filename: 'fonts/[name][ext]',
+      //   },
+      // },
     ],
   },
   plugins: [
     new CleanWebpackPlugin(),
 
-    new WebpackCriticalCSSInliner({
-      base: './dist',
-      src: './index.html',
-      target: './index-critical.html',
-      inlineGoogleFonts: false,
-      minify: true,
-    }),
-
-    new MiniCssExtractPlugin(),
-
     new HtmlWebpackPlugin({
       template: './src/template.html',
       // inject: false,
     }),
+
+    new MiniCssExtractPlugin(),
+
+    // new WebpackCriticalCSSInliner({
+    //   base: 'dist/',
+    //   src: 'index.html',
+    //   target: 'index-critical.html',
+    //   inlineGoogleFonts: false,
+    //   minify: true,
+    // }),
   ],
 
   devtool: 'source-map',

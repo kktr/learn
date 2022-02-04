@@ -1,9 +1,18 @@
 @use '../abstracts/variables';
 @use '../base/typography';
 
-.section-about {
-  // margin-top: -10vh;
-  // padding: calc(10vh + #{typography.em(90px)}) 0 0;
-  padding: 2em 1em;
-  background-color: variables.$color-grey-light-1;
+.section {
+  &-about {
+    z-index: -200;
+    margin-top: -10vh;
+    padding: calc(10vh + #{typography.em(60px)}) 0;
+    background-color: variables.$color-grey-light-1;
+  }
+
+  &-features {
+    padding: typography.rem(20px);
+    // background-color: variables.$color-grey-light-1;
+    background-image: url('../../assets/images/nat-4.webp');
+    background-size: cover;
+  }
 }
