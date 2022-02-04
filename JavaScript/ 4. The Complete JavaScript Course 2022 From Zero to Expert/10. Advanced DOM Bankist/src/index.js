@@ -2,7 +2,11 @@
 /* eslint-env es12 */
 
 'use strict';
+
 ///////////////////////////////////////
+import './img/card.webp';
+import './img/grow.webp';
+import './img/digital.webp';
 
 const modal = document.querySelector('.modal');
 const overlay = document.querySelector('.overlay');
