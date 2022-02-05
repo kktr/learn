@@ -5,7 +5,7 @@
 .row {
   @include mixins.clearfix;
 
-  max-width: typography.rem(1140px);
+  max-width: variables.$grid-width;
   margin: 0 auto;
 
   &:not(:last-child) {

@@ -22,8 +22,9 @@ $normal-weight: 400;
 $bold-weight: 700;
 $retina: '(-webkit-min-device-pixel-ratio: 2), (min-resolution:192dpi)';
 
+$grid-width: rem(1824px);
 $gutter-horizontal: rem(20px);
-$gutter-vertical: rem(80px);
+$gutter-vertical: rem(60px);
 
 $speed-superfast: 0.1s;
 $speed-fast: 0.2s;

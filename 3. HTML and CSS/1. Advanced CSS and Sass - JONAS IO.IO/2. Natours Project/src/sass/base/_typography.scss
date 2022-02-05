@@ -56,15 +56,6 @@ body {
 }
 
 .heading-secondary {
-  display: inline-block;
-  background-image:
-    linear-gradient(
-      to right,
-      variables.$color-primary--light,
-      variables.$color-primary--dark
-    );
-  background-clip: text;
-  color: transparent;
   font-weight: variables.$bold-weight;
   font-size: clamp(rem(16px), calc(20 / 1040 * 100vw), rem(32px));
   letter-spacing: rem(3.2px);

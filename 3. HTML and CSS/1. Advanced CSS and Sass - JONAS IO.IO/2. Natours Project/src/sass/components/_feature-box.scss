@@ -2,11 +2,20 @@
 @use '../base/typography';
 
 .feature-box {
-  &__icon {
+  padding: typography.rem(25px);
+  border-radius: typography.rem(3px);
+  background-color: rgba(variables.$color-white, 0.8);
+  box-shadow: 0 typography.rem(15px) typography.rem(40px) rgba(variables.$color-white, 0.15);
+  font-size: typography.rem(15px);
+  text-align: center;
+  transition: transform variables.$speed-fast;
 
+  &__icon {
+    margin-bottom: typography.rem(5px);
+    font-size: typography.rem(60px);
   }
 
-  &__text {
-
+  &:hover {
+    transform: translateY(typography.rem(-15px)) scale(1.03);
   }
 }

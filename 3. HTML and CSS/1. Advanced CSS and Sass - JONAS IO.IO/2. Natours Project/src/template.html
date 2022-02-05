@@ -83,7 +83,7 @@
     <main>
       <section class="section-about">
         <div class="u-center-text u-margin-bottom-big">
-          <h2 class="heading-secondary">
+          <h2 class="heading-secondary u-gradient-bg-text">
             Exciting tours for adventurous people
           </h2>
         </div>
@@ -113,12 +113,9 @@
 
           <div class="col col--1-of-2">
             <div class="composition">
-              <img
-                loading="lazy"
-                src="../src/assets/images/nat-1.jpg"
-                alt=""
-                class="composition__photo composition__photo--p1"
-              />
+              <img transform: translateY(typography.rem(-15px)) scale(1.03);
+              src="../src/assets/images/nat-1.jpg" alt=""
+              class="composition__photo composition__photo--p1" />
 
               <img
                 loading="lazy"
@@ -139,16 +136,81 @@
       </section>
 
       <section class="section-features">
-        <div class="row">
-          <div class="col col-1-od-4">
-            <div class="feature-box">
-              <i class="icon-basic-world"></i>
+        <picture class="section-features__bg-container">
+          <source src="./assets/images/nat-4.webp" />
+          <img
+            class="section-features__bg"
+            src="./assets/images/nat-4.webp"
+            alt="women"
+            loading="lazy"
+          />
+        </picture>
 
-              <h3 class="headin-tertinary"></h3>
+        <div class="row row--features">
+          <div class="col col--1-of-4">
+            <div class="feature-box">
+              <i
+                class="feature-box__icon icon-basic-world u-gradient-bg-text"
+              ></i>
+
+              <h3 class="heading-tertiary u-margin-bottom-medium">
+                Explore the world
+              </h3>
 
               <p class="feature-box__text">
                 Lorem ipsum dolor sit, amet consectetur adipisicing elit.
                 Doloribus, eveniet.
+              </p>
+            </div>
+          </div>
+
+          <div class="col col--1-of-4">
+            <div class="feature-box">
+              <i
+                class="feature-box__icon icon-basic-compass u-gradient-bg-text"
+              ></i>
+
+              <h3 class="heading-tertiary u-margin-bottom-medium">
+                Meet nature
+              </h3>
+
+              <p class="feature-box__text">
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Amet,
+                repellat?
+              </p>
+            </div>
+          </div>
+
+          <div class="col col--1-of-4">
+            <div class="feature-box">
+              <i
+                class="feature-box__icon icon-basic-map u-gradient-bg-text"
+              ></i>
+
+              <h3 class="heading-tertiary u-margin-bottom-medium">
+                Find your way
+              </h3>
+
+              <p class="feature-box__text">
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                Adipisci, ex?
+              </p>
+            </div>
+          </div>
+
+          <div class="col col--1-of-4">
+            <div class="feature-box">
+              <i
+                class="feature-box__icon icon-basic-heart u-gradient-bg-text"
+              ></i>
+
+              <h3 class="heading-tertiary u-margin-bottom-medium">
+                live a healthier
+              </h3>
+
+              <p class="feature-box__text">
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sit,
+                sapiente?
               </p>
             </div>
           </div>

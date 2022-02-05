@@ -12,3 +12,15 @@
 .u-margin-bottom-medium {
   margin-bottom: typography.rem(24px);
 }
+
+.u-gradient-bg-text {
+  display: inline-block;
+  background-image:
+    linear-gradient(
+      to right,
+      variables.$color-primary--light,
+      variables.$color-primary--dark
+    );
+  background-clip: text;
+  color: transparent;
+}
