@@ -8,15 +8,22 @@
   @return math.div($pxValue, $context) * 1em;
 }
 
-$color-primary: #7ed56f;
+$color-primary: rgb(76 135 194);
 $color-primary--light: rgb(113 158 214);
 $color-primary--dark: rgb(39 95 180);
 $color-secondary: rgb(113 158 214);
+$color-secondary-light: #ffb900;
+$color-secondary-dark: #ff7730;
+$color-tertiary-light: rgb(113 214 113);
+$color-tertiary-dark: 	rgb(39 180 39);
 $color-grey-light-1: #f7f7f7;
+$color-grey-light-2: #eee;
 $color-grey-dark-1: #666;
 $color-white: #fff;
 $color-black: #000;
 
+$thin-weight: 100;
+$light-weight: 300;
 $normal-weight: 400;
 
 $bold-weight: 700;

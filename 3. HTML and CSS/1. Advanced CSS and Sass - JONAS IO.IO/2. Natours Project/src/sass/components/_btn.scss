@@ -43,7 +43,7 @@
     }
   }
 
-  &-light {
+  &--light {
     margin: 0 auto auto;
     background-color: #fff;
     color: #777;
@@ -53,7 +53,17 @@
     }
   }
 
-  &-animated {
+  &--accent {
+    margin: 0 auto auto;
+    background-color: variables.$color-primary;
+    color: variables.$color-white;
+
+    &::after {
+      background-color: variables.$color-primary;
+    }
+  }
+
+  &--animated {
     animation: moveInBottom 0.5s ease-out 0.75s;
     animation-fill-mode: backwards;
   }
