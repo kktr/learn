@@ -1,0 +1,59 @@
+@use '../base/typography';
+@use '../abstracts/variables';
+
+.story {
+  width: 75%;
+  margin: 0 auto;
+  padding: typography.rem(60px);
+  padding-left: typography.rem(90px);
+  border-radius: typography.rem(3px);
+  background-color: variables.$color-white;
+  box-shadow: 0 typography.rem(3px) typography.rem(6px) rgba(variables.$color-black, 0.1);
+  font-size: typography.$browser-context;
+  transform: skewX(-12deg);
+
+  &__shape {
+    position: relative;
+    float: left;
+    width: typography.rem(150px);
+    height: typography.rem(150px);
+    transform: skewX(12deg);
+    shape-outside: circle(50% at 50% 50%);
+    clip-path: circle(50% at 50% 50%);
+  }
+
+  &__image {
+    height: 100%;
+    transform: translateX(- typography.rem(40px)) scale(1.4);
+    backface-visibility: hidden;
+    transition: all variables.$speed-fast;
+  }
+
+  &__text {
+    transform: translateX(typography.rem(30px));
+  }
+
+  &__caption {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    color: variables.$color-white;
+    font-size: typography.rem(17px);
+    text-align: center;
+    text-transform: uppercase;
+    transform: translate(-50%, -20%);
+    opacity: 0;
+    transition: all variables.$speed-fast;
+    backface-visibility: hidden;
+  }
+
+  &:hover &__caption {
+    transform: translate(-50%, -50%);
+    opacity: 1;
+  }
+
+  &:hover &__image {
+    filter: blur(3px) brightness(0.6);
+    transform: translateX(- typography.rem(40px)) scale(1);
+  }
+}
