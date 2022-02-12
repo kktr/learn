@@ -4,10 +4,10 @@
 .story {
   width: 75%;
   margin: 0 auto;
-  padding: typography.rem(60px);
-  padding-left: typography.rem(90px);
+  padding: typography.rem(72px);
+  padding-left: typography.rem(108px);
   border-radius: typography.rem(3px);
-  background-color: variables.$color-white;
+  background-color: rgba(variables.$color-white, 0.6);
   box-shadow: 0 typography.rem(3px) typography.rem(6px) rgba(variables.$color-black, 0.1);
   font-size: typography.$browser-context;
   transform: skewX(-12deg);

@@ -45,7 +45,7 @@
   }
 
   &__stories {
-    padding: typography.rem(15px) 0;
-    background-color: variables.$color-grey-light-1;
+    position: relative;
+    padding: typography.rem(150px) 0;
   }
 }
