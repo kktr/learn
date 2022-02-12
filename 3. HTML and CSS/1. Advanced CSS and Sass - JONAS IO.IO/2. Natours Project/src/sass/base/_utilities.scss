@@ -2,23 +2,23 @@
 @use './typography';
 
 .u-center-text {
-  text-align: center;
+  text-align: center !important;
 }
 
 .u-margin-top-big {
-  margin-bottom: typography.rem(60px);
+  margin-bottom: typography.rem(60px) !important;
 }
 
 .u-margin-top-huge {
-  margin-top: typography.rem(80px);
+  margin-top: typography.rem(80px) !important;
 }
 
 .u-margin-bottom-big {
-  margin-bottom: typography.rem(60px);
+  margin-bottom: typography.rem(60px) !important;
 }
 
 .u-margin-bottom-medium {
-  margin-bottom: typography.rem(24px);
+  margin-bottom: typography.rem(24px) !important;
 }
 
 .u-gradient-bg-text {

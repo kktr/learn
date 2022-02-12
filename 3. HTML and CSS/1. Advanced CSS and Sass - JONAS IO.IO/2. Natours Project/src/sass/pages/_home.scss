@@ -39,13 +39,38 @@
     }
   }
 
-  &__tours {
+  &-tours {
     padding: typography.rem(25px) 0 typography.rem(50px) 0;
     background-color: variables.$color-grey-light-1;
   }
 
-  &__stories {
+  &-stories {
     position: relative;
     padding: typography.rem(150px) 0;
+  }
+
+  &-book {
+    padding: typography.rem(150px) 0;
+    background-image: linear-gradient(to right bottom, variables.$color-primary--light, variables.$color-primary--dark);
+  }
+}
+
+.book {
+  height: typography.rem(500px);
+  border-radius: typography.rem(3px);
+  background-image:
+    linear-gradient(
+      105deg,
+      rgba(variables.$color-white, 0.9) 0%,
+      rgba(variables.$color-white, 0.9) 60%,
+      transparent 60%
+    ),
+    url('../../assets/images/nat-10.jpg');
+  background-size: 100%;
+  box-shadow: 0 typography.rem(15px) typography.rem(40px) rgba(variables.$color-black, 0.2);
+
+  &__form {
+    width: 50%;
+    padding: typography.rem(60px);
   }
 }
