@@ -1,0 +1,143 @@
+@use '../base/typography';
+@use '../abstracts/variables';
+
+.navigation {
+  &__checkbox {
+    display: none;
+  }
+
+  &__button {
+    position: fixed;
+    top: typography.rem(60px);
+    right: typography.rem(60px);
+    z-index: 2000;
+    width: typography.rem(70px);
+    height: typography.rem(70px);
+    border-radius: 50%;
+    background-color: variables.$color-white;
+    box-shadow: 0 typography.rem(10px) typography.rem(30px) rgba(variables.$color-black, 0.1);
+    text-align: center;
+    cursor: pointer;
+  }
+
+  &__background {
+    position: fixed;
+    top: typography.rem(65px);
+    right: typography.rem(65px);
+    z-index: 1000;
+    width: typography.rem(60px);
+    height: typography.rem(60px);
+    border-radius: 50%;
+    background-image: radial-gradient(variables.$color-primary--light, variables.$color-primary--dark);
+    transition: transform variables.$speed-long cubic-bezier(0.86, 0, 0.07, 1);
+  }
+
+  &__nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1500;
+    width: 0;
+    height: 100vh;
+    opacity: 0;
+    transition: all variables.$speed-long cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+
+  &__list {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    list-style: none;
+    text-align: center;
+    transform: translate(-50%, -50%);
+  }
+
+  &__item {
+    margin: typography.rem(10px);
+  }
+
+  &__link {
+    &:link,
+    &:visited {
+      display: inline-block;
+      padding: typography.rem(10px) typography.rem(20px);
+      background-image: linear-gradient(120deg, transparent 0%, transparent 50%, variables.$color-white 50%);
+      background-size: 220%;
+      color: variables.$color-white;
+      font-weight: 300;
+      font-size: typography.rem(30px);
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: all variables.$speed-medium;
+
+      span {
+        display: inline-block;
+        margin-right: typography.rem(15px);
+      }
+    }
+
+    &:hover,
+    &:active {
+      background-position: 100%;
+      color: variables.$color-primary;
+      transform: translateX(typography.rem(10px));
+    }
+  }
+
+  &__checkbox:checked ~ &__background {
+    transform: scale(80);
+  }
+
+  &__checkbox:checked ~ &__nav {
+    width: 100%;
+    opacity: 1;
+  }
+
+  &__icon {
+    position: relative;
+    margin-top: typography.rem(35px);
+
+    &,
+    &::before,
+    &::after {
+      display: inline-block;
+      width: typography.rem(30px);
+      height: typography.rem(2px);
+      background-color: variables.$color-grey-dark-3;
+    }
+
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      transition: all variables.$speed-fast;
+    }
+
+    &::before { top: typography.rem(- 8px); }
+    &::after { top: typography.rem(8px); }
+  }
+
+  &__button:hover &__icon::before {
+    top: typography.rem(- 10px);
+  }
+
+  &__button:hover &__icon::after {
+    top: typography.rem(10px);
+  }
+
+  &__checkbox:checked + &__button &__icon {
+    background-color: transparent;
+  }
+
+  &__checkbox:checked + &__button &__icon::before {
+    top: 0;
+    transform: rotate(135deg);
+  }
+
+  &__checkbox:checked + &__button &__icon::after {
+    top: 0;
+    transform: rotate(-135deg);
+  }
+}

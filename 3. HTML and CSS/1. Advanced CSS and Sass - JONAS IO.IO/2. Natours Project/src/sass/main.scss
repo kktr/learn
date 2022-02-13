@@ -5,6 +5,7 @@
 @use 'base/base';
 @use 'base/typography';
 @use 'base/utilities';
+@use 'layout/navigation';
 @use 'components/btn';
 @use 'components/composition';
 @use 'components/feature-box';
@@ -12,7 +13,7 @@
 @use 'components/story';
 @use 'components/bg-video';
 @use 'components/form';
-@use 'components/footer';
+@use 'layout/footer';
 @use 'layout/header';
 @use 'layout/grid';
 @use 'pages/home';

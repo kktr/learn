@@ -6,26 +6,6 @@
 
     <title>Natours | Exciting tours for adventurous people</title>
 
-    <!-- <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap"
-      media="print"
-      onload="this.media='all'"
-    /> -->
-
-    <!-- <script src="../dist/main.js"></script> -->
-
-    <!-- <link rel="stylesheet" href="../src/assets/iconfont/icon-font.css" />
-    <link rel="stylesheet" href="../build/post-main.css" /> -->
-
-    <!-- <link
-      rel="stylesheet"
-      href="../dist/main.css"
-      media="print"
-      onload="this.media='all'"
-    /> -->
     <meta name="description" content="Page created for advanced css training" />
     <meta
       property="og:title"
@@ -50,30 +30,34 @@
     <div class="navigation">
       <input type="checkbox" class="navigation__checkbox" id="navi-toggle" />
 
-      <label for="navi-toggle" class="navigation__button">MENU</label>
+      <label for="navi-toggle" class="navigation__button">
+        <span class="navigation__icon">&nbsp;</span>
+      </label>
 
       <div class="navigation__background">&nbsp;</div>
 
       <nav class="navigation__nav">
         <ul class="naviagation__list">
           <li class="navigation__item">
-            <a href="#" class="navigation__link">About Natours</a>
+            <a href="#section-about" class="navigation__link">About Natours</a>
           </li>
 
           <li class="navigation__item">
-            <a href="#" class="navigation__link">Your benefits</a>
+            <a href="#section-features" class="navigation__link"
+              >Your benefits</a
+            >
           </li>
 
           <li class="navigation__item">
-            <a href="#" class="navigation__link">Popular tours</a>
+            <a href="#section-tours" class="navigation__link">Popular tours</a>
           </li>
 
           <li class="navigation__item">
-            <a href="#" class="navigation__link">Stories</a>
+            <a href="#section-stories" class="navigation__link">Stories</a>
           </li>
 
           <li class="navigation__item">
-            <a href="#" class="navigation__link">Book now</a>
+            <a href="#section-book" class="navigation__link">Book now</a>
           </li>
         </ul>
       </nav>
@@ -113,7 +97,7 @@
     </header>
 
     <main>
-      <section class="section-about">
+      <section class="section-about" id="section-about">
         <div class="u-center-text u-margin-bottom-big">
           <h2 class="heading-secondary u-gradient-bg-text">
             Exciting tours for adventurous people
@@ -188,7 +172,7 @@
         </div>
       </section>
 
-      <section class="section-features">
+      <section class="section-features" id="section-features">
         <picture class="section-features__bg-container">
           <source src="./assets/images/nat-4-2000.webp" />
           <img
@@ -278,7 +262,7 @@
         </div>
       </section>
 
-      <section class="section-tours">
+      <section class="section-tours" id="section-tours">
         <div class="u-center-text u-margin-bottom-big">
           <h2 class="heading-secondary u-gradient-bg-text">
             Most popular tours
@@ -396,7 +380,7 @@
         </div>
       </section>
 
-      <section class="section-stories">
+      <section class="section-stories" id="section-stories">
         <div class="bg-video">
           <video class="bg-video__content" autoplay muted loop>
             <source src="./assets/images/video.mp4" type="video/mp4" />
@@ -416,7 +400,7 @@
             <figure class="story__shape">
               <img
                 class="story__image"
-                src="../src/assets/images/nat-8.jpg"
+                src="../src/assets/images/nat-8-775.webp "
                 alt="person on a tour"
                 srcset="
                   ./assets/images/nat-8-2000.webp 2000w,
@@ -427,6 +411,7 @@
                   ./assets/images/nat-8-225.webp   225w
                 "
                 sizes="225px"
+                width="225px"
               />
               <figcaption class="story__caption">Mary Smith</figcaption>
             </figure>
@@ -462,6 +447,7 @@
                   ./assets/images/nat-9-225.webp   225w
                 "
                 sizes="225px"
+                width="225px"
               />
               <figcaption class="story__caption">Jarosław Psikuta</figcaption>
             </figure>
@@ -486,7 +472,7 @@
         </div>
       </section>
 
-      <section class="section-book">
+      <section class="section-book" id="section-book">
         <div class="row">
           <div class="book">
             <div class="book__form">
@@ -561,12 +547,13 @@
       </section>
     </main>
 
-    <footer class="footer">
+    <footer class="footer" id="footer">
       <div class="footer__logo-box">
         <img
           src="./assets/images/logo-green-2x.png"
           alt="Full logo"
           class="footer__logo"
+          width="150px"
         />
       </div>
 
