@@ -92,7 +92,7 @@ module.exports = {
     new WebpackCriticalCSSInliner({
       base: 'dist/',
       src: 'index.html',
-      target: 'index-critical.html',
+      target: 'index.html',
       inlineGoogleFonts: false,
       minify: true,
     }),
