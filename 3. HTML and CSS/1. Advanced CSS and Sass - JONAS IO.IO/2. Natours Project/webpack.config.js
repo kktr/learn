@@ -89,13 +89,13 @@ module.exports = {
 
     new MiniCssExtractPlugin(),
 
-    // new WebpackCriticalCSSInliner({
-    //   base: 'dist/',
-    //   src: 'index.html',
-    //   target: 'index-critical.html',
-    //   inlineGoogleFonts: false,
-    //   minify: true,
-    // }),
+    new WebpackCriticalCSSInliner({
+      base: 'dist/',
+      src: 'index.html',
+      target: 'index-critical.html',
+      inlineGoogleFonts: false,
+      minify: true,
+    }),
   ],
 
   devtool: 'source-map',

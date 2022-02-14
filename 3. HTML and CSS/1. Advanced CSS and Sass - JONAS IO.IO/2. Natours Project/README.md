@@ -12,8 +12,8 @@
       Demo
     </a>
     <span> | </span>
-    <a href="">
-      Solution
+    <a href="https://github.com/kktr/learn/tree/main/3.%20HTML%20and%20CSS/1.%20Advanced%20CSS%20and%20Sass%20-%20JONAS%20IO.IO/2.%20Natours%20Project">
+      Code
     </a>
   </h3>
 </div>
@@ -26,13 +26,14 @@
 - [Built With](#built-with)
 - [Features](#features)
 - [Contact](#contact)
-- [Acknowledgements](#acknowledgements)
 
 <!-- OVERVIEW -->
 
 ## Overview
 
-![screenshot]()
+Natours - a project from the Advanced CSS course, with the help of which I was able to learn the world of animation and pseudo-element in CSS and SASS more deeply.
+
+![screenshot](https://raw.githubusercontent.com/kktr/learn/main/3.%20HTML%20and%20CSS/1.%20Advanced%20CSS%20and%20Sass%20-%20JONAS%20IO.IO/2.%20Natours%20Project/src/assets/images/Screen%20shots/natours-1.webp)
 
 ### Built With
 
@@ -50,7 +51,20 @@
 
 ## Features
 
-Natours - a project from the Advanced CSS course, with the help of which I was able to learn the world of animation and pseudo-element in CSS and SASS more deeply.
+Coming out of the course framework I did an optimization based on google light house.
+Technologies used: yarn, webpack, HMR, postcss(autoprefixer), critical css, webp, srcset, change bacground image form CSS to HTML, lazy loading, local fonts
+
+![about](https://raw.githubusercontent.com/kktr/learn/main/3.%20HTML%20and%20CSS/1.%20Advanced%20CSS%20and%20Sass%20-%20JONAS%20IO.IO/2.%20Natours%20Project/src/assets/images/Screen%20shots/natours-2.webp)
+
+![features](https://raw.githubusercontent.com/kktr/learn/main/3.%20HTML%20and%20CSS/1.%20Advanced%20CSS%20and%20Sass%20-%20JONAS%20IO.IO/2.%20Natours%20Project/src/assets/images/Screen%20shots/natours-3.webp)
+
+![tours](https://raw.githubusercontent.com/kktr/learn/main/3.%20HTML%20and%20CSS/1.%20Advanced%20CSS%20and%20Sass%20-%20JONAS%20IO.IO/2.%20Natours%20Project/src/assets/images/Screen%20shots/natours-4.webp)
+
+![stories](https://raw.githubusercontent.com/kktr/learn/main/3.%20HTML%20and%20CSS/1.%20Advanced%20CSS%20and%20Sass%20-%20JONAS%20IO.IO/2.%20Natours%20Project/src/assets/images/Screen%20shots/natours-5.webp)
+
+![book](https://raw.githubusercontent.com/kktr/learn/main/3.%20HTML%20and%20CSS/1.%20Advanced%20CSS%20and%20Sass%20-%20JONAS%20IO.IO/2.%20Natours%20Project/src/assets/images/Screen%20shots/natours-6.webp)
+
+![footer](https://raw.githubusercontent.com/kktr/learn/main/3.%20HTML%20and%20CSS/1.%20Advanced%20CSS%20and%20Sass%20-%20JONAS%20IO.IO/2.%20Natours%20Project/src/assets/images/Screen%20shots/natours-7.webp)
 
 ## Contact
 
