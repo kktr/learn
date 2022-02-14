@@ -57,7 +57,7 @@ Self-implemented:
 ## Features
 
 Coming out of the course framework I did an optimization based on google light house.
-Technologies used: yarn, webpack, HMR, postcss(autoprefixer), critical css, webp, srcset, change background image form CSS to HTML, lazy loading, local fonts.
+Technologies used: yarn, webpack, HMR, postcss(autoprefixer), critical css, webp, local fonts, srcset, sizes, change background image form CSS to HTML, lazy loading, .
 
 ![performance](https://raw.githubusercontent.com/kktr/learn/main/3.%20HTML%20and%20CSS/1.%20Advanced%20CSS%20and%20Sass%20-%20JONAS%20IO.IO/2.%20Natours%20Project/src/assets/images/Screen%20shots/natours-8.webp)
 
