@@ -46,7 +46,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: 'src/index.html',
       // hash: false,
-      // // inject: false,
+      // inject: false,
     }),
 
     new MiniCssExtractPlugin(),
@@ -54,7 +54,7 @@ module.exports = {
     new WebpackCriticalCSSInliner({
       base: 'dist/',
       src: 'index.html',
-      target: 'index-critical.html',
+      target: 'index.html',
       inlineGoogleFonts: true,
       minify: true,
     }),
