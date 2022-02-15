@@ -1,8 +1,8 @@
 import './Expenses.css';
 import ExpenseItem from './ExpenseItem';
-import Card from './Card';
+import Card from '../UI/Card';
 
-function Expenses(props) {
+function Expenses() {
   const expenses = [
     { title: 'carrots', amount: 2, date: new Date(2021, 11, 17) },
     { title: 'carrots', amount: 2, date: new Date(2020, 6, 5) },
