@@ -9,7 +9,7 @@ function Expenses(props) {
   ];
 
   return (
-    <div>
+    <div className="expenses">
       <ExpenseItem
         title={expenses[0].title}
         amount={expenses[0].amount}
