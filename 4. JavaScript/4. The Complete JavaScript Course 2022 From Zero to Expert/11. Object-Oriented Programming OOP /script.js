@@ -208,3 +208,34 @@ PersonCl.hey();
 
 //  don't work
 // jessica.hey();
+
+// 14/216 Object.create
+
+const PersonProto = {
+  calcAge() {
+    console.log(2037 - this.birthYear);
+  },
+
+  init(firstName, birthYear) {
+    this.fullName = firstName;
+    this.birthYear = birthYear;
+  },
+};
+
+const steven = Object.create(PersonProto);
+
+console.log('🚀 ~ steven', steven);
+
+steven.name = 'Seven';
+steven.birthYear = 2002;
+
+steven.calcAge();
+
+console.log(steven.__proto__ === PersonProto);
+
+const sarah = Object.create(PersonProto);
+
+sarah.init('sarah', 2000);
+console.log('🚀 ~ sarah', sarah);
+
+sarah.calcAge();
