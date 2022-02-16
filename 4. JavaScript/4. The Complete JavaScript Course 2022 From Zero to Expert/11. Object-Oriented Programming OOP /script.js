@@ -569,3 +569,73 @@ Account.helper();
 
 acc1.deposit(1).deposit(2).deposit(3);
 acc1.getMovements();
+
+// 14/226 ES6 Classes Summary
+
+// 14/227 Coding Challenge #4
+
+/* 
+1. Re-create challenge #3, but this time using ES6 classes: create an 'EVCl' child class of the 'CarCl' class
+2. Make the 'charge' property private;
+3. Implement the ability to chain the 'accelerate' and 'chargeBattery' methods of this class, and also update the 'brake' method in the 'CarCl' class. They experiment with chining!
+
+DATA CAR 1: 'Rivian' going at 120 km/h, with a charge of 23%
+
+GOOD LUCK 😀
+*/
+
+class CarCl {
+  constructor(make, currentSpeed) {
+    this.make = make;
+    this.speed = currentSpeed;
+  }
+  accelerate() {
+    this.speed += 10;
+    console.log(this.speed);
+  }
+  brake() {
+    this.speed -= 5;
+    console.log(this.speed);
+  }
+}
+
+class EVVL extends CarCl {
+  #charge;
+
+  constructor(make, currentSpeed, charge) {
+    super(make, currentSpeed);
+
+    this.#charge = charge;
+  }
+
+  accelerate() {
+    this.#charge--;
+    this.speed += 20;
+    console.log(
+      `${this.make} going at ${this.speed} km/h, with a charge of ${
+        this.#charge
+      }%`
+    );
+    return this;
+  }
+
+  brake() {
+    this.speed -= 5;
+    console.log(this.speed);
+    return this;
+  }
+
+  chargeBattery(chargeTo) {
+    this.#charge = chargeTo;
+  }
+}
+
+const rivian = new EVVL('Rivian', 120, 23);
+
+console.log(rivian);
+
+rivian.accelerate().accelerate().accelerate().accelerate().accelerate().brake();
+console.log('🚀 ~ rivian', rivian);
+
+rivian.chargeBattery(100);
+console.log('🚀 ~ rivian', rivian);
