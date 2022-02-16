@@ -512,15 +512,18 @@ class Account {
 
   // Public Methods
   getMovements() {
+    console.log(this.#movements);
     return this.#movements;
   }
 
   deposit(val) {
     this.#movements.push(val);
+    return this;
   }
 
   withdraw(val) {
     this.deposit(-val);
+    return this;
   }
 
   requestLoad(val) {
@@ -528,6 +531,7 @@ class Account {
       this.deposit(val);
       console.log('Loan approved');
     }
+    return this;
   }
 
   // Private Methods
@@ -560,3 +564,8 @@ console.log('🚀 ~ acc1', acc1);
 
 Account.helper();
 // acc1.helper();
+
+// 14/225 Chaining Methods
+
+acc1.deposit(1).deposit(2).deposit(3);
+acc1.getMovements();
