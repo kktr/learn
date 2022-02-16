@@ -394,3 +394,68 @@ console.log('🚀 ~ tesla', tesla);
 
 tesla.chargeBattery(100);
 console.log('🚀 ~ tesla', tesla);
+
+// 14/220 Inheritance Between "Classes": ES6 Classes
+
+class PersonCl2 {
+  constructor(fullName, birthYear) {
+    this.fullName = fullName;
+    this.birthYear = birthYear;
+  }
+
+  calcAge() {
+    console.log(2037 - this.birthYear);
+  }
+
+  greet() {
+    console.log(`Hey ${this.firstName}`);
+  }
+
+  get age() {
+    return 2037 - this.birthYear;
+  }
+
+  // Seta property that already exist
+  set fullName(name) {
+    if (name.includes(' ')) this._fullName = name;
+    else console.log(`${name} is not a full name!`);
+  }
+
+  get fullName() {
+    return this._fullName;
+  }
+
+  // Static method
+  static hey() {
+    console.log('Hey there');
+  }
+}
+
+class Student2 extends PersonCl2 {
+  constructor(fullName, birthYear, course) {
+    super(fullName, birthYear);
+
+    this.course = course;
+  }
+
+  introduce() {
+    console.log(`My name is ${this.fullName} and I study ${this.course}`);
+  }
+
+  calcAge() {
+    console.log(
+      `I'm ${
+        2037 - this.birthYear
+      } years old, but as a student i feel more like ${
+        2037 - this.birthYear + 10
+      }`
+    );
+  }
+}
+
+const marta = new Student2('Marta Jones', 2000, 'Math');
+console.log('🚀 ~ marta', marta);
+
+marta.introduce();
+
+marta.calcAge();
