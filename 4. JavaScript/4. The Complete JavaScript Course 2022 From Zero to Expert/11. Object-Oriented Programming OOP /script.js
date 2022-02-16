@@ -491,3 +491,49 @@ jay.init('Jay', 2010, 'Computer Science');
 
 jay.introduce();
 jay.calcAge();
+
+// 14/222 Another Class Example
+
+class Account {
+  constructor(owner, currency, pin) {
+    this.owner = owner;
+    this.currency = currency;
+    this.pin = pin;
+    this.movements = [];
+    this.locale = navigator.language;
+
+    console.log(`Thanks for opening an account, ${owner}`);
+  }
+
+  deposit(val) {
+    this.movements.push(val);
+  }
+
+  withdraw(val) {
+    this.deposit(-val);
+  }
+
+  approveLoan(val) {
+    return true;
+  }
+
+  requestLoad(val) {
+    if (this.approveLoan) {
+      this.deposit(val);
+      console.log('Loan approved');
+    }
+  }
+}
+
+const acc1 = new Account('Jonas', 'EUR', 1111);
+console.log(acc1);
+
+acc1.deposit(200);
+acc1.deposit(100);
+acc1.deposit(300);
+
+acc1.withdraw(50);
+console.log('🚀 ~ acc1', acc1);
+
+acc1.requestLoad(1000);
+console.log('🚀 ~ acc1', acc1);
