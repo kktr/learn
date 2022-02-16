@@ -534,6 +534,11 @@ class Account {
   #approveLoan(val) {
     return true;
   }
+
+  // Static Method
+  static helper() {
+    console.log('only available in Class');
+  }
 }
 
 const acc1 = new Account('Jonas', 'EUR', 1111);
@@ -552,3 +557,6 @@ console.log('🚀 ~ acc1', acc1);
 // 14/223 Encapsulation: Protected Properties and Methods
 
 // 14/224 Encapsulation: Private Class Fields and Methods
+
+Account.helper();
+// acc1.helper();
