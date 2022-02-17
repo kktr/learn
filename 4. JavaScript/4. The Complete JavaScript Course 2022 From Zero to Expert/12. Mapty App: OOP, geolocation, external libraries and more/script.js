@@ -29,6 +29,26 @@ function displayPosition(position) {
     .addTo(map)
     .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
     .openPopup();
+
+  const displayClickedPosition = (mapEvent) => {
+    const { lat: latitude, lng: longitude } = mapEvent.latlng;
+    const cords = [latitude, longitude];
+    const marker = L.marker(cords)
+      .addTo(map)
+      .bindPopup(
+        L.popup({
+          maxWidth: 250,
+          minWidth: 150,
+          autoClose: false,
+          closeOnClick: false,
+          className: 'running-popup',
+        })
+      )
+      .setPopupContent('Workout')
+      .openPopup();
+  };
+
+  map.on('click', displayClickedPosition);
 }
 
 function getPositionError() {
