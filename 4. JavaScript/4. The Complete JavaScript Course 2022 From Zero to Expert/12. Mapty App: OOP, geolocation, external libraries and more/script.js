@@ -13,28 +13,65 @@ const inputDuration = document.querySelector('.form__input--duration');
 const inputCadence = document.querySelector('.form__input--cadence');
 const inputElevation = document.querySelector('.form__input--elevation');
 
-let map, mapEvent;
+class App {
+  #map;
+  #mapEvent;
 
-function displayPosition(position) {
-  const { latitude } = position.coords;
-  const { longitude } = position.coords;
-  const cords = [latitude, longitude];
+  constructor() {
+    this.#getPosition();
+    form.addEventListener('submit', this.#newWorkout.bind(this));
+    inputType.addEventListener('change', this.#toggleElevationField.bind(this));
+  }
 
-  map = L.map('map').setView(cords, 13);
+  // displayClickedPosition = (mapE) => {};
 
-  L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
-    attribution:
-      '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-  }).addTo(map);
+  #getPosition() {
+    const getPositionError = () => {
+      alert('Could not get yor position');
+    };
 
-  L.marker(cords)
-    .addTo(map)
-    .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
-    .openPopup();
+    navigator?.geolocation.getCurrentPosition(
+      this.#loadMap.bind(this),
+      getPositionError
+    );
+  }
 
-  const submitForm = (e) => {
+  #loadMap(position) {
+    const { latitude } = position.coords;
+    const { longitude } = position.coords;
+    const cords = [latitude, longitude];
+
+    this.#map = L.map('map').setView(cords, 13);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+      attribution:
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    }).addTo(this.#map);
+
+    L.marker(cords)
+      .addTo(this.#map)
+      .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
+      .openPopup();
+
+    this.#map.on('click', this.#showForm.bind(this));
+  }
+
+  #showForm(mapE) {
+    this.#mapEvent = mapE;
+
+    form.classList.remove('hidden');
+    inputDistance.focus();
+  }
+
+  #toggleElevationField() {
+    inputElevation.closest('.form__row').classList.toggle('form__row--hidden');
+    inputCadence.closest('.form__row').classList.toggle('form__row--hidden');
+  }
+
+  #newWorkout(e) {
     e.preventDefault();
 
+    const mapCords = this.#mapEvent.latlng;
     const isInputValid = () => {
       return (
         inputDistance.value > 0 &&
@@ -43,9 +80,8 @@ function displayPosition(position) {
       );
     };
 
-    console.log(isInputValid());
     if (isInputValid()) {
-      const { lat: latitude, lng: longitude } = mapEvent.latlng;
+      const { lat: latitude, lng: longitude } = mapCords;
       const cords = [latitude, longitude];
       const capitalize = (s) => {
         return s[0].toUpperCase() + s.slice(1);
@@ -61,7 +97,7 @@ function displayPosition(position) {
       });
 
       const marker = L.marker(cords)
-        .addTo(map)
+        .addTo(this.#map)
         .bindPopup(
           L.popup({
             maxWidth: 250,
@@ -81,27 +117,7 @@ function displayPosition(position) {
 
       return;
     } else alert('Inputs have to be positive numbers!');
-  };
-
-  const displayClickedPosition = (mapE) => {
-    mapEvent = mapE;
-
-    form.classList.remove('hidden');
-    inputDistance.focus();
-
-    form.addEventListener('submit', submitForm);
-  };
-
-  map.on('click', displayClickedPosition);
+  }
 }
 
-function getPositionError() {
-  alert('Could not get yor position');
-}
-
-inputType.addEventListener('change', function () {
-  inputElevation.closest('.form__row').classList.toggle('form__row--hidden');
-  inputCadence.closest('.form__row').classList.toggle('form__row--hidden');
-});
-
-navigator?.geolocation.getCurrentPosition(displayPosition, getPositionError);
+const app = new App();
