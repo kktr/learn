@@ -23,8 +23,6 @@ class App {
     inputType.addEventListener('change', this.#toggleElevationField.bind(this));
   }
 
-  // displayClickedPosition = (mapE) => {};
-
   #getPosition() {
     const getPositionError = () => {
       alert('Could not get yor position');
