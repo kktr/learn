@@ -35,8 +35,7 @@ class App {
   }
 
   #loadMap(position) {
-    const { latitude } = position.coords;
-    const { longitude } = position.coords;
+    const { latitude, longitude } = position.coords;
     const cords = [latitude, longitude];
 
     this.#map = L.map('map').setView(cords, 13);
@@ -86,6 +85,10 @@ class App {
       inputElevation.value = '';
     };
 
+    const hideForm = () => {
+      form.classList.add('hidden');
+    };
+
     const addMarkWithPopup = () => {
       const { lat: latitude, lng: longitude } = mapCords;
       const cords = [latitude, longitude];
@@ -121,6 +124,7 @@ class App {
     if (isInputValid()) {
       addMarkWithPopup();
       clearInputs();
+      hideForm();
 
       return;
     } else alert('Inputs have to be positive numbers!');
