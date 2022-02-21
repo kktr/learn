@@ -70,6 +70,7 @@ class App {
     e.preventDefault();
 
     const mapCords = this.#mapEvent.latlng;
+
     const isInputValid = () => {
       return (
         inputDistance.value > 0 &&
@@ -78,9 +79,17 @@ class App {
       );
     };
 
-    if (isInputValid()) {
+    const clearInputs = () => {
+      inputDistance.value = '';
+      inputDuration.value = '';
+      inputCadence.value = '';
+      inputElevation.value = '';
+    };
+
+    const addMarkWithPopup = () => {
       const { lat: latitude, lng: longitude } = mapCords;
       const cords = [latitude, longitude];
+
       const capitalize = (s) => {
         return s[0].toUpperCase() + s.slice(1);
       };
@@ -107,11 +116,11 @@ class App {
         )
         .setPopupContent(`${workoutEmoticon} ${exerciseType} on ${dateString}`)
         .openPopup();
+    };
 
-      inputDistance.value = '';
-      inputDuration.value = '';
-      inputCadence.value = '';
-      inputElevation.value = '';
+    if (isInputValid()) {
+      addMarkWithPopup();
+      clearInputs();
 
       return;
     } else alert('Inputs have to be positive numbers!');
