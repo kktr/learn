@@ -23,3 +23,7 @@ const tasks: Task[] = [
   new Task('Learn React', Category.Programing),
   new Task('get hired by elPassion', Category.Work),
 ];
+
+const addTask = (task: Task) => {
+  tasks.push(task);
+};
