@@ -10,10 +10,16 @@ class Task {
   constructor(
     name: string,
     category: Category = Category.General,
-    doneStatus: boolean
+    doneStatus: boolean = false
   ) {
     this.name = name;
     this.category = category;
     this.doneStatus = doneStatus;
   }
 }
+
+const tasks: Task[] = [
+  new Task('Learn Typescript', Category.Programing),
+  new Task('Learn React', Category.Programing),
+  new Task('get hired by elPassion', Category.Work),
+];
