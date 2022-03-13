@@ -38,3 +38,6 @@ addButtonEl.addEventListener('click', (event) => {
   addTask(newTask);
   renderTasks([newTask]);
 });
+
+createTodoEl();
+renderTasks(tasks);
