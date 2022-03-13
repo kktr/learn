@@ -1,8 +1,7 @@
 class Department {
   // public is standard state
+  // declaration in 3 places
   longWayForCreateProp: string;
-  // beforeEs2022ShortWayForCreateProp: string;
-
   // es2022 declaration in 1 place
   #es2022shortWayForCreatePublicAndPrivateProp: string[] = [];
   es2022shortWayForCreatePublicProp: string = 'public ES 2022!';
@@ -12,11 +11,14 @@ class Department {
     longWayForCreateProp: string,
     // declaration in 2 places
     public beforeEs2022ShortWayForCreateProp: string,
+    // es2022 declaration in 1 place
     private TSWayForPrivate: string,
     private readonly id: number
   ) {
+    // declaration in 3 places
     this.longWayForCreateProp = longWayForCreateProp;
-    // this.beforeEs200ShortWayForCreateProp = beforeEs200ShortWayForCreateProp;
+    // declaration in 2 places
+    this.beforeEs2022ShortWayForCreateProp = beforeEs2022ShortWayForCreateProp;
     // this.#es2022shortWayForCreatePublicAndPrivateProp = [];
   }
 
