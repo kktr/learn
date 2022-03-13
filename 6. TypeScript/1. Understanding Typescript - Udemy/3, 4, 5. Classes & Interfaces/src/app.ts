@@ -5,8 +5,8 @@ class Department {
 
   // private and readonly work only in TS
   constructor(
-    n: string,
     longWayForCreateProp: string,
+    n: string,
     private TSWayForPrivate: string,
     private readonly id: number
   ) {
@@ -26,6 +26,10 @@ class Department {
   printEmployee(): void {
     console.log(this.#employees.length, this.#employees);
   }
+
+  printEmployeeID(): void {
+    console.log(this.id);
+  }
 }
 
 const accounting = new Department(
@@ -35,7 +39,7 @@ const accounting = new Department(
   1
 );
 
-accounting.describe();
+accounting.printEmployeeID();
 
 // const accountingCopy = { describe: accounting.describe.bind(accounting) };
 
