@@ -6,50 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TS Basics</title>
 
-    <script src="./dist/index.js" defer></script>
+    <script type="module" src="./dist/index.js" defer></script>
   </head>
   <body>
-    <div class="todo">
-      <form class="form">
-        <label for="task-name">Task: </label>
-        <input type="text" id="task-name" name="task-name" required />
-
-        <div class="form__radios">
-          <div class="form__radio form__radio-general">
-            <input type="radio" id="general" value="general" checked />
-            <label for="general">general</label>
-          </div>
-
-          <div class="form__radio form__radio-work">
-            <input type="radio" id="work" value="work" />
-            <label for="work">work</label>
-          </div>
-
-          <div class="form__radio form__radio-gym">
-            <input type="radio" id="gym" value="gym" />
-            <label for="gym">gym</label>
-          </div>
-
-          <div class="form__radio form__radio-hobby">
-            <input type="radio" id="hobby" value="hobby" />
-            <label for="hobby">hobby</label>
-          </div>
-
-          <div class="form__radio form__radio-social">
-            <input type="radio" id="social" value="social" />
-            <label for="social">social</label>
-          </div>
-
-          <button class="form__submit-button" type="submit" class="form__button">
-            Add
-          </button>
-      </form>
-
-      <div class="task-container">
-        <p>Todo:</p>
-
-        <ul class="tasks"></ul>
-      </div>
-    </div>
+    <div class="todo"></div>
   </body>
 </html>
