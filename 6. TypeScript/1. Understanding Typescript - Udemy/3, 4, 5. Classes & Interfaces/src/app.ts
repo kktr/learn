@@ -102,3 +102,7 @@ class ITDepartmentES2022 extends Department {
     );
   }
 }
+
+const ITAccountingES2022 = new ITDepartmentES2022('know', 'lw', 'wfp', 2);
+
+console.log(ITAccountingES2022);
