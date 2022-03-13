@@ -1,30 +1,38 @@
 class Department {
+  // public is standard state
   longWayForCreateProp: string;
-  #name: string;
-  #employees: string[];
+  // beforeEs2022ShortWayForCreateProp: string;
+
+  // es2022 declaration in 1 place
+  #es2022shortWayForCreatePublicAndPrivateProp: string[] = [];
 
   // private and readonly work only in TS
   constructor(
+    // declaration in 3 places
     longWayForCreateProp: string,
-    n: string,
+    // declaration in 2 places
+    public beforeEs2022ShortWayForCreateProp: string,
     private TSWayForPrivate: string,
     private readonly id: number
   ) {
     this.longWayForCreateProp = longWayForCreateProp;
-    this.#name = n;
-    this.#employees = [];
+    // this.beforeEs200ShortWayForCreateProp = beforeEs200ShortWayForCreateProp;
+    // this.#es2022shortWayForCreatePublicAndPrivateProp = [];
   }
 
   describe(this: Department): void {
-    console.log('Department: ' + this.#name);
+    console.log('Department: ' + this.beforeEs2022ShortWayForCreateProp);
   }
 
   addEmployee(employee: string): void {
-    this.#employees.push(employee);
+    this.#es2022shortWayForCreatePublicAndPrivateProp.push(employee);
   }
 
   printEmployee(): void {
-    console.log(this.#employees.length, this.#employees);
+    console.log(
+      this.#es2022shortWayForCreatePublicAndPrivateProp.length,
+      this.#es2022shortWayForCreatePublicAndPrivateProp
+    );
   }
 
   printEmployeeID(): void {
@@ -33,9 +41,9 @@ class Department {
 }
 
 const accounting = new Department(
-  'Acc',
   'this is a long way for create properties in JS',
   'this is a short way for create private properties in TS before es2022',
+  'private',
   1
 );
 
@@ -73,7 +81,7 @@ class ITDepartment extends Department {
 }
 
 const ITAccounting = new ITDepartment(
-  'ITACC',
+  'know',
   'lw',
   'wfp',
   2,
