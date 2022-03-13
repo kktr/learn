@@ -108,3 +108,13 @@ class ITDepartmentES2022 extends Department {
 const ITAccountingES2022 = new ITDepartmentES2022('know', 'lw', 'wfp', 2);
 
 console.log(ITAccountingES2022);
+
+class DepartmentES2022 {
+  constructor(
+    // declaration in 1places
+    public esVersionIs: string,
+    public be: string,
+    private what: string,
+    private readonly id: number
+  ) {}
+}
