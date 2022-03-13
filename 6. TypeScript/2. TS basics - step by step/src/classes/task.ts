@@ -1,6 +1,6 @@
 import { Category } from '../store/types.js';
 
-class Task {
+export class Task {
   name;
   category;
   doneStatus;
