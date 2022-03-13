@@ -17,3 +17,5 @@ const tasks: Task[] = [
 const addTask = (task: Task) => {
   tasks.push(task);
 };
+
+let selectedCategory: string;
