@@ -105,13 +105,33 @@ class App {
     e.preventDefault();
 
     const mapCords = this.#mapEvent.latlng;
+    const { lat: latitude, lng: longitude } = mapCords;
+    const cords = [latitude, longitude];
+
+    const exerciseClass = inputType.value;
+    const distance = +inputDuration.value;
+    const duration = +inputDuration.value;
+    let cadence, elevation;
+
+    const isWorkoutRunning = () => {
+      return exerciseClass === 'running';
+    };
+
+    if (!isWorkoutRunning()) {
+      elevation = +inputElevation.value;
+    }
+    if (isWorkoutRunning()) {
+      cadence = +inputCadence.value;
+    }
 
     const isInputValid = () => {
-      return (
-        inputDistance.value > 0 &&
-        inputDuration.value > 0 &&
-        (inputCadence.value > 0 || inputElevation.value > 0)
-      );
+      const isPositive = (...values) => {
+        return values.every((val) => val > 0);
+      };
+
+      return isPositive(distance, duration) && isWorkoutRunning()
+        ? isPositive(cadence)
+        : isFinite(elevation);
     };
 
     const clearInputs = () => {
@@ -126,16 +146,12 @@ class App {
     };
 
     const addMarkWithPopup = () => {
-      const { lat: latitude, lng: longitude } = mapCords;
-      const cords = [latitude, longitude];
-
       const capitalize = (s) => {
         return s[0].toUpperCase() + s.slice(1);
       };
 
-      const exerciseClass = inputType.value;
       const exerciseType = capitalize(exerciseClass);
-      const workoutEmoticon = exerciseClass == 'running' ? '🏃‍♂️' : '🚴‍♀️';
+      const workoutEmoticon = isWorkoutRunning() ? '🏃‍♂️' : '🚴‍♀️';
       const today = new Date();
       const dateString = today.toLocaleString('en-US', {
         day: 'numeric',
@@ -157,6 +173,17 @@ class App {
         .openPopup();
     };
 
+    if (isInputValid()) {
+      if (isWorkoutRunning()) {
+        const workout = new Running(cords, distance, duration, cadence);
+        console.log(workout);
+      }
+
+      if (!isWorkoutRunning()) {
+        const workout = new Cycling(cords, distance, duration, elevation);
+        console.log(workout);
+      }
+    }
     if (isInputValid()) {
       addMarkWithPopup();
       clearInputs();
