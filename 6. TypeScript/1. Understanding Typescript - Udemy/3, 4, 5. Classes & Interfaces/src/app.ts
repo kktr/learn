@@ -91,3 +91,14 @@ const ITAccounting = new ITDepartment(
 
 console.log(ITAccounting.admins);
 console.log(ITAccounting.clients);
+
+class ITDepartmentES2022 extends Department {
+  description = 'we dont need  describe it in constructor';
+  #privateES2022 = 'we can use new private hash';
+
+  static #privateStatic() {
+    console.log(
+      'a private static only accessible from inside of our prototype class'
+    );
+  }
+}
