@@ -5,7 +5,7 @@ class Department {
 
   // es2022 declaration in 1 place
   #es2022shortWayForCreatePublicAndPrivateProp: string[] = [];
-
+  es2022shortWayForCreatePublicProp: string = 'public ES 2022!';
   // private and readonly work only in TS
   constructor(
     // declaration in 3 places
