@@ -118,3 +118,7 @@ class DepartmentES2022 {
     private readonly id: number
   ) {}
 }
+
+const accountingES2022 = new DepartmentES2022('ES2022', 'is', 'awesome', 777);
+
+console.log(accountingES2022.esVersionIs);
