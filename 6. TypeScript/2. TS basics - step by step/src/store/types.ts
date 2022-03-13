@@ -1,4 +1,4 @@
-enum Category {
+export enum Category {
   General = 'general',
   Work = 'work',
   Programing = 'Programing',
