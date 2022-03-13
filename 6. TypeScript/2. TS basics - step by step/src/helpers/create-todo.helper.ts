@@ -20,18 +20,10 @@ const categories: Category[] = [
 ];
 
 export function createTodoEl(): void {
-  document.body.appendChild(todoEl);
-
   todoEl.className = 'todo';
-  todoEl.appendChild(formEl);
 
   formEl.className = 'form';
   formEl.name = 'form';
-  todoEl.appendChild(formEl);
-  formEl.appendChild(labelTaskEl);
-  formEl.appendChild(inputTaskEl);
-  formEl.appendChild(addButtonEl);
-  todoEl.appendChild(tasksContainerEl);
 
   labelTaskEl.htmlFor = 'task-name';
   labelTaskEl.innerText = 'Task: ';
@@ -51,8 +43,20 @@ export function createTodoEl(): void {
   tasksContainerEl.innerHTML = `
   <p>TODO: </p>
   `;
-  tasksContainerEl.appendChild(tasksListEl);
   tasksContainerEl.className = 'tasks';
+
+  document.body.appendChild(todoEl);
+
+  todoEl.appendChild(formEl);
+  todoEl.appendChild(formEl);
+
+  formEl.appendChild(labelTaskEl);
+  formEl.appendChild(inputTaskEl);
+  formEl.appendChild(addButtonEl);
+
+  todoEl.appendChild(tasksContainerEl);
+
+  tasksContainerEl.appendChild(tasksListEl);
 
   categories.forEach((category) => {
     const categoryContainerEl = document.createElement('div');
