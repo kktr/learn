@@ -1,0 +1,33 @@
+body {
+  background-color: grey;
+}
+
+.tasks__task {
+  list-style-type: none;
+}
+
+.tasks__task--general {
+  color: blueviolet;
+}
+
+.tasks__task--gym {
+  color: slateblue;
+}
+
+.tasks__task--hobby {
+  color: darkgoldenrod;
+}
+
+.tasks__task--social {
+  color: palevioletred;
+}
+
+.tasks__task--programing {
+  color: tomato;
+  font-weight: 700;
+}
+
+.tasks__task--work {
+  color: springgreen;
+  font-weight: 700;
+}
