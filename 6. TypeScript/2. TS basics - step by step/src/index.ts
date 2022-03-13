@@ -19,3 +19,22 @@ const addTask = (task: Task) => {
 };
 
 let selectedCategory: string;
+
+addButtonEl.addEventListener('click', (event) => {
+  event.preventDefault();
+
+  categoriesRadioButtons.forEach((category) => {
+    if (category.checked) {
+      selectedCategory = category.value;
+      category.checked = false;
+    }
+  });
+
+  categoriesRadioButtons[0].checked = true;
+
+  const newTask: Task = new Task(inputTaskEl.value, selectedCategory);
+
+  inputTaskEl.value = '';
+  addTask(newTask);
+  renderTasks([newTask]);
+});
