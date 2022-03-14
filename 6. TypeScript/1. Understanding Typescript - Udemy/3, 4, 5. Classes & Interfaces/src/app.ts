@@ -140,3 +140,51 @@ const accountingES2022 = new DepartmentES2022(
 );
 
 console.log(accountingES2022.esVersionIs);
+
+// 5/67 Getters & Setters
+
+class AccountingDepartment extends Department {
+  private lastReport: string;
+
+  get mostRecentReport() {
+    if (this.lastReport) {
+      return this.lastReport;
+    }
+    throw new Error('report not found');
+  }
+
+  set mostRecentReport(value: string) {
+    this.addReport(value);
+  }
+
+  private employees: string[] = [];
+  constructor(id: string, private reports: string[]) {
+    super(id, 'Accounting', 'Private', 3);
+    this.lastReport = reports[0];
+  }
+
+  addEmployee(name: string): void | undefined {
+    if (name === 'Max') {
+      return;
+    }
+    this.employees.push(name);
+  }
+
+  addReport(text: string) {
+    this.reports.push(text);
+    this.lastReport = text;
+  }
+}
+
+const accDepartment1 = new AccountingDepartment('1', []);
+
+// error
+// console.log(accDepartment1.mostRecentReport);
+
+accDepartment1.addReport('new report, here I AM !, ty ty, ty, tyty, tytyty!');
+
+console.log(accDepartment1.mostRecentReport);
+
+accDepartment1.mostRecentReport = 'newest report';
+
+console.log(accDepartment1.mostRecentReport);
