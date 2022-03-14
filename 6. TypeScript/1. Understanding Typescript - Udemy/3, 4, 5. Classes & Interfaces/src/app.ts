@@ -126,7 +126,8 @@ class DepartmentES2022 {
     public esVersionIs: string,
     public be: string,
     private what: string,
-    private readonly id: number
+    private readonly id: number,
+    protected likePrivateButAlsoWorksInExtendedClass: string
   ) {}
 }
 
