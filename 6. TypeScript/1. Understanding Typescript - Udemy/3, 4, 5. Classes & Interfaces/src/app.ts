@@ -131,6 +131,12 @@ class DepartmentES2022 {
   ) {}
 }
 
-const accountingES2022 = new DepartmentES2022('ES2022', 'is', 'awesome', 777);
+const accountingES2022 = new DepartmentES2022(
+  'ES2022',
+  'is',
+  'awesome',
+  777,
+  'protected'
+);
 
 console.log(accountingES2022.esVersionIs);
