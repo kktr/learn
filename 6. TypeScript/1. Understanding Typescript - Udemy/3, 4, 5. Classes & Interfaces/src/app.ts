@@ -247,3 +247,7 @@ class ITDepartment3 extends DepartmentAbstract {
     return (this.instance = new ITDepartment3(id, info));
   }
 }
+
+const itDepartment3 = ITDepartment3.getInstance(5, 'singleton');
+
+console.log(itDepartment3);
