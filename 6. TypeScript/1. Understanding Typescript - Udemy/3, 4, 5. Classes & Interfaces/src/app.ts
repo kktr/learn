@@ -41,6 +41,10 @@ class Department {
     console.log(this.id);
     return this.id;
   }
+
+  static addEmployee(name: string) {
+    return { name: name };
+  }
 }
 
 const accounting = new Department(
@@ -188,3 +192,9 @@ console.log(accDepartment1.mostRecentReport);
 accDepartment1.mostRecentReport = 'newest report';
 
 console.log(accDepartment1.mostRecentReport);
+
+// call static method
+console.log(Department.addEmployee('new employee'));
+
+const newEmployee = Department.addEmployee('Joe Dillinger');
+console.log(newEmployee);
