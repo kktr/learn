@@ -1,4 +1,6 @@
 class Department {
+  // static, can call only in class instance: Department.fiscalYear
+  static fiscalYear = 2022;
   // public is standard state
   // declaration in 3 places
   longWayForCreateProp: string;
@@ -198,3 +200,5 @@ console.log(Department.addEmployee('new employee'));
 
 const newEmployee = Department.addEmployee('Joe Dillinger');
 console.log(newEmployee);
+
+console.log(Department.fiscalYear);
