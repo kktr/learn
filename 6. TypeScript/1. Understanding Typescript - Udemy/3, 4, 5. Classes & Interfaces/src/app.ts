@@ -15,7 +15,7 @@ class Department {
     public beforeEs2022ShortWayForCreateProp: string,
     // es2022 declaration in 1 place, only in constructor
     private TSWayForPrivate: string,
-    private readonly id: number
+    protected id: number
   ) {
     // declaration in 3 places
     this.longWayForCreateProp = longWayForCreateProp;
