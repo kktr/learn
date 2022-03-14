@@ -251,3 +251,13 @@ class ITDepartment3 extends DepartmentAbstract {
 const itDepartment3 = ITDepartment3.getInstance(5, 'singleton');
 
 console.log(itDepartment3);
+
+const itDepartment3v2 = ITDepartment3.getInstance(
+  10,
+  'this will not overwrite'
+);
+
+console.log(itDepartment3v2);
+
+// they are this same, we can have only one instance of that class
+console.log(itDepartment3 === itDepartment3v2);
