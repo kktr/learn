@@ -37,8 +37,9 @@ class Department {
     );
   }
 
-  printEmployeeID(): void {
+  printEmployeeID(): number {
     console.log(this.id);
+    return this.id;
   }
 }
 
@@ -49,7 +50,7 @@ const accounting = new Department(
   1
 );
 
-accounting.printEmployeeID();
+console.log(accounting.printEmployeeID());
 
 // const accountingCopy = { describe: accounting.describe.bind(accounting) };
 
@@ -70,14 +71,19 @@ class ITDepartment extends Department {
   clients;
 
   constructor(
-    n: string,
+    es2022shortWayForCreatePublicProp: string,
     longWayForCreateProp: string,
     TSWayForPrivate: string,
     id: number,
     public admins: string[],
     clients: string[]
   ) {
-    super(n, longWayForCreateProp, TSWayForPrivate, id);
+    super(
+      es2022shortWayForCreatePublicProp,
+      longWayForCreateProp,
+      TSWayForPrivate,
+      id
+    );
     this.clients = clients;
   }
 }
@@ -95,6 +101,8 @@ console.log(ITAccounting);
 
 console.log(ITAccounting.admins);
 console.log(ITAccounting.clients);
+
+console.log(ITAccounting.printEmployeeID());
 
 class ITDepartmentES2022 extends Department {
   description = 'we dont need  describe it in constructor';
