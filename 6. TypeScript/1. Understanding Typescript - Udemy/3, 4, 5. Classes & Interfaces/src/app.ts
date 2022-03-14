@@ -210,3 +210,9 @@ console.log(newEmployee);
 console.log(Department.fiscalYear);
 
 console.log(accDepartment1.printEmployeeID());
+
+// create abstract classes when you want to force reassign method
+abstract class DepartmentAbstract {
+  abstract printEmployeeID(): void;
+  constructor(protected id: number) {}
+}
