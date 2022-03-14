@@ -226,3 +226,24 @@ class ITDepartment2 extends DepartmentAbstract {
 const itDepartment2 = new ITDepartment2(4);
 
 itDepartment2.printEmployeeID();
+
+// 5/70 Singleton & Private Constructors
+
+class ITDepartment3 extends DepartmentAbstract {
+  private static instance: ITDepartment3;
+  // private constructor, can call only inside ITDepartment3
+  private constructor(id: number, public info: string) {
+    super(id);
+  }
+
+  printEmployeeID() {
+    console.log(this.id);
+  }
+
+  static getInstance(id: number, info: string) {
+    if (ITDepartment3.instance) {
+      return this.instance;
+    }
+    return (this.instance = new ITDepartment3(id, info));
+  }
+}
