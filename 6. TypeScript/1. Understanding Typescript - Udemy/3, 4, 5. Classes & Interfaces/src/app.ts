@@ -216,3 +216,13 @@ abstract class DepartmentAbstract {
   abstract printEmployeeID(): void;
   constructor(protected id: number) {}
 }
+
+class ITDepartment2 extends DepartmentAbstract {
+  printEmployeeID() {
+    console.log(this.id);
+  }
+}
+
+const itDepartment2 = new ITDepartment2(4);
+
+itDepartment2.printEmployeeID();
