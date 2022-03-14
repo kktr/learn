@@ -127,7 +127,7 @@ class DepartmentES2022 {
     public be: string,
     private what: string,
     private readonly id: number,
-    protected likePrivateButAlsoWorksInExtendedClass: string
+    protected likePrivateButAlsoWorksInExtendedClasses: string
   ) {}
 }
 
