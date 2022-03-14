@@ -180,6 +180,12 @@ class AccountingDepartment extends Department {
     this.reports.push(text);
     this.lastReport = text;
   }
+
+  printEmployeeID() {
+    const message = `here I overwritten printEmployeeID for AccountingDepartment, but the way, id is ${this.id} `;
+    console.log(message);
+    return this.id;
+  }
 }
 
 const accDepartment1 = new AccountingDepartment('1', []);
@@ -202,3 +208,5 @@ const newEmployee = Department.addEmployee('Joe Dillinger');
 console.log(newEmployee);
 
 console.log(Department.fiscalYear);
+
+console.log(accDepartment1.printEmployeeID());
