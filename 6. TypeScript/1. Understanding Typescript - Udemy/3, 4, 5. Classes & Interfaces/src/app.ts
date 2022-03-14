@@ -11,7 +11,7 @@ class Department {
     longWayForCreateProp: string,
     // declaration in 2 places
     public beforeEs2022ShortWayForCreateProp: string,
-    // es2022 declaration in 1 place
+    // es2022 declaration in 1 place, only in constructor
     private TSWayForPrivate: string,
     private readonly id: number
   ) {
@@ -91,11 +91,14 @@ const ITAccounting = new ITDepartment(
   ['client1', 'client2']
 );
 
+console.log(ITAccounting);
+
 console.log(ITAccounting.admins);
 console.log(ITAccounting.clients);
 
 class ITDepartmentES2022 extends Department {
   description = 'we dont need  describe it in constructor';
+  // constructor is needed only when we create more props than in base Class
   #privateES2022 = 'we can use new private hash';
 
   static #privateStatic() {
