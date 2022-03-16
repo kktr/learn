@@ -68,3 +68,35 @@ function useVehicle(vehicle: Vehicle) {
     vehicle.loadCargo(100);
   }
 }
+
+// 6/84 Discriminated Unions
+
+interface Cat {
+  type: 'ground';
+  runningSpeed: number;
+}
+interface Eagle {
+  type: 'air';
+  flightingSpeed: number;
+}
+interface GoldenFish {
+  type: 'water';
+  swimmingSpeed: number;
+}
+
+type Animal = Cat | Eagle | GoldenFish;
+
+function moveAnimal(animal: Animal) {
+  let speed;
+  switch (animal.type) {
+    case 'air':
+      speed = animal.flightingSpeed;
+      break;
+    case 'ground':
+      speed = animal.runningSpeed;
+      break;
+    case 'water':
+      speed = animal.swimmingSpeed;
+  }
+  console.log('Moving at speed:' + speed);
+}
