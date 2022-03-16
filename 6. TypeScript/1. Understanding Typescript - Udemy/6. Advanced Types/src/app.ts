@@ -145,3 +145,16 @@ function add2(a: Combinable2, b: Combinable2) {
 const result = add2('Max', 'Janusz');
 
 console.log(result.toUpperCase());
+
+// 6/88 Optional Chaining
+
+const fetchedUserData = {
+  id: 'u1',
+  name: 'Max',
+  // job: { title: 'CEO', description: 'My own company' },
+};
+
+// JS old way
+// console.log(fetchedUserData.job && fetchedUserData.job.title);
+
+console.log(fetchedUserData?.job?.title);
