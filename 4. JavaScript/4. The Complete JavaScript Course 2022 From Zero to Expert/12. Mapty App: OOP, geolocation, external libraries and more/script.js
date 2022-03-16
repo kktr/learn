@@ -52,6 +52,7 @@ class Cycling extends Workout {
 class App {
   #map;
   #mapEvent;
+  #workouts = [];
 
   constructor() {
     this.#getPosition();
@@ -172,22 +173,20 @@ class App {
         .setPopupContent(`${workoutEmoticon} ${exerciseType} on ${dateString}`)
         .openPopup();
     };
-
+    let workout;
     if (isInputValid()) {
       if (isWorkoutRunning()) {
-        const workout = new Running(cords, distance, duration, cadence);
-        console.log(workout);
+        workout = new Running(cords, distance, duration, cadence);
       }
 
       if (!isWorkoutRunning()) {
-        const workout = new Cycling(cords, distance, duration, elevation);
-        console.log(workout);
+        workout = new Cycling(cords, distance, duration, elevation);
       }
-    }
-    if (isInputValid()) {
+      this.#workouts.push(workout);
       addMarkWithPopup();
       clearInputs();
       hideForm();
+      console.log(this.#workouts);
 
       return;
     } else alert('Inputs have to be positive numbers!');
