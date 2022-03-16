@@ -162,8 +162,11 @@ console.log(fetchedUserData?.job?.title);
 // 6/90 Nullish Coalescing
 
 const userInput = null;
+const userInput2 = '';
 
 // ( ?? ) null or undefined
 const storedData = userInput ?? 'DEFAULT';
+const storedData2 = userInput2 ?? 'DEFAULT';
 
 console.log(storedData);
+console.log(storedData2);
