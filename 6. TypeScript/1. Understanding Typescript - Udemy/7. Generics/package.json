@@ -1,0 +1,14 @@
+{
+  "name": "typescript-generics",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "start": "lite-server"
+  },
+  "author": "kktr",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "lite-server": "^2.6.1"
+  }
+}
