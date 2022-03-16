@@ -220,6 +220,38 @@ class App {
     };
     let workout;
 
+    const renderWorkout = (workout) => {
+      let list = document.createElement('li');
+      list.innerHTML = `
+<li class="workout workout--${workout.type}" data-id=${workout.id}>
+<h2 class="workout__title">${workout.type} on April 14</h2>
+<div class="workout__details">
+  <span class="workout__icon">${workout.workoutEmoticon}</span>
+  <span class="workout__value">${workout.distance}</span>
+  <span class="workout__unit">km</span>
+</div>
+<div class="workout__details">
+  <span class="workout__icon">⏱</span>
+  <span class="workout__value">${workout.duration}</span>
+  <span class="workout__unit">min</span>
+</div>
+<div class="workout__details">
+  <span class="workout__icon">⚡️</span>
+  <span class="workout__value">${workout.pace}</span>
+  <span class="workout__unit">${workout.paceUnit}</span>
+</div>
+<div class="workout__details">
+  <span class="workout__icon">🦶🏼</span>
+  <span class="workout__value">${
+    isWorkoutRunning() ? workout.cadence : workout.elevation
+  }</span>
+  <span class="workout__unit">${additionalUnit}</span>
+</div>
+</li>`;
+
+      containerWorkouts.append(list);
+    };
+
     //     Running
     // cadence: 5
     // cords: (2) [50.098560072241156, 14.33046340942383]
