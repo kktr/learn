@@ -34,7 +34,7 @@ class Workout {
   }
 }
 class Running extends Workout {
-  #type = 'Running';
+  type = 'running';
   constructor(
     coords,
     distance,
@@ -63,7 +63,7 @@ class Running extends Workout {
 }
 
 class Cycling extends Workout {
-  #type = 'Cycling';
+  type = 'cycling';
   constructor(
     coords,
     distance,
@@ -256,6 +256,7 @@ class App {
       }
       this.#workouts.push(workout);
       addMarkWithPopup();
+      renderWorkout(workout);
       clearInputs();
       hideForm();
       console.log(workout);
