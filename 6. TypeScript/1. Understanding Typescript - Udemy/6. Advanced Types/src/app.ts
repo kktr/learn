@@ -109,11 +109,11 @@ const userInputElement2 = document.getElementById(
 )! as HTMLInputElement;
 const userInputElement3 = document.getElementById('input3');
 
-userInputElement.value = 'Hi there!';
-userInputElement2.value = 'Hi there 2!';
-if (userInputElement3) {
-  (userInputElement3 as HTMLInputElement).value = 'Hi there 3!';
-}
+// userInputElement.value = 'Hi there!';
+// userInputElement2.value = 'Hi there 2!';
+// if (userInputElement3) {
+//   (userInputElement3 as HTMLInputElement).value = 'Hi there 3!';
+// }
 
 // 6/87 Index Properties
 
@@ -125,3 +125,23 @@ const errorBag: ErrorContainer = {
   email: 'Not a valid email!',
   username: 'Muse start with a capital character',
 };
+
+// 6/87 Function Overloads
+
+type Combinable2 = string | number;
+type Numeric2 = number | boolean;
+
+type Universal2 = Combinable2 & Numeric2;
+
+function add2(a: number, b: number): number;
+function add2(a: string, b: string): string;
+function add2(a: Combinable2, b: Combinable2) {
+  if (typeof a === 'string' || typeof b === 'string') {
+    return a.toString() + b.toString();
+  }
+  return a + b;
+}
+
+const result = add2('Max', 'Janusz');
+
+console.log(result.toUpperCase());
