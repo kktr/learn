@@ -9,3 +9,14 @@ const promise: Promise<string> = new Promise((resolve, reject) => {
     resolve('This is done');
   }, 2000);
 });
+
+// 7/95 Creating a Generic Function
+
+function merge<T, U>(objA: T, objB: U) {
+  return Object.assign(objA, objB);
+}
+
+console.log(merge({ name: 'Max' }, { age: 30 }));
+
+const mergedObj = merge({ name: 'Max' }, { age: 30 });
+console.log(mergedObj.age);
