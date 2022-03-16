@@ -17,15 +17,41 @@ class Workout {
   date = new Date();
   id = (Date.now() + '').slice(-10);
 
-  constructor(coords, distance, duration) {
+  constructor(
+    coords,
+    distance,
+    duration,
+    paceUnit,
+    additionalUnit,
+    workoutEmoticon
+  ) {
     this.cords = coords;
     this.distance = distance;
     this.duration = duration;
+    this.paceUnit = paceUnit;
+    this.additionalUnit = additionalUnit;
+    this.workoutEmoticon = workoutEmoticon;
   }
 }
 class Running extends Workout {
-  constructor(coords, distance, duration, cadence) {
-    super(coords, distance, duration);
+  #type = 'Running';
+  constructor(
+    coords,
+    distance,
+    duration,
+    cadence,
+    paceUnit,
+    additionalUnit,
+    workoutEmoticon
+  ) {
+    super(
+      coords,
+      distance,
+      duration,
+      paceUnit,
+      additionalUnit,
+      workoutEmoticon
+    );
     this.cadence = cadence;
     this.calcPace();
   }
@@ -37,8 +63,24 @@ class Running extends Workout {
 }
 
 class Cycling extends Workout {
-  constructor(coords, distance, duration, elevationGain) {
-    super(coords, distance, duration);
+  #type = 'Cycling';
+  constructor(
+    coords,
+    distance,
+    duration,
+    elevationGain,
+    paceUnit,
+    additionalUnit,
+    workoutEmoticon
+  ) {
+    super(
+      coords,
+      distance,
+      duration,
+      paceUnit,
+      additionalUnit,
+      workoutEmoticon
+    );
     this.elevationGain = elevationGain;
     this.calcSpeed();
   }
@@ -112,7 +154,8 @@ class App {
     const exerciseClass = inputType.value;
     const distance = +inputDuration.value;
     const duration = +inputDuration.value;
-    let cadence, elevation;
+    let cadence, elevation, paceUnit, additionalUnit;
+    let workoutEmoticon;
 
     const isWorkoutRunning = () => {
       return exerciseClass === 'running';
@@ -152,7 +195,9 @@ class App {
       };
 
       const exerciseType = capitalize(exerciseClass);
-      const workoutEmoticon = isWorkoutRunning() ? '🏃‍♂️' : '🚴‍♀️';
+      workoutEmoticon = isWorkoutRunning() ? '🏃‍♂️' : '🚴‍♀️';
+      additionalUnit = isWorkoutRunning() ? 'spm' : 'm';
+      paceUnit = isWorkoutRunning() ? 'min/km' : 'km/h';
       const today = new Date();
       const dateString = today.toLocaleString('en-US', {
         day: 'numeric',
@@ -174,19 +219,46 @@ class App {
         .openPopup();
     };
     let workout;
+
+    //     Running
+    // cadence: 5
+    // cords: (2) [50.098560072241156, 14.33046340942383]
+    // date: Wed Mar 16 2022 22:21:29 GMT+0100 (Central European Standard Time) {}
+    // distance: 10
+    // duration: 10
+    // id: "7465689946"
+    // pace: 1
+    // [[Prototype]]: Workout
+
     if (isInputValid()) {
       if (isWorkoutRunning()) {
-        workout = new Running(cords, distance, duration, cadence);
+        workout = new Running(
+          cords,
+          distance,
+          duration,
+          cadence,
+          paceUnit,
+          additionalUnit,
+          workoutEmoticon
+        );
       }
 
       if (!isWorkoutRunning()) {
-        workout = new Cycling(cords, distance, duration, elevation);
+        workout = new Cycling(
+          cords,
+          distance,
+          duration,
+          elevation,
+          paceUnit,
+          additionalUnit,
+          workoutEmoticon
+        );
       }
       this.#workouts.push(workout);
       addMarkWithPopup();
       clearInputs();
       hideForm();
-      console.log(this.#workouts);
+      console.log(workout);
 
       return;
     } else alert('Inputs have to be positive numbers!');
