@@ -114,3 +114,14 @@ userInputElement2.value = 'Hi there 2!';
 if (userInputElement3) {
   (userInputElement3 as HTMLInputElement).value = 'Hi there 3!';
 }
+
+// 6/87 Index Properties
+
+interface ErrorContainer {
+  [prop: string]: string;
+}
+
+const errorBag: ErrorContainer = {
+  email: 'Not a valid email!',
+  username: 'Muse start with a capital character',
+};
