@@ -69,7 +69,7 @@ function useVehicle(vehicle: Vehicle) {
   }
 }
 
-// 6/84 Discriminated Unions
+// 6/85 Discriminated Unions
 
 interface Cat {
   type: 'ground';
@@ -99,4 +99,18 @@ function moveAnimal(animal: Animal) {
       speed = animal.swimmingSpeed;
   }
   console.log('Moving at speed:' + speed);
+}
+
+// 6/86 Type Casting
+
+const userInputElement = <HTMLInputElement>document.getElementById('input');
+const userInputElement2 = document.getElementById(
+  'input2'
+)! as HTMLInputElement;
+const userInputElement3 = document.getElementById('input3');
+
+userInputElement.value = 'Hi there!';
+userInputElement2.value = 'Hi there 2!';
+if (userInputElement3) {
+  (userInputElement3 as HTMLInputElement).value = 'Hi there 3!';
 }
