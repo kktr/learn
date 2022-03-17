@@ -92,6 +92,7 @@ class App {
     this.#getPosition();
     form.addEventListener('submit', this.#newWorkout.bind(this));
     inputType.addEventListener('change', this.#toggleElevationField.bind(this));
+    containerWorkouts.addEventListener('click', this.#moveToPopup.bind(this));
   }
 
   #getPosition() {
@@ -135,6 +136,19 @@ class App {
     inputElevation.closest('.form__row').classList.toggle('form__row--hidden');
     inputCadence.closest('.form__row').classList.toggle('form__row--hidden');
   }
+
+  #moveToPopup = (e) => {
+    const workoutEl = e.target.closest('.workout');
+    if (!workoutEl) return;
+
+    const workout = this.#workouts.find(
+      (work) => work.id === workoutEl.dataset.id
+    );
+    this.#map.setView(workout.cords, 13, {
+      animated: true,
+      pan: { duration: 1 },
+    });
+  };
 
   #newWorkout(e) {
     e.preventDefault();
