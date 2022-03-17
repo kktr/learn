@@ -17,41 +17,21 @@ class Workout {
   date = new Date();
   id = (Date.now() + '').slice(-10);
 
-  constructor(
-    coords,
-    distance,
-    duration,
-    paceUnit,
-    additionalUnit,
-    workoutEmoticon
-  ) {
+  constructor(coords, distance, duration) {
     this.cords = coords;
     this.distance = distance;
     this.duration = duration;
-    this.paceUnit = paceUnit;
-    this.additionalUnit = additionalUnit;
-    this.workoutEmoticon = workoutEmoticon;
   }
 }
 class Running extends Workout {
   type = 'running';
-  constructor(
-    coords,
-    distance,
-    duration,
-    cadence,
-    paceUnit,
-    additionalUnit,
-    workoutEmoticon
-  ) {
-    super(
-      coords,
-      distance,
-      duration,
-      paceUnit,
-      additionalUnit,
-      workoutEmoticon
-    );
+  paceUnit = 'm/km';
+  additionalUnit = 'spm';
+  workoutEmoticon = '🏃‍♂️';
+  additionalIcon = '🦶🏼';
+
+  constructor(coords, distance, duration, cadence) {
+    super(coords, distance, duration);
     this.cadence = cadence;
     this.calcPace();
   }
@@ -64,23 +44,13 @@ class Running extends Workout {
 
 class Cycling extends Workout {
   type = 'cycling';
-  constructor(
-    coords,
-    distance,
-    duration,
-    elevationGain,
-    paceUnit,
-    additionalUnit,
-    workoutEmoticon
-  ) {
-    super(
-      coords,
-      distance,
-      duration,
-      paceUnit,
-      additionalUnit,
-      workoutEmoticon
-    );
+  paceUnit = 'km/k';
+  additionalUnit = 'm';
+  workoutEmoticon = '🚴‍♀️';
+  additionalIcon = '⛰';
+
+  constructor(coords, distance, duration, elevationGain) {
+    super(coords, distance, duration);
     this.elevationGain = elevationGain;
     this.calcSpeed();
   }
@@ -154,8 +124,7 @@ class App {
     const exerciseClass = inputType.value;
     const distance = +inputDuration.value;
     const duration = +inputDuration.value;
-    let cadence, elevation, paceUnit, additionalUnit;
-    let workoutEmoticon;
+    let cadence, elevation;
 
     const isWorkoutRunning = () => {
       return exerciseClass === 'running';
@@ -195,9 +164,6 @@ class App {
       };
 
       const exerciseType = capitalize(exerciseClass);
-      workoutEmoticon = isWorkoutRunning() ? '🏃‍♂️' : '🚴‍♀️';
-      additionalUnit = isWorkoutRunning() ? 'spm' : 'm';
-      paceUnit = isWorkoutRunning() ? 'min/km' : 'km/h';
       const today = new Date();
       const dateString = today.toLocaleString('en-US', {
         day: 'numeric',
@@ -215,16 +181,27 @@ class App {
             className: `${exerciseClass}-popup`,
           })
         )
-        .setPopupContent(`${workoutEmoticon} ${exerciseType} on ${dateString}`)
+        .setPopupContent(
+          `${workout.workoutEmoticon} ${exerciseType} on ${dateString}`
+        )
         .openPopup();
     };
     let workout;
 
-    const renderWorkout = (workout) => {
-      let list = document.createElement('li');
-      list.innerHTML = `
+    const renderWorkout = (workouts) => {
+      const capitalizeFirstLetter = (string) => {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+      };
+      for (const workout of workouts) {
+        let list = document.createElement('li');
+        list.innerHTML = `
 <li class="workout workout--${workout.type}" data-id=${workout.id}>
-<h2 class="workout__title">${workout.type} on April 14</h2>
+<h2 class="workout__title">${capitalizeFirstLetter(
+          workout.type
+        )} on ${workout.date.toLocaleString('en-US', {
+          month: 'long',
+          day: 'numeric',
+        })}</h2>
 <div class="workout__details">
   <span class="workout__icon">${workout.workoutEmoticon}</span>
   <span class="workout__value">${workout.distance}</span>
@@ -237,19 +214,22 @@ class App {
 </div>
 <div class="workout__details">
   <span class="workout__icon">⚡️</span>
-  <span class="workout__value">${workout.pace}</span>
+  <span class="workout__value">${
+    isWorkoutRunning() ? workout.pace : workout.speed
+  }</span>
   <span class="workout__unit">${workout.paceUnit}</span>
 </div>
 <div class="workout__details">
-  <span class="workout__icon">🦶🏼</span>
+  <span class="workout__icon">${workout.additionalIcon}</span></span>
   <span class="workout__value">${
-    isWorkoutRunning() ? workout.cadence : workout.elevation
+    isWorkoutRunning() ? workout.cadence : workout.elevationGain
   }</span>
-  <span class="workout__unit">${additionalUnit}</span>
+  <span class="workout__unit">${workout.additionalUnit}</span>
 </div>
 </li>`;
 
-      containerWorkouts.append(list);
+        containerWorkouts.prepend(list);
+      }
     };
 
     //     Running
@@ -264,31 +244,15 @@ class App {
 
     if (isInputValid()) {
       if (isWorkoutRunning()) {
-        workout = new Running(
-          cords,
-          distance,
-          duration,
-          cadence,
-          paceUnit,
-          additionalUnit,
-          workoutEmoticon
-        );
+        workout = new Running(cords, distance, duration, cadence);
       }
 
       if (!isWorkoutRunning()) {
-        workout = new Cycling(
-          cords,
-          distance,
-          duration,
-          elevation,
-          paceUnit,
-          additionalUnit,
-          workoutEmoticon
-        );
+        workout = new Cycling(cords, distance, duration, elevation);
       }
       this.#workouts.push(workout);
       addMarkWithPopup();
-      renderWorkout(workout);
+      renderWorkout([this.#workouts[this.#workouts.length - 1]]);
       clearInputs();
       hideForm();
       console.log(workout);
