@@ -16,11 +16,27 @@ const inputElevation = document.querySelector('.form__input--elevation');
 class Workout {
   date = new Date();
   id = (Date.now() + '').slice(-10);
+  type = '';
+  workoutEmoticon = '';
+  description = '';
 
   constructor(coords, distance, duration) {
     this.cords = coords;
     this.distance = distance;
     this.duration = duration;
+  }
+  capitalize = (s) => {
+    return s[0].toUpperCase() + s.slice(1);
+  };
+
+  today = new Date();
+  dateString = this.today.toLocaleString('en-US', {
+    day: 'numeric',
+    month: 'long',
+  });
+
+  setDescription() {
+    this.description = `${this.workoutEmoticon} ${this.exerciseType} on ${this.dateString}`;
   }
 }
 class Running extends Workout {
@@ -28,18 +44,21 @@ class Running extends Workout {
   paceUnit = 'm/km';
   additionalUnit = 'spm';
   workoutEmoticon = '🏃‍♂️';
-  additionalIcon = '🦶🏼';
+  additionalIcon = '🦶🦶';
 
   constructor(coords, distance, duration, cadence) {
     super(coords, distance, duration);
     this.cadence = cadence;
     this.calcPace();
+    this.setDescription();
   }
 
   calcPace() {
     this.pace = this.duration / this.distance;
     return this.pace;
   }
+
+  exerciseType = this.capitalize(this.type);
 }
 
 class Cycling extends Workout {
@@ -53,12 +72,15 @@ class Cycling extends Workout {
     super(coords, distance, duration);
     this.elevationGain = elevationGain;
     this.calcSpeed();
+    this.setDescription();
   }
 
   calcSpeed() {
     this.speed = this.distance / this.duration;
     return this.speed;
   }
+
+  exerciseType = this.capitalize(this.type);
 }
 
 class App {
@@ -155,21 +177,12 @@ class App {
     };
 
     const hideForm = () => {
+      form.style.display = 'none';
       form.classList.add('hidden');
+      setTimeout(() => (form.style.display = 'grid'), 1000);
     };
 
     const addMarkWithPopup = () => {
-      const capitalize = (s) => {
-        return s[0].toUpperCase() + s.slice(1);
-      };
-
-      const exerciseType = capitalize(exerciseClass);
-      const today = new Date();
-      const dateString = today.toLocaleString('en-US', {
-        day: 'numeric',
-        month: 'long',
-      });
-
       const marker = L.marker(cords)
         .addTo(this.#map)
         .bindPopup(
@@ -182,23 +195,21 @@ class App {
           })
         )
         .setPopupContent(
-          `${workout.workoutEmoticon} ${exerciseType} on ${dateString}`
+          workout.description
+          // `${workout.workoutEmoticon} ${exerciseType} on ${dateString}`
         )
         .openPopup();
     };
     let workout;
 
     const renderWorkout = (workouts) => {
-      const capitalizeFirstLetter = (string) => {
-        return string.charAt(0).toUpperCase() + string.slice(1);
-      };
       for (const workout of workouts) {
         let list = document.createElement('li');
         list.innerHTML = `
 <li class="workout workout--${workout.type}" data-id=${workout.id}>
-<h2 class="workout__title">${capitalizeFirstLetter(
-          workout.type
-        )} on ${workout.date.toLocaleString('en-US', {
+<h2 class="workout__title">${
+          workout.exerciseType
+        } on ${workout.date.toLocaleString('en-US', {
           month: 'long',
           day: 'numeric',
         })}</h2>
@@ -232,16 +243,6 @@ class App {
       }
     };
 
-    //     Running
-    // cadence: 5
-    // cords: (2) [50.098560072241156, 14.33046340942383]
-    // date: Wed Mar 16 2022 22:21:29 GMT+0100 (Central European Standard Time) {}
-    // distance: 10
-    // duration: 10
-    // id: "7465689946"
-    // pace: 1
-    // [[Prototype]]: Workout
-
     if (isInputValid()) {
       if (isWorkoutRunning()) {
         workout = new Running(cords, distance, duration, cadence);
@@ -255,7 +256,6 @@ class App {
       renderWorkout([this.#workouts[this.#workouts.length - 1]]);
       clearInputs();
       hideForm();
-      console.log(workout);
 
       return;
     } else alert('Inputs have to be positive numbers!');
