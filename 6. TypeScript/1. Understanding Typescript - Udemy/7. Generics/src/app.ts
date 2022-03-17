@@ -90,3 +90,27 @@ const numberStorage = new DataStorage<number>();
 
 numberStorage.addItem(2);
 console.log(numberStorage.getItems());
+
+//  7/101 Generic Utility Types
+interface LearningGoal {
+  title: string;
+  description: string;
+  date: Date;
+}
+
+function learningGoal(
+  title: string,
+  description: string,
+  date: Date
+): LearningGoal {
+  let learningGoal: Partial<LearningGoal> = {};
+  learningGoal.title = title;
+  learningGoal.description = description;
+  learningGoal.date = date;
+
+  return learningGoal as LearningGoal;
+}
+
+const names3: Readonly<string[]> = ['Michał', 'Zuzanna'];
+
+// names3.push('Krystian');
