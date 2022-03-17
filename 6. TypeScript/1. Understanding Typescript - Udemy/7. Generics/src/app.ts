@@ -50,3 +50,43 @@ function countAndDescribe<T extends Lengthy>(element: T) {
 }
 
 console.log(countAndDescribe('Hi there'));
+
+// 7/98 The "keyof" Constraint
+
+function extractAndConvert<T extends object, U extends keyof T>(
+  obj: T,
+  key: U
+) {
+  console.log('Value: ' + obj[key]);
+
+  return 'Value: ' + obj[key];
+}
+
+extractAndConvert({ name: 'Max' }, 'name');
+
+// 7/99 Generic classes
+
+class DataStorage<T extends number | string | boolean> {
+  private data: T[] = [];
+
+  addItem(item: T) {
+    this.data.push(item);
+  }
+
+  removeItem(item: T) {
+    this.data.splice(this.data.indexOf(item), 1);
+  }
+
+  getItems() {
+    return [...this.data];
+  }
+}
+
+const textStorage = new DataStorage<string>();
+
+textStorage.addItem('text data');
+
+const numberStorage = new DataStorage<number>();
+
+numberStorage.addItem(2);
+console.log(numberStorage.getItems());
