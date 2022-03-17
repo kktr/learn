@@ -114,3 +114,82 @@ function learningGoal(
 const names3: Readonly<string[]> = ['Michał', 'Zuzanna'];
 
 // names3.push('Krystian');
+
+// Required
+
+type JobPosition = 'trainee' | 'junior' | 'mid' | 'senior';
+
+type Employee = {
+  name: string;
+  lastName: string;
+  id: number;
+  jobPosition?: JobPosition;
+};
+
+function addEmployee(employee: Required<Employee>) {
+  console.log(employee);
+}
+
+const krystian: Employee = { name: 'Krystian', lastName: 'Kat', id: 777 };
+
+// addEmployee(krystian);
+
+krystian.jobPosition = 'trainee';
+console.log(krystian);
+
+const krystian2: Required<Employee> = {
+  name: 'Krystian',
+  lastName: 'Kat',
+  id: 777,
+  jobPosition: 'trainee',
+};
+
+addEmployee(krystian2);
+
+// Record
+
+type Calibers = '9mm' | '5,56mm' | '44"';
+type BrandKey = 'cz' | 'glock' | 'sw';
+
+interface Weapon {
+  name: string;
+  range: number;
+  caliber: Calibers;
+}
+
+const myWeapons: Record<BrandKey, Weapon> = {
+  cz: {
+    name: 'CZ Shadow 2',
+    range: 100,
+    caliber: '9mm',
+  },
+  glock: {
+    name: '17',
+    range: 75,
+    caliber: '9mm',
+  },
+  sw: {
+    name: '629',
+    range: 150,
+    caliber: '44"',
+  },
+};
+
+// 6/102 Generics Types vs Union Types
+
+// Union types don't work in that case
+// class DataStorage2 {
+//   private data: number[] | string[] | boolean[] = [];
+
+//   addItem(item: number | string | boolean) {
+//     this.data.push(item);
+//   }
+
+//   removeItem(item: number[] | string[] | boolean[]) {
+//     this.data.splice(this.data.indexOf(item), 1);
+//   }
+
+//   getItems() {
+//     return [...this.data];
+//   }
+// }
