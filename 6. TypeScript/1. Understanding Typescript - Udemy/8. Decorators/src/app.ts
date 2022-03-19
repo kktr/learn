@@ -7,8 +7,12 @@ function Logger(constructor: Function) {
 }
 
 // 8/106 Working with decorator factories
+//  8/107 Adding multiple decorators
 function Logger2(logString: string) {
+  console.log('Logger2', '1 step creating function from Top');
+
   return function (constructor: Function) {
+    console.log('Logger2', '4 step Rendering template, bottom first');
     console.log(logString);
     console.log(constructor);
   };
@@ -16,7 +20,10 @@ function Logger2(logString: string) {
 
 // 8/107 Building more usefully decorators
 function WithTemplate(template: string, hookId: string) {
+  console.log('WithTemplate', '2 step creating function from Top');
   return function (constructor: Function) {
+    console.log('WithTemplate', '3 step Rendering template, bottom first');
+
     const hookEl = document.getElementById(hookId);
     const p = constructor;
     if (hookEl) {
@@ -26,7 +33,7 @@ function WithTemplate(template: string, hookId: string) {
   };
 }
 // @Logger
-// @Logger2('decorator factory')
+@Logger2('decorator factory')
 @WithTemplate('<h1>Header H1 made by decorator WithTemplate<h1/>', 'heading')
 class Person {
   name = 'Max';
