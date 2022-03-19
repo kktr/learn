@@ -46,3 +46,30 @@ class Person {
 const person = new Person();
 
 console.log(person);
+
+// 8/109 Diving into property decorators
+
+function Log(target: any, propertyName: string | symbol) {
+  console.log('Property decorator!');
+  console.log(target, propertyName);
+}
+
+class Product {
+  @Log
+  price: number;
+
+  setPrice(val: number) {
+    if (val <= 0) return;
+    this.price = val;
+  }
+
+  constructor(title: string, price: number) {
+    this.price = price;
+  }
+
+  getPriceWithTax(tax: number) {
+    return this.price * (1 + tax);
+  }
+}
+
+const product = new Product('mleko', 4);
