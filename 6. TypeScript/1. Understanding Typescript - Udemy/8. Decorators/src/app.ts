@@ -6,7 +6,15 @@ function Logger(constructor: Function) {
   console.log(constructor);
 }
 
+// 8/106 Working with decorator factories
+function Logger2(logString: string) {
+  return function (constructor: Function) {
+    console.log(logString);
+    console.log(constructor);
+  };
+}
 @Logger
+@Logger2('decorator factory')
 class Person {
   name = 'Max';
 
