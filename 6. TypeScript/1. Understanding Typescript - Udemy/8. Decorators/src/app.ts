@@ -13,8 +13,21 @@ function Logger2(logString: string) {
     console.log(constructor);
   };
 }
-@Logger
-@Logger2('decorator factory')
+
+// 8/107 Building more usefully decorators
+function WithTemplate(template: string, hookId: string) {
+  return function (constructor: Function) {
+    const hookEl = document.getElementById(hookId);
+    const p = constructor;
+    if (hookEl) {
+      hookEl.innerHTML = template;
+      hookEl.querySelector('h1')!.innerText = p.name;
+    }
+  };
+}
+// @Logger
+// @Logger2('decorator factory')
+@WithTemplate('<h1>Header H1 made by decorator WithTemplate<h1/>', 'heading')
 class Person {
   name = 'Max';
 
