@@ -48,26 +48,48 @@ const person = new Person();
 console.log(person);
 
 // 8/109 Diving into property decorators
-
 function Log(target: any, propertyName: string | symbol) {
   console.log('Property decorator!');
   console.log(target, propertyName);
 }
 
+// 9/109 Accessor and Parameter decorators
+function Log2(target: any, name: string, descriptor: PropertyDescriptor) {
+  console.log('Accessor decorator !');
+  console.log(target, name, descriptor);
+}
+
+function Log3(
+  target: any,
+  name: string | symbol,
+  descriptor: PropertyDescriptor
+) {
+  console.log('Method decorator !');
+  console.log(target, name, descriptor);
+}
+
+function Log4(target: any, name: string | symbol, position: number) {
+  console.log('Parameter decorator !');
+
+  console.log(target, name, position);
+}
+
 class Product {
   @Log
-  price: number;
+  _price: number;
 
-  setPrice(val: number) {
+  @Log2
+  set price(val: number) {
     if (val <= 0) return;
-    this.price = val;
+    this._price = val;
   }
 
-  constructor(title: string, price: number) {
-    this.price = price;
+  constructor(title: string, _price: number) {
+    this._price = _price;
   }
 
-  getPriceWithTax(tax: number) {
+  @Log3
+  getPriceWithTax(@Log4 tax: number) {
     return this.price * (1 + tax);
   }
 }
