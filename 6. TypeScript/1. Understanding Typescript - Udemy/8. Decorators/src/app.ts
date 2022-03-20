@@ -119,3 +119,40 @@ function WithTemplate2(template: string, hookId: string) {
     };
   };
 }
+
+// 8/113 Other Decorator Return Types
+
+// returning in properties and parameters will be ignore by TS
+
+// 8/114 Example: Creating an "Autobind" Decorator
+function AutoBind(
+  target: any,
+  methodName: string,
+  descriptor: PropertyDescriptor
+) {
+  const originMethod = descriptor.value;
+  const adjMethod: PropertyDescriptor = {
+    configurable: true,
+    enumerable: true,
+    get() {
+      const boundFn = originMethod.bind(this);
+      return boundFn;
+    },
+  };
+
+  return adjMethod;
+}
+class Printer {
+  message = 'This works!';
+
+  @AutoBind
+  showMessage() {
+    console.log(this.message);
+  }
+}
+
+const print2 = new Printer();
+
+const buttonEl = document.querySelector('button')!;
+
+buttonEl.addEventListener('click', print2.showMessage);
