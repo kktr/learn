@@ -158,12 +158,61 @@ const buttonEl = document.querySelector('button')!;
 buttonEl.addEventListener('click', print2.showMessage);
 
 // 8/115 Validation with Decorators First Steps
+// 8/116 Validation with Decorators - Finished
 
-function Required() {}
-function PositiveNumber() {}
-function validate(obj: object) {}
+interface ValidatorConfig {
+  [property: string]: {
+    [validateProp: string]: string[];
+  };
+}
+
+const registeredValidators: ValidatorConfig = {};
+
+function Required(target: any, propName: string) {
+  registeredValidators[target.constructor.name] = {
+    ...registeredValidators[target.constructor.name],
+    [propName]: [
+      ...(registeredValidators[target.constructor.name]?.[propName] ?? []),
+      'required',
+    ],
+  };
+}
+
+function PositiveNumber(target: any, propName: string) {
+  registeredValidators[target.constructor.name] = {
+    ...registeredValidators[target.constructor.name],
+    [propName]: [
+      ...(registeredValidators[target.constructor.name]?.[propName] ?? []),
+      'positive',
+    ],
+  };
+}
+
+function validate(obj: any) {
+  const objValidatorConfig = registeredValidators[obj.constructor.name];
+  if (!objValidatorConfig) {
+    return true;
+  }
+
+  let isValid = true;
+  for (const prop in objValidatorConfig) {
+    for (const validator of objValidatorConfig[prop]) {
+      switch (validator) {
+        case 'required':
+          isValid = isValid && !!obj[prop];
+          break;
+        case 'positive':
+          isValid = isValid && obj[prop] > 0;
+          break;
+      }
+    }
+  }
+  return isValid;
+}
 class Course {
+  @Required
   title: string;
+  @PositiveNumber
   price: number;
 
   constructor(t: string, p: number) {
@@ -181,5 +230,11 @@ courseForm?.addEventListener('submit', (event) => {
   const price = +priceEl.value;
 
   const createdCourse = new Course(title, price);
+
+  if (!validate(createdCourse)) {
+    alert('Invalid input, try again!');
+    return;
+  }
+
   console.log(createdCourse);
 });
