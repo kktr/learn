@@ -34,6 +34,7 @@ function WithTemplate(template: string, hookId: string) {
 }
 // @Logger
 @Logger2('decorator factory')
+@WithTemplate2('<h2><h2/>', 'heading2')
 @WithTemplate('<h1>Header H1 made by decorator WithTemplate<h1/>', 'heading')
 class Person {
   name = 'Max';
@@ -95,3 +96,26 @@ class Product {
 }
 
 const product = new Product('mleko', 4);
+
+// 9/112 Returning (and changing) a Class in a Class Decorator
+
+function WithTemplate2(template: string, hookId: string) {
+  return function <T extends { new (...args: any[]): { name: string } }>(
+    originConstructor: T
+  ) {
+    // extends and super to keep previous class
+    return class extends originConstructor {
+      constructor(..._: any[]) {
+        super();
+
+        console.log('..rendering WithTemplate 2');
+
+        const hookEl = document.getElementById(hookId);
+        if (hookEl) {
+          hookEl.innerHTML = template;
+          hookEl.querySelector('h2')!.innerText = this.name;
+        }
+      }
+    };
+  };
+}
