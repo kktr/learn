@@ -76,8 +76,6 @@ const renderCountry = (data, className = '') => {
   </div>`;
 
   countriesContainer.insertAdjacentElement('beforeend', html);
-
-  countriesContainer.style.opacity = 1;
 };
 
 const getCountryByNameAndNeighbor = (name) => {
@@ -125,6 +123,10 @@ const getCountryByNameAndNeighbor = (name) => {
 // 16/252 Consuming Promises
 
 // 16/253 Chaining Promises
+const renderError = (msg) => {
+  countriesContainer.insertAdjacentText('beforeend', msg);
+};
+
 const getCountryData = function (country) {
   fetch(`https://restcountries.com/v3.1/name/${country}`)
     .then((response) => response.json())
@@ -134,13 +136,23 @@ const getCountryData = function (country) {
       const [neighbor] = data.borders;
 
       getCountryByNameAndNeighbor2(neighbor);
-    });
+    })
+    .catch((err) => renderError(err))
+    .finally(() => (countriesContainer.style.opacity = 1));
 };
 
 const getCountryByNameAndNeighbor2 = (neighbor) => {
   return fetch(`https://restcountries.com/v3.1/alpha/${neighbor}`)
     .then((response) => response.json())
-    .then(([data]) => renderCountry(data, 'neighbor'));
+    .then(([data]) => renderCountry(data, 'neighbor'))
+    .catch((err) => renderError(err))
+    .finally(() => (countriesContainer.style.opacity = 1));
 };
 
-getCountryData('poland');
+// getCountryData('poland');
+
+// 16/254 Handling Rejected Promises
+
+btn.addEventListener('click', () => {
+  getCountryData('poland');
+});
