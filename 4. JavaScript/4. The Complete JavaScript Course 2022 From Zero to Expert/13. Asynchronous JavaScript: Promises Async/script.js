@@ -118,4 +118,29 @@ const getCountryByNameAndNeighbor = (name) => {
 };
 
 // getCountryByNameAndNeighbor('portugal');
-getCountryByNameAndNeighbor('poland');
+// getCountryByNameAndNeighbor('poland');
+
+// 16/251 Promises and the Fetch API
+
+// 16/252 Consuming Promises
+
+// 16/253 Chaining Promises
+const getCountryData = function (country) {
+  fetch(`https://restcountries.com/v3.1/name/${country}`)
+    .then((response) => response.json())
+    .then(([data]) => {
+      renderCountry(data);
+
+      const [neighbor] = data.borders;
+
+      getCountryByNameAndNeighbor2(neighbor);
+    });
+};
+
+const getCountryByNameAndNeighbor2 = (neighbor) => {
+  return fetch(`https://restcountries.com/v3.1/alpha/${neighbor}`)
+    .then((response) => response.json())
+    .then(([data]) => renderCountry(data, 'neighbor'));
+};
+
+getCountryData('poland');
