@@ -123,17 +123,27 @@ const getCountryByNameAndNeighbor = (name) => {
 // 16/252 Consuming Promises
 
 // 16/253 Chaining Promises
-const renderError = (msg) => {
+const renderError = async (msg) => {
   countriesContainer.insertAdjacentText('beforeend', msg);
 };
 
+const getJSON = (url, errorMessage = 'Something went wrong') => {
+  return fetch(url).then((response) => {
+    if (!response.ok) {
+      throw new Error(`${errorMessage} (${response.status})`);
+    }
+    return response.json();
+  });
+};
+
 const getCountryData = function (country) {
-  fetch(`https://restcountries.com/v3.1/name/${country}`)
-    .then((response) => response.json())
+  getJSON(`https://restcountries.com/v3.1/name/${country}`, 'Country not found')
     .then(([data]) => {
       renderCountry(data);
 
       const [neighbor] = data.borders;
+      console.log(!neighbor);
+      if (!neighbor) throw new Error("Country doesn't have neighbor");
 
       getCountryByNameAndNeighbor2(neighbor);
     })
@@ -143,7 +153,13 @@ const getCountryData = function (country) {
 
 const getCountryByNameAndNeighbor2 = (neighbor) => {
   return fetch(`https://restcountries.com/v3.1/alpha/${neighbor}`)
-    .then((response) => response.json())
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`Country not found (${response.status})`);
+      }
+
+      return response.json();
+    })
     .then(([data]) => renderCountry(data, 'neighbor'))
     .catch((err) => renderError(err))
     .finally(() => (countriesContainer.style.opacity = 1));
@@ -154,5 +170,8 @@ const getCountryByNameAndNeighbor2 = (neighbor) => {
 // 16/254 Handling Rejected Promises
 
 btn.addEventListener('click', () => {
-  getCountryData('poland');
+  getCountryData('australia');
+  // getCountryData('adsad');
 });
+
+// 16/255 Throwing Errors Manually
